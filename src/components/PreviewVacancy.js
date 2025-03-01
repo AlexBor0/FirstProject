@@ -22,8 +22,10 @@ const PreviewVacancy = ({post, edit, previewContentRef, newVacancy, requirements
                 <div className="previewContent" ref={previewContentRef}>
                     <div className="card vacancy" >     
                         <h2>{newVacancy.vacancy}</h2>
-                        <p className="salary" >{newVacancy.salary} грн.</p>
-                        <p>Розташування: {newVacancy.city} {newVacancy.region&&(`(${newVacancy.region} обл.)`)}</p>
+                        <p className="salary" >{newVacancy.salary} грн.{" "}
+                            <span>{newVacancy.city} {newVacancy.region&&(`(${newVacancy.region} обл.)`)}
+                            </span>
+                        </p>
                         <p>Форма зайнятості: {newVacancy.employment||"За домовленістю"};</p>
                         <p>Графік роботи: {newVacancy.workSchedule||"За домовленістю"};</p>
                         <p>Формат роботи: {newVacancy.workFormat||"За домовленістю"};</p>
