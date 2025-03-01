@@ -1,0 +1,59 @@
+import React, {useState} from "react";
+import axios from 'axios';
+
+const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setUserNameLogo, setDocId, validInput, inputErrors}) => {
+    const [userLogin, setUserLogin] = useState({
+              userName: '',
+              userPassword: '',
+              }),
+          [postFetch, setPostFetch] = useState(false),
+          [loading, setLoading] = useState(true),
+          [error, setError] = useState(null);
+
+          const getDataItems = (e) => {
+            const { name, value } = e.target;
+            setUserLogin({ ...userLogin, [name]: value });
+            validInput(value, e.target);
+        };
+
+    
+		const fetchAauthorization = async () => {
+
+            setPostFetch(true);
+
+			try {const response = await axios
+                .post(`${host}/api/auth/local`,{
+                    identifier: userLogin.userName,
+                    password: userLogin.userPassword
+                });
+                setConfirm(response.data.user.confirmed);
+                setUserNameLogo(response.data.user.fullname);
+                setDocId(response.data.user.documentId);
+                    } 
+			catch (error) {setError(error);} 
+			finally {setLoading(false);
+      }
+		};
+    const fetchForm = (e) => {
+      e.preventDefault();
+      fetchAauthorization();
+    }
+        
+    return (
+      <>  
+    <form id="authForm" onSubmit={fetchForm} >
+    <h2 className="modalTitle">Вхід</h2>
+    <p>Для входу пройдіть авторизацію, або зареєструйтеся</p>
+    <input autoFocus={true} required placeholder="Login" name="userName" type="text" minLength="3" className="modalInput" onChange={getDataItems}/>
+    <input required placeholder="Password" name="userPassword" type="password" minLength="6" className="modalInput" onChange={getDataItems}/>
+    {(inputErrors.userName)&& <p style={{ color: 'red' }}>{inputErrors.userName}</p>}
+    <button>Увійти</button>
+    <p>{error&&"Вибачте, невірний логін або пароль"}</p>
+    <p>{postFetch&&loading&&"Зачекайте..."}</p>
+    <p>або</p>
+      </form>
+    <button onClick={() => setRegOn(!regOn)} >Зареєструватися</button>
+     </>)
+}
+
+export default AauthorizationForm

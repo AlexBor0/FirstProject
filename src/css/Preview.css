@@ -1,0 +1,100 @@
+.previewModal {
+    position: absolute;
+    display: block;
+    width:600px;
+    height:90%;
+    text-align: left;
+	  margin: 0px auto;
+    background-color:rgb(196, 224, 214);
+    z-index: 10;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.previewHeader {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.previewH4 {
+    text-align: center;
+    margin: 10px 0px 0px;
+}
+.btnEdit, .btnPublish {
+    display:inline-block;
+    text-transform: uppercase;
+    margin: 1px 35px 0px;
+    min-width: 150px;
+    padding: 4px 8px;
+    cursor: pointer;
+    letter-spacing: 0.05rem;
+    color: white;
+	  font-family: "Montserrat", sans-serif;
+    font-size: 0.8rem;
+	  font-weight: 600;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3 );
+    border: none;
+	  border-radius: 10px;
+}
+.btnEdit {
+    background-color:brown;
+}
+.btnPublish {
+    background-color:rgb(10, 76, 199);
+}
+.btnEdit:hover, .btnPublish:hover{
+    opacity: 0.8;
+}
+.previewModal .card {
+    overflow-y: auto;
+    transform: scale(0.65);
+    width: 130%;
+    margin: 0px 0px 0px -19%;
+    background-color:rgb(255, 254, 231);
+    opacity: 0.95;
+    padding: 20px;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3 );
+    font-size: 1rem;
+    border-radius:20px;
+    font-family: 'Open Sans', sans-serif;
+ }
+
+  .previewModal .vacancy {
+    padding-left: 30px;
+  }
+  .previewModal .vacancy h2 {
+    margin: 6px;
+  }
+  .previewModal .vacancy h3, h4 {
+    text-align: left;
+    margin: 5px;
+  }
+  .previewModal .vacancy p {
+    margin: 7px 0px;
+  }
+  .previewModal .vacancy h2 span{
+    font-weight: normal;
+   
+  }
+  .previewModal .vacancy div {
+    font-size: 1rem;
+    text-indent: 10px;
+    text-align: left;
+  }
+  .previewModal .vacancy :last-child {
+    margin-bottom: 0px;
+  }
+  .previewContent {
+    flex-grow: 1; 
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.new :nth-child(5) {
+  clear: both;
+  text-indent: 15px;
+  padding-top: 10px; 
+}

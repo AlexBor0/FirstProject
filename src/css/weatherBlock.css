@@ -1,0 +1,95 @@
+.weatherBlock {
+  min-width: 235px;
+  background-color:rgb(210, 247, 247);
+  opacity: 0.9;
+  border-radius: 20px;
+  padding: 5px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.3 );
+  font-size: 13px;
+}
+.weatherBlock p {
+  color:black;
+}
+.weatherForm form, .info, .weather {
+  text-align: center;
+}
+.weather{
+  font-family: 'Open Sans', sans-serif;
+  margin: 0px 8px;
+}
+.info p {
+  margin: 0 2% 3% 2%;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+}
+.weatherForm form button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 90%;
+    padding: 15px 5%;
+    cursor: pointer;
+    background: rgb(3, 87, 116);
+    letter-spacing: 0.05rem;
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3 );
+    border: none;
+    border-radius: 5px;
+  }
+  .weatherForm form button:hover {
+    background-color: rgb(23, 127, 138);
+  }
+  .weatherForm form input {
+    width: 90%;
+    padding: 5px;
+    background: rgb(210, 247, 247);
+    font-size: 16px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+  }
+  .weatherForm form input:focus {
+    outline: none !important;
+    background: rgb(210, 247, 247);
+  }
+  .weatherForm form input:-webkit-autofill:focus {
+    -webkit-text-fill-color: rgb(3, 87, 116);
+  }
+  .temp {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: -6px;
+    margin-top: 10px;
+  }
+  .goodIcon {
+    width: 60%;
+    border-radius: 20px;
+    background-color:rgb(154, 209, 250);
+    padding: 1px 10px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 6px;
+  }
+  .weatherIcon {
+    width: 60px;
+    height: 60px;
+    padding: 0px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .showButton {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: transform 200ms ease;
+    background: rgb(3, 87, 116);
+    color: white;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3 );
+    border-radius: 50%;
+    border: none;
+
+  }
