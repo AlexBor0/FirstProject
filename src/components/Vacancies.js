@@ -40,7 +40,7 @@ return (
 			<IoCloseCircleSharp onClick = {() => deleteVacancy(vacancy.id)} className="delete-icon"/>
         	<h2>{vacancy.title}</h2>
 			<p className="salary" >{vacancy.salary} грн.{" "}
-				<span>{vacancy.city} {vacancy.region&&(`(${vacancy.region} обл.)`)}
+				<span>{vacancy.location} {vacancy.region&&(`(${vacancy.region} обл.)`)}
 				</span>
 			</p>
 			<p>Форма зайнятості: {vacancy.employment||"За домовленістю"};</p>

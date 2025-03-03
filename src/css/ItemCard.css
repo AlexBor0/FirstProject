@@ -44,7 +44,9 @@ main .card {
 .delete-icon:hover {
   opacity: 0.5;
 } 
-
+.prof {
+	float:none;
+}
 .candidate img {
   float: left;
 }

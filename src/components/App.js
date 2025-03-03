@@ -11,6 +11,7 @@ import Candidates from "./Candidates";
 import WeatherBlock from "./weatherBlock";
 import ModalEntry from "./ModalEntry";
 import Goodbye from "./Goodbye";
+import ModalEditProfile from "./ModalEditProfile";
 import BtnAddDoc from "./BtnAddDoc";
 import ModalAddDoc from "./ModalAddDoc";
 import IconEntry from "./IconEntry";
@@ -39,6 +40,7 @@ const App = () => {
   const [typeOfSearch, setTypeOfsearch] = useState(true),
         [regEntry, setRegEntry] = useState(false), //Состояние входа в учетную запись
         [confirm, setConfirm] = useState(false), //Состояние получения регистрации
+        [showProfile, setShowProfile] = useState(false), //Состояние просмотра профиля
         [goodbye, setGoodbye] = useState(null),
         [docId, setDocId] = useState(null),
         [userImage, setUserImage] = useState([]),
@@ -162,7 +164,6 @@ const validInput = (value, inputElement) => {
       <div className="container">   
         <div className="wallimage"><Image url={wallpaper} alt="Обои" />
         </div>
-
           <ModalEntry 
             host={host} 
             regEntry={regEntry} 
@@ -196,7 +197,19 @@ const validInput = (value, inputElement) => {
             regEntry={regEntry}
             mainSearchRef={mainSearchRef}
             turnExit={turnExit}
+            setShowProfile={setShowProfile}
           /> 
+          {showProfile&&
+            <ModalEditProfile 
+              modalClass={modalClass}
+              setShowProfile={setShowProfile}
+              svgHttp={svgHttp}
+              svgXlink={svgXlink}
+              userImage={userImage}
+              host={host}
+            />
+          }
+
           <div className="searchBlock">
             <div className={`search ${fix}`}>
                 <form id="searchForm">

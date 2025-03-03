@@ -1,7 +1,7 @@
 import React from "react";
 import GestAva from "./../img/GestAva.png";
 
-const UserLogo = ({userNameLogo = "Гість", userImage, host})=> {
+const UserLogo = ({userNameLogo = "Гість", userImage, host, setShowProfile})=> {
     const altImg = "Гість";
     let avaMas, ava;
     if (userImage.length > 0) {
@@ -10,7 +10,9 @@ const UserLogo = ({userNameLogo = "Гість", userImage, host})=> {
         }
     
     return(
-        <button className="Userlogo">
+        <button className="Userlogo"
+            onClick={() => setShowProfile(true)}
+        >
          <img src={ userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
          <p style={{
             margin: "-5px 0px 0px 0px ",

@@ -1,8 +1,6 @@
 import React, {useState, useRef} from "react";
 import UploadFile from "./UploadFile";
 import UploadFileInfo from "./UploadFileInfo";
-import ItemSelect from "./ItemSelect";
-// import { IoClose } from "react-icons/io5";
 import CityInput from "./CityInput";
 import VacancyInput from "./VacancyInput";
 
@@ -10,19 +8,19 @@ import VacancyInput from "./VacancyInput";
 
 const AddResumeForm = ({ newCandidate, setNewCandidate, vacArr, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase }) => {
 
-const [selectVacValue, setSelectVacValue] = useState(''),
+    const [selectValue, setSelectValue] = useState(''),
       [showVacancyList, setShowVacancyList] = useState(false),
       [fileSize, setFileSize] = useState(''),
       vacHolder = "Наіменування вакансії*",
       pHolder = "Місто, де шукаєте роботу";
-const [selectValue, setSelectValue] = useState('');
+
 
 const vacBaseChunck = specialtiesBase.map((el) => el.position).flat();
 
 
 // const getPositions = (arr) => {
 //     const vbc = [];
-//     for(const el of arr) {
+//     for(const el of arr) 
 //         for(const i of el)
 //         vbc.push(i);
 //     }
@@ -30,9 +28,7 @@ const vacBaseChunck = specialtiesBase.map((el) => el.position).flat();
 // };
 // const vacBaseChunck = getPositions(arrBaseChunck);
 
-console.log(vacBaseChunck);
-const inputVacancyRef = useRef(null),
-      inputFileRef = useRef(null);
+const inputFileRef = useRef(null);
 
 const getImage = (e) => {
     const file = e.target.files[0];
@@ -56,20 +52,7 @@ const deleteImage = (e) => {
     if (inputFileRef.current) {
         inputFileRef.current.value = '';
     }
-};
-   
-const inputOnBlur = () => {
-    setTimeout(() => {
-            setShowVacancyList(false);
-    }, 200);
-};   
- 
-    let dinListV = vacArr.filter((el) => {
-        const words = el.toLowerCase().split(/\s+/);
-        const searchLetters = newCandidate.vacancy.toLowerCase();  
-        return words.some(word => word.startsWith(searchLetters));
-    });
-    
+}; 
    
     const lookAtPreviw = (e) => {
         e.preventDefault();
@@ -101,53 +84,18 @@ const inputOnBlur = () => {
                         onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
 
-            <VacancyInput
-                vacBaseChunck={vacBaseChunck}
-                pHolder = {vacHolder}
-                arrowPress={arrowPress}
-                getDataItems={getDataItems}
-                resetInput={resetInput}
-                selectedIndex={selectedIndex}
-                setSelectedIndex={setSelectedIndex}
-                setNewItem={setNewCandidate}
-                selectValue={selectValue}
-                setSelectValue={setSelectValue}
-            />
-                {/* <div className="vacancyAdd">
-                    <input value={selectVacValue} required placeholder="Посада, яку шукаєте*"autoComplete="off" minLength="3" maxLength="30" name="vacancy" type="text" className="modalInputAd short" 
-                        ref={inputVacancyRef}
-                        onChange={(e) => getDataItems(e, {
-                            setNewDoc: setNewCandidate,
-                            setSelectValue: setSelectVacValue,
-                            setShowList: setShowVacancyList
-                        })}
-                        onKeyDown={(e) => arrowPress(e, {
-                            list: dinListV,
-                            setValue: setSelectVacValue,
-                            updateItem: (field, value) => setNewCandidate(prev => ({...prev, [field]: value})),
-                            hideList: () => setShowVacancyList(false)
-                        })}
-                        onBlur={inputOnBlur}
-                    />
-                        {selectVacValue&&<button className="resetSearch" onClick={(e) => resetInput(e, {
-                            setSelectValue: setSelectVacValue,
-                            resetFields: ["vacancy"],
-                            hideList: setShowVacancyList,
-                            setNewItem: setNewCandidate,
-                        })}>
-                                        <span><IoClose className="resetSearchIcon" /></span>
-                                    </button>}
-                </div> */}
-
-                {/* <div>
-                    {showVacancyList&&<ItemSelect 
-                    dinList={dinListV}
+                <VacancyInput
+                    vacBaseChunck={vacBaseChunck}
+                    pHolder = {vacHolder}
+                    arrowPress={arrowPress}
+                    getDataItems={getDataItems}
+                    resetInput={resetInput}
                     selectedIndex={selectedIndex}
-                    setSelectValue={setSelectVacValue}
-                    newCandidate={newCandidate}
-                    setNewCandidate={setNewCandidate}
-                    />} 
-                </div> */}
+                    setSelectedIndex={setSelectedIndex}
+                    setNewItem={setNewCandidate}
+                    selectValue={selectValue}
+                    setSelectValue={setSelectValue}
+                />
 
                 <CityInput 
                     pHolder={pHolder}
