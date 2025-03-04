@@ -2,11 +2,11 @@ import React from "react";
 import { IoCloseCircleSharp, IoCameraSharp } from "react-icons/io5";
 import GestAva from "./../img/GestAva.png";
 
-const Profile = ({svgHttp, svgXlink, setShowProfile, userImage, host }) => {
+const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser }) => {
   const altImg = "Гість";
   let avaMas, ava;
-  if (userImage.length > 0) {
-          [ avaMas ] = userImage;
+  if (currentUser.userImage.length > 0) {
+          [ avaMas ] = currentUser.userImage;
           ava = ( host + avaMas.userAvatar.url );
       }
     return(
@@ -68,11 +68,19 @@ const Profile = ({svgHttp, svgXlink, setShowProfile, userImage, host }) => {
           <div className="pageOne">
             <div className="profileHead" >ВАШ ПРОФІЛЬ
             </div>
-            <img className="profileImg" src={ userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
-            <button className="changeFoto"> 
+            <img className="profileImg" src={ currentUser.userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
+            <button className="changeFoto"
+            > 
               <IoCameraSharp className="delete-icon"/>
             </button>
-            <p>Email:</p>
+            
+            <br/><span>Ім'я: </span>
+            <p>{currentUser.userName || "Ваше ім'я"}</p>
+            <span>Логін: </span>
+            <p>{currentUser.userLogin}</p>
+            <span>Email: </span>
+            <p className="mail"> {currentUser.userEmail} </p>
+            
           </div>
           <div className="pageTwo">
           <IoCloseCircleSharp className="delete-icon" onClick = {() => setShowProfile(false)}/>

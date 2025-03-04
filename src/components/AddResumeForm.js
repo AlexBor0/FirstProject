@@ -6,10 +6,9 @@ import VacancyInput from "./VacancyInput";
 
 
 
-const AddResumeForm = ({ newCandidate, setNewCandidate, vacArr, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase }) => {
+const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase }) => {
 
     const [selectValue, setSelectValue] = useState(''),
-      [showVacancyList, setShowVacancyList] = useState(false),
       [fileSize, setFileSize] = useState(''),
       vacHolder = "Наіменування вакансії*",
       pHolder = "Місто, де шукаєте роботу";

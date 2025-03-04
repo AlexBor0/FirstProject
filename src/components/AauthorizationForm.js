@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios';
 
-const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setUserNameLogo, setDocId, validInput, inputErrors}) => {
+const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, validInput, inputErrors}) => {
     const [userLogin, setUserLogin] = useState({
               userName: '',
               userPassword: '',
@@ -27,8 +27,12 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setUserNameLogo,
                     password: userLogin.userPassword
                 });
                 setConfirm(response.data.user.confirmed);
-                setUserNameLogo(response.data.user.fullname);
-                setDocId(response.data.user.documentId);
+                setCurrentUser(prev => ({...prev, userLogin:response.data.user.username}));
+                setCurrentUser(prev => ({...prev, userEmail:response.data.user.email}));
+                setCurrentUser(prev => ({...prev, userName:response.data.user.fullname}));
+                setCurrentUser(prev => ({...prev, userJWT:response.data.jwt}));
+                setCurrentUser(prev => ({...prev, docId:response.data.user.documentId}));
+                
                     } 
 			catch (error) {setError(error);} 
 			finally {setLoading(false);

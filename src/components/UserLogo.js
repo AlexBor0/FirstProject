@@ -1,11 +1,11 @@
 import React from "react";
 import GestAva from "./../img/GestAva.png";
 
-const UserLogo = ({userNameLogo = "Гість", userImage, host, setShowProfile})=> {
+const UserLogo = ({host, setShowProfile, currentUser})=> {
     const altImg = "Гість";
     let avaMas, ava;
-    if (userImage.length > 0) {
-            [ avaMas ] = userImage;
+    if (currentUser.userImage.length > 0) {
+            [ avaMas ] = currentUser.userImage;
             ava = ( host + avaMas.userAvatar.url );
         }
     
@@ -13,12 +13,12 @@ const UserLogo = ({userNameLogo = "Гість", userImage, host, setShowProfile}
         <button className="Userlogo"
             onClick={() => setShowProfile(true)}
         >
-         <img src={ userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
+         <img src={ currentUser.userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
          <p style={{
             margin: "-5px 0px 0px 0px ",
             fontSize: "12px",
             textAlign: "center"
-         }}>{ !userNameLogo ? "Гість" : userNameLogo }</p>   
+         }}>{ !currentUser.userName ? "Гість" : currentUser.userName }</p>   
         </button>
 
     )

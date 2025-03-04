@@ -5,7 +5,7 @@ import Registration from "./Registration";
 import './../css/ModalEntry.css';
 
 
-const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, setUserNameLogo, docId, setDocId, regUser, setRegUser, host, validInput, inputErrors}) => {
+const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, setRegUser, host, validInput, inputErrors}) => {
 
     const [regOn, setRegOn] = useState(false);
 
@@ -45,10 +45,9 @@ const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, set
                 {!regOn&&<AauthorizationForm 
                     host={host} 
                     confirm={confirm} 
-                    docId={docId} 
-                    setDocId={setDocId} 
-                    setConfirm={setConfirm} 
-                    setUserNameLogo={setUserNameLogo} 
+                    setConfirm={setConfirm}
+                    currentUser={currentUser} 
+                    setCurrentUser={setCurrentUser}
                     setRegOn={setRegOn} 
                     regOn={regOn}
                     validInput={validInput}

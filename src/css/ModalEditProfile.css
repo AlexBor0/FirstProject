@@ -13,7 +13,7 @@
 .pageOne, .pageTwo {
 	position: absolute;	
 	top:20px;
-	border: solid 2px red;
+	/* border: solid 2px red; */
 	padding-left: 20px;
 	position: absolute;
 	width: 160px;
@@ -50,4 +50,22 @@
 	background-color: rgb(255, 254, 231);
 	border-radius: 5px;
 	border: none;
+}
+.pageOne p{
+	font-size: 0.8em;
+	font-weight: 500;
+	font-family: 'Open Sans', sans-serif;
+	background-color: white;
+	border-radius: 5px;
+	border: solid 1px rgb(3, 87, 116);
+	padding: 0px 4px;
+	margin: 3px 14px 0px -5px;
+}
+.pageOne .mail{
+	font-size: 0.7em;
+	padding: 2px 2px;
+}
+.pageOne span {
+font-size: 0.8em;
+font-family: 'Verdana', sans-serif;
 }

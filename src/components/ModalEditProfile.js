@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import Profile from "./Profile";
 
 import './../css/ModalEditProfile.css';
 
-const ModalEditProfile = ({modalClass, setShowProfile, svgHttp, svgXlink, userImage, host}) => {
+const ModalEditProfile = ({ currentUser, modalClass, setShowProfile, svgHttp, svgXlink, host}) => {
         useEffect(() => {
                 const handlKeyDown = (e) => {
                     e.key === 'Escape'&&setShowProfile(false)
@@ -22,7 +22,7 @@ const ModalEditProfile = ({modalClass, setShowProfile, svgHttp, svgXlink, userIm
                 svgHttp={svgHttp}
                 svgXlink={svgXlink}
                 setShowProfile={setShowProfile}
-                userImage={userImage}
+                currentUser={currentUser}
                 host={host}
             />
              

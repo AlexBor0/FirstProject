@@ -33,18 +33,21 @@ const App = () => {
          userName: null,
          userEmail: "",
          userPassword: "",
-         userJWT: null,
-         userDocumentId: null,
          userConfirmed: null
-  });
+        });
+  const [currentUser, setCurrentUser] = useState({
+        userLogin: null,
+        userEmail: null,
+        userName: null,
+        userImage: [],
+        userJWT: null,
+        docId: null
+        })
   const [typeOfSearch, setTypeOfsearch] = useState(true),
         [regEntry, setRegEntry] = useState(false), //Состояние входа в учетную запись
         [confirm, setConfirm] = useState(false), //Состояние получения регистрации
         [showProfile, setShowProfile] = useState(false), //Состояние просмотра профиля
         [goodbye, setGoodbye] = useState(null),
-        [docId, setDocId] = useState(null),
-        [userImage, setUserImage] = useState([]),
-        [userNameLogo, setUserNameLogo] = useState(null),
         [addDoc, setAddDoc] = useState(false),
         [vacancyName, setVacancyName] = useState([]),
         [citiesBase, setCitiesBase] = useState(null),
@@ -66,9 +69,9 @@ const App = () => {
     if(!confirm) {
       toggleButton();     
     } else {setConfirm(!confirm);
-      setUserNameLogo("Гість");
-      setDocId(null);
-      setUserImage([]);
+      setCurrentUser(prev => ({...prev, userName:"Гість"}))
+      setCurrentUser(prev => ({...prev, docId:null}));
+      setCurrentUser(prev => ({...prev, userImage:[]}));
       setGoodbye(true);
     }
     mainSearchRef.current.focus();
@@ -101,25 +104,24 @@ const validInput = (value, inputElement) => {
   const toggleButton = () => {if(!regEntry)setRegEntry(!regEntry)} // Вход в учетную запись (regEntry меняется на true )
 
           useEffect(() => {
-            if (userNameLogo&&docId) {
+            if (currentUser.userName&&currentUser.docId) {
 
               const fetchUserImage = async () => {
             
-                try {const response = await axios.get(`${host}/api/Users/?filters[documentId][$eq]=${docId}&populate=userAvatar`);
-    
-                  setUserImage(response.data);} 
+                try {const response = await axios.get(`${host}/api/Users/?filters[documentId][$eq]=${currentUser.docId}&populate=userAvatar`);
+                  setCurrentUser(prev => ({...prev, userImage:response.data}));}
                 catch (error) {setError(error);} 
                 finally {setLoading(false);}
               };
 
               fetchUserImage()
             }
-            }, [userNameLogo, docId, regEntry]);
+            }, [currentUser.userName, currentUser.docId, regEntry]);
        
       confirm&&toggleModal();
 
       useEffect(() => {
-        if(docId&& !specialtiesBase) {
+        if(currentUser.docId&& !specialtiesBase) {
           const fetchSpecialties = async () => {
             
             try {const response = await axios.get(`${host}/api/bases?filters[dbTitle][$eq]=dbSpecialties`);
@@ -134,10 +136,10 @@ const validInput = (value, inputElement) => {
           fetchSpecialties();
           
         }
-      }, [docId, specialtiesBase]);
+      }, [currentUser.docId, specialtiesBase]);
 
       useEffect(() => {
-        if(docId&& !citiesBase) {
+        if(currentUser.docId&& !citiesBase) {
           const fetchCities = async () => {
             
             try {const response = await axios.get(`${host}/api/bases?filters[dbTitle][$eq]=dbCities`);
@@ -152,7 +154,7 @@ const validInput = (value, inputElement) => {
           fetchCities();
           
         }
-      }, [docId, citiesBase]);
+      }, [currentUser.docId, citiesBase]);
 
   
   window.addEventListener('scroll', () => {
@@ -168,12 +170,11 @@ const validInput = (value, inputElement) => {
             host={host} 
             regEntry={regEntry} 
             modalClass={modalClass} 
-            docId={docId} 
-            setDocId={setDocId} 
             toggleModal={toggleModal} 
             confirm={confirm} 
             setConfirm={setConfirm} 
-            setUserNameLogo={setUserNameLogo} 
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser} 
             regUser={regUser} 
             setRegUser={setRegUser}
             validInput={validInput}
@@ -192,12 +193,11 @@ const validInput = (value, inputElement) => {
             confirm={confirm} 
             svgHttp={svgHttp} 
             svgXlink={svgXlink} 
-            userNameLogo={userNameLogo}  
-            userImage={userImage} 
             regEntry={regEntry}
             mainSearchRef={mainSearchRef}
             turnExit={turnExit}
             setShowProfile={setShowProfile}
+            currentUser={currentUser}
           /> 
           {showProfile&&
             <ModalEditProfile 
@@ -205,7 +205,7 @@ const validInput = (value, inputElement) => {
               setShowProfile={setShowProfile}
               svgHttp={svgHttp}
               svgXlink={svgXlink}
-              userImage={userImage}
+              currentUser={currentUser}
               host={host}
             />
           }

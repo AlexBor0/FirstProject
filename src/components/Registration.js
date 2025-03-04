@@ -27,7 +27,7 @@ const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInpu
                     password: regUser.userPassword
                 });
 
-        setRegUser((prevState => ({...prevState, userJWT: response.data.jwt })))
+        // setRegUser((prevState => ({...prevState, userJWT: response.data.jwt })))
         setRegUser((prevState => ({...prevState, userConfirmed: response.data.user.confirmed })))
 		console.log("новый пользователь");
                

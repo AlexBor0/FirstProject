@@ -27,8 +27,7 @@ const Header = (props) => {
         <div className="AppHeaderRight">
           <UserLogo  
             setShowProfile={props.setShowProfile}
-            userNameLogo={ props.userNameLogo } 
-            userImage={ props.userImage } 
+            currentUser={props.currentUser}
             regEntry={ props.regEntry } 
             host={ props.host }
           />
