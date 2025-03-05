@@ -28,7 +28,7 @@ const Header = (props) => {
           <UserLogo  
             setShowProfile={props.setShowProfile}
             currentUser={props.currentUser}
-            regEntry={ props.regEntry } 
+            setRegEntry={ props.setRegEntry } 
             host={ props.host }
           />
           <IconEntry 

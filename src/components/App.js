@@ -42,7 +42,7 @@ const App = () => {
         userImage: [],
         userJWT: null,
         docId: null
-        })
+        });
   const [typeOfSearch, setTypeOfsearch] = useState(true),
         [regEntry, setRegEntry] = useState(false), //Состояние входа в учетную запись
         [confirm, setConfirm] = useState(false), //Состояние получения регистрации
@@ -65,58 +65,65 @@ const App = () => {
 
   const [btnScrollUp, setBtnScrollUp] = useState(false);
 
+  const resetCurrentUser = () => ({
+    userLogin: null,
+    userEmail: null,
+    userName: null,
+    userImage: [],
+    userJWT: null,
+    docId: null
+  });
+
   const turnExit = () => {
     if(!confirm) {
       toggleButton();     
-    } else {setConfirm(!confirm);
-      setCurrentUser(prev => ({...prev, userName:"Гість"}))
-      setCurrentUser(prev => ({...prev, docId:null}));
-      setCurrentUser(prev => ({...prev, userImage:[]}));
+    } else {setConfirm(false);
+      setCurrentUser(resetCurrentUser());
       setGoodbye(true);
     }
-    mainSearchRef.current.focus();
-   };
+    mainSearchRef.current?.focus();
+  };
 
    
-const validInput = (value, inputElement) => {
-  if(inputElement.type === "text") {
-      const forbiddenChars = /[<>{}[\]()&$%#?!*^+=|\\:;,"'`~]/;
-      const mat = value.match(forbiddenChars);
-      
-      if (mat) {
-          setInputErrors(prev => ({
-              ...prev,
-              [inputElement.name]: 'Використання таких символів не допускається'
-          }));
-          inputElement.setCustomValidity('Внесений некоректний символ/ли');
-      } else {
-          setInputErrors(prev => ({
-              ...prev,
-              [inputElement.name]: ''
-          }));
+  const validInput = (value, inputElement) => {
+    if(inputElement.type === "text") {
+        const forbiddenChars = /[<>{}[\]()&$%#?!*^+=|\\:;,"'`~]/;
+        const mat = value.match(forbiddenChars);
+        
+        if (mat) {
+            setInputErrors(prev => ({
+                ...prev,
+                [inputElement.name]: 'Використання таких символів не допускається'
+            }));
+            inputElement.setCustomValidity('Внесений некоректний символ/ли');
+        } else {
+            setInputErrors(prev => ({
+                ...prev,
+                [inputElement.name]: ''
+            }));
 
-          inputElement.setCustomValidity('');
-      }
-  }
-};
+            inputElement.setCustomValidity('');
+        }
+    }
+  };
          
   const toggleModal = () => {if(regEntry)setRegEntry(!regEntry)}  // Выход из учетной записи
   const toggleButton = () => {if(!regEntry)setRegEntry(!regEntry)} // Вход в учетную запись (regEntry меняется на true )
 
-          useEffect(() => {
-            if (currentUser.userName&&currentUser.docId) {
+      useEffect(() => {
+        if (currentUser.userName&&currentUser.docId) {
 
-              const fetchUserImage = async () => {
-            
-                try {const response = await axios.get(`${host}/api/Users/?filters[documentId][$eq]=${currentUser.docId}&populate=userAvatar`);
-                  setCurrentUser(prev => ({...prev, userImage:response.data}));}
-                catch (error) {setError(error);} 
-                finally {setLoading(false);}
-              };
+          const fetchUserImage = async () => {
+        
+            try {const response = await axios.get(`${host}/api/Users/?filters[documentId][$eq]=${currentUser.docId}&populate=userAvatar`);
+              setCurrentUser(prev => ({...prev, userImage:response.data}));}
+            catch (error) {setError(error);} 
+            finally {setLoading(false);}
+          };
 
-              fetchUserImage()
-            }
-            }, [currentUser.userName, currentUser.docId, regEntry]);
+          fetchUserImage()
+        }
+      }, [currentUser.userName, currentUser.docId, regEntry]);
        
       confirm&&toggleModal();
 
@@ -193,7 +200,8 @@ const validInput = (value, inputElement) => {
             confirm={confirm} 
             svgHttp={svgHttp} 
             svgXlink={svgXlink} 
-            regEntry={regEntry}
+            // regEntry={regEntry}
+            setRegEntry={setRegEntry}
             mainSearchRef={mainSearchRef}
             turnExit={turnExit}
             setShowProfile={setShowProfile}

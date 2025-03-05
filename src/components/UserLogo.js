@@ -1,7 +1,7 @@
 import React from "react";
 import GestAva from "./../img/GestAva.png";
 
-const UserLogo = ({host, setShowProfile, currentUser})=> {
+const UserLogo = ({host, setShowProfile, currentUser, setRegEntry})=> {
     const altImg = "Гість";
     let avaMas, ava;
     if (currentUser.userImage.length > 0) {
@@ -11,7 +11,11 @@ const UserLogo = ({host, setShowProfile, currentUser})=> {
     
     return(
         <button className="Userlogo"
-            onClick={() => setShowProfile(true)}
+            onClick={() => {
+                currentUser.docId
+                ? setShowProfile(true)
+                : setRegEntry(true);
+            }}
         >
          <img src={ currentUser.userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
          <p style={{

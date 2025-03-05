@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState}  from "react";
 import { IoCloseCircleSharp, IoCameraSharp } from "react-icons/io5";
 import GestAva from "./../img/GestAva.png";
 
-const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser }) => {
+const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, getImage }) => {
   const altImg = "Гість";
+  const [openForm, setOpenForm] = useState(false);
   let avaMas, ava;
   if (currentUser.userImage.length > 0) {
           [ avaMas ] = currentUser.userImage;
@@ -58,28 +59,62 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser }) => {
             <path className="fil3 str2" d="M374 240c7,-5 13,-10 19,-13 5,4 12,8 19,13 5,4 7,0 7,-2l0 -59 -52 0 0 59c0,2 2,6 7,2z"/>
 
             <rect className="fil2" x="118" y="204" width="164" height="290" rx="19" ry="19"/>
-            <g>
-              <path className="fil7 str4" d="M348 496l134 0c1,0 2,1 2,2l0 5c0,1 -1,2 -2,2l-134 0c-1,0 -2,-1 -2,-2l0 -5c0,-1 1,-2 2,-2z"/>
-              <path className="fil8 str5" d="M348 496l65 0c1,0 2,1 2,2l0 5c0,1 -1,2 -2,2l-65 0c-1,0 -2,-1 -2,-2l0 -5c0,-1 1,-2 2,-2z"/>
-            </g>
+
           </g>
         </svg>
                  
           <div className="pageOne">
             <div className="profileHead" >ВАШ ПРОФІЛЬ
             </div>
-            <img className="profileImg" src={ currentUser.userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
-            <button className="changeFoto"
-            > 
-              <IoCameraSharp className="delete-icon"/>
-            </button>
             
-            <br/><span>Ім'я: </span>
-            <p>{currentUser.userName || "Ваше ім'я"}</p>
-            <span>Логін: </span>
-            <p>{currentUser.userLogin}</p>
-            <span>Email: </span>
-            <p className="mail"> {currentUser.userEmail} </p>
+          <form id="editProfile">
+            <img className="profileImg" src={ currentUser.userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
+              {openForm&&<div className="changeFoto"> 
+                <label required htmlFor="imageF">
+                  <input autoFocus={true} type="file" id="imageF" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
+                      onChange={getImage} 
+                  />
+                    <IoCameraSharp className="delete-icon"/>
+                </label>
+              </div>}
+              
+              <br/><span>Ім'я: </span>
+                {openForm
+                ?(<input className="inputEditProfile" type="text" placeholder={currentUser.userName || "Ваше ім'я"}/>)
+                :(<p>{currentUser.userName || "Ваше ім'я"}</p>)}
+              <span>Логін: </span>
+                {openForm
+                ?(<input className="inputEditProfile" type="text" placeholder={currentUser.userLogin}/>)
+                :(<p>{currentUser.userLogin}</p>)}
+              <span>Email: </span>
+                {openForm
+                ?(<input className="inputEditProfile " type="email" placeholder={currentUser.userEmail}/>)
+                :(<p className="mail"> {currentUser.userEmail} </p>)}
+              
+                {openForm 
+                ?(<div className="wrapBtns">
+                  <button  
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpenForm(false)}
+                    }
+                  >НАЗАД
+                  </button>
+                  <button
+                   onClick={(e) => {
+                    e.preventDefault();
+                    }
+                  }
+                  >ЗМІНИТИ</button>
+                </div>) 
+                :(<button className="btnEditProfile" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpenForm(true)}
+                  }
+                  >РЕДАГУВАТИ</button>)}
+
+          </form>  
             
           </div>
           <div className="pageTwo">
