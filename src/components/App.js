@@ -31,9 +31,10 @@ const transLetters = {'q':'й', 'w':'ц', 'e':'у', 'r': 'к', 't': 'е', 'y': '
 const App = () => {
   const [regUser, setRegUser] = useState({
          userName: null,
-         userEmail: "",
-         userPassword: "",
-         userConfirmed: null
+         userEmail: null,
+         userPassword: null,
+         userConfirmed: null,
+        //  userJWT: null,
         });
   const [currentUser, setCurrentUser] = useState({
         userLogin: null,
@@ -55,13 +56,13 @@ const App = () => {
         [loading, setLoading] = useState(true),
         [error, setError] = useState(null),
         [fix, setFix] = useState(''),
-        modalClass = classNames({"blurRect": true, }),
-        mainSearchRef = useRef(null);
-        const [inputErrors, setInputErrors] = useState({
+        [inputErrors, setInputErrors] = useState({
             firstName: '',
             lastName: '',
             userName: '',
-        });    
+        }),
+        modalClass = classNames({"blurRect": true, }),
+        mainSearchRef = useRef(null);    
 
   const [btnScrollUp, setBtnScrollUp] = useState(false);
 
@@ -73,7 +74,6 @@ const App = () => {
     userJWT: null,
     docId: null
   });
-
   const turnExit = () => {
     if(!confirm) {
       toggleButton();     
@@ -83,7 +83,15 @@ const App = () => {
     }
     mainSearchRef.current?.focus();
   };
-
+  const resetRegUser = () => ({
+    userName: null,
+    userEmail: null,
+    userPassword: null,
+    userConfirmed: null
+  });
+  const resetRegForm = () => {
+    setRegUser(resetRegUser());
+  }  
    
   const validInput = (value, inputElement) => {
     if(inputElement.type === "text") {
@@ -184,8 +192,10 @@ const App = () => {
             setCurrentUser={setCurrentUser} 
             regUser={regUser} 
             setRegUser={setRegUser}
+            resetRegForm={resetRegForm}
             validInput={validInput}
             inputErrors={inputErrors}
+            resetRegUser={resetRegUser}
           />
 
           {goodbye&&<Goodbye 
@@ -200,7 +210,6 @@ const App = () => {
             confirm={confirm} 
             svgHttp={svgHttp} 
             svgXlink={svgXlink} 
-            // regEntry={regEntry}
             setRegEntry={setRegEntry}
             mainSearchRef={mainSearchRef}
             turnExit={turnExit}

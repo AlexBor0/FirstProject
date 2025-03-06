@@ -68,22 +68,30 @@
 	left: 0px;
 }
 .pageOne p, .inputEditProfile{
-	max-width:144px;
 	font-size: 0.8em;
 	font-weight: 500;
 	font-family: 'Open Sans', sans-serif;
 	background-color: white;
 	border-radius: 5px;
 	border: solid 1px rgb(3, 87, 116);
+	
+}
+.pageOne p{
 	padding: 0px 4px;
-	margin: 1px 14px -2px -5px;
+	margin: 1px 14px -1px -5px;
+}
+.pageOne .mail{
+	font-size: 0.7em;
+	padding: 0px 2px 1px 2px;
+	margin-top: 2px;
+	overflow-y: auto;
+}
+.inputEditProfile{
+	width:145px;
+	padding: 0px 0px 0px 4px;
+	margin: 0px 14px -3px -5px;
 }
 
-.pageOne .mail{
-	width:145px;
-	font-size: 0.7em;
-	padding: 2px 2px;
-}
 .pageOne span {
 	font-size: 0.8em;
 	font-family: 'Verdana', sans-serif;
@@ -113,7 +121,7 @@
 	border-radius: 5px;
 	/* margin-left: 5px; */
 	color:white;
-	padding: 4px 8px;
+	padding: 4px 6px;
 	font-size: 0.7em;
 	font-weight: 600;
 	font-family: "Montserrat", sans-serif;
@@ -123,9 +131,9 @@
 }
 .wrapBtns button:first-child {
 	background-color:brown;
-	padding: 4px 12px;
+	padding: 4px 14px;
 }
 .wrapBtns button:last-child {
 	background-color:rgb(10, 76, 199);
-	margin-left: 8px;
+	margin-left: 9px;
 }

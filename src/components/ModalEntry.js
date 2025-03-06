@@ -5,13 +5,14 @@ import Registration from "./Registration";
 import './../css/ModalEntry.css';
 
 
-const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, setRegUser, host, validInput, inputErrors}) => {
+const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, resetRegForm, host, validInput, inputErrors, setRegUser}) => {
 
     const [regOn, setRegOn] = useState(false);
 
     const setOnClick = () => {
         toggleModal();
         setRegOn(false);
+        resetRegForm();
        };
 
     useEffect(() => {
@@ -51,7 +52,8 @@ const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, cur
                     setRegOn={setRegOn} 
                     regOn={regOn}
                     validInput={validInput}
-                    inputErrors={inputErrors}/>}
+                    inputErrors={inputErrors}
+                />}
                 {regOn&&<Registration 
                     host={host} 
                     setRegOn={setRegOn} 
@@ -59,7 +61,9 @@ const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, cur
                     regUser={regUser} 
                     setRegUser={setRegUser}
                     validInput={validInput}
-                    inputErrors={inputErrors}/>}
+                    inputErrors={inputErrors}
+                    resetRegForm={resetRegForm}
+                />}
                 </div>
             </div>
 

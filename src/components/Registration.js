@@ -3,7 +3,7 @@ import RegForm from "./RegForm";
 import ModalThenks from "./ModaThenks";
 import axios from 'axios';
 
-const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInput, inputErrors}) => {
+const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInput, inputErrors,  resetRegForm}) => {
 
 
     const [postFetch, setPostFetch] = useState(false),
@@ -46,7 +46,9 @@ const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInpu
             setRO={setRegOn} 
             rO={regOn} 
             inputErrors={inputErrors}
-            getDataItems={getDataItems}/>
+            getDataItems={getDataItems}
+            resetRegForm={resetRegForm}
+            />
         }
 
         {regUser.userConfirmed&&<ModalThenks yourLogin={regUser.userName}/>}
