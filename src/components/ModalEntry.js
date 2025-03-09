@@ -2,10 +2,11 @@ import React, {useEffect, useState} from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import AauthorizationForm from "./AauthorizationForm";
 import Registration from "./Registration";
+import useEsc from "./useEsc";
 import './../css/ModalEntry.css';
 
 
-const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, resetRegForm, host, validInput, inputErrors, setRegUser}) => {
+const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, resetRegForm, host, validInput, inputErrors, setRegUser, showProfile, addDoc}) => {
 
     const [regOn, setRegOn] = useState(false);
 
@@ -15,17 +16,23 @@ const ModalEntry = ({regEntry, modalClass, toggleModal, confirm, setConfirm, cur
         resetRegForm();
        };
 
-    useEffect(() => {
-        const handlKeyDown = (e) => {
-            e.key === 'Escape'&&setOnClick()
+       useEsc(() => {
+        if (!showProfile && !addDoc) {
+          setOnClick();
         }
+      });  
+
+    // useEffect(() => {
+    //     const handlKeyDown = (e) => {
+    //         e.key === 'Escape'&&setOnClick()
+    //     }
             
-        document.addEventListener('keydown', handlKeyDown);
+    //     document.addEventListener('keydown', handlKeyDown);
       
-        return () => {
-          document.removeEventListener('keydown', handlKeyDown);
-        };
-      });
+    //     return () => {
+    //       document.removeEventListener('keydown', handlKeyDown);
+    //     };
+    //   });
 
       useEffect(() => {
         if (regEntry) {document.body.style.overflow = 'hidden';}

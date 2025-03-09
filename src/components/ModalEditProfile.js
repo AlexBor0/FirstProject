@@ -1,20 +1,12 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Profile from "./Profile";
-
+import useEsc from "./useEsc";
 import './../css/ModalEditProfile.css';
 
 const ModalEditProfile = ({ currentUser, modalClass, setShowProfile, svgHttp, svgXlink, host, getImage}) => {
-        useEffect(() => {
-                const handlKeyDown = (e) => {
-                    e.key === 'Escape'&&setShowProfile(false)
-                }
-                    
-                document.addEventListener('keydown', handlKeyDown);
-              
-                return () => {
-                  document.removeEventListener('keydown', handlKeyDown);
-                };
-              });
+
+    useEsc(() => setShowProfile(false));
+
     return (
 <div className={modalClass}>
     <div className="modalAddDoc">   

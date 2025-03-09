@@ -196,6 +196,8 @@ const App = () => {
             validInput={validInput}
             inputErrors={inputErrors}
             resetRegUser={resetRegUser}
+            showProfile={showProfile}
+            addDoc={addDoc}
           />
 
           {goodbye&&<Goodbye 

@@ -4,6 +4,7 @@ import AddResumeForm from "./AddResumeForm";
 import AddVacancyForm from "./AddVacancyForm";
 import MessagePost from "./MessagePost";
 import Preview from "./Preview";
+import useEsc from "./useEsc";
 import './../css/ModalAddDoc.css';
 
 const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputErrors, validInput, citiesBase, specialtiesBase}) => {
@@ -106,19 +107,9 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
         setSelectedIndex(0);
         hideList(false);
     };
-      
-    useEffect(() => {
-            const handlKeyDown = (e) => {
-                e.key === 'Escape'&&setAddDoc(false)
-            }
-                
-            document.addEventListener('keydown', handlKeyDown);
-          
-            return () => {
-              document.removeEventListener('keydown', handlKeyDown);
-            };
-          });
 
+    useEsc(( )=> setAddDoc(false));
+ 
           useEffect(() => {
             document.body.style.overflow = (addDoc || saveTextEditor) ? 'hidden' : 'unset';
             return () => { document.body.style.overflow = 'unset'; };
