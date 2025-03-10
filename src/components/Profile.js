@@ -3,7 +3,7 @@ import ProfileForm from "./ProfileForm";
 import { IoCloseCircleSharp } from "react-icons/io5";
 
 
-const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, getImage }) => {
+const Profile = ({ svgHttp, svgXlink, editeCandidate, setEditCandidate, setShowProfile, host, currentUser, getImage, getDataItems }) => {
 
     return(
       <div className="profileBook">
@@ -65,6 +65,9 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, getImag
               currentUser={currentUser}
               host={host} 
               getImage={getImage}
+              editeCandidate={editeCandidate}
+              setEditCandidate={setEditCandidate}
+              getDataItems={getDataItems}
             />      
           </div>
           <div className="pageTwo">

@@ -5,7 +5,6 @@ import CityInput from "./CityInput";
 import VacancyInput from "./VacancyInput";
 
 
-
 const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase }) => {
 
     const [selectValue, setSelectValue] = useState(''),

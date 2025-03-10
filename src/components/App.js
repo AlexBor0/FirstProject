@@ -92,7 +92,7 @@ const App = () => {
   const resetRegForm = useCallback(() => {
     setRegUser(resetRegUser());
   }, [setRegUser] ); 
-   
+  
   const validInput = (value, inputElement) => {
     if(inputElement.type === "text") {
         const forbiddenChars = /[<>{}[\]()&$%#?!*^+=|\\:;,"'`~]/;
@@ -114,7 +114,16 @@ const App = () => {
         }
     }
   };
-         
+
+  const getDataItems = (e, options = {}) => {
+    const { name, value } = e.target;
+    if (options.setNewDoc) options.setNewDoc(prev => ({ ...prev, [name]: value }));
+    if (options.setSelectValue) options.setSelectValue(value);
+    if (options.setQuery) options.setQuery(value);
+    if (options.setShowList) options.setShowList(value.length > 0);
+    if (options.validate) validInput(value, e.target);
+};
+        
   const toggleModal = useCallback(() => {
     if(regEntry)setRegEntry(!regEntry);
   }, [regEntry] ); // Выход из учетной записи
@@ -231,6 +240,7 @@ const App = () => {
               svgXlink={svgXlink}
               currentUser={currentUser}
               host={host}
+              getDataItems={getDataItems}
             />
           }
 
@@ -267,10 +277,11 @@ const App = () => {
               setAddDoc={setAddDoc} 
               modalClass={modalClass} 
               host={host}
-              validInput={validInput}
+              // validInput={validInput}
               inputErrors={inputErrors}
               citiesBase={citiesBase}
               specialtiesBase={specialtiesBase}
+              getDataItems={getDataItems}
               />
             }
           <div className="mainContainer">

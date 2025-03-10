@@ -8,7 +8,7 @@ import useEsc from "./useEsc";
 import useNoScroll from "./useNoScroll";
 import './../css/ModalAddDoc.css';
 
-const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputErrors, validInput, citiesBase, specialtiesBase}) => {
+const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputErrors, citiesBase, specialtiesBase, getDataItems}) => {
     console.log('Component rendered');
     const [newCandidate, setNewCandidate] = useState({
         firstName: "",
@@ -46,15 +46,6 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
     [error, setError] = useState(null);
 
     const modalContRef = useRef(null);
-
-    const getDataItems = (e, options = {}) => {
-        const { name, value } = e.target;
-        if (options.setNewDoc) options.setNewDoc(prev => ({ ...prev, [name]: value }));
-        if (options.setSelectValue) options.setSelectValue(value);
-        if (options.setQuery) options.setQuery(value);
-        if (options.setShowList) options.setShowList(value.length > 0);
-        if (options.validate) validInput(value, e.target);
-    };
 
     const arrowPress = (e, options) => {
         const { 
@@ -118,19 +109,19 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
             //  onClick = {(e) => (e.target.className === "blurRect"&&setAddDoc(false))} 
         >
             <div className="modalAddDoc">
-            {saveTextEditor&&<Preview
-            type={type}
-            newVacancy={newVacancy}
-            setNewVacancy={setNewVacancy}
-            newCandidate={newCandidate}
-            setNewCandidate={setNewCandidate}
-            setSaveTextEditor={setSaveTextEditor}
-            setPostFetch={setPostFetch}
-            setPostSuccess={setPostSuccess}
-            setLoading={setLoading}
-            setError={setError}
-            host={host}
-            />}
+                {saveTextEditor&&<Preview
+                    type={type}
+                    newVacancy={newVacancy}
+                    setNewVacancy={setNewVacancy}
+                    newCandidate={newCandidate}
+                    setNewCandidate={setNewCandidate}
+                    setSaveTextEditor={setSaveTextEditor}
+                    setPostFetch={setPostFetch}
+                    setPostSuccess={setPostSuccess}
+                    setLoading={setLoading}
+                    setError={setError}
+                    host={host}
+                />}
                 <div className="modalAdCont" ref={modalContRef}>
                 <IoCloseCircleSharp className="delete-icon" onClick = {() => setAddDoc(false)}/>
                 {!postFetch&&!type&&< AddResumeForm 
