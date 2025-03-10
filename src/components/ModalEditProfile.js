@@ -1,11 +1,13 @@
 import React from "react";
 import Profile from "./Profile";
 import useEsc from "./useEsc";
+import useNoScroll from "./useNoScroll";
 import './../css/ModalEditProfile.css';
 
-const ModalEditProfile = ({ currentUser, modalClass, setShowProfile, svgHttp, svgXlink, host, getImage}) => {
-
+const ModalEditProfile = ({ currentUser, modalClass, showProfile, setShowProfile, svgHttp, svgXlink, host, getImage}) => {
+    // console.log('Component rendered');
     useEsc(() => setShowProfile(false));
+    useNoScroll(showProfile);
 
     return (
 <div className={modalClass}>

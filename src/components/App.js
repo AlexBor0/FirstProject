@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef} from "react";
+import React, { useEffect, useState, useRef, useCallback} from "react";
 import axios from 'axios';
 import { IoArrowUp, IoSearch } from "react-icons/io5";
 import './../css/index.css';
@@ -89,9 +89,9 @@ const App = () => {
     userPassword: null,
     userConfirmed: null
   });
-  const resetRegForm = () => {
+  const resetRegForm = useCallback(() => {
     setRegUser(resetRegUser());
-  }  
+  }, [setRegUser] ); 
    
   const validInput = (value, inputElement) => {
     if(inputElement.type === "text") {
@@ -115,7 +115,10 @@ const App = () => {
     }
   };
          
-  const toggleModal = () => {if(regEntry)setRegEntry(!regEntry)}  // Выход из учетной записи
+  const toggleModal = useCallback(() => {
+    if(regEntry)setRegEntry(!regEntry);
+  }, [regEntry] ); // Выход из учетной записи
+
   const toggleButton = () => {if(!regEntry)setRegEntry(!regEntry)} // Вход в учетную запись (regEntry меняется на true )
 
       useEffect(() => {
@@ -179,7 +182,8 @@ const App = () => {
 
   return(
       <div className="container">   
-        <div className="wallimage"><Image url={wallpaper} alt="Обои" />
+        <div className="wallimage">
+          <Image url={wallpaper} alt="Обои" />
         </div>
           <ModalEntry 
             host={host} 
@@ -221,6 +225,7 @@ const App = () => {
           {showProfile&&
             <ModalEditProfile 
               modalClass={modalClass}
+              showProfile={showProfile}
               setShowProfile={setShowProfile}
               svgHttp={svgHttp}
               svgXlink={svgXlink}

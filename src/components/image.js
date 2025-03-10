@@ -1,11 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 
-const Image = (props) => {
+const Image = memo (({ url, alt }) => (
  
-            return(
-            <img className = "firstWallpaper" src={props.url} alt={props.alt}/>
-        )
-}
+            <img loading="lazy" className = "firstWallpaper" src={url} alt={alt}/>
+        
+));
 
-
-export default Image
+export default Image;

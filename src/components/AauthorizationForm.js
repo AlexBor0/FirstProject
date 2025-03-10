@@ -27,13 +27,14 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
                     password: userLogin.userPassword
                 });
                 setConfirm(response.data.user.confirmed);
-                setCurrentUser(prev => ({...prev, userLogin:response.data.user.username}));
-                setCurrentUser(prev => ({...prev, userEmail:response.data.user.email}));
-                setCurrentUser(prev => ({...prev, userName:response.data.user.fullname}));
-                setCurrentUser(prev => ({...prev, userJWT:response.data.jwt}));
-                setCurrentUser(prev => ({...prev, docId:response.data.user.documentId}));
-                
-                    } 
+                setCurrentUser(prev => ({...prev,
+                   userLogin:response.data.user.username,
+                   userEmail:response.data.user.email,
+                   userName:response.data.user.fullname,
+                   userJWT:response.data.jwt,
+                   docId:response.data.user.documentId
+                  }));              
+          } 
 			catch (error) {setError(error);} 
 			finally {setLoading(false);
       }

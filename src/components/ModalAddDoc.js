@@ -1,14 +1,15 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, { useState, useRef} from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import AddResumeForm from "./AddResumeForm";
 import AddVacancyForm from "./AddVacancyForm";
 import MessagePost from "./MessagePost";
 import Preview from "./Preview";
 import useEsc from "./useEsc";
+import useNoScroll from "./useNoScroll";
 import './../css/ModalAddDoc.css';
 
 const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputErrors, validInput, citiesBase, specialtiesBase}) => {
-
+    console.log('Component rendered');
     const [newCandidate, setNewCandidate] = useState({
         firstName: "",
         lastName: "",
@@ -108,12 +109,8 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
         hideList(false);
     };
 
-    useEsc(( )=> setAddDoc(false));
- 
-          useEffect(() => {
-            document.body.style.overflow = (addDoc || saveTextEditor) ? 'hidden' : 'unset';
-            return () => { document.body.style.overflow = 'unset'; };
-        }, [addDoc, saveTextEditor]);
+    useEsc(()=> setAddDoc(false));
+    useNoScroll( addDoc, saveTextEditor )
 
     return ((
         <div className={modalClass} 

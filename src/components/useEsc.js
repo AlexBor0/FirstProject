@@ -4,7 +4,6 @@ const useEsc = (func) => {
     useEffect(() => {
                     const handlKeyDown = (e) => {
                         if (e.key === 'Escape') {
-                          console.log('Escape pressed');
                           func();}
                     }
                         
