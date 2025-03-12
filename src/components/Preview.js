@@ -4,7 +4,7 @@ import './../css/Preview.css';
 import PreviewVacancy from "./PreviewVacancy";
 import PreviewResume from "./PreviewResume";
 
-const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate}) => {
+const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser}) => {
 
     const previewContentRef = useRef(null);
 
@@ -46,7 +46,12 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
         };
     
         const response = await apiRequest(() =>
-          axios.post(`${host}/api/vacancies`, { data })
+          axios.post(`${host}/api/vacancies`, { data }, {
+            headers: {
+              'Authorization': `Bearer ${currentUser.userJWT}`, 
+              'Content-Type': 'application/json', 
+            },
+          })
         );
         if (response) {
           setNewVacancy((prev) => ({ ...prev, documentId: response.data.data.documentId }));
@@ -58,7 +63,12 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
         file.append("files", newCandidate.foto);
     
         const imageResponse = await apiRequest(() =>
-          axios.post(`${host}/api/upload`, file)
+          axios.post(`${host}/api/upload`, file, {
+            headers: {
+              'Authorization': `Bearer ${currentUser.userJWT}`, 
+              'Content-Type': 'multipart/form-data', 
+            },
+          })
         );
         const newFotoId = imageResponse?.data[0].id;
     

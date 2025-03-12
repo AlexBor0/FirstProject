@@ -11,9 +11,9 @@ const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm
 
     const [regOn, setRegOn] = useState(false);
     // console.log('Component rendered');
-    const scrollArgs = useMemo(() => [regEntry], [
-        regEntry
-      ]);
+    // const scrollArgs = useMemo(() => [regEntry], [
+    //     regEntry
+    //   ]);
 
     const setOnClick = () => {
         toggleModal();
@@ -26,7 +26,7 @@ const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm
           setOnClick();
         }
       });  
-      useNoScroll(scrollArgs);
+      useNoScroll(regEntry);
 
 // состояние regEntry отвечает за показ Модального окна
 

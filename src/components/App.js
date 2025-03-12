@@ -42,7 +42,8 @@ const App = () => {
         userName: null,
         userImage: [],
         userJWT: null,
-        docId: null
+        docId: null,
+        id: null
         });
   const [typeOfSearch, setTypeOfsearch] = useState(true),
         [regEntry, setRegEntry] = useState(false), //Состояние входа в учетную запись
@@ -282,6 +283,7 @@ const App = () => {
               citiesBase={citiesBase}
               specialtiesBase={specialtiesBase}
               getDataItems={getDataItems}
+              currentUser={currentUser}
               />
             }
           <div className="mainContainer">

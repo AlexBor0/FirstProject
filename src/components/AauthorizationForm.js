@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios';
 
-const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, validInput, inputErrors}) => {
+const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, validInput, inputErrors, setInputErrors}) => {
     const [userLogin, setUserLogin] = useState({
               userName: '',
               userPassword: '',
@@ -15,7 +15,6 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
             setUserLogin({ ...userLogin, [name]: value });
             validInput(value, e.target);
         };
-
     
 		const fetchAauthorization = async () => {
 
@@ -32,7 +31,8 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
                    userEmail:response.data.user.email,
                    userName:response.data.user.fullname,
                    userJWT:response.data.jwt,
-                   docId:response.data.user.documentId
+                   docId:response.data.user.documentId,
+                   id:response.data.user.id
                   }));              
           } 
 			catch (error) {setError(error);} 
