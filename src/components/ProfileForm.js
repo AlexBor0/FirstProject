@@ -20,10 +20,10 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
           [error, setError] = useState(null),
           [openForm, setOpenForm] = useState(false);
     
-    let avaMas, ava;
+    let imgArr, img;
         if (currentUser.userImage.length > 0) {
-          [ avaMas ] = currentUser.userImage;
-          ava = ( host + avaMas.userAvatar.url );
+          [ imgArr ] = currentUser.userImage;
+          img = ( host + imgArr.userAvatar.url );
         };
     const imageSrc = editeCandidate.foto instanceof File 
         && URL.createObjectURL(editeCandidate.foto);
@@ -44,6 +44,8 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
 
     const fetchUpdateProfile = async () => {
       
+      const imageIdToDelete = currentUser.userImage[0].userAvatar.id;
+
       setLoading(true);
       setPostFetch(true);
       try { 
@@ -56,29 +58,26 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
           formDataToSend.append("field", "userAvatar");
 
           const uploadResponse = await fetch(`${host}/api/upload`, {
-            method: "POST",
-            headers: {
-              'Authorization': `Bearer ${currentUser.userJWT}`,
-            },
-            body:formDataToSend,
+              method: "POST",
+              headers: {
+                'Authorization': `Bearer ${currentUser.userJWT}`,
+              },
+              body:formDataToSend,
+            }
+          );
+
+          if (!uploadResponse.ok) {
+            throw new Error("Помилка при завантаженні файлу");
           }
-        );
 
-      if (!uploadResponse.ok) {
-        throw new Error("Помилка при завантаженні файлу");
-      }
+          const uploadData = await uploadResponse.json();
+          newAvatarUrl = host + uploadData[0].url; 
+          console.log("Файл успішно завантажено");
+        }
 
-      const uploadData = await uploadResponse.json();
-      newAvatarUrl = host + uploadData[0].url; 
-      console.log("Файл успішно завантажено");
-    }
-
-      const userData = {
-        fullname: editeCandidate.firstName,
-        // username: editeCandidate.lastName || currentUser.userLogin,
-        // email: editeCandidate.email || currentUser.userEmail,
-      };
-
+        const userData = {
+          fullname: editeCandidate.firstName,
+        };
 
       const updateResponse = await axios.put(
         `${host}/api/users/${currentUser.id}`,
@@ -92,19 +91,26 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
 
       if (updateResponse.status !== 200) {
         throw new Error("Помилка при оновленні даних користувача");
-      }
+      };
+
+      const deletePrevImage = await axios.delete(
+        `${host}/api/upload/files/${imageIdToDelete}`
+      );
+
+      if (deletePrevImage.status !== 200) {
+        throw new Error("Помилка при видаленні старого файлу");
+      };
+
       setCurrentUser((prev) => ({
         ...prev,
         userName: userData.fullname,
-        // userLogin: userData.username,
-        // userEmail: userData.email,
         userImage: newAvatarUrl
           ? [{ userAvatar: { url: newAvatarUrl } }]
           : prev.userImage,
       }));
 
         setPostSuccess(true);
-        console.log('Дані користувача оновлено:', updateResponse.data);
+        console.log('Дані користувача оновлено:');
 
       } catch (error) {
         setError(error);
@@ -117,7 +123,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
 
     return (
         <form id="editProfile">
-            <img className="profileImg" src={ currentUser.userImage.length < 1 ? GestAva : ava } alt="Гість"/>
+            <img className="profileImg" src={ currentUser.userImage.length < 1 ? GestAva : img } alt="Гість"/>
               {openForm&&
                 <div className="wrapPrevImage">
                   {editeCandidate.foto 
@@ -150,18 +156,10 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                 />)
                 :(<p>{currentUser.userName || "Ваше ім'я"}</p>)}
               <span>Логін: </span>
-                {openForm
-                ?(<input className="inputEditProfile text" type="text" name="lastName" placeholder={currentUser.userLogin}
-                  onChange={(e) => getDataItems(e, { setNewDoc: setEditCandidate, validate: true })}
-                  />)
-                :(<p>{currentUser.userLogin}</p>)}
+                <p>{currentUser.userLogin}</p>
               <span>Email: </span>
-                {openForm
-                ?(<input className="inputEditProfile mail" type="email" name="email" placeholder={currentUser.userEmail}
-                  onChange={(e) => getDataItems(e, { setNewDoc: setEditCandidate, validate: true })}
-                />)
-                :(<p className="mail"> {currentUser.userEmail} </p>)}
-              
+                <p className="mail"> {currentUser.userEmail} </p>
+
                 {openForm 
                 ?(<div className="wrapBtns">
                   <button  
@@ -175,7 +173,8 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                   <button
                    onClick={(e) => {
                     e.preventDefault();
-                    fetchUpdateProfile()
+                    fetchUpdateProfile();
+                    setOpenForm(false);
                     }
                   }
                   >ЗМІНИТИ</button>
@@ -183,7 +182,9 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                 :(<button className="btnEditProfile" 
                   onClick={(e) => {
                     e.preventDefault();
-                    setOpenForm(true)}
+                    setOpenForm(true);
+                    setEditCandidate(prev => ({...prev, foto: null}));
+                  }
                   }
                   >РЕДАГУВАТИ</button>)}
 
