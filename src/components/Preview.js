@@ -92,7 +92,9 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
     
         const response = await apiRequest(() =>
           axios.post(`${host}/api/candidates`, { data }, {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+              'Authorization': `Bearer ${currentUser.userJWT}`,
+              'Content-Type': 'application/json' },
           })
         );
         if (response) {

@@ -1,10 +1,10 @@
 import React, {useState}  from "react";
 import { IoCameraSharp, IoCloseCircleSharp } from "react-icons/io5";
 import GestAva from "./../img/GestAva.png";
-import axios from "axios";
+// import axios from "axios";
 
 
-const ProfileForm = ({currentUser, host, getDataItems }) => {
+const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) => {
 
     const [editeCandidate, setEditCandidate] = useState({
       firstName: "",
@@ -40,31 +40,75 @@ const ProfileForm = ({currentUser, host, getDataItems }) => {
             e.target.setCustomValidity('');
         } }   
     };
-    // const data = {
-    //   fullname: editeCandidate.firstName,
-    //   userAvatar: editeCandidate.foto,
-    //   username: editeCandidate.lastName,
-    // };
+   
 
-    const fetchNewVacancy = async () => {
+    const fetchUpdateProfile = async () => {
       
       setLoading(true);
       setPostFetch(true);
-      try {    
-          const file = new FormData();
-          file.append('userAvatar', editeCandidate.foto);
-          file.append('fullname', editeCandidate.firstName);
+      try { 
+        let newAvatarUrl = null; 
+        if (editeCandidate.foto) {
+          const formDataToSend = new FormData();
+          formDataToSend.append("files", editeCandidate.foto);
+          formDataToSend.append("ref", "plugin::users-permissions.user"); 
+          formDataToSend.append("refId", currentUser.id); 
+          formDataToSend.append("field", "userAvatar");
 
-          const response = await axios.put(`${host}/api/users/${currentUser.id}`, file, {
+          const uploadResponse = await fetch(`${host}/api/upload`, {
+            method: "POST",
             headers: {
-              'Authorization': `Bearer ${currentUser.userJWT}`, 
+              'Authorization': `Bearer ${currentUser.userJWT}`,
             },
-          });
+            body:formDataToSend,
+          }
+        );
+
+      if (!uploadResponse.ok) {
+        throw new Error("Помилка при завантаженні файлу");
+      }
+
+      const uploadData = await uploadResponse.json();
+      newAvatarUrl = host + uploadData[0].url; 
+      console.log("Файл успішно завантажено");
+    }
+
+      const userData = {
+        fullname: editeCandidate.firstName,
+        // username: editeCandidate.lastName || currentUser.userLogin,
+        // email: editeCandidate.email || currentUser.userEmail,
+      };
+
+
+      const updateResponse = await axios.put(
+        `${host}/api/users/${currentUser.id}`,
+        userData,
+        {
+          headers: {
+            Authorization: `Bearer ${currentUser.userJWT}`,
+          },
+        }
+      );
+
+      if (updateResponse.status !== 200) {
+        throw new Error("Помилка при оновленні даних користувача");
+      }
+      setCurrentUser((prev) => ({
+        ...prev,
+        userName: userData.fullname,
+        // userLogin: userData.username,
+        // userEmail: userData.email,
+        userImage: newAvatarUrl
+          ? [{ userAvatar: { url: newAvatarUrl } }]
+          : prev.userImage,
+      }));
+
         setPostSuccess(true);
-        console.log('Данные пользователя обновлены:', response.data);
+        console.log('Дані користувача оновлено:', updateResponse.data);
+
       } catch (error) {
         setError(error);
-        console.error('Ошибка при обновлении данных:', error.response?.data || error.message);
+        console.error('Помилка:', error.message);
       } finally {
         setLoading(false);
       }
@@ -131,7 +175,7 @@ const ProfileForm = ({currentUser, host, getDataItems }) => {
                   <button
                    onClick={(e) => {
                     e.preventDefault();
-                    fetchNewVacancy()
+                    fetchUpdateProfile()
                     }
                   }
                   >ЗМІНИТИ</button>

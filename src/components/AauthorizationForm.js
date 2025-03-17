@@ -31,6 +31,7 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
                    userEmail:response.data.user.email,
                    userName:response.data.user.fullname,
                    userJWT:response.data.jwt,
+                   userImage:(response.data.user?.userAvatar || []),
                    docId:response.data.user.documentId,
                    id:response.data.user.id
                   }));              

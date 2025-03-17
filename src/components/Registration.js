@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInput, inputErrors,  resetRegForm}) => {
 
-
+    const [yourLogin, setYourLogin] = useState(undefined);
     const [postFetch, setPostFetch] = useState(false),
           [loading, setLoading] = useState(true),
           [error, setError] = useState(null);
@@ -17,7 +17,7 @@ const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInpu
         };
 
     const fetchRegistration = async () => {
-
+        setYourLogin(regUser.userName);
         setPostFetch(true);
 
 			try {const response = await axios
@@ -28,7 +28,8 @@ const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInpu
                 });
 
         // setRegUser((prevState => ({...prevState, userJWT: response.data.jwt })))
-        setRegUser((prevState => ({...prevState, userConfirmed: response.data.user.confirmed })))
+        setRegUser((prevState => ({...prevState, userConfirmed: response.data.user.confirmed })));
+        
 		console.log("новый пользователь");
                
             } 
@@ -51,7 +52,7 @@ const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInpu
             />
         }
 
-        {regUser.userConfirmed&&<ModalThenks yourLogin={regUser.userName}/>}
+        {regUser.userConfirmed&&<ModalThenks yourLogin={yourLogin}/>}
     </>)
 }
 

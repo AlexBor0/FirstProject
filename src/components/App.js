@@ -240,8 +240,10 @@ const App = () => {
               svgHttp={svgHttp}
               svgXlink={svgXlink}
               currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
               host={host}
               getDataItems={getDataItems}
+              axios={axios}
             />
           }
 
