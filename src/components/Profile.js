@@ -65,9 +65,6 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
               host={host} 
-              // getImage={getImage}
-              // editeCandidate={editeCandidate}
-              // setEditCandidate={setEditCandidate}
               getDataItems={getDataItems}
               axios={axios}
             />      

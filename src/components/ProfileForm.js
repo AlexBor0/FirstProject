@@ -1,6 +1,7 @@
-import React, {useState}  from "react";
+import React, {useState, useEffect}  from "react";
 import { IoCameraSharp, IoCloseCircleSharp } from "react-icons/io5";
 import GestAva from "./../img/GestAva.png";
+import Spinner from "./Spinner";
 // import axios from "axios";
 
 
@@ -14,17 +15,21 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
       foto: null, 
     });
     const [fileSize, setFileSize] = useState(''),
-          [postFetch, setPostFetch] = useState(false),
           [postSuccess, setPostSuccess] = useState(null),
           [loading, setLoading] = useState(false),
           [error, setError] = useState(null),
-          [openForm, setOpenForm] = useState(false);
-    
-    let imgArr, img;
-        if (currentUser.userImage.length > 0) {
-          [ imgArr ] = currentUser.userImage;
-          img = ( host + imgArr.userAvatar.url );
-        };
+          [openForm, setOpenForm] = useState(false),
+          [imageOpacity, setImageOpacity] = useState(1), // Новое состояние для прозрачности изображения
+          [currentImageSrc, setCurrentImageSrc] = useState('');
+
+          useEffect(() => {
+            if (currentUser.userImage && currentUser.userImage.length > 0) {
+              setCurrentImageSrc(host + currentUser.userImage[0].userAvatar.url);
+            } else {
+              setCurrentImageSrc(GestAva);
+            }
+          }, [currentUser, host]);
+
     const imageSrc = editeCandidate.foto instanceof File 
         && URL.createObjectURL(editeCandidate.foto);
 
@@ -33,6 +38,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
         if(file) {
             if ( file.size > 120 * 1024 ) {
             e.target.setCustomValidity('Розмір файла не повинен перевищувати 120 кВ');
+
             return;
             } else {
             setEditCandidate(prev => ({...prev, foto: file}));
@@ -43,11 +49,12 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
    
 
     const fetchUpdateProfile = async () => {
-      
-      const imageIdToDelete = currentUser.userImage[0].userAvatar.id;
 
+     let imageIdToDelete = currentUser?.userImage?.[0]?.userAvatar?.id || null;
+    
       setLoading(true);
-      setPostFetch(true);
+      setImageOpacity(0);
+
       try { 
         let newAvatarUrl = null; 
         if (editeCandidate.foto) {
@@ -73,8 +80,17 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
           const uploadData = await uploadResponse.json();
           newAvatarUrl = host + uploadData[0].url; 
           console.log("Файл успішно завантажено");
-        }
+        };
 
+        if (newAvatarUrl) {
+          const img = new Image();
+          img.onload = () => {
+            setCurrentImageSrc(newAvatarUrl);
+            setTimeout(() => setImageOpacity(1), 300);
+          };
+          img.src = newAvatarUrl;
+        };
+        setFileSize(null);
         const userData = {
           fullname: editeCandidate.firstName,
         };
@@ -92,15 +108,21 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
       if (updateResponse.status !== 200) {
         throw new Error("Помилка при оновленні даних користувача");
       };
+      if (imageIdToDelete) {
+        const deletePrevImage = await axios.delete(
+          `${host}/api/upload/files/${imageIdToDelete}`,
+          {
+            headers: {
+              Authorization: `Bearer ${currentUser.userJWT}`,
+            },
+          }
+        );
 
-      const deletePrevImage = await axios.delete(
-        `${host}/api/upload/files/${imageIdToDelete}`
-      );
-
-      if (deletePrevImage.status !== 200) {
-        throw new Error("Помилка при видаленні старого файлу");
+        if (deletePrevImage.status !== 200) {
+          throw new Error("Помилка при видаленні старого файлу");
+        };
       };
-
+     
       setCurrentUser((prev) => ({
         ...prev,
         userName: userData.fullname,
@@ -108,22 +130,33 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
           ? [{ userAvatar: { url: newAvatarUrl } }]
           : prev.userImage,
       }));
-
         setPostSuccess(true);
         console.log('Дані користувача оновлено:');
 
       } catch (error) {
         setError(error);
         console.error('Помилка:', error.message);
+        setImageOpacity(1);
       } finally {
         setLoading(false);
       }
     };
 
-
     return (
         <form id="editProfile">
-            <img className="profileImg" src={ currentUser.userImage.length < 1 ? GestAva : img } alt="Гість"/>
+          <div className="profileImgWrap">
+            {loading?
+             (<Spinner className="profileImg"/>)
+             :  (
+                  <img 
+                    className={`profileImg ${loading ? 'loading' : 'loaded'}`}
+                    src={currentImageSrc} 
+                    alt="Профіль"
+                    style={{ opacity: imageOpacity }}
+                  />    
+                )}
+             
+          </div>
               {openForm&&
                 <div className="wrapPrevImage">
                   {editeCandidate.foto 
@@ -141,15 +174,14 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                      onClick = {(e) => {
                       e.preventDefault();
                       setEditCandidate(prev => ({...prev, foto: null}));
+                      setFileSize(null);
                     }}>
                       <IoCloseCircleSharp className="delete-icon"/>
                     </button>
                   </div>
                 </div>
-              }
-              
-              
-              <br/><span>Ім'я: </span>
+              }    
+              <br/><span>Ім'я: </span> <span className="fileSize">{fileSize&&( fileSize + "kb")}</span>
                 {openForm
                 ?(<input className="inputEditProfile text" type="text" name="firstName" placeholder={currentUser.userName || "Ваше ім'я"}
                   onChange={(e) => getDataItems(e, { setNewDoc: setEditCandidate, validate: true })}
@@ -179,7 +211,8 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                   }
                   >ЗМІНИТИ</button>
                 </div>) 
-                :(<button className="btnEditProfile" 
+                :(
+                <button className="btnEditProfile" 
                   onClick={(e) => {
                     e.preventDefault();
                     setOpenForm(true);

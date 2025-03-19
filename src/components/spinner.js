@@ -1,10 +1,10 @@
 import React from "react";
-import spinner from "./../img/054 spinner.svg";
+import spinner from "./../img/054 spinner1.svg";
 
-const Image = () => (
+const Spinner= () => (
  
-            <img className = "spiner" src={spinner} alt={"icon"}/>
+            <img className = "spiner" width="80px" height="80px" src={spinner} alt={"icon"}/>
         
 );
 
-export default Image;
+export default Spinner;
