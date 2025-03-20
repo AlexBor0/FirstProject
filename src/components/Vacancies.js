@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 
-const Vacancies = ({host, setTitle}) => {
+const Vacancies = ({host, setTitle, axios}) => {
 
 const [vacancies, setVacancies] = useState([]);
 const [loading, setLoading] = useState(true);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from 'axios';
 import Info from "./info";
 import Weather from "./weather";
 import WeatherForm from "./WeatherForm";
@@ -10,7 +9,7 @@ const buttonsTitle = "ОТРИМАТИ";
 
 
 
-const WeatherBlock = () => {
+const WeatherBlock = ({axios}) => {
 
    const formRef = useRef(null);
 

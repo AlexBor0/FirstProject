@@ -79,8 +79,10 @@ const App = () => {
   const turnExit = () => {
     if(!confirm) {
       toggleButton();     
-    } else {setConfirm(false);
-      setCurrentUser(resetCurrentUser());
+    } else {
+      setConfirm(false);
+      setCurrentUser(resetCurrentUser());  
+      localStorage.removeItem('jwt');
       setGoodbye(true);
     }
     mainSearchRef.current?.focus();
@@ -125,6 +127,37 @@ const App = () => {
     if (options.setShowList) options.setShowList(value.length > 0);
     if (options.validate) validInput(value, e.target);
 };
+
+useEffect(() => {
+  const jwt = localStorage.getItem('jwt');
+  if (jwt) {
+      const fetchUserData = async () => {
+          try {
+              const response = await axios.get(`${host}/api/users/me?populate=userAvatar`, {
+                  headers: {
+                      Authorization: `Bearer ${jwt}`
+                  }
+              });
+              setCurrentUser({
+                  userLogin: response.data.username,
+                  userEmail: response.data.email,
+                  userName: response.data.fullname,
+                  userJWT: jwt,
+                  userImage: (response.data?.userAvatar || []),
+                  docId: response.data.documentId,
+                  id: response.data.id
+              });
+              setConfirm(true); // Устанавливаем состояние авторизации
+          } catch (error) {
+              console.error('Ошибка при получении данных пользователя:', error);
+              localStorage.removeItem('jwt'); // Удаляем недействительный токен
+              setCurrentUser(resetCurrentUser()); // Сбрасываем состояние пользователя
+              setConfirm(false);
+          }
+      };
+      fetchUserData();
+  }
+}, []);
         
   const toggleModal = useCallback(() => {
     if(regEntry)setRegEntry(!regEntry);
@@ -216,6 +249,7 @@ const App = () => {
             resetRegUser={resetRegUser}
             showProfile={showProfile}
             addDoc={addDoc}
+            axios={axios}
           />
 
           {goodbye&&<Goodbye 
@@ -284,7 +318,7 @@ const App = () => {
               setAddDoc={setAddDoc} 
               modalClass={modalClass} 
               host={host}
-              // validInput={validInput}
+              axios={axios}
               inputErrors={inputErrors}
               citiesBase={citiesBase}
               specialtiesBase={specialtiesBase}
@@ -295,16 +329,21 @@ const App = () => {
           <div className="mainContainer">
             <main>                         
               {typeOfSearch&&<Candidates 
-                typeOfSearch={typeOfSearch} 
-                host={host}/>}
+                host={host}
+                axios={axios}
+                />}
               {!typeOfSearch&&<Vacancies 
                 host={host} 
-                setTitle={setVacancyName} />} 
+                setTitle={setVacancyName} 
+                axios={axios}
+                />} 
                    
             </main>
 
             <aside>
-              <WeatherBlock/>
+              <WeatherBlock
+              axios={axios}
+              />
             </aside>
             {btnScrollUp&&<button className="btnUp" 
               onClick={() => window.scrollTo(0, 0)}>

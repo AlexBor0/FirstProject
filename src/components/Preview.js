@@ -1,10 +1,9 @@
 import React, {useEffect, useRef} from "react";
-import axios from "axios";
 import './../css/Preview.css';
 import PreviewVacancy from "./PreviewVacancy";
 import PreviewResume from "./PreviewResume";
 
-const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser}) => {
+const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, axios}) => {
 
     const previewContentRef = useRef(null);
 

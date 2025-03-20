@@ -8,9 +8,9 @@ import VacancyInput from "./VacancyInput";
 const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase }) => {
 
     const [selectValue, setSelectValue] = useState(''),
-      [fileSize, setFileSize] = useState(''),
-      vacHolder = "Наіменування вакансії*",
-      pHolder = "Місто, де шукаєте роботу";
+          [fileSize, setFileSize] = useState(''),
+          vacHolder = "Наіменування вакансії*",
+          pHolder = "Місто, де шукаєте роботу";
 
 
 const vacBaseChunck = specialtiesBase.map((el) => el.position).flat();

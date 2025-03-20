@@ -8,8 +8,8 @@ import useEsc from "./useEsc";
 import useNoScroll from "./useNoScroll";
 import './../css/ModalAddDoc.css';
 
-const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputErrors, citiesBase, specialtiesBase, getDataItems, currentUser}) => {
-    console.log('Component rendered');
+const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputErrors, citiesBase, specialtiesBase, getDataItems, currentUser, axios}) => {
+
     const [newCandidate, setNewCandidate] = useState({
         firstName: "",
         lastName: "",
@@ -122,6 +122,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                     setError={setError}
                     host={host}
                     currentUser={currentUser}
+                    axios={axios}
                 />}
                 <div className="modalAdCont" ref={modalContRef}>
                 <IoCloseCircleSharp className="delete-icon" onClick = {() => setAddDoc(false)}/>

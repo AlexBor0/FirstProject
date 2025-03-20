@@ -7,7 +7,7 @@ import useNoScroll from "./useNoScroll";
 import './../css/ModalEntry.css';
 
 
-const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, resetRegForm, host, validInput, inputErrors, setRegUser, showProfile, addDoc}) => {
+const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, resetRegForm, host, validInput, inputErrors, setRegUser, showProfile, addDoc, axios}) => {
 
     const [regOn, setRegOn] = useState(false);
     // console.log('Component rendered');
@@ -45,6 +45,7 @@ const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm
                     regOn={regOn}
                     validInput={validInput}
                     inputErrors={inputErrors}
+                    axios={axios}
                 />}
                 {regOn&&<Registration 
                     host={host} 
@@ -55,6 +56,7 @@ const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm
                     validInput={validInput}
                     inputErrors={inputErrors}
                     resetRegForm={resetRegForm}
+                    axios={axios}
                 />}
                 </div>
             </div>

@@ -1,8 +1,7 @@
 import React,  { useEffect, useState } from "react";
 import CandidateCard from "./CandidateCard";
-import axios from "axios";
 
-const Candidates = ({host}) => {
+const Candidates = ({host, axios}) => {
 
     const [candidates, setCandidates] = useState([]),
           [loading, setLoading] = useState(true),

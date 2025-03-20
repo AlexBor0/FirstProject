@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import axios from 'axios';
 
-const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, validInput, inputErrors, setInputErrors}) => {
+const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, validInput, inputErrors, axios, setInputErrors}) => {
     const [userLogin, setUserLogin] = useState({
               userName: '',
               userPassword: '',
@@ -17,9 +16,7 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
         };
     
 		const fetchAauthorization = async () => {
-
             setPostFetch(true);
-
 			try {const response = await axios
                 .post(`${host}/api/auth/local`,{
                     identifier: userLogin.userName,
@@ -34,10 +31,13 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
                    userImage:(response.data.user?.userAvatar || []),
                    docId:response.data.user.documentId,
                    id:response.data.user.id
-                  }));              
+                  }));  
+                  localStorage.setItem('jwt', response.data.jwt);            
           } 
-			catch (error) {setError(error);} 
-			finally {setLoading(false);
+			catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
       }
 		};
     const fetchForm = (e) => {
