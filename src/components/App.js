@@ -41,6 +41,7 @@ const App = () => {
         userEmail: null,
         userName: null,
         userImage: [],
+        changeFoto: false,
         userJWT: null,
         docId: null,
         id: null
@@ -132,19 +133,22 @@ const App = () => {
   const toggleButton = () => {if(!regEntry)setRegEntry(!regEntry)} // Вход в учетную запись (regEntry меняется на true )
 
       useEffect(() => {
-        if (currentUser.userName&&currentUser.docId) {
+        if ((currentUser.userName&&currentUser.docId) || currentUser.changeFoto) {
 
           const fetchUserImage = async () => {
         
             try {const response = await axios.get(`${host}/api/Users/?filters[documentId][$eq]=${currentUser.docId}&populate=userAvatar`);
-              setCurrentUser(prev => ({...prev, userImage:response.data}));}
+              setCurrentUser(prev => ({...prev, 
+                userImage:response.data,
+                changeFoto: false,
+              }));}
             catch (error) {setError(error);} 
             finally {setLoading(false);}
           };
 
-          fetchUserImage()
+          fetchUserImage();
         }
-      }, [currentUser.userName, currentUser.docId, regEntry]);
+      }, [currentUser.userName, currentUser.changeFoto, currentUser.docId, regEntry]);
        
       confirm&&toggleModal();
 

@@ -28,7 +28,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
             } else {
               setCurrentImageSrc(GestAva);
             }
-          }, [currentUser, host]);
+          }, [currentUser.userImage, host]);
 
     const imageSrc = editeCandidate.foto instanceof File 
         && URL.createObjectURL(editeCandidate.foto);
@@ -50,67 +50,84 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
 
     const fetchUpdateProfile = async () => {
 
-     let imageIdToDelete = currentUser?.userImage?.[0]?.userAvatar?.id || null;
+      try {  
+        if(editeCandidate.foto) {
+          let imageIdToDelete = currentUser?.userImage?.[0]?.userAvatar?.id || null;
+          console.log(imageIdToDelete);
+      
+          setLoading(true);
+          setImageOpacity(0);
     
-      setLoading(true);
-      setImageOpacity(0);
+        
+            let newAvatarUrl = null; 
+            if (editeCandidate.foto) {
+              const formDataToSend = new FormData();
+              formDataToSend.append("files", editeCandidate.foto);
+              formDataToSend.append("ref", "plugin::users-permissions.user"); 
+              formDataToSend.append("refId", currentUser.id); 
+              formDataToSend.append("field", "userAvatar");
+    
+              const uploadResponse = await fetch(`${host}/api/upload`, {
+                  method: "POST",
+                  headers: {
+                    'Authorization': `Bearer ${currentUser.userJWT}`,
+                  },
+                  body:formDataToSend,
+                }
+              );
+    
+              if (!uploadResponse.ok) {
+                throw new Error("Помилка при завантаженні файлу");
+              } else {
+                setCurrentUser((prev) => ({...prev, changeFoto: true}))
+              }
+    
+              const uploadData = await uploadResponse.json();
+              newAvatarUrl = host + uploadData[0].url; 
+              console.log("Файл успішно завантажено");
+            };
+    
+            if (newAvatarUrl) {
+              const img = new Image();
+              img.onload = () => {
+                setCurrentImageSrc(newAvatarUrl);
+                setTimeout(() => setImageOpacity(1), 300);
+              };
+              img.src = newAvatarUrl;
+            };
+            setFileSize(null);
+            if (imageIdToDelete&&editeCandidate.foto) {
+              const deletePrevImage = await axios.delete(
+                `${host}/api/upload/files/${imageIdToDelete}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${currentUser.userJWT}`,
+                  },
+                }
+              );
+      
+              if (deletePrevImage.status !== 200) {
+                throw new Error("Помилка при видаленні старого файлу");
+              };
+            };
+          
+            setCurrentUser((prev) => ({
+              ...prev,
+              userImage: newAvatarUrl
+                ? [{ userAvatar: { url: newAvatarUrl } }]
+                : prev.userImage,
+            }));
 
-      try { 
-        let newAvatarUrl = null; 
-        if (editeCandidate.foto) {
-          const formDataToSend = new FormData();
-          formDataToSend.append("files", editeCandidate.foto);
-          formDataToSend.append("ref", "plugin::users-permissions.user"); 
-          formDataToSend.append("refId", currentUser.id); 
-          formDataToSend.append("field", "userAvatar");
-
-          const uploadResponse = await fetch(`${host}/api/upload`, {
-              method: "POST",
-              headers: {
-                'Authorization': `Bearer ${currentUser.userJWT}`,
-              },
-              body:formDataToSend,
-            }
-          );
-
-          if (!uploadResponse.ok) {
-            throw new Error("Помилка при завантаженні файлу");
-          }
-
-          const uploadData = await uploadResponse.json();
-          newAvatarUrl = host + uploadData[0].url; 
-          console.log("Файл успішно завантажено");
         };
 
-        if (newAvatarUrl) {
-          const img = new Image();
-          img.onload = () => {
-            setCurrentImageSrc(newAvatarUrl);
-            setTimeout(() => setImageOpacity(1), 300);
+        if(editeCandidate.firstName) {
+          const userData = {
+            fullname: editeCandidate.firstName || currentUser.userName,
           };
-          img.src = newAvatarUrl;
-        };
-        setFileSize(null);
-        const userData = {
-          fullname: editeCandidate.firstName,
-        };
 
-      const updateResponse = await axios.put(
-        `${host}/api/users/${currentUser.id}`,
-        userData,
-        {
-          headers: {
-            Authorization: `Bearer ${currentUser.userJWT}`,
-          },
-        }
-      );
-
-      if (updateResponse.status !== 200) {
-        throw new Error("Помилка при оновленні даних користувача");
-      };
-      if (imageIdToDelete) {
-        const deletePrevImage = await axios.delete(
-          `${host}/api/upload/files/${imageIdToDelete}`,
+        const updateResponse = await axios.put(
+          `${host}/api/users/${currentUser.id}`,
+          userData,
           {
             headers: {
               Authorization: `Bearer ${currentUser.userJWT}`,
@@ -118,18 +135,14 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
           }
         );
 
-        if (deletePrevImage.status !== 200) {
-          throw new Error("Помилка при видаленні старого файлу");
+        if (updateResponse.status !== 200) {
+          throw new Error("Помилка при оновленні даних користувача");
+        } else {
+          setCurrentUser((prev) => ({...prev, userName: userData.fullname}));
+
         };
-      };
-     
-      setCurrentUser((prev) => ({
-        ...prev,
-        userName: userData.fullname,
-        userImage: newAvatarUrl
-          ? [{ userAvatar: { url: newAvatarUrl } }]
-          : prev.userImage,
-      }));
+        }
+
         setPostSuccess(true);
         console.log('Дані користувача оновлено:');
 
@@ -216,7 +229,11 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                   onClick={(e) => {
                     e.preventDefault();
                     setOpenForm(true);
-                    setEditCandidate(prev => ({...prev, foto: null}));
+                    setEditCandidate(prev => ({...prev, 
+                      foto: null,
+                      firstName: null,
+                    }));
+
                   }
                   }
                   >РЕДАГУВАТИ</button>)}
