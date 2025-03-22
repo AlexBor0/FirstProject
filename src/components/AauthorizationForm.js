@@ -28,7 +28,7 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
                    userEmail:response.data.user.email,
                    userName:response.data.user.fullname,
                    userJWT:response.data.jwt,
-                   userImage:(response.data.user?.userAvatar || []),
+                  //  userImage:(response.data.user?.userAvatar || []),
                    docId:response.data.user.documentId,
                    id:response.data.user.id
                   }));  
@@ -48,16 +48,16 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
     return (
       <>  
     <form id="authForm" onSubmit={fetchForm} >
-    <h2 className="modalTitle">Вхід</h2>
-    <p>Для входу пройдіть авторизацію, або зареєструйтеся</p>
-    <input autoFocus={true} required placeholder="Login" name="userName" type="text" minLength="3" className="modalInput" onChange={getDataItems}/>
-    <input required placeholder="Password" name="userPassword" type="password" minLength="6" className="modalInput" onChange={getDataItems}/>
-    {(inputErrors.userName)&& <p style={{ color: 'red' }}>{inputErrors.userName}</p>}
-    <button>Увійти</button>
-    <p>{error&&"Вибачте, невірний логін або пароль"}</p>
-    <p>{postFetch&&loading&&"Зачекайте..."}</p>
-    <p>або</p>
-      </form>
+      <h2 className="modalTitle">Вхід</h2>
+      <p>Для входу пройдіть авторизацію, або зареєструйтеся</p>
+      <input autoFocus={true} required placeholder="Login" name="userName" type="text" minLength="3" className="modalInput" onChange={getDataItems}/>
+      <input required placeholder="Password" name="userPassword" type="password" minLength="6" className="modalInput" onChange={getDataItems}/>
+      {(inputErrors.userName)&& <p style={{ color: 'red' }}>{inputErrors.userName}</p>}
+      <button>Увійти</button>
+      <p>{error&&"Вибачте, невірний логін або пароль"}</p>
+      <p>{postFetch&&loading&&"Зачекайте..."}</p>
+      <p>або</p>
+    </form>
     <button onClick={() => setRegOn(!regOn)} >Зареєструватися</button>
      </>)
 }

@@ -2,7 +2,6 @@ import React, {useState, useEffect}  from "react";
 import { IoCameraSharp, IoCloseCircleSharp } from "react-icons/io5";
 import GestAva from "./../img/GestAva.png";
 import Spinner from "./Spinner";
-// import axios from "axios";
 
 
 const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) => {
@@ -53,12 +52,10 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
       try {  
         if(editeCandidate.foto) {
           let imageIdToDelete = currentUser?.userImage?.[0]?.userAvatar?.id || null;
-          console.log(imageIdToDelete);
-      
+
           setLoading(true);
           setImageOpacity(0);
-    
-        
+      
             let newAvatarUrl = null; 
             if (editeCandidate.foto) {
               const formDataToSend = new FormData();

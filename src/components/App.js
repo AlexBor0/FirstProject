@@ -143,9 +143,10 @@ useEffect(() => {
                   userEmail: response.data.email,
                   userName: response.data.fullname,
                   userJWT: jwt,
-                  userImage: (response.data?.userAvatar || []),
+                  userImage: response.data.userAvatar ? [response.data] : [],
                   docId: response.data.documentId,
-                  id: response.data.id
+                  id: response.data.id,
+                  changeFoto: false,
               });
               setConfirm(true); // Устанавливаем состояние авторизации
           } catch (error) {
@@ -166,7 +167,10 @@ useEffect(() => {
   const toggleButton = () => {if(!regEntry)setRegEntry(!regEntry)} // Вход в учетную запись (regEntry меняется на true )
 
       useEffect(() => {
-        if ((currentUser.userName&&currentUser.docId) || currentUser.changeFoto) {
+        const jwt = localStorage.getItem('jwt');
+        if ((currentUser.userName && currentUser.docId 
+          && !jwt
+        ) || currentUser.changeFoto) {
 
           const fetchUserImage = async () => {
         
@@ -174,7 +178,8 @@ useEffect(() => {
               setCurrentUser(prev => ({...prev, 
                 userImage:response.data,
                 changeFoto: false,
-              }));}
+              }));
+            }
             catch (error) {setError(error);} 
             finally {setLoading(false);}
           };
