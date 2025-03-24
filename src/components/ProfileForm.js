@@ -47,6 +47,13 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
             e.target.setCustomValidity('');
         } }   
     };
+
+    const deleteImage = (e) => {
+      e.preventDefault();
+      setEditCandidate(prev => ({...prev, foto: null}));
+      setFileSize(null);
+      setValidText("");
+    };
    
 
     const fetchUpdateProfile = async () => {
@@ -187,12 +194,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                         <IoCameraSharp className="delete-icon"/>
                     </label>
                     <button className="delPrevImg" 
-                     onClick = {(e) => {
-                      e.preventDefault();
-                      setEditCandidate(prev => ({...prev, foto: null}));
-                      setFileSize(null);
-                      setValidText("");
-                    }}>
+                     onClick = {deleteImage}>
                       <IoCloseCircleSharp className="delete-icon"/>
                     </button>
                   </div>

@@ -27,6 +27,7 @@ const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, 
                    userLogin:response.data.user.username,
                    userEmail:response.data.user.email,
                    userName:response.data.user.fullname,
+                   userStatus: response.data.user.userStatus,
                    userJWT:response.data.jwt,
                    docId:response.data.user.documentId,
                    id:response.data.user.id

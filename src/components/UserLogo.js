@@ -11,11 +11,7 @@ const UserLogo = ({host, setShowProfile, currentUser, setRegEntry})=> {
           } else {
             setCurrentImageSrc(GestAva);
           }
-        // let avaMas;  
-        // if (currentUser.userImage.length > 0) {
-        //     [ avaMas ] = currentUser.userImage;
-        //     setAva( host + avaMas.userAvatar.url );
-        // }
+
     }, [currentUser.userImage, currentUser.changeFoto, host])
 
 

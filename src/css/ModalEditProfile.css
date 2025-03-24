@@ -28,9 +28,9 @@
 .pageTwo .delete-icon{
 	margin: 4px 2px;
 }
-/* .pageOne .delete-icon {
-	margin: -4px 2px;
-} */
+.fil3 {
+	z-index: 20;
+}
 .profileHead{
 	margin:5px 25px 5px 5px;
 	background:#fff;

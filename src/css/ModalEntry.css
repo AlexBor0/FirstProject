@@ -33,6 +33,7 @@
 }
 .modalTitle{
 	text-align:center;
+	margin-top: -5px;
 }
 .modalInput{
 	display:block;
@@ -56,6 +57,7 @@
 .modalContent p {
     text-align:center;
     font-family: 'Open Sans', sans-serif;
+	margin: 5px;
     color: rgb(129, 129, 129);
 }
 .modalContent button{
@@ -64,7 +66,7 @@
     margin-right: auto;
     text-transform: uppercase;
     margin-top: 10px;
-    width: 90%;
+    width: 324px;
     padding: 15px 5%;
     cursor: pointer;
     background: rgb(3, 87, 116);
@@ -77,4 +79,19 @@
 }
 .modalContent button:hover,  .modalContent button:focus{
 	background-color: rgb(23, 127, 138);
+}
+.statusOption {
+	text-align: center;
+	width: 296px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 20px;
+}
+.statusOption .statusWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items:start;
+	width: 180px;
+	margin-right: auto;
+	margin-left: auto;
 }

@@ -33,13 +33,16 @@ const App = () => {
          userName: null,
          userEmail: null,
          userPassword: null,
+         userStatus: null,
          userConfirmed: null,
-        //  userJWT: null,
+         userJWT: null,
+         userId: null
         });
   const [currentUser, setCurrentUser] = useState({
         userLogin: null,
         userEmail: null,
         userName: null,
+        userStatus: null,
         userImage: [],
         changeFoto: false,
         userJWT: null,
@@ -91,6 +94,7 @@ const App = () => {
     userName: null,
     userEmail: null,
     userPassword: null,
+    userStatus: null,
     userConfirmed: null
   });
   const resetRegForm = useCallback(() => {
@@ -142,6 +146,7 @@ useEffect(() => {
                   userLogin: response.data.username,
                   userEmail: response.data.email,
                   userName: response.data.fullname,
+                  userStatus: response.data.userStatus,
                   userJWT: jwt,
                   userImage: response.data.userAvatar ? [response.data] : [],
                   docId: response.data.documentId,
@@ -168,8 +173,8 @@ useEffect(() => {
 
       useEffect(() => {
         const jwt = localStorage.getItem('jwt');
-        if ((currentUser.userName && currentUser.docId 
-          && !jwt
+        if ((currentUser.userName && currentUser.docId && currentUser.userImage.length < 1 
+          
         ) || currentUser.changeFoto) {
 
           const fetchUserImage = async () => {
@@ -186,7 +191,7 @@ useEffect(() => {
 
           fetchUserImage();
         }
-      }, [currentUser.userName, currentUser.changeFoto, currentUser.docId, regEntry]);
+      }, [currentUser.userName, currentUser.changeFoto, currentUser.docId, regEntry, currentUser.userImage.length]);
        
       confirm&&toggleModal();
 
@@ -248,6 +253,7 @@ useEffect(() => {
             setCurrentUser={setCurrentUser} 
             regUser={regUser} 
             setRegUser={setRegUser}
+            getDataItems={getDataItems}
             resetRegForm={resetRegForm}
             validInput={validInput}
             inputErrors={inputErrors}

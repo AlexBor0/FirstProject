@@ -150,6 +150,8 @@
     height: 30px;
 	width: 30px;
   }
+
+
 .modalAdCont textarea {
 	min-height: 80px;
 	max-width: 500px;
@@ -191,7 +193,7 @@
 }
 .vacCitySelect {
     position: absolute;
-	z-index: 2;
+	
 	background:white;
 	padding: 0px 0px;
 	left: 30px;
