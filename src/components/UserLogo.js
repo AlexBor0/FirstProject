@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GestAva from "./../img/GestAva.png";
 
 const UserLogo = ({host, setShowProfile, currentUser, setRegEntry})=> {
     const altImg = "Гість";
-    let avaMas, ava;
-    if (currentUser.userImage.length > 0) {
-            [ avaMas ] = currentUser.userImage;
-            ava = ( host + avaMas.userAvatar.url );
-        }
-    
+   const [currentImageSrc, setCurrentImageSrc] = useState('');
+
+    useEffect(() => { 
+        if (currentUser.userImage && currentUser.userImage.length > 0) {
+            setCurrentImageSrc(host + currentUser.userImage[0].userAvatar.url);
+          } else {
+            setCurrentImageSrc(GestAva);
+          }
+        // let avaMas;  
+        // if (currentUser.userImage.length > 0) {
+        //     [ avaMas ] = currentUser.userImage;
+        //     setAva( host + avaMas.userAvatar.url );
+        // }
+    }, [currentUser.userImage, currentUser.changeFoto, host])
+
+
     return(
         <button className="Userlogo"
             onClick={() => {
@@ -17,7 +27,7 @@ const UserLogo = ({host, setShowProfile, currentUser, setRegEntry})=> {
                 : setRegEntry(true);
             }}
         >
-         <img src={ currentUser.userImage.length < 1 ? GestAva : ava } alt={ altImg }/>
+         <img src={ currentImageSrc } alt={ altImg }/>
          <p style={{
             margin: "-5px 0px 0px 0px ",
             fontSize: "12px",

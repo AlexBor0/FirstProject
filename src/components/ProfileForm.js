@@ -14,7 +14,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
       foto: null, 
     });
     const [fileSize, setFileSize] = useState(''),
-          [postSuccess, setPostSuccess] = useState(null),
+          [validText, setValidText] = useState(null),
           [loading, setLoading] = useState(false),
           [error, setError] = useState(null),
           [openForm, setOpenForm] = useState(false),
@@ -27,19 +27,21 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
             } else {
               setCurrentImageSrc(GestAva);
             }
-          }, [currentUser.userImage, host]);
+          }, [currentUser.userImage, currentUser.changeFoto, host]);
 
     const imageSrc = editeCandidate.foto instanceof File 
         && URL.createObjectURL(editeCandidate.foto);
 
     const getImage = (e) => {
+      setValidText("");
         const file = e.target.files[0];
         if(file) {
             if ( file.size > 120 * 1024 ) {
             e.target.setCustomValidity('Розмір файла не повинен перевищувати 120 кВ');
-
+            setValidText("Не більше 120kb!");
             return;
             } else {
+            setValidText("");
             setEditCandidate(prev => ({...prev, foto: file}));
             setFileSize( (file.size / 1024).toFixed(1));
             e.target.setCustomValidity('');
@@ -49,6 +51,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
 
     const fetchUpdateProfile = async () => {
 
+      let newAvatarId = null;
       try {  
         if(editeCandidate.foto) {
           let imageIdToDelete = currentUser?.userImage?.[0]?.userAvatar?.id || null;
@@ -75,12 +78,11 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
     
               if (!uploadResponse.ok) {
                 throw new Error("Помилка при завантаженні файлу");
-              } else {
-                setCurrentUser((prev) => ({...prev, changeFoto: true}))
               }
     
               const uploadData = await uploadResponse.json();
-              newAvatarUrl = host + uploadData[0].url; 
+              newAvatarUrl = host + uploadData[0].url;
+              newAvatarId = uploadData[0].id; 
               console.log("Файл успішно завантажено");
             };
     
@@ -105,13 +107,18 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
       
               if (deletePrevImage.status !== 200) {
                 throw new Error("Помилка при видаленні старого файлу");
+              } else {
+                setCurrentUser((prev) => ({...prev, changeFoto: true}))
               };
             };
           
             setCurrentUser((prev) => ({
               ...prev,
               userImage: newAvatarUrl
-                ? [{ userAvatar: { url: newAvatarUrl } }]
+                ? [{ userAvatar: {
+                   url: newAvatarUrl,
+                   id: newAvatarId,
+                 } }]
                 : prev.userImage,
             }));
 
@@ -140,7 +147,6 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
         };
         }
 
-        setPostSuccess(true);
         console.log('Дані користувача оновлено:');
 
       } catch (error) {
@@ -171,7 +177,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                 <div className="wrapPrevImage">
                   {editeCandidate.foto 
                     ? <img className="previewImg" width="50px" height="50px" src={ editeCandidate.foto && imageSrc } alt=""/>
-                    : <div className="subImg" > </div>
+                    : <div className="subImg" > {validText} </div>
                   }
                   <div className="changeFoto"> 
                     <label required htmlFor="imageF">
@@ -185,6 +191,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                       e.preventDefault();
                       setEditCandidate(prev => ({...prev, foto: null}));
                       setFileSize(null);
+                      setValidText("");
                     }}>
                       <IoCloseCircleSharp className="delete-icon"/>
                     </button>

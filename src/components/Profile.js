@@ -30,7 +30,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
                 .str3 {stroke:#035774;stroke-width:2;stroke-miterlimit:22.9256}
                 .str0 {stroke:#035774;stroke-width:9;stroke-miterlimit:22.9256}
                 .str4 {stroke:#B87333;stroke-width:2;stroke-miterlimit:22.9256}
-                .str2 {stroke:black;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256}
+                .str2 {stroke:black;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256}
                 .str1 {stroke:#035774;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.9256}
                 .fil3 {fill:#E31E24}
                 .fil0 {fill:#177F8A}
@@ -51,7 +51,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
               <path className="fil1 str1" d="M318 533c3,-21 25,-22 41,-22l128 0c30,0 25,4 25,-39 0,-19 -1,-256 0,-268 0,-20 0,-25 -16,-25 -48,0 -97,0 -145,0 -25,0 -29,8 -41,20l0 334 9 0z"/>
             </g>
             <rect className="fil2" x="330" y="204" width="164" height="290" rx="19" ry="19"/>
-            <path className="fil3 str2" d="M374 240c7,-5 13,-10 19,-13 5,4 12,8 19,13 5,4 7,0 7,-2l0 -59 -52 0 0 59c0,2 2,6 7,2z"/>
+            <path className="fil3 str2" d="M338 222c7,-4 10,-7 15,-10 4,3 9,6 15,10 4,3 6,0 5,-2l0 -45 -40 0 0 45c0,2 2,5 5,2l0 0z"/>
 
             <rect className="fil2" x="118" y="204" width="164" height="290" rx="19" ry="19"/>
 
@@ -59,7 +59,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
         </svg>
                  
           <div className="pageOne">
-            <div className="profileHead" >ВАШ ПРОФІЛЬ
+            <div className="profileHead" >ПРОФІЛЬ
             </div>
             <ProfileForm
               currentUser={currentUser}
