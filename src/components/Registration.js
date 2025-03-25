@@ -2,18 +2,12 @@ import React, {useState} from "react";
 import RegForm from "./RegForm";
 import ModalThenks from "./ModaThenks";
 
-const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, validInput, inputErrors,  resetRegForm, getDataItems, axios}) => {
+const RegistrationForm = ({setRegOn, regOn, regUser, setRegUser, host, inputErrors, resetRegForm, getDataItems, axios}) => {
 
     const [yourLogin, setYourLogin] = useState(undefined);
     const [postFetch, setPostFetch] = useState(false),
           [loading, setLoading] = useState(true),
           [error, setError] = useState(null);
-
-    // const getDataItems = (e) => {
-    //         const { name, value } = e.target;
-    //         setRegUser({ ...regUser, [name]: value });
-    //         validInput(value, e.target);
-    //     };
 
     const fetchRegistration = async () => {
         setYourLogin(regUser.userName);

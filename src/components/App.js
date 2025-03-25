@@ -172,7 +172,7 @@ useEffect(() => {
   const toggleButton = () => {if(!regEntry)setRegEntry(!regEntry)} // Вход в учетную запись (regEntry меняется на true )
 
       useEffect(() => {
-        const jwt = localStorage.getItem('jwt');
+
         if ((currentUser.userName && currentUser.docId && currentUser.userImage.length < 1 
           
         ) || currentUser.changeFoto) {

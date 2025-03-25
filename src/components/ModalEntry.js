@@ -1,4 +1,4 @@
-import React, {useState, useMemo, memo} from "react";
+import React, {useState, memo} from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import AauthorizationForm from "./AauthorizationForm";
 import Registration from "./Registration";
@@ -10,10 +10,6 @@ import './../css/ModalEntry.css';
 const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, resetRegForm, host, validInput, inputErrors, setRegUser, getDataItems, showProfile, addDoc, axios}) => {
 
     const [regOn, setRegOn] = useState(false);
-    // console.log('Component rendered');
-    // const scrollArgs = useMemo(() => [regEntry], [
-    //     regEntry
-    //   ]);
 
     const setOnClick = () => {
         toggleModal();
@@ -53,7 +49,6 @@ const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm
                     regOn={regOn} 
                     regUser={regUser} 
                     setRegUser={setRegUser}
-                    validInput={validInput}
                     inputErrors={inputErrors}
                     resetRegForm={resetRegForm}
                     getDataItems={getDataItems}

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, validInput, inputErrors, axios, setInputErrors}) => {
+const AauthorizationForm = ({regOn, setRegOn, host, setConfirm, setCurrentUser, validInput, inputErrors, axios}) => {
     const [userLogin, setUserLogin] = useState({
               userName: '',
               userPassword: '',

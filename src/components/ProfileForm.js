@@ -21,13 +21,13 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
           [imageOpacity, setImageOpacity] = useState(1), // Новое состояние для прозрачности изображения
           [currentImageSrc, setCurrentImageSrc] = useState('');
 
-          useEffect(() => {
-            if (currentUser.userImage && currentUser.userImage.length > 0) {
-              setCurrentImageSrc(host + currentUser.userImage[0].userAvatar.url);
-            } else {
-              setCurrentImageSrc(GestAva);
-            }
-          }, [currentUser.userImage, currentUser.changeFoto, host]);
+    useEffect(() => {
+      if (currentUser.userImage && currentUser.userImage.length > 0) {
+        setCurrentImageSrc(host + currentUser.userImage[0].userAvatar.url);
+      } else {
+        setCurrentImageSrc(GestAva);
+      }
+    }, [currentUser.userImage, currentUser.changeFoto, host]);
 
     const imageSrc = editeCandidate.foto instanceof File 
         && URL.createObjectURL(editeCandidate.foto);
@@ -54,8 +54,28 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
       setFileSize(null);
       setValidText("");
     };
-   
 
+    const goBack = (e) => {
+      e.preventDefault();
+      setEditCandidate(prev => ({...prev, foto: null}));
+      setOpenForm(false)
+    };
+
+    const changeProfile = (e) => {
+      e.preventDefault();
+      fetchUpdateProfile();
+      setOpenForm(false);
+    };
+
+    const editeProfile = (e) => {
+      e.preventDefault();
+      setOpenForm(true);
+      setEditCandidate(prev => ({...prev, 
+        foto: null,
+        firstName: null,
+      }));
+    }
+   
     const fetchUpdateProfile = async () => {
 
       let newAvatarId = null;
@@ -85,6 +105,8 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
     
               if (!uploadResponse.ok) {
                 throw new Error("Помилка при завантаженні файлу");
+              } else if(!imageIdToDelete){
+                setCurrentUser((prev) => ({...prev, changeFoto: true}));
               }
     
               const uploadData = await uploadResponse.json();
@@ -168,16 +190,17 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
     return (
         <form id="editProfile">
           <div className="profileImgWrap">
-            {loading?
-             (<Spinner className="profileImg"/>)
-             :  (
-                  <img 
-                    className={`profileImg ${loading ? 'loading' : 'loaded'}`}
-                    src={currentImageSrc} 
-                    alt="Профіль"
-                    style={{ opacity: imageOpacity }}
-                  />    
-                )}
+            {loading
+            ?
+              (<Spinner className="profileImg"/>)
+            : (
+                <img 
+                  className={`profileImg ${loading ? 'loading' : 'loaded'}`}
+                  src={currentImageSrc} 
+                  alt="Профіль"
+                  style={{ opacity: imageOpacity }}
+                />    
+              )}
              
           </div>
               {openForm&&
@@ -188,13 +211,13 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                   }
                   <div className="changeFoto"> 
                     <label required htmlFor="imageF">
-                      <input autoFocus={true} type="file" id="imageF" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
-                          onChange={getImage} 
+                      <input autoFocus={ true } type="file" id="imageF" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
+                          onChange={ getImage } 
                       />
                         <IoCameraSharp className="delete-icon"/>
                     </label>
                     <button className="delPrevImg" 
-                     onClick = {deleteImage}>
+                     onClick={ deleteImage }>
                       <IoCloseCircleSharp className="delete-icon"/>
                     </button>
                   </div>
@@ -202,48 +225,29 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
               }    
               <br/><span>Ім'я: </span> <span className="fileSize">{fileSize&&( fileSize + "kb")}</span>
                 {openForm
-                ?(<input className="inputEditProfile text" type="text" name="firstName" placeholder={currentUser.userName || "Ваше ім'я"}
-                  onChange={(e) => getDataItems(e, { setNewDoc: setEditCandidate, validate: true })}
-                />)
-                :(<p>{currentUser.userName || "Ваше ім'я"}</p>)}
-              <span>Логін: </span>
-                <p>{currentUser.userLogin}</p>
-              <span>Email: </span>
+                  ?(<input className="inputEditProfile text" type="text" name="firstName" placeholder={currentUser.userName || "Ваше ім'я"}
+                    onChange={(e) => getDataItems(e, { setNewDoc: setEditCandidate, validate: true })}
+                    />)
+                  :(<p>{currentUser.userName || "Ваше ім'я"}</p>)
+                }
+                <span>Логін: </span>
+                  <p>{currentUser.userLogin}</p>
+                <span>Email: </span>
                 <p className="mail"> {currentUser.userEmail} </p>
 
                 {openForm 
-                ?(<div className="wrapBtns">
-                  <button  
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setEditCandidate(prev => ({...prev, foto: null}));
-                      setOpenForm(false)}
-                    }
-                  >НАЗАД
-                  </button>
-                  <button
-                   onClick={(e) => {
-                    e.preventDefault();
-                    fetchUpdateProfile();
-                    setOpenForm(false);
-                    }
-                  }
-                  >ЗМІНИТИ</button>
-                </div>) 
-                :(
-                <button className="btnEditProfile" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setOpenForm(true);
-                    setEditCandidate(prev => ({...prev, 
-                      foto: null,
-                      firstName: null,
-                    }));
-
-                  }
-                  }
-                  >РЕДАГУВАТИ</button>)}
-
+                  ?(<div className="wrapBtns">
+                      <button onClick={ goBack }>
+                        НАЗАД
+                      </button>
+                      <button onClick={ changeProfile }>
+                        ЗМІНИТИ
+                      </button>
+                    </div>) 
+                  :(<button className="btnEditProfile" onClick={ editeProfile } >
+                      РЕДАГУВАТИ
+                    </button>)
+                }
         </form>
     )
 }
