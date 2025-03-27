@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import './../css/Preview.css';
 import PreviewVacancy from "./PreviewVacancy";
 import PreviewResume from "./PreviewResume";
@@ -6,6 +6,7 @@ import PreviewResume from "./PreviewResume";
 const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, axios}) => {
 
     const previewContentRef = useRef(null);
+    const [failUpload, setFailUpload] = useState(null);
 
     useEffect(() => {
         if (previewContentRef.current) {
@@ -83,6 +84,8 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
           lastName: newCandidate.lastName,
           email: newCandidate.email,
           vacancies: { connect: [vacancyId] },
+          user: {connect: [currentUser.id] },
+          title: newCandidate.vacancy,
           city: newCandidate.city,
           region: newCandidate.region,
           resume: newCandidate.resume,
@@ -99,7 +102,31 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
         if (response) {
           setNewCandidate((prev) => ({ ...prev, documentId: response.data.data.documentId }));
         }
+        if (response.status === 400 && 404) {
+          setFailUpload(true);
+        };
       };
+      
+      useEffect ((newFotoId) => {
+        if (failUpload) {
+          const fetchDeleteImage = async () => {
+            const deletePrevImage = await axios.delete(
+              `${host}/api/upload/files/${newFotoId}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${currentUser.userJWT}`,
+                },
+              }  
+            );
+            if (deletePrevImage.status !== 200) {
+              throw new Error("Помилка при видаленні відправленого файлу");
+            };
+          };
+          fetchDeleteImage();
+        }     
+      }, [currentUser.userJWT, host, axios, failUpload]);
+
+
 
       const requirements = type && Array.isArray(newVacancy.requirements)
       ? newVacancy.requirements

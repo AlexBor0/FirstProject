@@ -28,9 +28,6 @@
 .pageTwo .delete-icon{
 	margin: 4px 2px;
 }
-.fil3 {
-	z-index: 20;
-}
 .profileHead{
 	margin:5px 25px 5px 5px;
 	background:#fff;
@@ -189,4 +186,37 @@
 	background-color:rgb(10, 76, 199);
 	margin-left: 9px;
 }
-
+.currentEntries ol{
+	padding-left: 0px;
+	margin-left: -3px;
+	margin-top: 0px;
+	font-size: 12px;
+	font-family: 'Open Sans', sans-serif;
+}
+.currentEntries ol li {
+	overflow-wrap: break-word;
+	padding-left: 3px;
+	background-color:white;
+	border-radius: 5px;
+	border: solid 1px rgb(121, 202, 206);
+	width: 145px;
+	margin-top: 3px;
+}
+.currentEntries h4 {
+	font-size:small;
+	font-weight: 600;
+	margin: 2px auto 3px 6px;
+}
+.currentEntries p{
+	margin: 0px;
+}
+.currentEntries data {
+	font-size: 10px;
+	color:rgb(10, 76, 199)
+}
+.redo-icon {
+	float: right;
+	color: rgb(10, 76, 199);
+	cursor: pointer;
+	transform: scale(1.7);
+}

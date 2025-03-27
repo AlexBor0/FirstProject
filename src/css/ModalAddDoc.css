@@ -193,7 +193,7 @@
 }
 .vacCitySelect {
     position: absolute;
-	
+	z-index: 1;
 	background:white;
 	padding: 0px 0px;
 	left: 30px;

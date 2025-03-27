@@ -166,5 +166,10 @@ button.addResume:hover, button.addResume:focus {
   color:rgb(3, 87, 116);
   
 }
-
+.delete-icon {
+  float: right;
+  color: brown;
+  cursor: pointer;
+  transform: scale(1.6);
+}
 

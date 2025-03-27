@@ -35,13 +35,6 @@ main .card {
   font-weight: 600;
 }
 
-.delete-icon {
-  float: right;
-  color: brown;
-  cursor: pointer;
-  transform: scale(1.6);
-}
-
 .delete-icon:hover {
   opacity: 0.5;
 } 

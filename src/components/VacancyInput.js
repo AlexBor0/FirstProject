@@ -64,22 +64,7 @@ const VacancyInput = ({ arrowPress, getDataItems, resetInput, selectedIndex, set
     
         return containsQuery.sort().slice(0, 7);
     };
-// const dinListV = () => {
-//     if (!vacancyQuery || !vacBaseChunck) return [];
-//     const queryWords = vacancyQuery.toLowerCase().split(/\s+/);
-//     const N = queryWords.length;
-
-//     return vacBaseChunck.filter((el) => {
-//         const elWords = el.toLowerCase().split(/\s+/);
-//         if (elWords.length < N) return false;
-//         for (let i = 0; i < N - 1; i++) {
-//             if (elWords[i] !== queryWords[i]) return false;
-//         }
-//         return elWords[N - 1].startsWith(queryWords[N - 1]);
-//     }).sort().slice(0, 7);
-// };
-
-    
+   
     const inputOnBlur = () => {
         setTimeout(() => {
             if (!selectValue) {

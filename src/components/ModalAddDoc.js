@@ -15,6 +15,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
         lastName: "",
         email: "",
         vacancy: "",
+        title: "",
         city: "",
         region: "",
         resume: "",

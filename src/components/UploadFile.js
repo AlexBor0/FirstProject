@@ -19,7 +19,7 @@ const UploadFile = ({svgH, svgX, getImage, inputFileRef}) => {
                     <input type="file" id="image" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
                         onChange={getImage} 
                         ref={inputFileRef}/>
-                    <span className="inputFileBtnText">ЗАВАНТАЖИТИ ФАЙЛ</span>
+                    <span className="inputFileBtnText">ЗАВАНТАЖИТИ ФОТО</span>
                 </label>
             </div>
        </>)

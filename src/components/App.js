@@ -44,6 +44,7 @@ const App = () => {
         userName: null,
         userStatus: null,
         userImage: [],
+        userDocs: [],
         changeFoto: false,
         userJWT: null,
         docId: null,
@@ -75,9 +76,13 @@ const App = () => {
     userLogin: null,
     userEmail: null,
     userName: null,
+    userStatus: null,
     userImage: [],
+    userDocs: [],
+    changeFoto: false,
     userJWT: null,
-    docId: null
+    docId: null,
+    id: null,
   });
   const turnExit = () => {
     if(!confirm) {
@@ -132,16 +137,30 @@ const App = () => {
     if (options.validate) validInput(value, e.target);
 };
 
+useEffect (() => {
+  const status = currentUser.userStatus;
+  if(status) {
+    status === "candidate"?setTypeOfsearch(false):setTypeOfsearch(true)
+  } 
+}, [currentUser.userStatus])
+
 useEffect(() => {
+  const status = currentUser.userStatus;
   const jwt = localStorage.getItem('jwt');
+  let recDoc = status === "employer"? "vacancies":"candidates";
   if (jwt) {
       const fetchUserData = async () => {
           try {
-              const response = await axios.get(`${host}/api/users/me?populate=userAvatar`, {
+              const response = await axios.get(`${host}/api/users/me?populate[0]=userAvatar&populate[1]=${recDoc}`, {
                   headers: {
                       Authorization: `Bearer ${jwt}`
                   }
               });
+
+              const userVacancies = response.data.vacancies || [];
+              const userCandidates = response.data.candidates || [];
+              const resDoc = status === "employer"? userVacancies : userCandidates;
+
               setCurrentUser({
                   userLogin: response.data.username,
                   userEmail: response.data.email,
@@ -149,11 +168,14 @@ useEffect(() => {
                   userStatus: response.data.userStatus,
                   userJWT: jwt,
                   userImage: response.data.userAvatar ? [response.data] : [],
+                  userDocs: resDoc,
                   docId: response.data.documentId,
                   id: response.data.id,
                   changeFoto: false,
               });
+
               setConfirm(true); // Устанавливаем состояние авторизации
+              console.log(resDoc);
           } catch (error) {
               console.error('Ошибка при получении данных пользователя:', error);
               localStorage.removeItem('jwt'); // Удаляем недействительный токен
@@ -269,6 +291,7 @@ useEffect(() => {
           />}
             
           <Header 
+            regUser={regUser}
             host={host} 
             typeOfSearch = {typeOfSearch} 
             setTypeOfsearch = {setTypeOfsearch}  
@@ -293,6 +316,7 @@ useEffect(() => {
               host={host}
               getDataItems={getDataItems}
               axios={axios}
+              typeOfSearch={typeOfSearch}
             />
           }
 
@@ -339,11 +363,11 @@ useEffect(() => {
             }
           <div className="mainContainer">
             <main>                         
-              {typeOfSearch&&<Candidates 
+              {typeOfSearch&&currentUser?.userStatus === "employer"&&<Candidates 
                 host={host}
                 axios={axios}
                 />}
-              {!typeOfSearch&&<Vacancies 
+              {!typeOfSearch&&currentUser?.userStatus === "candidate"&&<Vacancies 
                 host={host} 
                 setTitle={setVacancyName} 
                 axios={axios}

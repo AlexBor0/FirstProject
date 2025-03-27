@@ -1,9 +1,12 @@
 import React  from "react";
 import ProfileForm from "./ProfileForm";
-import { IoCloseCircleSharp } from "react-icons/io5";
+import { IoCloseCircleSharp, IoArrowRedo  } from "react-icons/io5";
+import FormatDate from './FormatDate';
 
 
-const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurrentUser, getDataItems, axios }) => {
+const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurrentUser, getDataItems, axios, typeOfSearch }) => {
+
+  const currentDoc = currentUser?.userDocs || [];
 
     return(
       <div className="profileBook">
@@ -71,11 +74,24 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
             />      
           </div>
           <div className="pageTwo">
-          <IoCloseCircleSharp className="delete-icon" onClick = {() => setShowProfile(false)}/>
-          <div className="profileHead" >
-            ДОКУМЕНТИ
-          </div>
-            
+            <IoCloseCircleSharp className="delete-icon" onClick = {() => setShowProfile(false)}/>
+            <div className="profileHead" >
+              { typeOfSearch? "МОЇ ВАКАНСІЇ": "МОЇ РЕЗЮМЕ"}
+            </div>
+            <div  className="currentEntries">
+              <ol >
+                {currentDoc.map((el,index) => (
+                  <li key={index}>
+                    <h4>{el.title}</h4>
+                    <p><data>Створено: <FormatDate isoDate={el.createdAt} /></data></p>
+                    <p>Оглянуто: (0) разів</p>
+                    <p>Відгуки: (0) разів</p>
+                  </li>
+                  ))  
+                } 
+              </ol>
+            </div> 
+            <IoArrowRedo className="redo-icon"/>  
           </div>
       </div>
     )

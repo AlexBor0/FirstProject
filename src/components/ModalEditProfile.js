@@ -4,7 +4,7 @@ import useEsc from "./useEsc";
 import useNoScroll from "./useNoScroll";
 import './../css/ModalEditProfile.css';
 
-const ModalEditProfile = ({ currentUser, modalClass, showProfile, setShowProfile, svgHttp, svgXlink, host, getDataItems, axios, setCurrentUser}) => {
+const ModalEditProfile = ({ currentUser, modalClass, showProfile, setShowProfile, svgHttp, svgXlink, host, getDataItems, axios, setCurrentUser, typeOfSearch}) => {
 
 
     useEsc(() => setShowProfile(false));
@@ -22,6 +22,7 @@ const ModalEditProfile = ({ currentUser, modalClass, showProfile, setShowProfile
                 getDataItems={getDataItems}
                 axios={axios}
                 setCurrentUser={setCurrentUser}
+                typeOfSearch={typeOfSearch}
             />
              
     </div>
