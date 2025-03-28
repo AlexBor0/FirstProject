@@ -14,28 +14,29 @@
 	position: absolute;	
 	top:20px;
 	/* border: solid 2px red; */
-	padding-left: 20px;
 	position: absolute;
-	width: 160px;
+
 	height: 300px;
 }
 .pageOne {
 	left: 46px;
+	padding-left: 20px;
+	width: 160px;
 }
-.pageTwo {
-	right: 46px;
-}
-.pageTwo .delete-icon{
-	margin: 4px 2px;
-}
-.profileHead{
-	margin:5px 25px 5px 5px;
+.profileHead {	
 	background:#fff;
 	border: solid 2px rgb(3, 87, 116) ;
 	border-radius: 10px;
 	font-size:13px;
 	font-weight: 600;
 	text-align:center;
+}
+.pageOne .profileHead{
+	margin:5px 25px 5px 5px;
+	padding:2px 3px;
+}
+.pageTwo .profileHead {
+	margin:5px 25px 5px 25px;
 	padding:2px 3px;
 }
 .wrapPrevImage{
@@ -121,13 +122,13 @@
 	font-family: 'Open Sans', sans-serif;
 	background-color: white;
 	border-radius: 5px;
-	border: solid 1px rgb(3, 87, 116);
+	border: solid 1px rgb(248, 232, 207);
 	
 }
 .pageOne p{
 	padding: 0px 4px;
 	margin: 1px 14px -1px -5px;
-	background-color: rgb(229, 230, 230);
+	background-color: rgb(248, 232, 207);
 }
 .pageOne .mail{
 	font-size: 0.7em;
@@ -186,37 +187,63 @@
 	background-color:rgb(10, 76, 199);
 	margin-left: 9px;
 }
+.pageTwo {
+	right: 46px;
+	width: 178px;
+}
+.pageTwo .delete-icon{
+	margin: 4px 2px;
+	
+}
+.currentEntries {
+	height: 250px;
+	overflow-x: hidden;
+}
 .currentEntries ol{
 	padding-left: 0px;
-	margin-left: -3px;
+	margin-left: 14px;
 	margin-top: 0px;
 	font-size: 12px;
 	font-family: 'Open Sans', sans-serif;
+
 }
 .currentEntries ol li {
 	overflow-wrap: break-word;
 	padding-left: 3px;
-	background-color:white;
+	background-color:rgb(248, 232, 207);
 	border-radius: 5px;
-	border: solid 1px rgb(121, 202, 206);
-	width: 145px;
+	/* border: solid 1px rgb(121, 202, 206); */
+	width: 148px;
 	margin-top: 3px;
+}
+.currentEntries ol li:nth-child(even) {
+	background:none;
 }
 .currentEntries h4 {
 	font-size:small;
 	font-weight: 600;
-	margin: 2px auto 3px 6px;
+	margin: 2px auto 2px 6px;
 }
 .currentEntries p{
 	margin: 0px;
+	font-size:10px;
 }
 .currentEntries data {
 	font-size: 10px;
 	color:rgb(10, 76, 199)
 }
-.redo-icon {
+.pageBtn {
 	float: right;
+	background:none;
+	border:none;
+	padding: 0px;
+}
+.redo-icon {
 	color: rgb(10, 76, 199);
 	cursor: pointer;
-	transform: scale(1.7);
+	transform: scale(1.8);
+	margin-right: 2px;
+}
+.redo-icon:hover {
+	opacity: 0.5;
 }

@@ -1,6 +1,6 @@
 import React  from "react";
 import ProfileForm from "./ProfileForm";
-import { IoCloseCircleSharp, IoArrowRedo  } from "react-icons/io5";
+import { IoCloseCircleSharp, IoArrowRedo, IoPencilSharp } from "react-icons/io5";
 import FormatDate from './FormatDate';
 
 
@@ -74,7 +74,14 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
             />      
           </div>
           <div className="pageTwo">
-            <IoCloseCircleSharp className="delete-icon" onClick = {() => setShowProfile(false)}/>
+            <button className="pageBtn" 
+            onClick = {(e) => {
+              e.preventDefault();
+              setShowProfile(false)
+              }}
+            >
+            <IoCloseCircleSharp className="delete-icon" />
+            </button>
             <div className="profileHead" >
               { typeOfSearch? "МОЇ ВАКАНСІЇ": "МОЇ РЕЗЮМЕ"}
             </div>
@@ -84,14 +91,18 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
                   <li key={index}>
                     <h4>{el.title}</h4>
                     <p><data>Створено: <FormatDate isoDate={el.createdAt} /></data></p>
-                    <p>Оглянуто: (0) разів</p>
-                    <p>Відгуки: (0) разів</p>
+                    <p><span>Оглянуто: (0)</span> <span>Відгуки: (0)</span></p>
+                    <button className="pageBtn item"><IoCloseCircleSharp className="delete-icon" /></button>
+                    <button className="pageBtn item"><IoPencilSharp className="edit-icon"/></button>
                   </li>
                   ))  
                 } 
               </ol>
-            </div> 
-            <IoArrowRedo className="redo-icon"/>  
+            </div>
+            <button className="pageBtn" onClick={e => e.preventDefault}>
+            <IoArrowRedo className="redo-icon"/> 
+            </button>
+              
           </div>
       </div>
     )
