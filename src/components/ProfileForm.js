@@ -144,11 +144,11 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
             setCurrentUser((prev) => ({
               ...prev,
               userImage: newAvatarUrl
-                ? [{ userAvatar: {
-                   url: newAvatarUrl,
-                   id: newAvatarId,
-                 } }]
-                : prev.userImage,
+                      ? [{ userAvatar: {
+                        url: newAvatarUrl,
+                        id: newAvatarId,
+                      } }]
+                      : prev.userImage,
             }));
 
         };

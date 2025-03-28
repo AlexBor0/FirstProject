@@ -3,7 +3,7 @@ import './../css/Preview.css';
 import PreviewVacancy from "./PreviewVacancy";
 import PreviewResume from "./PreviewResume";
 
-const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, axios}) => {
+const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, setCurrentUser, axios}) => {
 
     const previewContentRef = useRef(null);
     const [failUpload, setFailUpload] = useState(null);
@@ -101,8 +101,12 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
         );
         if (response) {
           setNewCandidate((prev) => ({ ...prev, documentId: response.data.data.documentId }));
+          setCurrentUser((prev) => ({ ...prev, addDoc: response.data.data.documentId }));
         }
-        if (response.status === 400 && 404) {
+        if 
+        // (response.status === 400 && 404) 
+        (response.status!== 200)
+          {
           setFailUpload(true);
         };
       };

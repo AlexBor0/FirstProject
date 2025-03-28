@@ -46,6 +46,7 @@ const App = () => {
         userImage: [],
         userDocs: [],
         changeFoto: false,
+        addDoc: null,
         userJWT: null,
         docId: null,
         id: null
@@ -145,8 +146,8 @@ useEffect (() => {
 }, [currentUser.userStatus])
 
 useEffect(() => {
-  const status = currentUser.userStatus;
   const jwt = localStorage.getItem('jwt');
+  const status = currentUser.userStatus;
   let recDoc = status === "employer"? "vacancies":"candidates";
   if (jwt) {
       const fetchUserData = async () => {
@@ -175,7 +176,6 @@ useEffect(() => {
               });
 
               setConfirm(true); // Устанавливаем состояние авторизации
-              console.log(resDoc);
           } catch (error) {
               console.error('Ошибка при получении данных пользователя:', error);
               localStorage.removeItem('jwt'); // Удаляем недействительный токен
@@ -213,7 +213,34 @@ useEffect(() => {
 
           fetchUserImage();
         }
+  
       }, [currentUser.userName, currentUser.changeFoto, currentUser.docId, regEntry, currentUser.userImage.length]);
+
+      useEffect(() => {
+        const status = currentUser.userStatus;
+        let recDoc = status === "employer"? "vacancies":"candidates";
+        if((currentUser.userJWT && currentUser.userStatus) || currentUser.addDoc ) {
+          const fetchGetDocs = async () => {
+            
+            try {const response = await axios.get(`${host}/api/users/me?populate=${recDoc}`, {
+                  headers: {
+                      Authorization: `Bearer ${currentUser.userJWT}`
+                  }
+              });
+              const userVacancies = response.data.vacancies || [];
+              const userCandidates = response.data.candidates || [];
+              const resDoc = status === "employer"? userVacancies : userCandidates;
+            setCurrentUser(prev => ({...prev, 
+              userDocs:resDoc
+            }));
+            }          
+            catch (error) {setError(error);} 
+            finally {setLoading(false);             
+            }
+          };
+          fetchGetDocs();
+        }   
+      }, [currentUser.userStatus, currentUser.userJWT, currentUser.addDoc])
        
       confirm&&toggleModal();
 
@@ -359,6 +386,7 @@ useEffect(() => {
               specialtiesBase={specialtiesBase}
               getDataItems={getDataItems}
               currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
               />
             }
           <div className="mainContainer">
