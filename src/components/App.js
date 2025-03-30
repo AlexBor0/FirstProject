@@ -185,7 +185,7 @@ useEffect(() => {
       };
       fetchUserData();
   }
-}, []);
+}, [currentUser.userStatus]);
         
   const toggleModal = useCallback(() => {
     if(regEntry)setRegEntry(!regEntry);

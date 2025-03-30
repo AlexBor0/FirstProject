@@ -1,12 +1,30 @@
-import React  from "react";
+import React, { useState }  from "react";
 import ProfileForm from "./ProfileForm";
-import { IoCloseCircleSharp, IoArrowRedo, IoPencilSharp } from "react-icons/io5";
+import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoClose } from "react-icons/io5";
 import FormatDate from './FormatDate';
+import ConfirmModal from './ConfirmModal';
 
 
 const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurrentUser, getDataItems, axios, typeOfSearch }) => {
 
   const currentDoc = currentUser?.userDocs || [];
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showDocList, setShowDocList] = useState(true);
+  const [indexDoc, setIndexDoc] = useState(null);
+
+  // const fetchDeleteDoc = async () => {
+  //   const deleteDoc = await axios.delete(
+  //     `${host}/api/upload/files/${newFotoId}`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${currentUser.userJWT}`,
+  //       },
+  //     }  
+  //   );
+  //   if (deleteDoc.status !== 200) {
+  //     throw new Error("Помилка при видаленні резюме");
+  //   };
+  // };
 
     return(
       <div className="profileBook">
@@ -86,18 +104,35 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
               { typeOfSearch? "МОЇ ВАКАНСІЇ": "МОЇ РЕЗЮМЕ"}
             </div>
             <div  className="currentEntries">
-              <ol >
+              {showConfirmModal&&<ConfirmModal
+                setShowConfirmModal={setShowConfirmModal}
+                indexDoc={indexDoc}
+                currentUser={currentUser}
+                setShowDocList={setShowDocList}
+              />}
+              {showDocList&& (<ol >
                 {currentDoc.map((el,index) => (
                   <li key={index}>
                     <h4>{el.title}</h4>
                     <p><data>Створено: <FormatDate isoDate={el.createdAt} /></data></p>
-                    <p><span>Оглянуто: (0)</span> <span>Відгуки: (0)</span></p>
-                    <button className="pageBtn item"><IoCloseCircleSharp className="delete-icon" /></button>
-                    <button className="pageBtn item"><IoPencilSharp className="edit-icon"/></button>
+                    <p><span>Оглянуто: (0)</span></p>
+                    <p><span>Відгуки: (0)</span>
+                    <button className="pageBtn item" 
+                      onClick = {(e) => {
+                        e.preventDefault();
+                        setIndexDoc(index);
+                        setShowConfirmModal(true);
+                        setShowDocList(false);
+                      }}>
+                      <IoClose className="del-icon" />
+                    </button>
+                    <button className="pageBtn item"><IoCreate className="edit-icon"/></button>
+                    <button className="pageBtn item"><IoEyeSharp className="view-icon" /></button>
+                    </p>
                   </li>
                   ))  
                 } 
-              </ol>
+              </ol>)}
             </div>
             <button className="pageBtn" onClick={e => e.preventDefault}>
             <IoArrowRedo className="redo-icon"/> 
