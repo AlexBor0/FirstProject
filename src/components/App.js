@@ -222,7 +222,7 @@ useEffect(() => {
         if((currentUser.userJWT && currentUser.userStatus) || currentUser.addDoc ) {
           const fetchGetDocs = async () => {
             
-            try {const response = await axios.get(`${host}/api/users/me?populate=${recDoc}`, {
+            try {const response = await axios.get(`${host}/api/users/me?populate[${recDoc}][populate][0]=foto`, {
                   headers: {
                       Authorization: `Bearer ${currentUser.userJWT}`
                   }

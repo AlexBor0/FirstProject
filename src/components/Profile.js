@@ -12,19 +12,6 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
   const [showDocList, setShowDocList] = useState(true);
   const [indexDoc, setIndexDoc] = useState(null);
 
-  // const fetchDeleteDoc = async () => {
-  //   const deleteDoc = await axios.delete(
-  //     `${host}/api/upload/files/${newFotoId}`,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${currentUser.userJWT}`,
-  //       },
-  //     }  
-  //   );
-  //   if (deleteDoc.status !== 200) {
-  //     throw new Error("Помилка при видаленні резюме");
-  //   };
-  // };
 
     return(
       <div className="profileBook">
@@ -109,6 +96,9 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
                 indexDoc={indexDoc}
                 currentUser={currentUser}
                 setShowDocList={setShowDocList}
+                host={host}
+                axios={axios}
+                setCurrentUser={setCurrentUser}
               />}
               {showDocList&& (<ol >
                 {currentDoc.map((el,index) => (
