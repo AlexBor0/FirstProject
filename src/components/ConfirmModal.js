@@ -1,10 +1,11 @@
-import React, { useState }  from "react";
+import React from "react";
 
 
-const ConfirmModal = ({setShowConfirmModal, indexDoc, currentUser, setShowDocList, host, axios, setCurrentUser}) => {
+const ConfirmModal = ({setShowConfirmModal, indexDoc, currentUser, setShowDocList, host, axios, setCurrentUser, typeBtn}) => {
 
     const delSuccessStatuses = [200, 202, 204];
 
+    const action = (typeBtn === "del"? "видалити" : (typeBtn === "edit" ? "редагувати" : "переглянути"));
 
     const fetchDeleteDoc = async () => {
 
@@ -62,28 +63,48 @@ const ConfirmModal = ({setShowConfirmModal, indexDoc, currentUser, setShowDocLis
         e.preventDefault(); 
         setShowConfirmModal(false);
         setShowDocList(true)
-    }
+    };
 
-    const deleteDocument = (e) => {
-        e.preventDefault();
+    const deleteDocument = () => {
         fetchDeleteImgAndDoc();
         setShowConfirmModal(false);
         setShowDocList(true);
-    }
+    };
 
-    return(
-        <div className="modalConfirm">
-            <p>Бажаєте видалити резюме <b>{currentUser.userDocs[indexDoc].title}</b> ? </p>
-            
+    const viewDocument = () => console.log('Просмотр документа');
+    const editDocument = () => console.log('Редактирование документа');
+
+    const chooseAction = (typeBtn) => {
+        switch (typeBtn) {
+            case "del": return deleteDocument();
+            case "edit": return editDocument();
+            case "view": return viewDocument();
+            default: console.log("Непередбачена помилка")
+        }
+    };
+
+    const btnBlok = (
             <div className="wrapBtns">
                 <button onClick={backward}>
                     НІ
                 </button>
-                <button onClick={deleteDocument}>
+                <button onClick={() => chooseAction(typeBtn)}>
                     ТАК
                 </button>
-            </div>
+            </div>);
+            
+    
+
+    const modalDelete = (
+        <div className="modalConfirm">
+            <p>Бажаєте {action} резюме <b>{currentUser.userDocs[indexDoc].title}</b> ? </p>
+            {btnBlok}
         </div>
+    );
+
+
+    return(
+        modalDelete
     )
 };
 export default ConfirmModal

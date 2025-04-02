@@ -11,7 +11,15 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showDocList, setShowDocList] = useState(true);
   const [indexDoc, setIndexDoc] = useState(null);
+  const [typeBtn, setTypeBtn] = useState(null);
 
+  const openModal = (e, index) => {
+    e.preventDefault();
+    setIndexDoc(index);
+    setTypeBtn(e.currentTarget.dataset.type);
+    setShowConfirmModal(true);
+    setShowDocList(false); 
+  }
 
     return(
       <div className="profileBook">
@@ -79,13 +87,8 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
             />      
           </div>
           <div className="pageTwo">
-            <button className="pageBtn" 
-            onClick = {(e) => {
-              e.preventDefault();
-              setShowProfile(false)
-              }}
-            >
-            <IoCloseCircleSharp className="delete-icon" />
+            <button className="pageBtn" onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}>
+              <IoCloseCircleSharp className="delete-icon" />
             </button>
             <div className="profileHead" >
               { typeOfSearch? "МОЇ ВАКАНСІЇ": "МОЇ РЕЗЮМЕ"}
@@ -99,6 +102,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
                 host={host}
                 axios={axios}
                 setCurrentUser={setCurrentUser}
+                typeBtn={typeBtn}
               />}
               {showDocList&& (<ol >
                 {currentDoc.map((el,index) => (
@@ -107,17 +111,15 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
                     <p><data>Створено: <FormatDate isoDate={el.createdAt} /></data></p>
                     <p><span>Оглянуто: (0)</span></p>
                     <p><span>Відгуки: (0)</span>
-                    <button className="pageBtn item" 
-                      onClick = {(e) => {
-                        e.preventDefault();
-                        setIndexDoc(index);
-                        setShowConfirmModal(true);
-                        setShowDocList(false);
-                      }}>
+                    <button className="pageBtn item" data-type="del" onClick = {(e) => openModal(e,index)}>
                       <IoClose className="del-icon" />
                     </button>
-                    <button className="pageBtn item"><IoCreate className="edit-icon"/></button>
-                    <button className="pageBtn item"><IoEyeSharp className="view-icon" /></button>
+                    <button className="pageBtn item" data-type="edit" onClick = {(e) => openModal(e,index)}>
+                      <IoCreate className="edit-icon"/>
+                    </button>
+                    <button className="pageBtn item" data-type="view" onClick = {(e) => openModal(e,index)}>
+                      <IoEyeSharp className="view-icon" />
+                    </button>
                     </p>
                   </li>
                   ))  
