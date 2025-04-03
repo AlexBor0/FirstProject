@@ -1,6 +1,6 @@
 import React, { useState }  from "react";
 import ProfileForm from "./ProfileForm";
-import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoClose } from "react-icons/io5";
+import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoTrash } from "react-icons/io5";
 import FormatDate from './FormatDate';
 import ConfirmModal from './ConfirmModal';
 
@@ -87,7 +87,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
             />      
           </div>
           <div className="pageTwo">
-            <button className="pageBtn" onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}>
+            <button className="pageBtn" autoFocus={true} onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}>
               <IoCloseCircleSharp className="delete-icon" />
             </button>
             <div className="profileHead" >
@@ -112,7 +112,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
                     <p><span>Оглянуто: (0)</span></p>
                     <p><span>Відгуки: (0)</span>
                     <button className="pageBtn item" data-type="del" onClick = {(e) => openModal(e,index)}>
-                      <IoClose className="del-icon" />
+                      <IoTrash  className="del-icon" />
                     </button>
                     <button className="pageBtn item" data-type="edit" onClick = {(e) => openModal(e,index)}>
                       <IoCreate className="edit-icon"/>

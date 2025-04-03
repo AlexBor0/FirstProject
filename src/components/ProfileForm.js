@@ -217,7 +217,8 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                         <IoCameraSharp className="delete-icon"/>
                     </label>
                     <button className="delPrevImg" 
-                     onClick={ deleteImage }>
+                            autoFocus={true}
+                            onClick={ deleteImage }>
                       <IoCloseCircleSharp className="delete-icon"/>
                     </button>
                   </div>

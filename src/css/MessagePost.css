@@ -1,0 +1,9 @@
+.messagePost{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+}
+.ok-icon {
+    font-size: 40px;
+}

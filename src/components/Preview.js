@@ -7,6 +7,7 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
 
     const previewContentRef = useRef(null);
     const [failUpload, setFailUpload] = useState(null);
+    const editable = true;
 
     useEffect(() => {
         if (previewContentRef.current) {
@@ -77,13 +78,13 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
         );
         const vacancyId = idVacancyResponse.data.data[0]?.documentId;
     
-        if (!vacancyId) throw new Error('Вакансия не найдена');
+        if (!vacancyId) console.log('Вакансия не найдена');
     
         const data = {
           firstName: newCandidate.firstName,
           lastName: newCandidate.lastName,
           email: newCandidate.email,
-          vacancies: { connect: [vacancyId] },
+          vacancies: { connect: [vacancyId] } || newCandidate.vacancy,
           user: {connect: [currentUser.id] },
           title: newCandidate.vacancy,
           city: newCandidate.city,
@@ -167,12 +168,14 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
                 />
               ) : (
                 <PreviewResume
-                  newCandidate={newCandidate}
+                  candidate={newCandidate}
                   post={post}
                   newVacancy={newVacancy}
                   edit={edit}
                   previewContentRef={previewContentRef}
                   host={host}
+                  editable={editable}
+                  currentUser={currentUser}
                 />
               )}
             </>

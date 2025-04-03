@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import PreviewResume from './PreviewResume';
 
 
 const ConfirmModal = ({setShowConfirmModal, indexDoc, currentUser, setShowDocList, host, axios, setCurrentUser, typeBtn}) => {
+
+    const [showDoc, setShowDoc] = useState(false);
 
     const delSuccessStatuses = [200, 202, 204];
 
@@ -71,7 +74,10 @@ const ConfirmModal = ({setShowConfirmModal, indexDoc, currentUser, setShowDocLis
         setShowDocList(true);
     };
 
-    const viewDocument = () => console.log('Просмотр документа');
+    const viewDocument = () => {
+        setShowDoc(true);
+    };
+
     const editDocument = () => console.log('Редактирование документа');
 
     const chooseAction = (typeBtn) => {
@@ -88,14 +94,12 @@ const ConfirmModal = ({setShowConfirmModal, indexDoc, currentUser, setShowDocLis
                 <button onClick={backward}>
                     НІ
                 </button>
-                <button onClick={() => chooseAction(typeBtn)}>
+                <button autoFocus={true} onClick={() => chooseAction(typeBtn)}>
                     ТАК
                 </button>
             </div>);
             
-    
-
-    const modalDelete = (
+    const modal= (
         <div className="modalConfirm">
             <p>Бажаєте {action} резюме <b>{currentUser.userDocs[indexDoc].title}</b> ? </p>
             {btnBlok}
@@ -104,7 +108,19 @@ const ConfirmModal = ({setShowConfirmModal, indexDoc, currentUser, setShowDocLis
 
 
     return(
-        modalDelete
+        <>
+            {modal}
+            {showDoc&&<PreviewResume
+                  candidate={currentUser.userDocs[indexDoc]}
+                  indexDoc={indexDoc}
+                  setShowDoc={setShowDoc}
+                  editable={false}
+                  host={host}
+                  backward={backward}
+                  setShowConfirmModal={setShowConfirmModal}
+                  setShowDocList={setShowDocList}
+                />}
+        </>   
     )
 };
 export default ConfirmModal

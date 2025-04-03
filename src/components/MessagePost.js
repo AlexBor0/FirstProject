@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { FcOk } from "react-icons/fc";
+import './../css/MessagePost.css';
 
 const MessagePost = ({isOpen, onClose, setAddDoc, typeOfDoc}) => {
 
@@ -19,10 +21,15 @@ const MessagePost = ({isOpen, onClose, setAddDoc, typeOfDoc}) => {
     if (!isOpen) return null;
 
     return(
-        <>
-            <h3>{document}</h3>
+        <div className="messagePost">
+            <div>
+                <FcOk className="ok-icon"/>
+            </div>
+            <div>
+                <h3>{document}</h3>
                 <p>Через декілька хвилин {typeOfDoc? "вона" : "воно"} з'явиться у пошуку кандидатів</p>
-        </>
+            </div>     
+        </div>
     )
 }
 
