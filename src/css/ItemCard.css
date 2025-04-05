@@ -1,5 +1,5 @@
 
-main .card {
+/* main .card {
   min-width: 500px;
   margin-bottom: 50px;
   background-color:rgb(255, 254, 231);
@@ -9,8 +9,14 @@ main .card {
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3 );
   font-size: 1rem;
   font-family: 'Open Sans', sans-serif;
-}
-.vacancy, .candidate {
+} */
+* main .card {
+  min-width: 500px;
+  margin-bottom: 50px;
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+} 
+.vacancy {
   min-width: 550px;
 }
 .vacancy {
@@ -39,14 +45,5 @@ main .card {
   opacity: 0.5;
 } 
 
-.candidate img {
-  float: left;
-}
-.candidate h3, .candidate h3+p, .candidate img+p {
-  margin: 5px 0px 5px 110px;
-}
-.list :nth-child(6) {
-  clear: both;
-  text-indent: 15px;
-  padding-top: 10px; 
-}
+
+

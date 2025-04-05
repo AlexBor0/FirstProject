@@ -21,7 +21,7 @@ const Header = ({ typeOfSearch, setTypeOfsearch, host, setShowProfile, currentUs
           <img src={ gear } className="appLogo1" alt="logo" />
           <img src={ gear } className="appLogo2" alt="logo" />
         </div> 
-        <div id='logotype' ><span >JobFinder</span>
+        <div id='logotype' ><span >Jober</span>
         </div>
         {currentUser.userStatus
         ?("")

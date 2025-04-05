@@ -1,7 +1,6 @@
 .modalAddDoc{
 	max-width:600px;
 	margin:40px auto;
-
 }
 .profileBook {
 	position: relative;
@@ -13,9 +12,7 @@
 .pageOne, .pageTwo {
 	position: absolute;	
 	top:20px;
-	/* border: solid 2px red; */
 	position: absolute;
-
 	height: 300px;
 }
 .pageOne {

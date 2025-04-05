@@ -12,7 +12,7 @@ const Candidates = ({candidates, deleteUser, host}) => {
 
         <div className="candidate">
             {candidates.map((el) => (
-              <Candidate onDelete = {deleteUser} key={el.id} user={el} host={host}/>
+              <Candidate onDelete = {deleteUser} key={el.id} candidate={el} host={host}/>
             ))}
         </div>
 

@@ -51,8 +51,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    font-size: calc(8px + 2.6vmin);
-    font-weight: 500;
+    font-size: calc(12px + 3vmin);
+    font-weight: 600;
     color: white;
 
   }
