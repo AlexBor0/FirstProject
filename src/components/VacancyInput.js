@@ -66,13 +66,15 @@ const VacancyInput = ({ arrowPress, getDataItems, resetInput, selectedIndex, set
     };
    
     const inputOnBlur = () => {
+
         setTimeout(() => {
             if (!selectValue) {
                 setNewItem(prev => ({...prev, vacancy: ''}));
-            }
-            setShowVacancyList(false);
-            setSelectedIndex(0);
+            };
+                setShowVacancyList(false);
+                setSelectedIndex(0);
         }, 200);
+        
     };
     
     return (

@@ -390,7 +390,8 @@ useEffect(() => {
               />
             }
           <div className="mainContainer">
-            <main>                         
+            <main>
+                                       
               {typeOfSearch&&currentUser?.userStatus === "employer"&&<Candidates 
                 host={host}
                 axios={axios}

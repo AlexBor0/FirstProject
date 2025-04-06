@@ -25,31 +25,33 @@ const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host
     return (
         <>
             <div className={editable?"previewModal":"viewModal"} >
+                <div className="previewContainer">
                 
-                <h3 className="previewH3">{editable? "Прев'ю ": "Перегляд "}резюме</h3>
-                {editable&&
-                    <div className="previewHeader"> 
-                        <button className="btnEdit" 
-                            onClick={edit}
-                            autoFocus={true}
-                        >
-                            Редагувати
-                        </button>
-                        <button className="btnPublish"
-                            onClick={post}
-                        >
-                            Опублікувати
-                        </button>
+                    <h3 className="previewH3">{editable? "Прев'ю ": "Перегляд "}резюме</h3>
+                    {editable&&
+                        <div className="previewHeader"> 
+                            <button className="btnEdit" 
+                                onClick={edit}
+                                autoFocus={true}
+                            >
+                                Редагувати
+                            </button>
+                            <button className="btnPublish"
+                                onClick={post}
+                            >
+                                Опублікувати
+                            </button>
+                        </div>
+                    }
+                    <div className="previewContent" ref={previewContentRef}>
+                        <ResumeCard
+                            candidate={candidate}
+                            onClose={onClose}
+                            vacancyTitle={vacancyTitle}
+                            imageSrc={imageSrc}
+                            editable={editable}
+                        />
                     </div>
-                }
-                <div className="previewContent" ref={previewContentRef}>
-                    <ResumeCard
-                        candidate={candidate}
-                        onClose={onClose}
-                        vacancyTitle={vacancyTitle}
-                        imageSrc={imageSrc}
-                        editable={editable}
-                    />
                 </div>
             </div>
         </>

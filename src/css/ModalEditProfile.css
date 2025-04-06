@@ -50,7 +50,6 @@
 .fileSize {
 	float: right;
 	margin-right: 20px;
-
 }
 .subImg {
 	width: 40px;
@@ -192,7 +191,6 @@
 }
 .pageTwo .delete-icon{
 	margin: 4px 2px;
-	
 }
 .currentEntries {
 	height: 250px;
@@ -227,7 +225,7 @@
 }
 .currentEntries p{
 	margin: 0px;
-	font-size:10px;
+	/* font-size:10px; */
 }
 .currentEntries data {
 	font-size: 10px;
