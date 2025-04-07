@@ -5,9 +5,9 @@ import CityInput from "./CityInput";
 import VacancyInput from "./VacancyInput";
 
 
-const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase }) => {
+const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase, setClassModal, setIsPreviewVisible}) => {
 
-    const [selectValue, setSelectValue] = useState(''),
+    const [selectValue, setSelectValue] = useState(newCandidate.vacancy || ''),
           [fileSize, setFileSize] = useState(''),
           vacHolder = "Наіменування вакансії*",
           pHolder = "Місто, де шукаєте роботу";
@@ -54,7 +54,9 @@ const deleteImage = (e) => {
    
     const lookAtPreviw = (e) => {
         e.preventDefault();
+        setClassModal("modalAddDoc");
         setPreview(true);
+        setIsPreviewVisible(true);
     };
 
         let wl = newCandidate.resume.length;
@@ -64,22 +66,36 @@ const deleteImage = (e) => {
             <form onSubmit = {lookAtPreviw} id="addResumeForm">
                 <h3 className="modalTitle">Швидке розміщення резюме</h3>
                 <p>Для розміщення резюме заповніть форму, та натисніть "Розмістити"</p>
-                <input  autoFocus={true} 
-                        required placeholder="Iм'я *" 
-                        minLength="3" 
-                        maxLength="30" 
-                        name="firstName" 
-                        type="text" 
-                        className="modalInputAd short" 
-                        onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
-
+                <input  
+                    autoFocus={true} 
+                    required placeholder="Iм'я *" 
+                    minLength="3" 
+                    maxLength="30" 
+                    name="firstName" 
+                    type="text" 
+                    className="modalInputAd short" 
+                    value={newCandidate.firstName}
+                    onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
                 
-                <input required placeholder="Прізвище *"  minLength="3" maxLength="30" name="lastName" type="text" className="modalInputAd short" 
-                        onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
+                <input 
+                    required placeholder="Прізвище *"  
+                    minLength="3" 
+                    maxLength="30" 
+                    name="lastName" 
+                    type="text" 
+                    className="modalInputAd short"
+                    value={newCandidate.lastName}
+                    onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
-                <input required placeholder="Email *" name="email" minLength="6" maxLength="30" type="email" className="modalInputAd short"  
-                        onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
+                <input 
+                    required placeholder="Email *" 
+                    name="email" minLength="6" 
+                    maxLength="30" 
+                    type="email" 
+                    className="modalInputAd short"
+                    value={newCandidate.email}  
+                    onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
 
                 <VacancyInput
@@ -105,32 +121,45 @@ const deleteImage = (e) => {
                     selectedIndex={selectedIndex}
                     setSelectedIndex={setSelectedIndex}
                     setNewCandidate={setNewCandidate}
+                    newCandidate={newCandidate}
                 />
 
-                {(inputErrors.firstName||inputErrors.lastName)&& <p style={{ color: 'red' }}>{inputErrors.firstName||inputErrors.lastName}</p>}
+                {(inputErrors.firstName || inputErrors.lastName) && (
+                    <p style={{ color: 'red' }}>{inputErrors.firstName||inputErrors.lastName}</p>
+                )}
                 <UploadFile 
                     getImage={getImage}
                     inputFileRef={inputFileRef}
                 />
-                {newCandidate.foto&&<UploadFileInfo 
-                    newCandidate={newCandidate} 
-                    fileSize={fileSize}
-                    deleteImage={deleteImage}
-                    hasFile={!!newCandidate.foto}
-                    />}
+                {newCandidate.foto && ( 
+                    <UploadFileInfo 
+                        newCandidate={newCandidate} 
+                        fileSize={fileSize}
+                        deleteImage={deleteImage}
+                        hasFile={!!newCandidate.foto}
+                    />
+                )}
           
-                <textarea required placeholder="Коротке резюме*  (інформація, якою ви можете зацікавити работодавця)" name="resume" type="text" minLength="100" maxLength="800" className="modalInputAd txtArea" rows="10"
+                <textarea 
+                    required placeholder="Коротке резюме*  (інформація, якою ви можете зацікавити работодавця)" 
+                    name="resume" 
+                    type="text" 
+                    minLength="100" 
+                    maxLength="800" 
+                    className="modalInputAd txtArea" 
+                    rows="10"
+                    value={newCandidate.resume}
                     onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
                
                 <p>Розмір резюме має бути від 100 до 800 символів. 
-                    <span style={{color: wl<100?'orange': 'green'}}>{wl>0&&' Зараз ' + wl}</span>
+                    <span style={{color: wl < 100 ? 'orange' : 'green'}}>{wl > 0 && ' Зараз ' +  wl}</span>
                 </p>
                 <button className="btnAddRes">ПЕРЕГЛЯД ТА РОЗМІЩЕННЯ</button>
                 <p>*- поля обов'язкові для заповнення</p>
             </form>
         </>
-    )
+    );
 }
 
 export default AddResumeForm

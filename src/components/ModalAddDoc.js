@@ -44,9 +44,12 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
     [selectedIndex, setSelectedIndex] = useState(0),
     [saveTextEditor, setSaveTextEditor] = useState(false),
     [loading, setLoading] = useState(false),
+    [classModal, setClassModal] = useState("modalAddDoc"),
+    [isPreviewVisible, setIsPreviewVisible] = useState(false),
     [error, setError] = useState(null);
 
     const modalContRef = useRef(null);
+    
 
     const arrowPress = (e, options) => {
         const { 
@@ -106,11 +109,11 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
 
     return ((
         <div className={modalClass} 
-             style={{ overflow: "hidden"}} 
-            //  onClick = {(e) => (e.target.className === "blurRect"&&setAddDoc(false))} 
-        >
-            <div className="modalAddDoc">
-                {saveTextEditor&&<Preview
+             style={{ overflow: "hidden"}}>
+
+            {!isPreviewVisible && (
+            <div className={classModal}>
+                {/* {saveTextEditor&&<Preview
                     type={type}
                     newVacancy={newVacancy}
                     setNewVacancy={setNewVacancy}
@@ -125,49 +128,77 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                     currentUser={currentUser}
                     setCurrentUser={setCurrentUser}
                     axios={axios}
-                />}
+
+                />} */}
                 <div className="modalAdCont" ref={modalContRef}>
-                <IoCloseCircleSharp className="delete-icon" onClick = {() => setAddDoc(false)}/>
-                {!postFetch&&!type&&< AddResumeForm 
-                    vacArr={vacArr}
-                    setNewCandidate={setNewCandidate} 
-                    newCandidate={newCandidate} 
-                    inputErrors={inputErrors}
-                    citiesBase={citiesBase}
-                    arrowPress={arrowPress}
-                    selectedIndex={selectedIndex}
-                    setSelectedIndex={setSelectedIndex}
-                    getDataItems={getDataItems}
-                    resetInput={resetInput}
-                    setPreview={setSaveTextEditor}
-                    specialtiesBase={specialtiesBase}
-                />}
-                {!postFetch&&type&&< AddVacancyForm 
-                    citiesBase={citiesBase}
-                    arrowPress={arrowPress}
-                    selectedIndex={selectedIndex}
-                    setSelectedIndex={setSelectedIndex}
-                    resetInput={resetInput}
+                    <IoCloseCircleSharp className="delete-icon" onClick = {() => setAddDoc(false)}/>
+                    {!postFetch && !type && (
+                        < AddResumeForm 
+                            vacArr={vacArr}
+                            setNewCandidate={setNewCandidate} 
+                            newCandidate={newCandidate} 
+                            inputErrors={inputErrors}
+                            citiesBase={citiesBase}
+                            arrowPress={arrowPress}
+                            selectedIndex={selectedIndex}
+                            setSelectedIndex={setSelectedIndex}
+                            getDataItems={getDataItems}
+                            resetInput={resetInput}
+                            setPreview={setSaveTextEditor}
+                            specialtiesBase={specialtiesBase}
+                            setClassModal={setClassModal}
+                            setIsPreviewVisible={setIsPreviewVisible}
+                        />
+                    )}
+                    {!postFetch && type && (
+                        < AddVacancyForm 
+                            citiesBase={citiesBase}
+                            arrowPress={arrowPress}
+                            selectedIndex={selectedIndex}
+                            setSelectedIndex={setSelectedIndex}
+                            resetInput={resetInput}
+                            newVacancy={newVacancy}
+                            setNewVacancy={setNewVacancy}
+                            getDataItems={getDataItems}
+                            specialtiesBase={specialtiesBase}
+                            saveTextEditor={saveTextEditor}
+                            setSaveTextEditor={setSaveTextEditor}
+                            modalContRef={modalContRef}
+                        />
+                    )}
+                    {postSuccess && (
+                        <MessagePost 
+                            isOpen={postSuccess} 
+                            onClose={setPostSuccess} 
+                            setAddDoc={setAddDoc}
+                            typeOfDoc={type}
+                        />
+                    )}
+                    <p>{error && `Резюме не відправлене, виникла помилка: ${error.MessagePost}! Спробуйте відправити повторно`}</p>
+                    <p>{postFetch && loading && "Зачекайте..."}</p>
+                </div>
+            </div>
+            )}
+            {isPreviewVisible && saveTextEditor && (
+                <Preview
+                    type={type}
                     newVacancy={newVacancy}
                     setNewVacancy={setNewVacancy}
-                    getDataItems={getDataItems}
-                    specialtiesBase={specialtiesBase}
-                    saveTextEditor={saveTextEditor}
+                    newCandidate={newCandidate}
+                    setNewCandidate={setNewCandidate}
                     setSaveTextEditor={setSaveTextEditor}
-                    modalContRef={modalContRef}
-                />}
-                {postSuccess&&<MessagePost 
-                    isOpen={postSuccess} 
-                    onClose={setPostSuccess} 
+                    setPostFetch={setPostFetch}
+                    setPostSuccess={setPostSuccess}
+                    setLoading={setLoading}
+                    setError={setError}
+                    host={host}
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                    axios={axios}
+                    setIsPreviewVisible={setIsPreviewVisible}
                     setAddDoc={setAddDoc}
-                    typeOfDoc={type}
-                />}
-                <p>{error&&`Резюме не відправлене, виникла помилка: ${error.MessagePost}! Спробуйте відправити повторно`}</p>
-                <p>{postFetch&&loading&&"Зачекайте..."}</p>
-                </div>
-
-            </div>
-
+                />
+            )}
         </div>)
     );
 }

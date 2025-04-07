@@ -28,10 +28,13 @@ const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host
                 <div className="previewContainer">
                 
                     <h3 className="previewH3">{editable? "Прев'ю ": "Перегляд "}резюме</h3>
-                    {editable&&
+                    {editable&& (
                         <div className="previewHeader"> 
                             <button className="btnEdit" 
-                                onClick={edit}
+                                onClick={() => {
+                                    edit();
+
+                                }}
                                 autoFocus={true}
                             >
                                 Редагувати
@@ -42,7 +45,7 @@ const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host
                                 Опублікувати
                             </button>
                         </div>
-                    }
+                    )}
                     <div className="previewContent" ref={previewContentRef}>
                         <ResumeCard
                             candidate={candidate}

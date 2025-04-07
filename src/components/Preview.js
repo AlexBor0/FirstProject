@@ -3,7 +3,7 @@ import './../css/Preview.css';
 import PreviewVacancy from "./PreviewVacancy";
 import PreviewResume from "./PreviewResume";
 
-const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, setCurrentUser, axios}) => {
+const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, setCurrentUser, axios, setIsPreviewVisible, setAddDoc}) => {
 
     const previewContentRef = useRef(null);
     const [failUpload, setFailUpload] = useState(null);
@@ -149,11 +149,13 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
         setSaveTextEditor(false);
         if (type) {
           setNewVacancy((prev) => ({ ...prev, requirements: [] }));
-        }
+        };
+        setIsPreviewVisible(false);
       };
 
       const post = () => {
         type ? fetchNewVacancy() : fetchNewCandidate();
+        setAddDoc(false);
       };
 
         return (
