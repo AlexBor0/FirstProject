@@ -45,7 +45,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
       } else {
           console.log("Не знайдено документу для видалення")
       };
-      setShowProfileBook(true);
+      
     };
 
     const fetchDeleteImgAndDoc = async () => {
@@ -101,9 +101,10 @@ const chooseAction = (typeBtn) => {
 const confirmAction = (e) => {
     e.preventDefault();
     chooseAction(typeBtn);
+    if(typeBtn === "view") {
     setShowProfileBook(false);
+  }
 }
-
   const openModal = (e, index) => {
     e.preventDefault();
     setIndexDoc(index);

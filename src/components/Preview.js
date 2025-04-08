@@ -155,7 +155,8 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
 
       const post = () => {
         type ? fetchNewVacancy() : fetchNewCandidate();
-        setAddDoc(false);
+        // setAddDoc(false);
+        // setPostSuccess(true);
       };
 
         return (

@@ -113,23 +113,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
 
             {!isPreviewVisible && (
             <div className={classModal}>
-                {/* {saveTextEditor&&<Preview
-                    type={type}
-                    newVacancy={newVacancy}
-                    setNewVacancy={setNewVacancy}
-                    newCandidate={newCandidate}
-                    setNewCandidate={setNewCandidate}
-                    setSaveTextEditor={setSaveTextEditor}
-                    setPostFetch={setPostFetch}
-                    setPostSuccess={setPostSuccess}
-                    setLoading={setLoading}
-                    setError={setError}
-                    host={host}
-                    currentUser={currentUser}
-                    setCurrentUser={setCurrentUser}
-                    axios={axios}
 
-                />} */}
                 <div className="modalAdCont" ref={modalContRef}>
                     <IoCloseCircleSharp className="delete-icon" onClick = {() => setAddDoc(false)}/>
                     {!postFetch && !type && (
