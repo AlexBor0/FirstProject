@@ -12,7 +12,7 @@ const MessagePost = ({isOpen, onClose, setAddDoc, typeOfDoc}) => {
                 onClose(null);
                 setAddDoc(false);
 
-            }, 3000);
+            }, 30000);
             return () => clearTimeout(timer);
         }
         

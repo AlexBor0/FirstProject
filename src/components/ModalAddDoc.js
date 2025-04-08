@@ -166,14 +166,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                             modalContRef={modalContRef}
                         />
                     )}
-                    {postSuccess && (
-                        <MessagePost 
-                            isOpen={postSuccess} 
-                            onClose={setPostSuccess} 
-                            setAddDoc={setAddDoc}
-                            typeOfDoc={type}
-                        />
-                    )}
+                    
                     <p>{error && `Резюме не відправлене, виникла помилка: ${error.MessagePost}! Спробуйте відправити повторно`}</p>
                     <p>{postFetch && loading && "Зачекайте..."}</p>
                 </div>
@@ -198,6 +191,14 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                     setIsPreviewVisible={setIsPreviewVisible}
                     setAddDoc={setAddDoc}
                 />
+            )}
+            {postSuccess && (
+                        <MessagePost 
+                            isOpen={postSuccess} 
+                            onClose={setPostSuccess} 
+                            setAddDoc={setAddDoc}
+                            typeOfDoc={type}
+                        />
             )}
         </div>)
     );

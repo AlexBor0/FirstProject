@@ -1,12 +1,14 @@
 import React from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
+import FormatDate from './FormatDate';
+import Mailto from "./Mailto";
 import './../css/Preview.css';
 import './../css/ResumeCard.css';
 
 const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable}) => {
 
     return (
-        <div className="card candidate" >
+        <article className="card candidate" >
             {!editable&&
                 <button autoFocus={true} onClick = {onClose}>
                     <IoCloseCircleSharp className="delete-icon"/>
@@ -14,13 +16,40 @@ const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable}) => {
             }
             
             <img src={imageSrc} alt={candidate.foto?"Фото кандидата" : "Фото за замовчуванням"}  width="100px" height="100px" />
-            <p><strong>{vacancyTitle}</strong>
-                {" у місті: "}{candidate.city}{" ("}{candidate.region}{" обл.)"} 
-            </p>
-            <h3>{candidate.firstName} {candidate.lastName}</h3>
-            <p>{candidate.email}</p>
+            <h3>{vacancyTitle}</h3>
+            <p><strong>{candidate.firstName} {candidate.lastName}</strong> 
+            </p> 
+            <address>
+                <p>{"місто: "}{candidate.city}{" ("}{candidate.region}{" обл.)"}</p>
+                <Mailto
+                    email={candidate.email}
+                    subject="Відгук на резюме" 
+                    body="Доброго дня!"
+                    children={candidate.email}
+                />
+            </address>
+            {!editable&& 
+                <div className="dates">
+                    <div>
+                        <span>Створено:{" "}</span>
+                        <br/>
+                        <span>Оновлено:{" "}</span>
+                    </div>
+                    <div>
+                        <time>
+                            <FormatDate isoDate={candidate.createdAt}/>
+                        </time>
+                        <br/>
+                        <time>
+                            <FormatDate isoDate={candidate.updatedAt}/>
+                        </time> 
+                    </div>       
+                                      
+                </div>
+            }
+           
             <p className="textResume">{candidate.resume}</p>
-        </div>
+        </article>
     )
   }
   export default ResumeCard

@@ -22,19 +22,30 @@
   .candidate {
     position: relative;
  }
-.candidate p {
+.candidate p, address {
     margin: 5px 5px;
     font-size: 0.9rem;
   }
-
 .candidate img {
     float: left;
+    margin-right: 10px;
   }
-  .candidate img+p {
-    margin: 5px 15px 5px 110px;
+.dates{
+  width: 194px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-between;
+    clear: both;
+    font-size: 0.7rem;
+    margin: 0px 0px 3px 0px;
+    color:rgb(10, 76, 199);
   }
-.candidate h3, .candidate h3+p{
-    margin: 5px 0px 5px 110px;
+.candidate h3{
+    margin: -4px 0px 3px 110px;
+  }
+.candidate h3+p{
+    margin: 0px 0px 3px 110px;
   }
 
 .delete-icon:hover {

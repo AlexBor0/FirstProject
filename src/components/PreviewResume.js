@@ -3,7 +3,7 @@ import GestAva from "./../img/GestAva.png";
 import './../css/Preview.css';
 import ResumeCard from "./ResumeCard";
 
-const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host, setShowDoc, setShowConfirmModal, setShowDocList }) => {
+const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host, setShowDoc, setShowConfirmModal, setShowDocList, setShowProfileBook }) => {
     
     const imageSrc = editable
         ? 
@@ -18,6 +18,7 @@ const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host
         setShowDoc(false); 
         setShowConfirmModal(false);
         setShowDocList(true);
+        setShowProfileBook(true);
     };
 
     const vacancyTitle = editable ? candidate.vacancy : candidate.title;

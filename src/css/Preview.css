@@ -16,11 +16,9 @@
 
 } 
 .viewModal {
-  top:-10px;
-  left: 100%;
-  transform: translateX(-82.5%);
-  /* left: -160%; */
-  /* padding: 20px; */
+  top:50px;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 30px;
   margin-left: auto;
   margin-right: auto;
