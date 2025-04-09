@@ -121,7 +121,7 @@ const deleteImage = (e) => {
                     selectedIndex={selectedIndex}
                     setSelectedIndex={setSelectedIndex}
                     setNewCandidate={setNewCandidate}
-                    newCandidate={newCandidate}
+                    newDoc={newCandidate}
                 />
 
                 {(inputErrors.firstName || inputErrors.lastName) && (

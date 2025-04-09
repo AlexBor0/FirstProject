@@ -148,6 +148,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                             saveTextEditor={saveTextEditor}
                             setSaveTextEditor={setSaveTextEditor}
                             modalContRef={modalContRef}
+                            setIsPreviewVisible={setIsPreviewVisible}
                         />
                     )}
                     

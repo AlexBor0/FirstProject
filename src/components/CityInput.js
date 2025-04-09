@@ -3,7 +3,7 @@ import { IoClose } from "react-icons/io5";
 import CitySelect from "./CitySelect";
 
 
-const CityInput = ({citiesBase, arrowPress, getDataItems, resetInput, setNewItem, selectedIndex, setSelectedIndex, pHolder, newCandidate}) => {
+const CityInput = ({citiesBase, arrowPress, getDataItems, resetInput, setNewItem, selectedIndex, setSelectedIndex, pHolder, newDoc}) => {
 
     const [cityQuery, setCityQuery] = useState(''),
           [showCityList, setShowCityList] = useState(false),
@@ -50,7 +50,7 @@ const debouncedCityQuery = useDebounce(cityQuery, 400);
                 type="text" 
                 className="modalInputAd" 
                 autoComplete="off"
-                value={selectCityValue || newCandidate.city}
+                value={selectCityValue || newDoc.city}
                 ref={inputCityRef} 
                 onChange={(e) => getDataItems(e, {
                     setSelectValue: setSelectCityValue,

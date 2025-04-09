@@ -218,11 +218,11 @@ useEffect(() => {
 
       useEffect(() => {
         const status = currentUser.userStatus;
-        let recDoc = status === "employer"? "vacancies":"candidates";
+        let recDoc = status === "employer"? "=vacancies": "[candidates][populate][0]=foto";
         if((currentUser.userJWT && currentUser.userStatus) || currentUser.addDoc ) {
           const fetchGetDocs = async () => {
             
-            try {const response = await axios.get(`${host}/api/users/me?populate[${recDoc}][populate][0]=foto`, {
+            try {const response = await axios.get(`${host}/api/users/me?populate${recDoc}`, {
                   headers: {
                       Authorization: `Bearer ${currentUser.userJWT}`
                   }

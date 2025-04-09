@@ -5,12 +5,15 @@ import Mailto from "./Mailto";
 import './../css/Preview.css';
 import './../css/ResumeCard.css';
 
-const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable}) => {
+const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, parentComponent }) => {
 
     return (
         <article className="card candidate" >
             {!editable&&
-                <button autoFocus={true} onClick = {onClose}>
+                <button 
+                autoFocus={parentComponent !== 'Candidate' && true} 
+                onClick = {onClose}
+                >
                     <IoCloseCircleSharp className="delete-icon"/>
                 </button>
             }

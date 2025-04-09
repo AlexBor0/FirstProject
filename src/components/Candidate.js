@@ -33,6 +33,7 @@ const Candidate = ({candidate, onDelete, host}) => {
                 vacancyTitle={vacancyTitle}
                 imageSrc={imageSrc}
                 editable={editable}
+                parentComponent={'Candidate'}
             />
         </>
        

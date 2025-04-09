@@ -7,7 +7,7 @@ const PreviewVacancy = ({post, edit, previewContentRef, newVacancy, requirements
     return (
         <>
         <div className="previewModal" >
-            <h3 className="previewH4">Прев'ю вакансії</h3>
+            <h3 className="previewH3">Прев'ю вакансії</h3>
             <div className="previewHeader"> 
                 <button className="btnEdit" 
                     onClick={edit}

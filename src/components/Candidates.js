@@ -23,7 +23,7 @@ const Candidates = ({host, axios}) => {
             };
     
             fetchCandidates();
-        }, [host]);
+        }, [host, axios]);
     
     if (loading) return <p>Загрузка...</p>;
     if (error) return <p>Ошибка: {error.message}</p>

@@ -25,7 +25,7 @@ const deleteVacancy = (id) => {
 		};
 
 		fetchVacancies();
-	}, [host, setTitle]);
+	}, [host, setTitle, axios]);
 
 if (loading) return <p>Загрузка...</p>;
 if (error) return <p>Ошибка: {error.message}</p>

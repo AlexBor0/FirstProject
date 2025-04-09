@@ -8,7 +8,7 @@ import VacancyInput from "./VacancyInput";
 
 
 
-const AddVacancyForm = ({ newVacancy, setNewVacancy, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, specialtiesBase, saveTextEditor, setSaveTextEditor, modalContRef }) => {
+const AddVacancyForm = ({ newVacancy, setNewVacancy, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, specialtiesBase, saveTextEditor, setSaveTextEditor, modalContRef, setIsPreviewVisible}) => {
 
 const pHolder = "Місто, де пропонується робота",
       vacHolder = "Наіменування вакансії*"; 
@@ -22,6 +22,7 @@ const [selectValue, setSelectValue] = useState(''),
 const formRef = useRef(null);
 const prevElementTopRef = useRef(null);
 const textEditorRef = useRef(null);
+const check = newVacancy.employment;
 
 
 useEffect(() => {
@@ -111,7 +112,7 @@ useEffect(() => {
 
 let vl = newVacancy.description.length;
 
-const validSubmit = (e) => {
+const validSubmit = async (e) => {
     e.preventDefault();
 
     if (editorLetters > 600) {
@@ -119,8 +120,33 @@ const validSubmit = (e) => {
         return; 
       };
       setValidationError("");
+
+    try {
       setSaveTextEditor(true);
+      const requirements = await new Promise((resolve) => {
+
+            resolve(newVacancy.requirements); 
+
+    });
+
+    if (requirements && newVacancy.requirements.length > 0) {
+        setIsPreviewVisible(true); 
+    } else {
+        setValidationError("Вимоги до кандидата не збережено. Спробуйте ще раз.");
+    }
+} catch (error) {
+    console.error("Ошибка при сохранении требований:", error);
+    setValidationError("Сталася помилка при збереженні вимог. Спробуйте ще раз.");
+} finally {
+
+}
 };
+
+const changeRadio = (e) => {
+    if (e.target.type === 'radio') {
+        getDataItems(e, { setNewDoc: setNewVacancy });
+    }
+  }
 
     return(
         <>
@@ -138,10 +164,10 @@ const validSubmit = (e) => {
                 selectedIndex={selectedIndex}
                 setSelectedIndex={setSelectedIndex}
                 setSelectVacancyValue={setSelectValue}
+                newVacancy={newVacancy}
             />
 
             <VacancyInput
-                // newVacancy ={newVacancy}
                 vacBaseChunck={vacBaseChunck}
                 pHolder = {vacHolder}
                 arrowPress={arrowPress}
@@ -152,103 +178,97 @@ const validSubmit = (e) => {
                 setNewItem={setNewVacancy}
                 selectValue={selectValue}
                 setSelectValue={setSelectValue}
+                newVacancy={newVacancy}
             />
 
             <div className="optionsFild">
-            <fieldset className="workOptions" 
-                    onChange={(e) => {
-                        if(e.target.type === 'radio') {
-                             getDataItems(e, { setNewDoc: setNewVacancy})
-                            }
-                        } 
-                    }
-            >
+            <fieldset className="workOptions" onChange={changeRadio} >
                 <legend>Форма зайнятості:</legend>
                     <div>
-                        <input  id="full" name="employment" type="radio" value="повна" className="radioInput" defaultChecked />
+                        <input  id="full" name="employment" type="radio" value="повна" className="radioInput" checked={check === "повна"} onChange={changeRadio} />
                         <label htmlFor="full">Повна зайнятість</label>
                     </div>
                     <div>
-                        <input  id="under" name="employment" type="radio" value="неповна" className="radioInput" />
+                        <input  id="under" name="employment" type="radio" value="неповна" className="radioInput" checked={check === "неповна"} onChange={changeRadio} />
                         <label htmlFor="under">Неповна зайнятість</label>
                     </div>
                     <div>
-                        <input  id="partTime" name="employment" type="radio" value="часткова" className="radioInput" />
+                        <input  id="partTime" name="employment" type="radio" value="часткова" className="radioInput"  checked={check === "часткова"} onChange={changeRadio} />
                         <label htmlFor="partTime">Часткова зайнятість</label>
                     </div>
                     <div>
-                        <input  id="temporary" name="employment" type="radio" value="тимчасова" className="radioInput" />
+                        <input  id="temporary" name="employment" type="radio" value="тимчасова" className="radioInput" checked={check === "тимчасова"} onChange={changeRadio} />
                         <label htmlFor="temporary">Тимчасова робота</label>
                     </div>
             </fieldset>
-            <fieldset className="workOptions" 
-                onChange={(e) => {
-                    if(e.target.type === 'radio') {
-                        getDataItems(e, { setNewDoc: setNewVacancy,
-                        })
-                        }
-                    } 
-                }
-            >
+            <fieldset className="workOptions" onChange={changeRadio} >
                 <legend>Графік роботи:</legend>
                     <div>
-                        <input  id="workWeek" name="workSchedule" type="radio" value="тижневий" className="radioInput" defaultChecked/>
+                        <input  id="workWeek" name="workSchedule" type="radio" value="тижневий" className="radioInput" checked={newVacancy.workSchedule === "тижневий"} onChange={changeRadio}/>
                         <label htmlFor="workWeek">Тижневий графік</label>
                     </div>
                     <div>
-                        <input  id="shiftWork" name="workSchedule" type="radio" value="змінний" className="radioInput" />
+                        <input  id="shiftWork" name="workSchedule" type="radio" value="змінний" className="radioInput" checked={newVacancy.workSchedule === "змінний"} onChange={changeRadio}/>
                         <label htmlFor="shiftWork">Змінний графік</label>
                     </div>
                     <div>
-                        <input  id="flexibleWork" name="workSchedule" type="radio" value="гнучкий" className="radioInput" />
+                        <input  id="flexibleWork" name="workSchedule" type="radio" value="гнучкий" className="radioInput" checked={newVacancy.workSchedule === "гнучкий"} onChange={changeRadio}/>
                         <label htmlFor="flexibleWork">Гнучкий графік</label>
                     </div>
                     <div>
-                        <input  id="longShiftWork" name="workSchedule" type="radio" value="вахтовий" className="radioInput" />
+                        <input  id="longShiftWork" name="workSchedule" type="radio" value="вахтовий" className="radioInput" checked={newVacancy.workSchedule === "вахтовий"} onChange={changeRadio}/>
                         <label htmlFor="longShiftWork">Вахтовий метод</label>
                     </div>
             </fieldset>
-            <fieldset className="workOptions format"
-                onChange={(e) => {
-                    if(e.target.type === 'radio') {
-                        getDataItems(e, { setNewDoc: setNewVacancy,
-                         })
-                        }
-                    } 
-                }
-            >
+            <fieldset className="workOptions format" onChange={changeRadio} >
                 <legend>Формат роботи:</legend>
                     <div>
-                        <input  id="faceWork" name="workFormat" type="radio" value="очна робота" className="radioInput" defaultChecked/>
+                        <input  id="faceWork" name="workFormat" type="radio" value="очна робота" className="radioInput" checked={newVacancy.workFormat === "очна робота"} onChange={changeRadio}/>
                         <label htmlFor="faceWork">Очна робота</label>
                     </div>
                     <div>
-                        <input  id="hybridWork" name="workFormat" type="radio" value="гібридний формат" className="radioInput" />
+                        <input  id="hybridWork" name="workFormat" type="radio" value="гібридний формат" className="radioInput" checked={newVacancy.workFormat === "гібридний формат"} onChange={changeRadio}/>
                         <label htmlFor="hybridWork">Гібридний формат</label>
                     </div>
                     <div>
-                        <input  id="remote" name="workFormat" type="radio" value="дистанційна" className="radioInput" />
+                        <input  id="remote" name="workFormat" type="radio" value="дистанційна" className="radioInput" checked={newVacancy.workFormat === "дистанційна"} onChange={changeRadio}/>
                         <label htmlFor="remote">Дистанційна</label>
                     </div>
                     <div>
-                        <input  id="outsourcing" name="workFormat" type="radio" value="аутсорс" className="radioInput" />
+                        <input  id="outsourcing" name="workFormat" type="radio" value="аутсорс" className="radioInput" checked={newVacancy.workFormat === "аутсорс"} onChange={changeRadio}/>
                         <label htmlFor="outsourcing">Аутсорс</label>
                     </div>
                     <div>
-                        <input  id="projectWork" name="workFormat" type="radio" value="проектна робота" className="radioInput" />
+                        <input  id="projectWork" name="workFormat" type="radio" value="проектна робота" className="radioInput" checked={newVacancy.workFormat === "проектна робота"} onChange={changeRadio}/>
                         <label htmlFor="projectWork">Проектна робота</label>
                     </div>
                     <div>
-                        <input  id="freelance" name="workFormat" type="radio" value="фріланс" className="radioInput" />
+                        <input  id="freelance" name="workFormat" type="radio" value="фріланс" className="radioInput" checked={newVacancy.workFormat === "фріланс"} onChange={changeRadio}/>
                         <label htmlFor="freelance">Фріланс</label>
                     </div>
             </fieldset>
             </div>
-            <input required placeholder="Розмір зарплати*, грн" name="salary" min="0" max="500000" step="500" type="number" className="modalInputAd short" 
-                    onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
+            <input 
+              required 
+              placeholder="Розмір зарплати*, грн" 
+              name="salary" min="0" max="500000" 
+              step="500" 
+              type="number" 
+              className="modalInputAd short" 
+              value={newVacancy.salary}
+              onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
             />
-            <input required placeholder="Досвід роботи*, років" name="experience" min="0" max="50" step="0.5" type="number" className="modalInputAd short" 
-                    onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
+            <input 
+              required 
+              placeholder="Досвід роботи*, років" 
+              name="experience" 
+              min="0"
+              max="50" 
+              step="0.5" 
+              type="number" 
+              className="modalInputAd short"
+              value={newVacancy.experience} 
+              onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
             />
             
             <CityInput 
@@ -259,11 +279,23 @@ const validSubmit = (e) => {
                 setNewItem={setNewVacancy}
                 selectedIndex={selectedIndex}
                 setSelectedIndex={setSelectedIndex}
-                pHolder={pHolder}/>
-             <p>Опис вакансії має бути від 100 до 600 символів.</p>
-              <p>Вимоги до кандидата не більше 600.</p>  
-            <textarea required placeholder="Опис вакансії*" name="description" type="text" minLength="100" maxLength="600" className="modalInputAd txtArea" rows="10" cols="62"
-                    onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
+                pHolder={pHolder}
+                newDoc={newVacancy}
+                />
+            <p>Опис вакансії має бути від 100 до 600 символів.</p>
+            <p>Вимоги до кандидата не більше 600.</p>  
+            <textarea 
+                required
+                placeholder="Опис вакансії*"
+                name="description" 
+                type="text" 
+                minLength="100" 
+                maxLength="600" 
+                className="modalInputAd txtArea" 
+                rows="10" 
+                cols="62"
+                value={newVacancy.description}
+                onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
             />
             <span className="lettering" style={{color: vl<100?'orange': 'green'}}>
                 {vl>0&&'Кількість символів в опису вакансії: ' + vl + '. '}
@@ -278,6 +310,7 @@ const validSubmit = (e) => {
                     setNewVacancy={setNewVacancy}
                     saveTextEditor={saveTextEditor}
                     setEditorLetters={setEditorLetters}
+                    newVacancy={newVacancy}
                 />
             </div>
             {validationError && editorLetters > 600 && <p style={{ color: "red" }}>{validationError}</p>}
