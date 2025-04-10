@@ -39,6 +39,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
          
       }),
 
+    [savingEditorContent, setSavingEditorContent] = useState(null),
     [postFetch, setPostFetch] = useState(false),
     [postSuccess, setPostSuccess] = useState(null),
     [selectedIndex, setSelectedIndex] = useState(0),
@@ -149,6 +150,8 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                             setSaveTextEditor={setSaveTextEditor}
                             modalContRef={modalContRef}
                             setIsPreviewVisible={setIsPreviewVisible}
+                            setSavingEditorContent={setSavingEditorContent}
+                            savingEditorContent={savingEditorContent}
                         />
                     )}
                     

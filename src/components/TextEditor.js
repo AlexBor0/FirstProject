@@ -110,7 +110,7 @@ const useContentConverter = () => {
 };
 
 
-const TextEditor = ({ setNewVacancy, saveTextEditor, setEditorLetters }) => {
+const TextEditor = ({ setNewVacancy, saveTextEditor, setEditorLetters, setKeepEitor, savingEditorContent }) => {
 
   const editor = useEditor({
     extensions: [
@@ -120,7 +120,7 @@ const TextEditor = ({ setNewVacancy, saveTextEditor, setEditorLetters }) => {
         types: ['heading', 'paragraph']
       }),
     ],
-    content: '',
+    content: savingEditorContent || '',
     editorProps: {
       attributes: {
         class: 'ProseMirror',
@@ -128,6 +128,18 @@ const TextEditor = ({ setNewVacancy, saveTextEditor, setEditorLetters }) => {
       }
     }
   });
+
+  useEffect(() => {
+    if (editor) {
+      setKeepEitor(editor);
+    }
+}, [editor, setKeepEitor]);
+
+useEffect(() => {
+  if (editor && savingEditorContent) {
+      editor.commands.setContent(savingEditorContent);
+  }
+}, [editor, savingEditorContent]);
  
   useEffect(() => {
     if (!editor) return;

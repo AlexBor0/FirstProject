@@ -8,7 +8,7 @@ import VacancyInput from "./VacancyInput";
 
 
 
-const AddVacancyForm = ({ newVacancy, setNewVacancy, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, specialtiesBase, saveTextEditor, setSaveTextEditor, modalContRef, setIsPreviewVisible}) => {
+const AddVacancyForm = ({ newVacancy, setNewVacancy, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, specialtiesBase, saveTextEditor, setSaveTextEditor, modalContRef, setIsPreviewVisible, setSavingEditorContent, savingEditorContent}) => {
 
 const pHolder = "Місто, де пропонується робота",
       vacHolder = "Наіменування вакансії*"; 
@@ -18,7 +18,8 @@ const vacBaseChunck = depart && specialtiesBase.find(el => el.category === depar
 const [selectValue, setSelectValue] = useState(newVacancy.vacancy ||''),
       [editorLetters, setEditorLetters] = useState(null),
       [validationError, setValidationError] = useState(""),
-      [isSubmitting, setIsSubmitting] = useState(false);
+      [isSubmitting, setIsSubmitting] = useState(false),
+      [keepEitor, setKeepEitor] = useState(null);;
 
 const formRef = useRef(null);
 const prevElementTopRef = useRef(null);
@@ -121,6 +122,9 @@ const validSubmit = (e) => {
         return; 
       };
       setValidationError("");
+      if (keepEitor) {
+        setSavingEditorContent(keepEitor.getJSON()); 
+    }
       setIsSubmitting(true);
       setSaveTextEditor(true);
     };
@@ -299,7 +303,8 @@ const changeRadio = (e) => {
                     setNewVacancy={setNewVacancy}
                     saveTextEditor={saveTextEditor}
                     setEditorLetters={setEditorLetters}
-                    newVacancy={newVacancy}
+                    setKeepEitor={setKeepEitor}
+                    savingEditorContent={savingEditorContent}
                 />
             </div>
             {validationError && editorLetters > 600 && <p style={{ color: "red" }}>{validationError}</p>}
