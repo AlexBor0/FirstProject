@@ -17,7 +17,8 @@ const vacBaseChunck = depart && specialtiesBase.find(el => el.category === depar
 
 const [selectValue, setSelectValue] = useState(newVacancy.vacancy ||''),
       [editorLetters, setEditorLetters] = useState(null),
-      [validationError, setValidationError] = useState("")
+      [validationError, setValidationError] = useState(""),
+      [isSubmitting, setIsSubmitting] = useState(false);
 
 const formRef = useRef(null);
 const prevElementTopRef = useRef(null);
@@ -112,7 +113,7 @@ useEffect(() => {
 
 let vl = newVacancy.description.length;
 
-const validSubmit = async (e) => {
+const validSubmit = (e) => {
     e.preventDefault();
 
     if (editorLetters > 600) {
@@ -120,27 +121,16 @@ const validSubmit = async (e) => {
         return; 
       };
       setValidationError("");
-
-    try {
+      setIsSubmitting(true);
       setSaveTextEditor(true);
-      const requirements = await new Promise((resolve) => {
+    };
 
-            resolve(newVacancy.requirements); 
-
-    });
-
-    if (requirements && newVacancy.requirements.length > 0) {
-        setIsPreviewVisible(true); 
-    } else {
-        setValidationError("Вимоги до кандидата не збережено. Спробуйте ще раз.");
-    }
-} catch (error) {
-    console.error("Ошибка при сохранении требований:", error);
-    setValidationError("Сталася помилка при збереженні вимог. Спробуйте ще раз.");
-} finally {
-
-}
-};
+    useEffect(() => {
+      if (isSubmitting && newVacancy.requirements && newVacancy.requirements.length > 0) {
+        setIsSubmitting(false);
+        setIsPreviewVisible(true);
+      }
+    }, [isSubmitting, newVacancy.requirements]);  
 
 const changeRadio = (e) => {
     if (e.target.type === 'radio') {
@@ -178,7 +168,6 @@ const changeRadio = (e) => {
                 setNewItem={setNewVacancy}
                 selectValue={selectValue}
                 setSelectValue={setSelectValue}
-                newVacancy={newVacancy}
             />
 
             <div className="optionsFild">
