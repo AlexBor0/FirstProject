@@ -3,12 +3,13 @@ import { IoClose } from "react-icons/io5";
 import VacancySelect from "./VacancySelect";
 
 
-const VacancyInput = ({ arrowPress, getDataItems, resetInput, selectedIndex, setSelectedIndex, vacBaseChunck, pHolder, setNewItem, selectValue, setSelectValue}) => {
+const VacancyInput = ({ arrowPress, getDataItems, resetInput, selectedIndex, setSelectedIndex, vacBaseChunck, pHolder, setNewItem, selectValue, setSelectValue, newVacancy}) => {
 
-    const [vacancyQuery, setVacancyQuery] = useState(''),
+    const [vacancyQuery, setVacancyQuery] = useState(newVacancy.vacancy ||''),
           [showVacancyList, setShowVacancyList] = useState(false);
           
     const inputVacancyRef = useRef(null);
+    
 
     const dinListV = () => {
         if (!vacancyQuery || !vacBaseChunck) return [];

@@ -1,25 +1,61 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useCallback} from "react";
 import { IoClose } from "react-icons/io5";
 
 
-const VacancyDepInput = ({specialtiesBase, setNewVacancy, setSelectVacancyValue}) => {
+const VacancyDepInput = ({specialtiesBase, setNewVacancy, setSelectVacancyValue, newVacancy}) => {
+
+    const departments = specialtiesBase.map(el => el.category),
+    totalItems = departments.length;
+
+    const getIndexByDepartment = useCallback((department) => {
+        return departments.findIndex(dep => dep === department);
+    }, [departments]);
+
+    const initialIndex = newVacancy?.department 
+    ? getIndexByDepartment(newVacancy.department) 
+    : 0;
 
     const [showSelectBubl, setShowSelectBubl] = useState(false),
-          [currentIndex, setCurrentIndex] = useState(0),
-          [selectVacDepValue, setSelectVacDepValue] = useState('');
+          [currentIndex, setCurrentIndex] = useState(initialIndex > -1 ? initialIndex : 0),
+          [selectVacDepValue, setSelectVacDepValue] = useState(newVacancy?.department || '');
 
     const selectRef = useRef(null);
     const closeButtonRef = useRef(null);
+    const initialized = useRef(false);
 
-    const departments = specialtiesBase.map(el => el.category ),
-          totalItems = departments.length;
+
+    useEffect(() => {
+        // При первом рендере устанавливается флаг инициализации
+        if (!initialized.current) {
+            initialized.current = true;
+            
+            if (newVacancy?.department) {
+                const index = getIndexByDepartment(newVacancy.department);
+                
+                if (index !== -1) {
+                    setCurrentIndex(index);
+                    setSelectVacDepValue(newVacancy.department);
+                }
+            }
+        }
+        // Заход после предпросмотра 
+        else if (newVacancy?.department && newVacancy.department !== selectVacDepValue) {
+            const index = getIndexByDepartment(newVacancy.department);
+            
+            if (index !== -1) {
+                setCurrentIndex(index);
+                setSelectVacDepValue(newVacancy.department);
+            }
+        }
+    }, [newVacancy?.department, selectVacDepValue, getIndexByDepartment]);
+
 
     const resetVacancy = () => {
         setSelectVacancyValue('');
         setNewVacancy(prev => ({...prev, vacancy: ''}));
     }
 
-          useEffect(() => {
+          useEffect(() => { // Скрытие/открытие скролла в модальном окне
             const modalAdCont = document.querySelector('.modalAdCont');
             
             if (showSelectBubl) {
@@ -40,13 +76,13 @@ const VacancyDepInput = ({specialtiesBase, setNewVacancy, setSelectVacancyValue}
         }, [showSelectBubl]);    
         
         useEffect(() => {
-            const handleClickOutside = (e) => {
+            const handleClickOutside = (e) => {// Скрытие бабл селекта при клике вне его
                 if (selectRef.current && !selectRef.current.contains(e.target)) {
                     setShowSelectBubl(false);
                 }
             };
     
-            const handleWheel = (e) => {
+            const handleWheel = (e) => {// Прокрутка колесиком мыши
                 if (showSelectBubl) {
                     const direction = e.deltaY > 0 ? 'down' : 'up';
                     handleDriveWhell(direction);
@@ -65,7 +101,7 @@ const VacancyDepInput = ({specialtiesBase, setNewVacancy, setSelectVacancyValue}
             };
         });
 
-    const getVisibleItems = () => {
+    const getVisibleItems = () => { // Показ видимых элементов
         const items = [];
         for (let i = -2; i <= 2; i++) {
             let index = (currentIndex + i + totalItems) % totalItems;
@@ -149,74 +185,78 @@ const handleItemClick = (value, position) => {
     
     return (
         <>
-        <div className="itemAdd" ref={selectRef}>
-            <button id="selectBtn" className="modalInputAd shortBtn" autoFocus={true}
-                onClick={(e) => {e.preventDefault();
-                    setShowSelectBubl(true);
-                    }}
-            >
-                {selectVacDepValue || 'Виберіть галузь*'}
-                <div className="arrow Up"></div>
-                <div className="arrow Down"></div>
-            </button>
-            <div className={showSelectBubl?"selectWill show":"selectWill hidden"}>
-            <div className="darkShadaw"></div>
-            {showSelectBubl&&(
-                <button className="closeSelect" ref={closeButtonRef}
-                    onClick={() => {setShowSelectBubl(false);
-                        setSelectVacDepValue('');
-                        setNewVacancy(prev => ({...prev, department: ''}));
-                        resetVacancy();
-                     }}
-                >
-                    <span><IoClose className="resetSearchIcon" /></span>
-                </button>)
-            }
-            {showSelectBubl&&(
-                <button className="arrowUpBtn"
+            <div className="itemAdd" ref={selectRef}>
 
-                    onClick={(e) => 
-                        {e.preventDefault();
-                        handleDriveWhell("up");
-                    }}
+                <button id="selectBtn" className="modalInputAd shortBtn" autoFocus={true}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setShowSelectBubl(true);
+                        }}
                 >
-                    <div className="bigUp"></div>
-                </button>)
-            }
+                    {selectVacDepValue || 'Виберіть галузь*'}
+                    <div className="arrow Up"></div>
+                    <div className="arrow Down"></div>
+                </button>
+                
+                <div className={showSelectBubl?"selectWill show":"selectWill hidden"}>
+                <div className="darkShadaw"></div>
+                {showSelectBubl&&(
+                    <button className="closeSelect" ref={closeButtonRef}
+                        onClick={() => {
+                            setShowSelectBubl(false);
+                            setSelectVacDepValue('');
+                            setNewVacancy(prev => ({...prev, department: ''}));
+                            resetVacancy();
+                        }}
+                    >
+                        <span><IoClose className="resetSearchIcon" /></span>
+                    </button>)
+                }
+                {showSelectBubl&&(
+                    <button className="arrowUpBtn"
 
-            {showSelectBubl&&(
-                <button className="arrowDowBtn"
-                    onClick={(e) => 
-                        {e.preventDefault();
-                        handleDriveWhell("down");
-                }}
-                >
-                    <div className="bigDown"></div>
-                </button>)
-            }
-                <ul>
-                {getVisibleItems().map((item, index)=> (
-                    <li className="selectItem" key={`${item.value}`}>
-                        <button className={`selectBtn ${item.className}`} 
-                            onClick={(e) => 
-                                {e.preventDefault();
-                                    handleItemClick(item.value, index - 2);
-                                    resetVacancy();
-                                }} 
-                        >
-                            <div className="btnText ">
-                                {item.value}
-                            </div>
-                        </button>
-                    </li>
-                ))}
-                </ul>
+                        onClick={(e) => 
+                            {e.preventDefault();
+                            handleDriveWhell("up");
+                        }}
+                    >
+                        <div className="bigUp"></div>
+                    </button>)
+                }
+
+                {showSelectBubl&&(
+                    <button className="arrowDowBtn"
+                        onClick={(e) => 
+                            {e.preventDefault();
+                            handleDriveWhell("down");
+                    }}
+                    >
+                        <div className="bigDown"></div>
+                    </button>)
+                }
+                    <ul>
+                    {getVisibleItems().map((item, index)=> (
+                        <li className="selectItem" key={`${item.value}`}>
+                            <button className={`selectBtn ${item.className}`} 
+                                onClick={(e) => 
+                                    {e.preventDefault();
+                                        handleItemClick(item.value, index - 2);
+                                        resetVacancy();
+                                    }} 
+                            >
+                                <div className="btnText ">
+                                    {item.value}
+                                </div>
+                            </button>
+                        </li>
+                    ))}
+                    </ul>
+                    
+                </div>
                 
             </div>
-            
-        </div>
  
-    </>
+        </>
     )
 }
 export default VacancyDepInput
