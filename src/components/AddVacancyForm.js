@@ -15,7 +15,7 @@ const pHolder = "Місто, де пропонується робота",
 const depart = newVacancy.department;
 const vacBaseChunck = depart && specialtiesBase.find(el => el.category === depart )?.position;
 
-const [selectValue, setSelectValue] = useState(''),
+const [selectValue, setSelectValue] = useState(newVacancy.vacancy ||''),
       [editorLetters, setEditorLetters] = useState(null),
       [validationError, setValidationError] = useState("")
 

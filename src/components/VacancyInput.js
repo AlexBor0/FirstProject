@@ -5,7 +5,7 @@ import VacancySelect from "./VacancySelect";
 
 const VacancyInput = ({ arrowPress, getDataItems, resetInput, selectedIndex, setSelectedIndex, vacBaseChunck, pHolder, setNewItem, selectValue, setSelectValue, newVacancy}) => {
 
-    const [vacancyQuery, setVacancyQuery] = useState(newVacancy.vacancy ||''),
+    const [vacancyQuery, setVacancyQuery] = useState(''),
           [showVacancyList, setShowVacancyList] = useState(false);
           
     const inputVacancyRef = useRef(null);
