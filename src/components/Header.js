@@ -5,7 +5,7 @@ import BtnTogSearch from "./BtnTogSearch";
 import IconEntry from "./IconEntry";
 import UserLogo from "./UserLogo";
 
-const Header = ({ typeOfSearch, setTypeOfsearch, host, setShowProfile, currentUser, setRegEntry, confirm, svgHttp, svgXlink, turnExit }) => {
+const Header = ({ typeOfSearch, setTypeOfsearch, host, setShowProfile, currentUser, setRegEntry, confirm, svgHttp, svgXlink, turnExit, userLogoRef}) => {
 
    let thing, title;
     typeOfSearch ? thing = "персоналу" : thing="роботи";
@@ -32,12 +32,14 @@ const Header = ({ typeOfSearch, setTypeOfsearch, host, setShowProfile, currentUs
         />)  
         }  
          
-        <div className="AppHeaderRight">
+        <div className="AppHeaderRight" 
+        >
           <UserLogo  
             setShowProfile={setShowProfile}
             currentUser={currentUser}
             setRegEntry={ setRegEntry } 
             host={ host }
+            ref={userLogoRef}
           />
           <IconEntry 
             confirm={ confirm } 
@@ -54,5 +56,5 @@ const Header = ({ typeOfSearch, setTypeOfsearch, host, setShowProfile, currentUs
       </div>
     </div>
   );
-}
+};
 export default Header;

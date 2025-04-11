@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import { IoClose } from "react-icons/io5";
 import CitySelect from "./CitySelect";
+import transChars from "./Translit";
 
 
 const CityInput = ({citiesBase, arrowPress, getDataItems, resetInput, setNewItem, selectedIndex, setSelectedIndex, pHolder, newDoc}) => {
@@ -28,10 +29,12 @@ const debouncedCityQuery = useDebounce(cityQuery, 400);
         if (!debouncedCityQuery || !citiesBase) return [];
 
         const searchLetters = debouncedCityQuery.toLowerCase();
-
+        const transSearchLetters = transChars(searchLetters);
+        
         return citiesBase
-        .filter(el => el.cN.toLowerCase().startsWith(searchLetters))
+        .filter(el => el.cN.toLowerCase().startsWith(searchLetters) || el.cN.toLowerCase().startsWith(transSearchLetters))
         .slice(0, 5);
+      
     }, [debouncedCityQuery, citiesBase]);
 
     const inputOnBlur = () => {

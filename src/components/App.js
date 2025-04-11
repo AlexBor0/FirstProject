@@ -22,12 +22,7 @@ const svgHttp = "http://www.w3.org/2000/svg",
       svgXlink = "http://www.w3.org/1999/xlink",
       host = "http://localhost:1337";
 
-const transLetters = {'q':'й', 'w':'ц', 'e':'у', 'r': 'к', 't': 'е', 'y': 'н', 'u': 'г', 'i': 'ш', 'o': 'щ', 'p': 'з', '[': 'х', ']': 'ї', 
-                       'a': 'ф', 's': 'і', 'd': 'в', 'f': 'а', 'g': 'п', 'h': 'р', 'j': 'о', 'k': 'л', 'l': 'д', ';': 'ж', "''": 'є',
-                       'z': 'я', 'x': 'ч', 'c':'с', 'v':'м', 'b': 'и', 'n':'т', 'm':'ь', ',':'б', '.': 'ю', '""': 'є', '<':'б', '>':'ю'  
-}
-
-  
+ 
 const App = () => {
   const [regUser, setRegUser] = useState({
          userName: null,
@@ -68,8 +63,10 @@ const App = () => {
             lastName: '',
             userName: '',
         }),
-        modalClass = classNames({"blurRect": true, }),
-        mainSearchRef = useRef(null);    
+        modalClass = classNames({"blurRect": true, });
+
+ const mainSearchRef = useRef(null), 
+       userLogoRef = useRef(null);   
 
   const [btnScrollUp, setBtnScrollUp] = useState(false);
 
@@ -330,6 +327,7 @@ useEffect(() => {
             turnExit={turnExit}
             setShowProfile={setShowProfile}
             currentUser={currentUser}
+            userLogoRef={userLogoRef}
           /> 
           {showProfile&&
             <ModalEditProfile 
@@ -410,7 +408,15 @@ useEffect(() => {
               />
             </aside>
             {btnScrollUp&&<button className="btnUp" 
-              onClick={() => window.scrollTo(0, 0)}>
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+                setTimeout(() => {
+                  userLogoRef.current?.focus();
+                }, 300);
+              }}>
               <IoArrowUp className="arrowUp" />
             </button>}
           </div>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import GestAva from "./../img/GestAva.png";
 
-const UserLogo = ({host, setShowProfile, currentUser, setRegEntry})=> {
+const UserLogo = forwardRef(({host, setShowProfile, currentUser, setRegEntry}, ref) => {
     const altImg = "Гість";
    const [currentImageSrc, setCurrentImageSrc] = useState('');
 
@@ -16,7 +16,10 @@ const UserLogo = ({host, setShowProfile, currentUser, setRegEntry})=> {
 
 
     return(
-        <button className="Userlogo"
+        <button
+            className="Userlogo"
+            tabIndex={0}
+            ref={ref}
             onClick={() => {
                 currentUser.docId
                 ? setShowProfile(true)
@@ -32,5 +35,5 @@ const UserLogo = ({host, setShowProfile, currentUser, setRegEntry})=> {
         </button>
 
     )
-}
+});
 export default UserLogo
