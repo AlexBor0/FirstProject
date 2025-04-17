@@ -9,9 +9,10 @@ import formatPhoneNumber from "./FormatePhone";
 const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase, setClassModal, setIsPreviewVisible}) => {
 
     const [selectValue, setSelectValue] = useState(newCandidate.vacancy || ''),
-          [telephoneDigits, setTelephoneDigits] = useState(''),
+          [telephoneDigits, setTelephoneDigits] = useState(() => {
+            return newCandidate.telephone ? newCandidate.telephone.replace(/\D/g, '') : '380';
+            }),
           [fileSize, setFileSize] = useState(''),
-        //   [countryCode, setCountryCode] = useState(true),
           vacHolder = "Наіменування вакансії*",
           pHolder = "Місто, де шукаєте роботу";
 
@@ -67,12 +68,6 @@ const getTelNumber = (e) => {
     const cursorPosition = e.target.selectionStart;
     const oldValue = e.target.value;
     let value = e.target.value.replace(/\D/g, '');
-    // setCountryCode(value.startsWith("380")) ;
-    // const maxLength = countryCode ? 12 : 15;
-
-    // if (value.length > maxLength) {
-    //     value = value.slice(0, maxLength);
-    // }
 
     setTelephoneDigits(value);
 
@@ -84,7 +79,7 @@ const getTelNumber = (e) => {
         e.target.setSelectionRange(newCursorPosition, newCursorPosition);
     }, 0);
 };
-// Вариант 1
+
 const manageDigits = (e) => {
 
         
@@ -102,7 +97,7 @@ const manageDigits = (e) => {
 
     }, [telephoneDigits, setNewCandidate]);
 
-    const handleKeyboardEvents = (e) => {
+    const manageEvents = (e) => {
         const cursorPosition = e.target.selectionStart;
         if (e.key === 'Backspace' && telephoneDigits.length <= 3) {
 
@@ -180,19 +175,19 @@ const manageDigits = (e) => {
                     onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
 
-                    <input 
-                        placeholder="+380 (XX) XXX XX XX" 
-                        name="telephone"
-                        minLength="6" 
-                        maxLength="19" 
-                        type="tel" 
-                        className="modalInputAd short "
-                        value={newCandidate.telephone}  
-                        onInput={getTelNumber}
-                        onKeyDown={handleKeyboardEvents}
-                        onClick={manageDigits}
-                        onFocus={manageDigits}
-                    />
+                <input 
+                    placeholder="+380 (XX) XXX XX XX" 
+                    name="telephone"
+                    minLength="6" 
+                    maxLength="19" 
+                    type="tel" 
+                    className="modalInputAd short "
+                    value={newCandidate.telephone}  
+                    onInput={getTelNumber}
+                    onKeyDown={manageEvents}
+                    onClick={manageDigits}
+                    onFocus={manageDigits}
+                />
 
                 <VacancyInput 
                     vacBaseChunck={vacBaseChunck}

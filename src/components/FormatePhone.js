@@ -27,12 +27,7 @@ const formatPhoneNumber = (digits) => {
                     formatted += digits.slice(8, 10) + "-";
                     if (digits.length <= 12) {
                         formatted += digits.slice(10); 
-                    } 
-                    // else if (counryCode && (digits.length > 12)) {
-                    //     formatted += digits.slice(10, 12) + "-";
-                    //     formatted += digits.slice(12); 
-                    // }
-                    else {
+                    }  else {
                         formatted += digits.slice(10, 12);
                     }
                 } 
@@ -40,5 +35,6 @@ const formatPhoneNumber = (digits) => {
          }
     }
     return formatted;
-     };
+};
+
 export default formatPhoneNumber;

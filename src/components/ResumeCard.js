@@ -6,10 +6,11 @@ import './../css/Preview.css';
 import './../css/ResumeCard.css';
 import formatPhoneNumber from "./FormatePhone";
 
+
 const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, parentComponent }) => {
 
     const tel = candidate.telephone;
-    const formatedTel = formatPhoneNumber(tel);
+    const formatedTel = tel ? tel.replace(/\D/g, '') : tel;
 
 
     return (
@@ -39,7 +40,7 @@ const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, paren
                     body="Доброго дня!"
                     children={candidate.email}
                 />
-                {tel ? (<p>тел: <a href={`tel:+${tel}`}>{formatedTel}</a></p>) : (<p>телефон не зазначено</p>)}
+                {tel ? (<p>тел: <a href={`tel:+${formatedTel}`}>{editable ? tel : formatPhoneNumber(tel) }</a></p>) : (<p>тел: не надано</p>)}
             </address>
             {!editable&& 
                 <div className="dates">

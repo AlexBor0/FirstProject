@@ -84,7 +84,7 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
           firstName: newCandidate.firstName,
           lastName: newCandidate.lastName,
           email: newCandidate.email,
-          telephone: newCandidate.telephone,
+          telephone: newCandidate.telephone.replace(/\D/g, ''),
           vacancies: { connect: [vacancyId] } || newCandidate.vacancy,
           user: {connect: [currentUser.id] },
           title: newCandidate.vacancy,
