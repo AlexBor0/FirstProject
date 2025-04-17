@@ -185,7 +185,7 @@ const handleItemClick = (value, position) => {
     
     return (
         <>
-            <div className="itemAdd" ref={selectRef}>
+            <div className="itemAdd upShow" ref={selectRef}>
 
                 <button id="selectBtn" className="modalInputAd shortBtn" autoFocus={true}
                     onClick={(e) => {

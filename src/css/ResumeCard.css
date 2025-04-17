@@ -1,6 +1,6 @@
 .card button:has(.delete-icon) {
     position: absolute;
-    top: 4px;
+    bottom: 4px;
     right: 5px;
     margin: 10px;
     padding: 0px;
@@ -19,16 +19,19 @@
     font-family: 'Open Sans', sans-serif;
     overflow-y: hidden;
  }
-  .candidate {
+.candidate {
     position: relative;
  }
 .candidate p, address {
-    margin: 5px 5px;
+    margin: 3px 3px;
     font-size: 0.9rem;
+  }
+  .card p:has(strong) {
+    margin-top: 7px;
   }
 .candidate img {
     float: left;
-    margin-right: 10px;
+    margin: 10px 10px 5px 0px;
   }
 .dates{
   width: 194px;
@@ -41,8 +44,15 @@
     margin: 0px 0px 3px 0px;
     color:rgb(10, 76, 199);
   }
+  article header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color:wheat;
+  }
 .candidate h3{
-    margin: -4px 0px 3px 110px;
+    margin: 4px 0px 8px 0px;
   }
 .candidate h3+p{
     margin: 0px 0px 3px 110px;

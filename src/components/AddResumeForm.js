@@ -1,14 +1,17 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import UploadFile from "./UploadFile";
 import UploadFileInfo from "./UploadFileInfo";
 import CityInput from "./CityInput";
 import VacancyInput from "./VacancyInput";
+import formatPhoneNumber from "./FormatePhone";
 
 
 const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase, setClassModal, setIsPreviewVisible}) => {
 
     const [selectValue, setSelectValue] = useState(newCandidate.vacancy || ''),
+          [telephoneDigits, setTelephoneDigits] = useState(''),
           [fileSize, setFileSize] = useState(''),
+        //   [countryCode, setCountryCode] = useState(true),
           vacHolder = "Наіменування вакансії*",
           pHolder = "Місто, де шукаєте роботу";
 
@@ -52,11 +55,90 @@ const deleteImage = (e) => {
     }
 }; 
    
-    const lookAtPreviw = (e) => {
-        e.preventDefault();
-        setClassModal("modalAddDoc");
-        setPreview(true);
-        setIsPreviewVisible(true);
+const lookAtPreviw = (e) => {
+    e.preventDefault();
+    setClassModal("modalAddDoc");
+    setPreview(true);
+    setIsPreviewVisible(true);
+};
+
+const getTelNumber = (e) => {
+    
+    const cursorPosition = e.target.selectionStart;
+    const oldValue = e.target.value;
+    let value = e.target.value.replace(/\D/g, '');
+    // setCountryCode(value.startsWith("380")) ;
+    // const maxLength = countryCode ? 12 : 15;
+
+    // if (value.length > maxLength) {
+    //     value = value.slice(0, maxLength);
+    // }
+
+    setTelephoneDigits(value);
+
+    setTimeout(() => {
+        const newCursorPosition = Math.min(
+            formatPhoneNumber(value).length,
+            cursorPosition + (formatPhoneNumber(value).length - oldValue.length)
+        );
+        e.target.setSelectionRange(newCursorPosition, newCursorPosition);
+    }, 0);
+};
+// Вариант 1
+const manageDigits = (e) => {
+
+        
+    if (e.target.value.length < 1) {
+        setTelephoneDigits("380");
+        setTimeout(() => {
+            e.target.setSelectionRange(4, 4); 
+        }, 0);
+    };
+
+};
+ 
+    useEffect (() => {
+           setNewCandidate(prev => ({ ...prev, telephone: formatPhoneNumber(telephoneDigits)}));
+
+    }, [telephoneDigits, setNewCandidate]);
+
+    const handleKeyboardEvents = (e) => {
+        const cursorPosition = e.target.selectionStart;
+        if (e.key === 'Backspace' && telephoneDigits.length <= 3) {
+
+            setTelephoneDigits("380");
+            setTimeout(() => {
+                e.target.setSelectionRange(4, 4); 
+            }, 10);
+        } else if (e.key ==='Backspace' && telephoneDigits.length > 4) {
+            setTimeout(() => {
+            e.target.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+        }, 10);
+        
+        } else if (e.key === 'Delete' && !window.getSelection().toString()) {
+
+            if (telephoneDigits.length <= 3) {
+                setTelephoneDigits("380");
+                setTimeout(() => {
+                    e.target.setSelectionRange(4, 4);
+                }, 10);
+            } else {
+                
+                setTimeout(() => {
+                    e.target.setSelectionRange(cursorPosition, cursorPosition);
+                }, 10);
+            }
+        } else if (/^\d$/.test(e.key) && !e.ctrlKey && !e.altKey && !e.metaKey) {
+            const cursorPosition = e.target.selectionStart;
+            const valueLength = e.target.value.length;
+
+            if (cursorPosition < valueLength) {
+                setTimeout(() => {
+                    e.target.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+
+                }, 10);
+            }
+        }
     };
 
         let wl = newCandidate.resume.length;
@@ -98,7 +180,21 @@ const deleteImage = (e) => {
                     onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
 
-                <VacancyInput
+                    <input 
+                        placeholder="+380 (XX) XXX XX XX" 
+                        name="telephone"
+                        minLength="6" 
+                        maxLength="19" 
+                        type="tel" 
+                        className="modalInputAd short "
+                        value={newCandidate.telephone}  
+                        onInput={getTelNumber}
+                        onKeyDown={handleKeyboardEvents}
+                        onClick={manageDigits}
+                        onFocus={manageDigits}
+                    />
+
+                <VacancyInput 
                     vacBaseChunck={vacBaseChunck}
                     pHolder = {vacHolder}
                     arrowPress={arrowPress}
@@ -110,7 +206,6 @@ const deleteImage = (e) => {
                     selectValue={selectValue}
                     setSelectValue={setSelectValue}
                 />
-
                 <CityInput 
                     pHolder={pHolder}
                     citiesBase={citiesBase} 

@@ -160,7 +160,18 @@ const changeRadio = (e) => {
                 setSelectVacancyValue={setSelectValue}
                 newVacancy={newVacancy}
             />
-
+            <input 
+              required 
+              placeholder="Назва компанії" 
+              name="experience" 
+              min="0"
+              max="50" 
+              step="0.5" 
+              type="text" 
+              className="modalInputAd short"
+              value={newVacancy.experience} 
+              onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
+            />
             <VacancyInput
                 vacBaseChunck={vacBaseChunck}
                 pHolder = {vacHolder}

@@ -4,8 +4,13 @@ import FormatDate from './FormatDate';
 import Mailto from "./Mailto";
 import './../css/Preview.css';
 import './../css/ResumeCard.css';
+import formatPhoneNumber from "./FormatePhone";
 
 const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, parentComponent }) => {
+
+    const tel = candidate.telephone;
+    const formatedTel = formatPhoneNumber(tel);
+
 
     return (
         <article className="card candidate" >
@@ -17,19 +22,24 @@ const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, paren
                     <IoCloseCircleSharp className="delete-icon"/>
                 </button>
             }
-            
+            <header>
+             <h3>{vacancyTitle}</h3>
+            </header>
             <img src={imageSrc} alt={candidate.foto?"Фото кандидата" : "Фото за замовчуванням"}  width="100px" height="100px" />
-            <h3>{vacancyTitle}</h3>
+            
             <p><strong>{candidate.firstName} {candidate.lastName}</strong> 
             </p> 
             <address>
                 <p>{"місто: "}{candidate.city}{" ("}{candidate.region}{" обл.)"}</p>
+                
+                <span>e-mail: </span>
                 <Mailto
                     email={candidate.email}
                     subject="Відгук на резюме" 
                     body="Доброго дня!"
                     children={candidate.email}
                 />
+                {tel ? (<p>тел: <a href={`tel:+${tel}`}>{formatedTel}</a></p>) : (<p>телефон не зазначено</p>)}
             </address>
             {!editable&& 
                 <div className="dates">
