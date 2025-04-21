@@ -40,7 +40,8 @@ const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host
                             >
                                 Редагувати
                             </button>
-                            <button className="btnPublish"
+                            <button 
+                                className="btnPublish"
                                 onClick={post}
                             >
                                 Опублікувати

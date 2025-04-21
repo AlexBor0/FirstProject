@@ -1,0 +1,68 @@
+.card button:has(.delete-icon) {
+    position: absolute;
+    bottom: 4px;
+    right: 5px;
+    margin: 10px;
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+   }
+.card {  
+    background-color:rgb(255, 254, 231);
+    opacity: 0.95;
+    padding: 20px;
+    max-width: 100%;
+    margin: 0px 20px 0px 20px;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3 );
+    font-size: 1rem;
+    border-radius:20px;
+    font-family: 'Open Sans', sans-serif;
+    overflow-y: hidden;
+ }
+.vacancy {
+    position: relative;
+ }
+.vacancy p, address {
+    margin: 3px 3px;
+    font-size: 0.9rem;
+  }
+  .card p:has(strong) {
+    margin-top: 7px;
+  }
+.vacancy img {
+    float: left;
+    margin: 10px 10px 5px 0px;
+  }
+.dates{
+  width: 194px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content:space-between;
+    clear: both;
+    font-size: 0.7rem;
+    margin: 0px 0px 3px 0px;
+    color:rgb(10, 76, 199);
+  }
+  article header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color:wheat;
+  }
+.vacancy h3{
+    margin: 4px 0px 8px 0px;
+  }
+.vacancy h3+p{
+    margin: 0px 0px 3px 110px;
+  }
+
+.delete-icon:hover {
+    opacity: 0.5;
+  }
+.textResume {
+    clear: both;
+    text-indent: 15px;
+    padding-top: 10px; 
+  }

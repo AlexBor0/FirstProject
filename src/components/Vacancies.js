@@ -1,64 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { IoCloseCircleSharp } from "react-icons/io5";
-import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+import VacancyCard from './VacancyCard';
 
 const Vacancies = ({host, setTitle, axios}) => {
 
-const [vacancies, setVacancies] = useState([]);
-const [loading, setLoading] = useState(true);
-const [error, setError] = useState(null);
+	const [vacancies, setVacancies] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const editable = false;
 
-const deleteVacancy = (id) => {
-	setVacancies(vacancies.filter((el) => el.id !== id))
-		}
+	const onClose = (id) => {
+		setVacancies(vacancies.filter((el) => el.id !== id))
+			}
 
-	useEffect(() => {
+		useEffect(() => {
 
-		const fetchVacancies = async () => {
+			const fetchVacancies = async () => {
 
-			try {const response = await axios.get(`${host}/api/Vacancies`);
-				setVacancies(response.data.data)
-				setTitle(response.data.data.map(vacancy => (vacancy.title)));
-			} 
-			catch (error) {setError(error);} 
-			finally {setLoading(false);}
-		};
+				try {const response = await axios.get(`${host}/api/Vacancies`);
+					setVacancies(response.data.data)
+					setTitle(response.data.data.map(vacancy => (vacancy.title)));
+				} 
+				catch (error) {setError(error);} 
+				finally {setLoading(false);}
+			};
 
-		fetchVacancies();
-	}, [host, setTitle, axios]);
+			fetchVacancies();
+		}, [host, setTitle, axios]);
 
-if (loading) return <p>Загрузка...</p>;
-if (error) return <p>Ошибка: {error.message}</p>
-
-return (
-
-<>
-	{vacancies.map(vacancy => (
 		
-    	<div className="card vacancy" key={vacancy.id}>
-			<IoCloseCircleSharp onClick = {() => deleteVacancy(vacancy.id)} className="delete-icon"/>
-        	<h2>{vacancy.title}</h2>
-			<p className="salary" >{vacancy.salary} грн.{" "}
-				<span>{vacancy.location} {vacancy.region&&(`(${vacancy.region} обл.)`)}
-				</span>
-			</p>
-			<p>Форма зайнятості: {vacancy.employment||"За домовленістю"};</p>
-			<p>Графік роботи: {vacancy.workSchedule||"За домовленістю"};</p>
-			<p>Формат роботи: {vacancy.workFormats||"За домовленістю"};</p>
-			<div><h3>Опис вакансії:</h3> 
-				<div>{vacancy.description}</div>
-			</div>
-			<hr/>
-			<div>
-				<strong>Вимоги до претендента: </strong>
-				<p>Бажаний досвід роботи (років): <span style={{fontWeight: 'bold'}}>{vacancy.experience? vacancy.experience : "Можливо без досвіду"}</span></p>
-				{vacancy.requirements&&<BlocksRenderer content = {vacancy.requirements}/>}
-			</div>
-    	</div>
-	))}
-</>
 
-);
+	if (loading) return <p>Загрузка...</p>;
+	if (error) return <p>Ошибка: {error.message}</p>
+
+	return (
+			
+			<div >
+				{vacancies.map(el => (
+					
+					<VacancyCard
+					key={el.id}
+					onClose={onClose}
+					vacancy={el}
+					editable={editable}
+					parentComponent={'Vacancies'}
+					/>
+				))}
+
+			</div>
+		
+		);
 
 };
 

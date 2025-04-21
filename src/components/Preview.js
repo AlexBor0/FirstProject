@@ -32,8 +32,18 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
       };
 
       const fetchNewVacancy = async () => {
+
+        const idCandidateResponse = await axios.get(
+          `${host}/api/candidates?filters[title][$eq]=${newVacancy.vacancy}`
+        );
+        const candidateId = idCandidateResponse.data.data[0]?.documentId;
+    
+        if (!candidateId) console.log('Кандидат не знайдений');
         const data = {
+          company: newVacancy.company,
           title: newVacancy.vacancy,
+          candidates: { connect: [candidateId] } || newVacancy.candidate,
+          user: {connect: [currentUser.id] },
           department: newVacancy.department,
           employment: newVacancy.employment,
           workSchedule: newVacancy.workSchedule,
@@ -164,22 +174,24 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
             <>
               {type ? (
                 <PreviewVacancy
-                  requirements={requirements}
+                  vacancy={newVacancy}
                   post={post}
-                  newVacancy={newVacancy}
                   edit={edit}
+                  editable={editable}
+                  requirements={requirements}
                   previewContentRef={previewContentRef}
+                  currentUser={currentUser}
                 />
               ) : (
                 <PreviewResume
                   candidate={newCandidate}
                   post={post}
-                  newVacancy={newVacancy}
                   edit={edit}
-                  previewContentRef={previewContentRef}
-                  host={host}
                   editable={editable}
+                  newVacancy={newVacancy} 
+                  previewContentRef={previewContentRef}
                   currentUser={currentUser}
+                  host={host} 
                 />
               )}
             </>

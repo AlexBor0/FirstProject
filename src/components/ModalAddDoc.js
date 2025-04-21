@@ -25,6 +25,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
       }),
 
         [newVacancy, setNewVacancy] = useState({
+        company: "",
         vacancy: "",
         department: "",
         employment: "",
@@ -37,7 +38,6 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
         description: "",
         requirements: [],
         documentId: "",
-         
       }),
 
     [savingEditorContent, setSavingEditorContent] = useState(null),

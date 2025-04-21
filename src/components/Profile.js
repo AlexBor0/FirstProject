@@ -3,6 +3,7 @@ import ProfileForm from "./ProfileForm";
 import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoTrash } from "react-icons/io5";
 import FormatDate from './FormatDate';
 import PreviewResume from './PreviewResume';
+import PreviewVacancy from './PreviewVacancy';
 
 
 
@@ -180,6 +181,9 @@ const confirmAction = (e) => {
                 axios={axios}
               />      
             </div>
+
+            {/* Страница 2 */}
+            
             <div className="pageTwo">
               <button className="pageBtn" autoFocus={true} onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}>
                 <IoCloseCircleSharp className="delete-icon" />
@@ -236,17 +240,32 @@ const confirmAction = (e) => {
             </div>
         </div>
         )}
-        {showDoc&&<PreviewResume
-                  candidate={currentUser.userDocs[indexDoc]}
-                  indexDoc={indexDoc}
-                  setShowDoc={setShowDoc}
-                  editable={false}
-                  host={host}
-                  backward={backward}
-                  setShowConfirmModal={setShowConfirmModal}
-                  setShowDocList={setShowDocList}
-                  setShowProfileBook={setShowProfileBook}
-                />}
+        {showDoc&& (typeOfSearch 
+          ? <PreviewVacancy
+              vacancy={currentUser.userDocs[indexDoc]}
+              indexDoc={indexDoc}
+              setShowDoc={setShowDoc}
+              editable={false}
+              host={host}
+              backward={backward}
+              setShowConfirmModal={setShowConfirmModal}
+              setShowDocList={setShowDocList}
+              setShowProfileBook={setShowProfileBook}
+            />
+          : <PreviewResume
+              candidate={currentUser.userDocs[indexDoc]}
+              indexDoc={indexDoc}
+              setShowDoc={setShowDoc}
+              editable={false}
+              host={host}
+              backward={backward}
+              setShowConfirmModal={setShowConfirmModal}
+              setShowDocList={setShowDocList}
+              setShowProfileBook={setShowProfileBook}
+            /> )
+        }
+
+
       </>
     )
 }

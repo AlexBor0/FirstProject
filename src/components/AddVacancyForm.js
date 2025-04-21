@@ -163,13 +163,12 @@ const changeRadio = (e) => {
             <input 
               required 
               placeholder="Назва компанії" 
-              name="experience" 
-              min="0"
-              max="50" 
-              step="0.5" 
+              name="company" 
+              minLength="3" 
+              maxLength="30"
               type="text" 
               className="modalInputAd short"
-              value={newVacancy.experience} 
+              value={newVacancy.company} 
               onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
             />
             <VacancyInput
