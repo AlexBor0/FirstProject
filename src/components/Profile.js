@@ -19,6 +19,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
   const delSuccessStatuses = [200, 202, 204];
 
     const action = (typeBtn === "del"? "видалити" : (typeBtn === "edit" ? "редагувати" : "переглянути"));
+    const docs = typeOfSearch ? "Vacancies" : "Candidates"
     
     const fetchDeleteDoc = async () => {
 
@@ -26,7 +27,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
 
       if (idDocToDel) {
           const deleteDoc = await axios.delete(
-              `${host}/api/Candidates/${idDocToDel}`,
+              `${host}/api/${docs}/${idDocToDel}`,
                   {
                       headers: {
                           Authorization: `Bearer ${currentUser.userJWT}`,
@@ -80,7 +81,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
   };
 
   const deleteDocument = () => {
-    fetchDeleteImgAndDoc();
+    typeOfSearch ? fetchDeleteDoc() : fetchDeleteImgAndDoc();
     setShowConfirmModal(false);
     setShowDocList(true);
   };
@@ -168,7 +169,9 @@ const confirmAction = (e) => {
 
             </g>
           </svg>
-                  
+
+            {/* Страница 1 */}
+
             <div className="pageOne">
               <div className="profileHead" >
                 ПРОФІЛЬ
@@ -193,23 +196,25 @@ const confirmAction = (e) => {
               </div>
               <div  className="currentEntries">
 
-              {showConfirmModal&&  (
-                <div className="modalConfirm">
-                  <p>Бажаєте {action} резюме <b>{currentUser.userDocs[indexDoc].title}</b> ? </p>
-                  <div className="wrapBtns">
-                    <button onClick={backward}>
-                        НІ
-                    </button>
-                    <button autoFocus={true} onClick={
-                      // () => chooseAction(typeBtn)
-                      confirmAction
-                      }
-                    >
-                        ТАК
-                    </button>
+                {/* Модальное окно подтверждение */}
+
+                {showConfirmModal&&  (
+                  <div className="modalConfirm">
+                    <p>Бажаєте {action} резюме <b>{currentUser.userDocs[indexDoc].title}</b> ? </p>
+                    <div className="wrapBtns">
+                      <button onClick={backward}>
+                          НІ
+                      </button>
+                      <button autoFocus={true} onClick={
+                        // () => chooseAction(typeBtn)
+                        confirmAction
+                        }
+                      >
+                          ТАК
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
                 {showDocList&& (<ol >
                   {currentDoc.map((el,index) => (

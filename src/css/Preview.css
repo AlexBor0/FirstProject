@@ -96,9 +96,7 @@
     text-indent: 10px;
     text-align: left;
   }
-.previewModal .vacancy :last-child {
-    margin-bottom: 0px;
-  }
+
 .previewContent {
     flex-grow: 1; 
     /* overflow-y: auto; */

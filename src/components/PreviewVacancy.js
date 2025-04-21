@@ -39,7 +39,6 @@ const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, e
                             vacancy={vacancy}
                             onClose={onClose}
                             editable={editable}
-                            parentComponent={'Vacancies'}
                             requirements={requirements}
                         />
 

@@ -34,7 +34,7 @@
     margin: 10px 10px 5px 0px;
   }
 .dates{
-  width: 194px;
+    width: 194px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
