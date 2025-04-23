@@ -3,6 +3,7 @@
 	margin:40px auto;
 }
 .profileBook {
+	z-index: 0;
 	position: relative;
 	width: 470px;
 	height: 372px;
@@ -10,6 +11,7 @@
 	margin-right: auto;
 }
 .pageOne, .pageTwo {
+	z-index: 2;
 	position: absolute;	
 	top:20px;
 	position: absolute;
@@ -274,5 +276,21 @@
 	font-size: 12px;
 	font-family: 'Open Sans', sans-serif;
 	margin: 0px 2px -10px 2px;
+}
+.bookPageTwo{
+	z-index: 2;
+	position: absolute;	
+	top:0px;
+	left: 0px;
+	border: solid 1px red;
+	display: none;
+}
+.bookPageThree{
+	z-index: 1;
+	position: absolute;	
+	top:0px;
+	left: 235px;
+	border: solid 1px blue;
+	/* display: none; */
 }
 

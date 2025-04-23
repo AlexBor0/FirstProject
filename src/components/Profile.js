@@ -17,6 +17,13 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
   const [showDoc, setShowDoc] = useState(false);
   const [showProfileBook, setShowProfileBook] = useState(true);
   const delSuccessStatuses = [200, 202, 204];
+  const svgStyle = {
+    shapeRendering: "geometricPrecision",
+    textRendering: "geometricPrecision",
+    imageRendering: "optimizeQuality",
+    fillRule: "evenodd",
+    clipRule: "evenodd"
+  }
 
     const action = (typeBtn === "del"? "видалити" : (typeBtn === "edit" ? "редагувати" : "переглянути"));
     const docs = typeOfSearch ? "Vacancies" : "Candidates"
@@ -125,13 +132,7 @@ const confirmAction = (e) => {
             width="470px"
             height="372px"
             version="1.1"
-            style={{
-              shapeRendering: "geometricPrecision",
-              textRendering: "geometricPrecision",
-              imageRendering: "optimizeQuality",
-              fillRule: "evenodd",
-              clipRule: "evenodd"
-            }}
+            style={{svgStyle}}
             viewBox="55 245 500 230"
             xmlnsXlink={svgXlink}
           >
@@ -156,17 +157,21 @@ const confirmAction = (e) => {
                 `}
               </style>
             </defs>
-            <g id="Слой_x0020_1">
+            <g >
               <rect className="fil0 str0" x="76" y="208" width="461" height="332" rx="13" ry="13"/>
-              <g>
+
+              <g className="bookPageOne">
                 <path className="fil1 str1" d="M294 533c-3,-21 -25,-22 -41,-22l-128 0c-30,0 -25,4 -25,-39 0,-19 1,-256 0,-268 0,-20 0,-25 16,-25 48,0 97,0 145,0 25,0 29,8 41,20l0 334 -9 0z"/>
-                <path className="fil1 str1" d="M318 533c3,-21 25,-22 41,-22l128 0c30,0 25,4 25,-39 0,-19 -1,-256 0,-268 0,-20 0,-25 -16,-25 -48,0 -97,0 -145,0 -25,0 -29,8 -41,20l0 334 9 0z"/>
+                <rect className="fil2" x="118" y="204" width="164" height="290" rx="19" ry="19"/>
               </g>
-              <rect className="fil2" x="330" y="204" width="164" height="290" rx="19" ry="19"/>
+
+              <g className="bookPageFour">
+                <path className="fil1 str1" d="M318 533c3,-21 25,-22 41,-22l128 0c30,0 25,4 25,-39 0,-19 -1,-256 0,-268 0,-20 0,-25 -16,-25 -48,0 -97,0 -145,0 -25,0 -29,8 -41,20l0 334 9 0z"/>
+                <rect className="fil2" x="330" y="204" width="164" height="290" rx="19" ry="19"/>
+              </g>
+              
               {/* <path className="fil3 str2" d="M338 222c7,-4 10,-7 15,-10 4,3 9,6 15,10 4,3 6,0 5,-2l0 -45 -40 0 0 45c0,2 2,5 5,2l0 0z"/> */}
-
-              <rect className="fil2" x="118" y="204" width="164" height="290" rx="19" ry="19"/>
-
+              
             </g>
           </svg>
 
@@ -243,7 +248,44 @@ const confirmAction = (e) => {
               </button>
                 
             </div>
+            <svg
+              xmlns= {svgHttp}
+              xmlSpace="preserve"
+              width="235px"
+              height="372px"
+              version="1.1"
+              style={{svgStyle}}
+              viewBox="55 245 250 230"
+              xmlnsXlink={svgXlink}
+              className="bookPageTwo"
+            >
+              <g >
+                <path className="fil1 str1" d="M294 533c-3,-21 -25,-22 -41,-22l-128 0c-30,0 -25,4 -25,-39 0,-19 1,-256 0,-268 0,-20 0,-25 16,-25 48,0 97,0 145,0 25,0 29,8 41,20l0 334 -9 0z"/>
+                <rect className="fil2" x="118" y="204" width="164" height="290" rx="19" ry="19"/>
+              </g>
+          </svg>
+
+          <svg
+              xmlns= {svgHttp}
+              xmlSpace="preserve"
+              width="235px"
+              height="372px"
+              version="1.1"
+              style={{svgStyle}}
+              viewBox="305 245 250 230"
+              xmlnsXlink={svgXlink}
+              className="bookPageThree"
+            >
+
+              <g >
+                <path className="fil1 str1" d="M318 533c3,-21 25,-22 41,-22l128 0c30,0 25,4 25,-39 0,-19 -1,-256 0,-268 0,-20 0,-25 -16,-25 -48,0 -97,0 -145,0 -25,0 -29,8 -41,20l0 334 9 0z"/>
+                <rect className="fil2" x="330" y="204" width="164" height="290" rx="19" ry="19"/>
+              </g>
+
+          </svg>
+
         </div>
+        
         )}
         {showDoc&& (typeOfSearch 
           ? <PreviewVacancy

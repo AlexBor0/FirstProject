@@ -49,6 +49,7 @@ const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host
                         </div>
                     )}
                     <div className="previewContent" ref={previewContentRef}>
+
                         <ResumeCard
                             candidate={candidate}
                             onClose={onClose}
@@ -56,6 +57,7 @@ const PreviewResume = ({post, edit, previewContentRef, candidate, editable, host
                             imageSrc={imageSrc}
                             editable={editable}
                         />
+                        
                     </div>
                 </div>
             </div>
