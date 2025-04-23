@@ -1,6 +1,6 @@
 import React, { useState }  from "react";
 import ProfileForm from "./ProfileForm";
-import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoTrash } from "react-icons/io5";
+import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoTrash, IoArrowUndo } from "react-icons/io5";
 import FormatDate from './FormatDate';
 import PreviewResume from './PreviewResume';
 import PreviewVacancy from './PreviewVacancy';
@@ -121,6 +121,27 @@ const confirmAction = (e) => {
     setShowConfirmModal(true);
     setShowDocList(false); 
   }
+  const flipPage = (e) => {
+    e.preventDefault();
+
+    const pageTwo = document.querySelector('.pageTwo');
+    const pageThree = document.querySelector('.pageThree');
+    const bookPageThree = document.querySelector('.bookPageThree');
+    const bookPageTwo = document.querySelector('.bookPageTwo');
+
+    // Запускаем анимацию исчезновения для pageTwo и bookPageThree
+    pageTwo.classList.add('flip-out');
+    bookPageThree.classList.add('flip-out');
+    pageThree.classList.add('flip-in');
+    // После завершения анимации скрываем их и показываем bookPageTwo
+    setTimeout(() => {
+        pageTwo.style.display = 'none';
+        bookPageThree.style.display = 'none';
+        bookPageTwo.style.display = 'block';
+        pageThree.style.display = 'block';
+        bookPageTwo.classList.add('flip-in');
+    }, 210); // 500мс соответствует длительности анимации (0.5s)
+};
 
     return(
       <>
@@ -243,7 +264,7 @@ const confirmAction = (e) => {
                   } 
                 </ol>)}
               </div>
-              <button className="pageBtn" onClick={e => e.preventDefault}>
+              <button className="pageBtn" onClick={flipPage}>
                 <IoArrowRedo className="redo-icon"/> 
               </button>
                 
@@ -264,6 +285,21 @@ const confirmAction = (e) => {
                 <rect className="fil2" x="118" y="204" width="164" height="290" rx="19" ry="19"/>
               </g>
           </svg>
+
+
+           {/* Страница 3 */}
+
+           <div className="pageThree">
+              <div className="profileHead" >
+                КОМПАНІЯ
+              </div>
+              <div className="currentEntries">
+
+              </div>
+              <button className="pageBtn" onClick={flipPage}>
+                <IoArrowUndo  className="redo-icon"/> 
+              </button>     
+            </div>
 
           <svg
               xmlns= {svgHttp}
