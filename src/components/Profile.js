@@ -16,6 +16,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
   const [typeBtn, setTypeBtn] = useState(null);
   const [showDoc, setShowDoc] = useState(false);
   const [showProfileBook, setShowProfileBook] = useState(true);
+  const [isPageTwoVisible, setIsPageTwoVisible] = useState(true);
   const delSuccessStatuses = [200, 202, 204];
   const svgStyle = {
     shapeRendering: "geometricPrecision",
@@ -113,14 +114,20 @@ const confirmAction = (e) => {
     if(typeBtn === "view") {
     setShowProfileBook(false);
   }
-}
+};
   const openModal = (e, index) => {
     e.preventDefault();
     setIndexDoc(index);
     setTypeBtn(e.currentTarget.dataset.type);
     setShowConfirmModal(true);
     setShowDocList(false); 
-  }
+  };
+
+  const clearAnimationClasses = (elements) => {
+    elements.forEach(element => {
+      element.classList.remove('flip-out', 'flip-in', 'flip-out-reverse', 'flip-in-reverse');
+    });
+  };
   const flipPage = (e) => {
     e.preventDefault();
 
@@ -128,19 +135,39 @@ const confirmAction = (e) => {
     const pageThree = document.querySelector('.pageThree');
     const bookPageThree = document.querySelector('.bookPageThree');
     const bookPageTwo = document.querySelector('.bookPageTwo');
+    const allElements = [pageTwo, pageThree, bookPageTwo, bookPageThree];
+    clearAnimationClasses(allElements);
 
-    // Запускаем анимацию исчезновения для pageTwo и bookPageThree
-    pageTwo.classList.add('flip-out');
-    bookPageThree.classList.add('flip-out');
-    pageThree.classList.add('flip-in');
-    // После завершения анимации скрываем их и показываем bookPageTwo
-    setTimeout(() => {
+    if (isPageTwoVisible) {
+      // Перелистываем вперед
+      pageTwo.classList.add('flip-out');
+      bookPageThree.classList.add('flip-out');
+      setTimeout(() => {
         pageTwo.style.display = 'none';
         bookPageThree.style.display = 'none';
-        bookPageTwo.style.display = 'block';
         pageThree.style.display = 'block';
+        bookPageTwo.style.display = 'block';
+        pageThree.classList.add('flip-in');
         bookPageTwo.classList.add('flip-in');
-    }, 210); // 500мс соответствует длительности анимации (0.5s)
+        setIsPageTwoVisible(false);
+        setTimeout(() => clearAnimationClasses(allElements), 210);
+      },
+       210);
+    } else {
+      // Перелистываем назад
+      pageThree.classList.add('flip-in-reverse');
+      bookPageTwo.classList.add('flip-in-reverse');
+      setTimeout(() => {
+        pageThree.style.display = 'none';
+        bookPageTwo.style.display = 'none';
+        pageTwo.style.display = 'block';
+        bookPageThree.style.display = 'block';
+        pageTwo.classList.add('flip-out-reverse');
+        bookPageThree.classList.add('flip-out-reverse');
+        setIsPageTwoVisible(true);
+        setTimeout(() => clearAnimationClasses(allElements), 210);
+      }, 210);
+    }
 };
 
     return(
