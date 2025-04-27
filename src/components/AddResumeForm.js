@@ -3,21 +3,23 @@ import UploadFile from "./UploadFile";
 import UploadFileInfo from "./UploadFileInfo";
 import CityInput from "./CityInput";
 import VacancyInput from "./VacancyInput";
-import formatPhoneNumber from "./FormatePhone";
+// import formatPhoneNumber from "./FormatePhone";
+import TelephoneInput from "./TelephoneInput";
 
 
 const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase, setClassModal, setIsPreviewVisible}) => {
 
     const [selectValue, setSelectValue] = useState(newCandidate.vacancy || ''),
-          [telephoneDigits, setTelephoneDigits] = useState(() => {
-            return newCandidate.telephone ? newCandidate.telephone.replace(/\D/g, '') : '380';
-            }),
+        //   [telephoneDigits, setTelephoneDigits] = useState(() => {
+        //     return newCandidate.telephone ? newCandidate.telephone.replace(/\D/g, '') : '380';
+        //     }),
           [fileSize, setFileSize] = useState(''),
           vacHolder = "Наіменування вакансії*",
           pHolder = "Місто, де шукаєте роботу";
 
 
 const vacBaseChunck = specialtiesBase.map((el) => el.position).flat();
+const telClass = "modalInputAd short";
 
 
 // const getPositions = (arr) => {
@@ -63,78 +65,78 @@ const lookAtPreviw = (e) => {
     setIsPreviewVisible(true);
 };
 
-const getTelNumber = (e) => {
+// const getTelNumber = (e) => {
     
-    const cursorPosition = e.target.selectionStart;
-    const oldValue = e.target.value;
-    let value = e.target.value.replace(/\D/g, '');
+//     const cursorPosition = e.target.selectionStart;
+//     const oldValue = e.target.value;
+//     let value = e.target.value.replace(/\D/g, '');
 
-    setTelephoneDigits(value);
+//     setTelephoneDigits(value);
 
-    setTimeout(() => {
-        const newCursorPosition = Math.min(
-            formatPhoneNumber(value).length,
-            cursorPosition + (formatPhoneNumber(value).length - oldValue.length)
-        );
-        e.target.setSelectionRange(newCursorPosition, newCursorPosition);
-    }, 0);
-};
+//     setTimeout(() => {
+//         const newCursorPosition = Math.min(
+//             formatPhoneNumber(value).length,
+//             cursorPosition + (formatPhoneNumber(value).length - oldValue.length)
+//         );
+//         e.target.setSelectionRange(newCursorPosition, newCursorPosition);
+//     }, 0);
+// };
 
-const manageDigits = (e) => {
+// const manageDigits = (e) => {
 
         
-    if (e.target.value.length < 1) {
-        setTelephoneDigits("380");
-        setTimeout(() => {
-            e.target.setSelectionRange(4, 4); 
-        }, 0);
-    };
+//     if (e.target.value.length < 1) {
+//         setTelephoneDigits("380");
+//         setTimeout(() => {
+//             e.target.setSelectionRange(4, 4); 
+//         }, 0);
+//     };
 
-};
+// };
  
-    useEffect (() => {
-           setNewCandidate(prev => ({ ...prev, telephone: formatPhoneNumber(telephoneDigits)}));
+    // useEffect (() => {
+    //        setNewCandidate(prev => ({ ...prev, telephone: formatPhoneNumber(telephoneDigits)}));
 
-    }, [telephoneDigits, setNewCandidate]);
+    // }, [telephoneDigits, setNewCandidate]);
 
-    const manageEvents = (e) => {
-        const cursorPosition = e.target.selectionStart;
-        if (e.key === 'Backspace' && telephoneDigits.length <= 3) {
+    // const manageEvents = (e) => {
+    //     const cursorPosition = e.target.selectionStart;
+    //     if (e.key === 'Backspace' && telephoneDigits.length <= 3) {
 
-            setTelephoneDigits("380");
-            setTimeout(() => {
-                e.target.setSelectionRange(4, 4); 
-            }, 10);
-        } else if (e.key ==='Backspace' && telephoneDigits.length > 4) {
-            setTimeout(() => {
-            e.target.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
-        }, 10);
+    //         setTelephoneDigits("380");
+    //         setTimeout(() => {
+    //             e.target.setSelectionRange(4, 4); 
+    //         }, 10);
+    //     } else if (e.key ==='Backspace' && telephoneDigits.length > 4) {
+    //         setTimeout(() => {
+    //         e.target.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+    //     }, 10);
         
-        } else if (e.key === 'Delete' && !window.getSelection().toString()) {
+    //     } else if (e.key === 'Delete' && !window.getSelection().toString()) {
 
-            if (telephoneDigits.length <= 3) {
-                setTelephoneDigits("380");
-                setTimeout(() => {
-                    e.target.setSelectionRange(4, 4);
-                }, 10);
-            } else {
+    //         if (telephoneDigits.length <= 3) {
+    //             setTelephoneDigits("380");
+    //             setTimeout(() => {
+    //                 e.target.setSelectionRange(4, 4);
+    //             }, 10);
+    //         } else {
                 
-                setTimeout(() => {
-                    e.target.setSelectionRange(cursorPosition, cursorPosition);
-                }, 10);
-            }
-        } else if (/^\d$/.test(e.key) && !e.ctrlKey && !e.altKey && !e.metaKey) {
-            const cursorPosition = e.target.selectionStart;
-            const valueLength = e.target.value.length;
+    //             setTimeout(() => {
+    //                 e.target.setSelectionRange(cursorPosition, cursorPosition);
+    //             }, 10);
+    //         }
+    //     } else if (/^\d$/.test(e.key) && !e.ctrlKey && !e.altKey && !e.metaKey) {
+    //         const cursorPosition = e.target.selectionStart;
+    //         const valueLength = e.target.value.length;
 
-            if (cursorPosition < valueLength) {
-                setTimeout(() => {
-                    e.target.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+    //         if (cursorPosition < valueLength) {
+    //             setTimeout(() => {
+    //                 e.target.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
 
-                }, 10);
-            }
-        }
-    };
+    //             }, 10);
+    //         }
+    //     }
+    // };
 
         let wl = newCandidate.resume.length;
 
@@ -175,18 +177,24 @@ const manageDigits = (e) => {
                     onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
 
-                <input 
+                {/* <input 
                     placeholder="+380 (XX) XXX XX XX" 
                     name="telephone"
                     minLength="6" 
                     maxLength="19" 
                     type="tel" 
-                    className="modalInputAd short "
+                    className={telClass}
                     value={newCandidate.telephone}  
                     onInput={getTelNumber}
                     onKeyDown={manageEvents}
                     onClick={manageDigits}
                     onFocus={manageDigits}
+                /> */}
+
+                <TelephoneInput
+                    telClass={telClass}
+                    telephone={newCandidate.telephone}
+                    setNewItem={setNewCandidate}
                 />
 
                 <VacancyInput 

@@ -44,7 +44,8 @@ const App = () => {
         addDoc: null,
         userJWT: null,
         docId: null,
-        id: null
+        id: null,
+        company: null
         });
   const [typeOfSearch, setTypeOfsearch] = useState(true),
         [regEntry, setRegEntry] = useState(false), //Состояние входа в учетную запись
