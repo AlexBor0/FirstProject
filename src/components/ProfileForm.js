@@ -58,7 +58,8 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
     const goBack = (e) => {
       e.preventDefault();
       setEditCandidate(prev => ({...prev, foto: null}));
-      setOpenForm(false)
+      setOpenForm(false);
+      setFileSize('')
     };
 
     const changeProfile = (e) => {
@@ -224,7 +225,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                   </div>
                 </div>
               }    
-              <br/><span>Ім'я: </span> <span className="fileSize">{fileSize&&( fileSize + "kb")}</span>
+              <br/><span>Ім'я: </span> <span className="fileSize">{fileSize&&openForm&&( fileSize + "kb")}</span>
                 {openForm
                   ?(<input className="inputEditProfile text" type="text" name="firstName" placeholder={currentUser.userName || "Ваше ім'я"}
                     onChange={(e) => getDataItems(e, { setNewDoc: setEditCandidate, validate: true })}

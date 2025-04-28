@@ -30,7 +30,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser}) => {
           const imageSrc = editCompany.logo instanceof File 
           && URL.createObjectURL(editCompany.logo);
 
-          const getImage = (e) => {
+          const getLogoImage = (e) => {
             setValidText("");
               const file = e.target.files[0];
               if(file) {
@@ -52,6 +52,12 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser}) => {
             setFileSize(null);
             setValidText("");
           };
+          const goBack = (e) => {
+            e.preventDefault();
+            // setEditCandidate(prev => ({...prev, foto: null}));
+            setOpenForm(false);
+            setIsPrev(true)
+          };
 
 
     return (
@@ -66,7 +72,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser}) => {
                             onClick={(e) => {
                                 e.preventDefault();
                                 setIsPrev(false);
-
+                                setOpenForm(true);
                             }}
                         >
                             ДОДАТИ
@@ -91,27 +97,29 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser}) => {
                                 
                                 <div className="wrapLogoImage">
                                     {editCompany.logo 
-                                    ? <img className="previewImg" width="100px" height="100px" src={ editCompany.logo && imageSrc } alt=""/>
-                                    : <div className="subImg" > 
+                                    ? <img className="previewImg" width="70px" height="70px" src={ editCompany.logo && imageSrc } alt=""/>
+                                    : <div className="subImgComp" width="70px" height="70px"> 
                                         <CompanyLogo 
                                             wordOne="ЛОГО"
-                                            // wordTwo="КОМПАНІЇ"
                                         />
                                        </div>
                                     }
-
-                                    <div className="changeFoto"> 
-                                    <label required htmlFor="imageF">
-                                        <input autoFocus={ true } type="file" id="imageF" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
-                                            onChange={ getImage } 
-                                        />
-                                        <IoCameraSharp className="delete-icon"/>
-                                    </label>
-                                    <button className="delPrevImg" 
-                                            autoFocus={true}
-                                            onClick={ deleteImage }>
-                                        <IoCloseCircleSharp className="delete-icon"/>
-                                    </button>
+                                    <div className="wrapBtnsImg">
+                                        <div className="subImg" > {validText} </div>
+                                        <div className="changeFoto"> 
+                                        
+                                            <label required htmlFor="imageL">
+                                                <input autoFocus={ true } type="file" id="imageL" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
+                                                    onChange={ getLogoImage } 
+                                                />
+                                                <IoCameraSharp className="delete-icon"/>
+                                            </label>
+                                            <button className="delPrevImg" 
+                                                    autoFocus={true}
+                                                    onClick={ deleteImage }>
+                                                <IoCloseCircleSharp className="delete-icon"/>
+                                            </button>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -142,6 +150,21 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser}) => {
                                         />)
                                     :(<p>{currentUser.telegram || "Телеграм-канал"}</p>)}
                                 </div>
+                                {openForm 
+                                    ?(<div className="wrapBtns">
+                                        <button onClick={ goBack }>
+                                            НАЗАД
+                                        </button>
+                                        <button onClick={/* changeProfile */(e) => {
+                                    e.preventDefault()}}>
+                                            ЗМІНИТИ
+                                        </button>
+                                        </div>) 
+                                    :(<button className="btnEditProfile" onClick={/* editeProfile */(e) => {
+                                        e.preventDefault()}} >
+                                        РЕДАГУВАТИ
+                                        </button>)
+                                    }
 
                             
                         </form>
