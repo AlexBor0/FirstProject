@@ -33,7 +33,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
         && URL.createObjectURL(editeCandidate.foto);
 
     const getImage = (e) => {
-      setValidText("");
+      deleteImage(e);
         const file = e.target.files[0];
         if(file) {
             if ( file.size > 120 * 1024 ) {

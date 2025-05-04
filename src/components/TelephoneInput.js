@@ -82,18 +82,18 @@ const TelephoneInput = ({telephone, telClass, setNewItem}) => {
 
 return (
     <input 
-                    placeholder="+380 (XX) XXX XX XX" 
-                    name="telephone"
-                    minLength="6" 
-                    maxLength="19" 
-                    type="tel" 
-                    className={telClass}
-                    value={telephone}  
-                    onInput={getTelNumber}
-                    onKeyDown={manageEvents}
-                    onClick={manageDigits}
-                    onFocus={manageDigits}
-                />
+        placeholder="+380 (XX) XXX XX XX" 
+        name="telephone"
+        minLength="6" 
+        maxLength="19" 
+        type="tel" 
+        className={telClass}
+        value={telephone}  
+        onInput={getTelNumber}
+        onKeyDown={manageEvents}
+        onClick={manageDigits}
+        onFocus={manageDigits}
+    />
 )
 }
 

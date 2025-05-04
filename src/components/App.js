@@ -79,9 +79,11 @@ const App = () => {
     userImage: [],
     userDocs: [],
     changeFoto: false,
+    addDoc: null,
     userJWT: null,
     docId: null,
     id: null,
+    company: null
   });
   const turnExit = () => {
     if(!confirm) {

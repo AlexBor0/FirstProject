@@ -13,6 +13,7 @@
     height: 100%;
     width: 100%;
     margin-left: -10px;
+
 }
 .explanation {
     font-size: 0.84rem;
@@ -37,6 +38,9 @@
 .btnAdd:hover {
     opacity: 0.5;
 }
+.pageTwo .pageBtn{
+    margin: 4px 2px;
+} 
 #imageL + .delete-icon{
     color: rgb(10, 76, 199);
 }
@@ -57,7 +61,7 @@
     font-size: 0.7em;
 }
 .wrapLogoImage{
-    margin: 4px auto 2px auto;
+    margin: 4px auto 2px 0px;
 	display: flex;
 	flex-direction:row;
 	justify-content: space-between;
@@ -65,11 +69,15 @@
 	width: 130px;
 	height: 70px;
 }
+.wrapLogoImage img {
+    border-radius: 5px;
+}
 #editCompany .subImgComp {
     width: 70px;
 	height: 70px;
 	font-size: 10px;
 	margin-bottom: auto;
+    border-radius: 5px;
 }
 #editCompany .wrapBtns {
     width: 110%;
@@ -92,6 +100,13 @@
         position: relative;
 }
 .wrapBtnsImg {
+    margin-left: 6px;
 
-    text-align: center;
+}
+.wrapBtnsImg .subImg {
+    margin: 3px auto 3px auto;
+}
+#editCompany .subImg .dark  {
+    font-size: 1.2em;
+    color:black;
 }

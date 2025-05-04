@@ -1,26 +1,20 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, { useState, useRef } from "react";
 import UploadFile from "./UploadFile";
 import UploadFileInfo from "./UploadFileInfo";
 import CityInput from "./CityInput";
 import VacancyInput from "./VacancyInput";
-// import formatPhoneNumber from "./FormatePhone";
 import TelephoneInput from "./TelephoneInput";
 
 
 const AddResumeForm = ({ newCandidate, setNewCandidate, inputErrors, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, setPreview, specialtiesBase, setClassModal, setIsPreviewVisible}) => {
 
     const [selectValue, setSelectValue] = useState(newCandidate.vacancy || ''),
-        //   [telephoneDigits, setTelephoneDigits] = useState(() => {
-        //     return newCandidate.telephone ? newCandidate.telephone.replace(/\D/g, '') : '380';
-        //     }),
           [fileSize, setFileSize] = useState(''),
           vacHolder = "Наіменування вакансії*",
           pHolder = "Місто, де шукаєте роботу";
 
 
 const vacBaseChunck = specialtiesBase.map((el) => el.position).flat();
-const telClass = "modalInputAd short";
-
 
 // const getPositions = (arr) => {
 //     const vbc = [];
@@ -31,6 +25,7 @@ const telClass = "modalInputAd short";
 //     return vbc;
 // };
 // const vacBaseChunck = getPositions(arrBaseChunck);
+const telClass = "modalInputAd short";
 
 const inputFileRef = useRef(null);
 
@@ -65,79 +60,6 @@ const lookAtPreviw = (e) => {
     setIsPreviewVisible(true);
 };
 
-// const getTelNumber = (e) => {
-    
-//     const cursorPosition = e.target.selectionStart;
-//     const oldValue = e.target.value;
-//     let value = e.target.value.replace(/\D/g, '');
-
-//     setTelephoneDigits(value);
-
-//     setTimeout(() => {
-//         const newCursorPosition = Math.min(
-//             formatPhoneNumber(value).length,
-//             cursorPosition + (formatPhoneNumber(value).length - oldValue.length)
-//         );
-//         e.target.setSelectionRange(newCursorPosition, newCursorPosition);
-//     }, 0);
-// };
-
-// const manageDigits = (e) => {
-
-        
-//     if (e.target.value.length < 1) {
-//         setTelephoneDigits("380");
-//         setTimeout(() => {
-//             e.target.setSelectionRange(4, 4); 
-//         }, 0);
-//     };
-
-// };
- 
-    // useEffect (() => {
-    //        setNewCandidate(prev => ({ ...prev, telephone: formatPhoneNumber(telephoneDigits)}));
-
-    // }, [telephoneDigits, setNewCandidate]);
-
-    // const manageEvents = (e) => {
-    //     const cursorPosition = e.target.selectionStart;
-    //     if (e.key === 'Backspace' && telephoneDigits.length <= 3) {
-
-    //         setTelephoneDigits("380");
-    //         setTimeout(() => {
-    //             e.target.setSelectionRange(4, 4); 
-    //         }, 10);
-    //     } else if (e.key ==='Backspace' && telephoneDigits.length > 4) {
-    //         setTimeout(() => {
-    //         e.target.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
-    //     }, 10);
-        
-    //     } else if (e.key === 'Delete' && !window.getSelection().toString()) {
-
-    //         if (telephoneDigits.length <= 3) {
-    //             setTelephoneDigits("380");
-    //             setTimeout(() => {
-    //                 e.target.setSelectionRange(4, 4);
-    //             }, 10);
-    //         } else {
-                
-    //             setTimeout(() => {
-    //                 e.target.setSelectionRange(cursorPosition, cursorPosition);
-    //             }, 10);
-    //         }
-    //     } else if (/^\d$/.test(e.key) && !e.ctrlKey && !e.altKey && !e.metaKey) {
-    //         const cursorPosition = e.target.selectionStart;
-    //         const valueLength = e.target.value.length;
-
-    //         if (cursorPosition < valueLength) {
-    //             setTimeout(() => {
-    //                 e.target.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
-
-    //             }, 10);
-    //         }
-    //     }
-    // };
-
         let wl = newCandidate.resume.length;
 
     return(
@@ -147,7 +69,8 @@ const lookAtPreviw = (e) => {
                 <p>Для розміщення резюме заповніть форму, та натисніть "Розмістити"</p>
                 <input  
                     autoFocus={true} 
-                    required placeholder="Iм'я *" 
+                    required 
+                    placeholder="Iм'я *" 
                     minLength="3" 
                     maxLength="30" 
                     name="firstName" 
@@ -158,7 +81,8 @@ const lookAtPreviw = (e) => {
                 />
                 
                 <input 
-                    required placeholder="Прізвище *"  
+                    required 
+                    placeholder="Прізвище *"  
                     minLength="3" 
                     maxLength="30" 
                     name="lastName" 
@@ -168,7 +92,8 @@ const lookAtPreviw = (e) => {
                     onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
                 <input 
-                    required placeholder="Email *" 
+                    required 
+                    placeholder="Email *" 
                     name="email" minLength="6" 
                     maxLength="30" 
                     type="email" 
@@ -176,20 +101,6 @@ const lookAtPreviw = (e) => {
                     value={newCandidate.email}  
                     onChange={(e) => getDataItems(e, { setNewDoc: setNewCandidate, validate: true })}
                 />
-
-                {/* <input 
-                    placeholder="+380 (XX) XXX XX XX" 
-                    name="telephone"
-                    minLength="6" 
-                    maxLength="19" 
-                    type="tel" 
-                    className={telClass}
-                    value={newCandidate.telephone}  
-                    onInput={getTelNumber}
-                    onKeyDown={manageEvents}
-                    onClick={manageDigits}
-                    onFocus={manageDigits}
-                /> */}
 
                 <TelephoneInput
                     telClass={telClass}
@@ -239,7 +150,8 @@ const lookAtPreviw = (e) => {
                 )}
           
                 <textarea 
-                    required placeholder="Коротке резюме*  (інформація, якою ви можете зацікавити работодавця)" 
+                    required 
+                    placeholder="Коротке резюме*  (інформація, якою ви можете зацікавити работодавця)" 
                     name="resume" 
                     type="text" 
                     minLength="100" 

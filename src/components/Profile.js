@@ -194,6 +194,8 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
                   currentUser={currentUser}
                   getDataItems={getDataItems}
                   setCurrentUse={setCurrentUser}
+                  axios={axios}
+                  host={host}
                 /> 
               : <BillBoard/> }
               </div>

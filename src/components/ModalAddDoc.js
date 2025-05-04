@@ -27,6 +27,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
         [newVacancy, setNewVacancy] = useState({
         company: "",
         vacancy: "",
+        candidate: "",
         department: "",
         employment: "",
         workSchedule: "",
@@ -185,8 +186,9 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                         <MessagePost 
                             isOpen={postSuccess} 
                             onClose={setPostSuccess} 
-                            setAddDoc={setAddDoc}
+                            closeItem={setAddDoc}
                             typeOfDoc={type}
+                            newClass={"modalAddDoc modalAdCont"}
                         />
             )}
         </div>)
