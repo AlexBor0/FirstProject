@@ -1,5 +1,5 @@
 
-const ConfirmModal = ({currentUser, indexDoc, deleteDocument, setShowDoc, typeBtn, backward, setShowProfileBook} ) => {
+const ConfirmModal = ({currentUser, indexDoc, deleteDocument, setShowDoc, typeBtn, backward, setShowProfileBook, document} ) => {
 
     const action = (typeBtn === "del"? "видалити" : (typeBtn === "edit" ? "редагувати" : "переглянути"));
 
@@ -27,7 +27,7 @@ const ConfirmModal = ({currentUser, indexDoc, deleteDocument, setShowDoc, typeBt
 
     return (
         <div className="modalConfirm">
-        <p>Бажаєте {action} резюме <b>{currentUser.userDocs[indexDoc].title}</b> ? </p>
+        <p>Бажаєте {action} {document} <b>{currentUser.userDocs[indexDoc].title}</b> ? </p>
         <div className="wrapBtns">
           <button onClick={backward}>
               НІ

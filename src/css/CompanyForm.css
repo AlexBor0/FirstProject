@@ -53,15 +53,9 @@
     text-align: left;
     margin-top: -6px;
 }
-#editCompany h4 {
-    margin-left: 23%;
-    margin-bottom: 0px;
-}
-#editCompany span{
-    font-size: 0.7em;
-}
+
 .wrapLogoImage{
-    margin: 4px auto 2px 0px;
+    margin: 4px auto 0px 0px;
 	display: flex;
 	flex-direction:row;
 	justify-content: space-between;
@@ -109,4 +103,42 @@
 #editCompany .subImg .dark  {
     font-size: 1.2em;
     color:black;
+}
+.companyProfile {
+    margin-left: 14px;
+    text-align: center;
+    font-size: 0.8em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width:152px;
+}
+.companyName{
+    font-weight: 600;
+	margin: 0px 14px -3px -5px;
+	border: none;
+}
+.companyProfile .btnEditProfile{
+    font-size: 0.9em;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right:auto;
+}
+.currentEntries .companyProfile p{
+	padding: 0px 4px;
+	margin: 1px 0px 1px 0px;
+	background-color: rgb(248, 232, 207);
+	border: solid 1px rgb(248, 232, 207);
+    border-radius: 5px;
+}
+.companyProfile .wrapLogoImage {
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+}
+.currentEntries .companyProfile h4 {
+    margin-bottom: 4px;
+}
+.companyProfile span {
+    font-size: 1.0em;
+    padding: 4px 4px;
+    color: black;
 }

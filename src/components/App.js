@@ -148,11 +148,12 @@ useEffect (() => {
 useEffect(() => {
   const jwt = localStorage.getItem('jwt');
   const status = currentUser.userStatus;
-  let recDoc = status === "employer"? "vacancies":"candidates";
+  const recDoc = status === "employer"? "vacancies":"candidates";
+  const companyReq = status === "employer"? "&populate[company][populate][logo]=true" : "";
   if (jwt) {
       const fetchUserData = async () => {
           try {
-              const response = await axios.get(`${host}/api/users/me?populate[0]=userAvatar&populate[1]=${recDoc}`, {
+              const response = await axios.get(`${host}/api/users/me?populate[userAvatar]=true&populate[${recDoc}]=true${companyReq}`, {
                   headers: {
                       Authorization: `Bearer ${jwt}`
                   }
@@ -173,6 +174,7 @@ useEffect(() => {
                   docId: response.data.documentId,
                   id: response.data.id,
                   changeFoto: false,
+                  company: status === "employer"? response.data.company : undefined,
               });
 
               setConfirm(true); // Устанавливаем состояние авторизации

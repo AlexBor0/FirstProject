@@ -251,6 +251,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
                     typeBtn={typeBtn}
                     backward={backward}
                     setShowProfileBook={setShowProfileBook}
+                    document={typeOfSearch ? "вакансію" : "резюме"}
                   />
                 }
 
