@@ -190,26 +190,28 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
 
     return (
         <form id="editProfile">
-          <div className="profileImgWrap">
-            {loading
-            ?
-              (<Spinner className="profileImg"/>)
-            : (
-                <img 
-                  className={`profileImg ${loading ? 'loading' : 'loaded'}`}
-                  src={currentImageSrc} 
-                  alt="Профіль"
-                  style={{ opacity: imageOpacity }}
-                />    
-              )}
-             
-          </div>
+          <div className="userProfile">
+            <div className="profileImgWrap">
+              {loading
+              ?
+                (<Spinner className="profileImg"/>)
+              : (
+                  <img 
+                    className={`profileImg ${loading ? 'loading' : 'loaded'}`}
+                    src={currentImageSrc} 
+                    alt="Профіль"
+                    style={{ opacity: imageOpacity }}
+                  />    
+                )}
+              
+            </div>
               {openForm&&
                 <div className="wrapPrevImage">
                   {editeCandidate.foto 
                     ? <img className="previewImg" width="50px" height="50px" src={ editeCandidate.foto && imageSrc } alt=""/>
                     : <div className="subImg" > {validText} </div>
                   }
+                  
                   <div className="changeFoto"> 
                     <label required htmlFor="imageF">
                       <input autoFocus={ true } type="file" id="imageF" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
@@ -223,21 +225,23 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                       <IoCloseCircleSharp className="delete-icon"/>
                     </button>
                   </div>
+                  <div className="fileSize">{fileSize&&openForm&&( fileSize + "kb")}</div>
                 </div>
               }    
-              <br/><span>Ім'я: </span> <span className="fileSize">{fileSize&&openForm&&( fileSize + "kb")}</span>
+              <div className="companyDetails" >
+                <span>Ім'я: </span> 
                 {openForm
                   ?(<input className="inputEditProfile text" type="text" name="firstName" placeholder={currentUser.userName || "Ваше ім'я"}
                     onChange={(e) => getDataItems(e, { setNewDoc: setEditCandidate, validate: true })}
                     />)
-                  :(<p>{currentUser.userName || "Ваше ім'я"}</p>)
+                  :(<p className="subInput">{currentUser.userName || "Ваше ім'я"}</p>)
                 }
                 <span>Логін: </span>
                   <p>{currentUser.userLogin}</p>
                 <span>Email: </span>
                 <p className="mail"> {currentUser.userEmail} </p>
-
-                {openForm 
+              </div>
+              {openForm 
                   ?(<div className="wrapBtns">
                       <button onClick={ goBack }>
                         НАЗАД
@@ -246,10 +250,15 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                         ЗМІНИТИ
                       </button>
                     </div>) 
-                  :(<button className="btnEditProfile" onClick={ editeProfile } >
-                      РЕДАГУВАТИ
-                    </button>)
+                  :(<div className="wrapOneBtn">
+                      <button className="btnEditProfile" onClick={ editeProfile } >
+                        РЕДАГУВАТИ
+                      </button>
+                    </div>)
                 }
+          </div>
+                
+                
         </form>
     )
 }

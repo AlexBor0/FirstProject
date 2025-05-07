@@ -25,11 +25,10 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
         telegram: ''  
       });
 
-    const telClass ="inputEditProfile text";
 
     const explanation = 
         <p className="explanation">
-            <span>Додайте</span><br/> 
+            Додайте<br/> 
             інформацію про вашу компанію:
             назву, логотип та реквізити, за якими 
             можуть звертатися потенційні претенденти.
@@ -166,8 +165,8 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
                     <div className="wrapLogoImage">
                         <img 
                             className="previewImg" 
-                            width="70px" 
-                            height="70px" 
+                            width="60px" 
+                            height="60px" 
                             src={
                                 ((currentUser?.company?.logo?.url && host + currentUser.company.logo.formats.thumbnail.url) || imageSrc) || 
                                 <CompanyLogo 
@@ -180,21 +179,22 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
                     <h4>Реквізити:</h4>
                     <div className="companyDetails" >
                         <span>Телефон: </span>  
-                        <p>{(currentUser?.company?.telephone && formatPhoneNumber(currentUser?.company?.telephone)) || "тел. номер"}</p>
+                        <p className="subInput">{(currentUser?.company?.telephone && formatPhoneNumber(currentUser?.company?.telephone)) || "тел. номер"}</p>
                         <span>Сайт компанії: </span> 
                         <p>{currentUser?.company?.companySite || "Сайт компанії"}</p>
                         <span>Telegram: </span> 
                         <p>{currentUser?.company?.telegram || "Телеграм-канал"}</p>
                     </div>
-                    <button 
-                        className="btnEditProfile" 
-                            onClick={(e) => {
-                                e.preventDefault()
-                            }} 
-                    >
-                        РЕДАГУВАТИ
-                    </button>
-
+                    <div className="wrapOneBtn">
+                        <button 
+                            className="btnEditProfile" 
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                }} 
+                        >
+                            РЕДАГУВАТИ
+                        </button>
+                    </div>
                 </div>
             }
             { (openForm && !isPrev && !postFetch) &&
@@ -220,8 +220,8 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
                             
                         <div className="wrapLogoImage">
                             {(newCompany.logo) 
-                            ? <img className="previewImg" width="70px" height="70px" src={ newCompany.logo && imageSrc } alt="Логотип компанії"/>
-                            : <div className="subImgComp" width="70px" height="70px"> 
+                            ? <img className="previewImg" width="60px" height="60px" src={ newCompany.logo && imageSrc } alt="Логотип компанії"/>
+                            : <div className="subImgComp" width="60px" height="60px"> 
                                 <CompanyLogo 
                                     wordOne="ЛОГО"
                                 />
@@ -259,7 +259,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
 
                                 <span>Телефон: </span> 
                                     <TelephoneInput
-                                        telClass={telClass}
+                                        telClass={"inputEditProfile text"}
                                         telephone={newCompany.telephone}
                                         setNewItem={setNewCompany}
                                     />

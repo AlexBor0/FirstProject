@@ -2,27 +2,33 @@
     display: flex;
     flex-direction: column;
     /* gap: 1rem; */
-    margin-left: 10px;
-    margin-right: 0px;
+    margin-left: 3px;
+    margin-right: 1px;
     text-align: center;
     height: 100%;
     padding-left: 10px;
+    width: 155px;
     
 }
 .prevMessage {
     height: 100%;
     width: 100%;
-    margin-left: -10px;
-
+    text-align: center;
+}
+.pageTwo .prevMessage {
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
 }
 .explanation {
     font-size: 0.84rem;
     font-family: 'Open Sans', sans-serif;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top:10px;
 }
 .btnAdd {
-    margin-top: 17px;
+    margin-bottom: 9px;
 	margin-left: auto;
     margin-right: auto;
 	padding: 4px 8px;
@@ -30,7 +36,7 @@
 	background:rgb(76, 175, 80);
 	color: rgb(204, 255, 144);
 	font-family: "Montserrat", sans-serif;
-	font-size: 0.7em;
+	font-size: 12px;
 	font-weight: 600;
 	border: none;
 	border-radius: 5px;
@@ -38,9 +44,7 @@
 .btnAdd:hover {
     opacity: 0.5;
 }
-.pageTwo .pageBtn{
-    margin: 4px 2px;
-} 
+
 #imageL + .delete-icon{
     color: rgb(10, 76, 199);
 }
@@ -55,7 +59,7 @@
 }
 
 .wrapLogoImage{
-    margin: 4px auto 0px 0px;
+    margin: 2px auto 0px auto;
 	display: flex;
 	flex-direction:row;
 	justify-content: space-between;
@@ -65,19 +69,19 @@
 }
 .wrapLogoImage img {
     border-radius: 5px;
+    margin: 4px;
 }
 #editCompany .subImgComp {
     width: 70px;
 	height: 70px;
+    object-fit: cover;
 	font-size: 10px;
 	margin-bottom: auto;
     border-radius: 5px;
 }
 #editCompany .wrapBtns {
-    width: 110%;
-    margin-top: 8px;
-    margin-right: -20px;
-    margin-left: -18px;
+    margin-top: 10px;
+    margin-left: -1px;
 }
 #editCompany .wrapBtns button:last-child  {
     margin-left: 4px;
@@ -86,59 +90,69 @@
         display: flex;
         flex-direction: row;
         justify-content:space-between;
-        align-items: baseline;
+        align-items:center;
         padding: 3px 6px;
         background-color: rgb(255, 254, 231);
         border-radius: 5px;
         border: none;
         position: relative;
 }
-.wrapBtnsImg {
-    margin-left: 6px;
-
-}
 .wrapBtnsImg .subImg {
-    margin: 3px auto 3px auto;
+    margin: 5px auto auto auto;
+    display: flex;
+    align-items:center;
 }
 #editCompany .subImg .dark  {
+ 
     font-size: 1.2em;
     color:black;
 }
 .companyProfile {
-    margin-left: 14px;
+    margin-left: auto;
+	margin-right: auto;
     text-align: center;
     font-size: 0.8em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    width:152px;
+    width:154px;
 }
-.companyName{
+.currentEntries .companyProfile .companyName{
     font-weight: 600;
-	margin: 0px 14px -3px -5px;
+	margin: 0px 0px 2px -1px;
 	border: none;
 }
 .companyProfile .btnEditProfile{
-    font-size: 0.9em;
-    margin-top: 10px;
+    font-size: 12px;
     margin-left: auto;
     margin-right:auto;
 }
 .currentEntries .companyProfile p{
 	padding: 0px 4px;
-	margin: 1px 0px 1px 0px;
+	margin: 2px 0px 2px -1px;
 	background-color: rgb(248, 232, 207);
 	border: solid 1px rgb(248, 232, 207);
     border-radius: 5px;
+}
+.pageTwo p .subInput {
+    margin: 2px 0px 2px -1px;
 }
 .companyProfile .wrapLogoImage {
     justify-content: center;
     margin-left: auto;
     margin-right:auto;
 }
-.currentEntries .companyProfile h4 {
-    margin-bottom: 4px;
+.currentEntries .companyProfile .subInput{
+	margin: 2px 0px 2px 0px;
 }
-.companyProfile span {
-    font-size: 1.0em;
+.currentEntries .companyProfile h4 {
+    margin-bottom: 7px;
+}
+.companyDetails span {
+    margin: 2px 0;
+    font-size: 12px;
     padding: 4px 4px;
     color: black;
+}
+.companyForm .inputEditProfile {
+    margin: 0;
+    margin-left: -1px;
 }

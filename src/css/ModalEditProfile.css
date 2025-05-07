@@ -10,30 +10,26 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+.pageOne, .pageTwo, .pageThree, .pageFour {
+	position: absolute;
+	width: 181px;	
+	height: 302px;
+	top:20px;
+}
 .pageOne, .pageTwo, .pageThree {
 	z-index: 2;
-	position: absolute;	
-	top:20px;
-	height: 300px;
-}
-.pageFour {
-	position: absolute;	
-	top:20px;
-	right: 46px;
-	width: 178px;
-	padding-left: 20px;
-	height: 300px;
 }
 .pageOne, .pageThree {
-	left: 46px;
-	padding-left: 20px;
-	width: 160px;
+	left: 44.5px;
+}
+.pageTwo, .pageFour {
+    right: 43px;
+    transform-origin: left center; 
 }
 .pageThree {
 	display: none;
 	transform-origin: right center;
 }
-
 .profileHead {	
 	background:#fff;
 	border: solid 2px rgb(3, 87, 116) ;
@@ -41,32 +37,38 @@
 	font-size:13px;
 	font-weight: 600;
 	text-align:center;
-}
-.pageOne .profileHead, .pageThree .profileHead {
-	margin:5px 25px 5px 5px;
+	margin:5px 25px 4px 25px;
 	padding:2px 3px;
 }
-.pageTwo .profileHead, .pageFour .profileHead {
-	margin:5px 25px 5px 25px;
-	padding:2px 3px;
+
+.userProfile {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width:154px;
+	font-size: 0.8em;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 20px;
 }
 .wrapPrevImage{
 	float: right;
-    margin-right: 20px;
+    margin-right: 8px;
 	margin-top: 0px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
 	width: 50px;
-	height: 80px;
+	height: 94px;
 }
 .wrapPrevImage img {
 	border-radius: 5px;
+	border:none;
+	margin-bottom:4px;
 }
 .fileSize {
-	float: right;
-	margin-right: 20px;
+	float: right;	
+	height: 16px;
+	width: 53px;
 }
 .subImg {
 	width: 40px;
@@ -80,11 +82,17 @@
 .profileImgWrap {
 	display: inline-block;
 	position: relative;
+	margin-left: 7px;
+	margin-bottom:13px;
 	width: 80px;
 	height: 80px;
 	overflow: hidden;
 	border-radius: 5px;
 }
+.userProfile .wrapBtns, .userProfile .wrapOneBtn {
+	margin-top: 10px;
+}
+
 .profileImg {
 	position: absolute;
 	width: 100%;
@@ -102,7 +110,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content:space-between;
-	align-items: baseline;
+	align-items:center;
 	padding: 3px 6px;
 	background-color: rgb(255, 254, 231);
 	border-radius: 5px;
@@ -121,72 +129,98 @@
 .redo-icon, .view-icon, #imageF + .delete-icon, .currentEntries data {
 	color: rgb(10, 76, 199);
 }
+.delete-icon{
+	font-size: 16px;
+}
+.pageBtn .delete-icon {
+	font-size: 14px;
+}
+.delPrevImg .delete-icon {
+	font-size: 14px;
+}
 #imageF:focus + .delete-icon {
 	border:solid 1px black;
 	border-radius:3px;
+}
+.delPrevImg:focus .delete-icon{
+	padding: 1px;
 }
 .changeFoto .inputFile {
 	width: 25px ;
 	top: 0px;
 	left: 0px;
 }
-.pageOne p, .inputEditProfile{
-	font-size: 0.8em;
+.pageOne p{
+	font-size: 12px;
+	font-weight: 500;
+	font-family: 'Open Sans', sans-serif;
+	border-radius: 5px;
+	margin: 2px 0 2px 1px;
+	width:149px;
+	padding: 0px 0px 0px 4px;
+	border: none;	
+	background-color: rgb(248, 232, 207);
+	border: solid 1px rgb(248, 232, 207);
+}
+
+.inputEditProfile{
+	outline: solid 1px rgb(248, 232, 207);
+	font-size: 12px;
 	font-weight: 500;
 	font-family: 'Open Sans', sans-serif;
 	background-color: white;
 	border-radius: 5px;
-}
-.pageOne p{
-	padding: 0px 4px;
-	margin: 1px 14px -1px -5px;
-	background-color: rgb(248, 232, 207);
-	border: solid 1px rgb(248, 232, 207);
-}
-.pageOne .mail{
-	font-size: 0.7em;
-	padding: 0px 2px 1px 2px;
-	margin-top: 2px;
-	overflow-y: auto;
-}
-.inputEditProfile{
-	width:145px;
-	padding: 0px 0px 0px 4px;
-	margin: 0px 14px -3px -5px;
-	border: none;
-	outline: solid 2px rgb(248, 232, 207);
+	margin: 2px 0px 2px 1px;	
+	width:150px;
+	padding: 1px 0px 0px 3px;
+	border: none;	
 }
 
-.pageOne span {
-	font-size: 0.8em;
+.companyDetails .subInput{
+	margin: 2px 0px 1px 1px;
+	padding-left: 3px;
+}
+.userProfile .subInput{
+	width:150px;
+}
+.pageOne .mail{
+	overflow-y: auto;
+}
+.userProfile span {
+	margin: 2px 0;
+	padding: 4px 4px;
+	font-size: 12px;
 	font-family: 'Verdana', sans-serif;
 }
 .btnEditProfile {
-	margin-top: 18px;
-	margin-left: 19px;
 	padding: 4px 8px;
 	cursor: pointer;
 	background:rgb(222, 161, 56);
 	color: rgb(2, 2, 2);
 	font-family: "Montserrat", sans-serif;
-	font-size: 0.7em;
+	font-size: 12px;
 	font-weight: 600;
 	border: none;
 	border-radius: 5px;
 }
+.userProfile .btnEditProfile{
+	margin-left: auto;
+	margin-right: auto;
+}
 .btnEditProfile:hover {
 	background:rgb(251, 143, 93);
 }
-.wrapBtns {
-	margin-top: 18px;
-	margin-left: -4px;
+.wrapBtns, .wrapOneBtn{
+	margin-top: 10px;
+	text-align: center;
 }
+
 .wrapBtns button{
 	border: none;
 	border-radius: 5px;
 	color:white;
 	padding: 4px 6px;
-	font-size: 0.7em;
+	font-size: 12px;
 	font-weight: 600;
 	font-family: "Montserrat", sans-serif;
 }
@@ -199,19 +233,15 @@
 }
 .wrapBtns button:last-child {
 	background-color:rgb(10, 76, 199);
-	margin-left: 9px;
+	margin-left: 4px;
 }
-.pageTwo {
-	right: 46px;
-	width: 178px;
-}
-.pageFour .delete-icon {
-	margin: 4px 2px;
-}
+
 .currentEntries {
-	height: 250px;
+	height: 258px;
 	overflow-x: hidden;
+	margin-bottom: -9px;
 }
+
 .currentEntries ol{
 	padding-left: 0px;
 	margin-left: 14px;
@@ -225,8 +255,7 @@
 	padding: 2px 2px 6px 6px;
 	background-color:rgb(248, 232, 207);
 	border-radius: 5px;
-	width: 142px;
-	
+	width: 142px;	
 }
 .currentEntries ol li:nth-child(even) {
 	background:none;
@@ -252,21 +281,28 @@
 	border:none;
 	padding: 0px;
 }
+.pageTwo .pageBtn, .pageFour .pageBtn{
+    /* margin: 4px 4px; */
+	margin-right: 6px;
+} 
+.pageTwo .pageBtn, .pageThree .pageBtn, .pageFour .pageBtn {
+	margin-top: 4px;
+}
+.pageThree .pageBtn {
+	float: left;
+	margin-left: 6px;
+}
 .pageBtn:has(.del-icon) {
 	margin-left: 0px;
 }
 .redo-icon {
 	transform: scale(1.8);
-	margin-right: 2px;
 }
 .redo-icon:hover, .pageBtn:hover {
 	opacity: 0.5;
 	cursor: pointer;
 }
-.pageThree .pageBtn {
-	float: left;
-	margin-left: -15px;
-}
+
 .del-icon {
 	margin: 0px;
 	color: brown;
@@ -357,11 +393,7 @@
 .flip-in {
     animation: flipPageBack 0.4s ease forwards;
 }
-.pageTwo {
-    right: 46px;
-    width: 178px;
-    transform-origin: left center; 
-}
+
 
 .bookPageThree {
     position: absolute;
@@ -394,3 +426,7 @@
 .flip-in-reverse {
     animation: flipPageBackReverse 0.4s ease forwards;
 }
+/* .companyDetails {
+    text-align: left;
+    margin-top: 0;
+} */
