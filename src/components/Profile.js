@@ -8,7 +8,7 @@ import SvgBook from "./SvgBook";
 import EvenBookPage from "./EvenBookPage";
 import OddBookPage from "./OddBookPage ";
 import ConfirmModal from "./ConfirmModal";
-import CompanyForm from "./CompanyForm";
+import CompanyPage from "./CompanyPage";
 import BillBoard from "./BillBoard";
 
 
@@ -190,7 +190,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
               </div>
               <div  className="currentEntries">
               { typeOfSearch
-              ? <CompanyForm
+              ? <CompanyPage
                   currentUser={currentUser}
                   getDataItems={getDataItems}
                   setCurrentUse={setCurrentUser}

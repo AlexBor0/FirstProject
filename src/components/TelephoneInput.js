@@ -1,7 +1,7 @@
 import React,  {useState, useEffect} from "react";
 import formatPhoneNumber from "./FormatePhone";
 
-const TelephoneInput = ({telephone, telClass, setNewItem}) => {
+const TelephoneInput = ({telephone, telClass, setNewItem }) => {
 
     const [telephoneDigits, setTelephoneDigits] = useState(() => {
                 return telephone ? telephone.replace(/\D/g, '') : '380';

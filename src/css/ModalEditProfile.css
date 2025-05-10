@@ -156,7 +156,7 @@
 	font-family: 'Open Sans', sans-serif;
 	border-radius: 5px;
 	margin: 2px 0 2px 1px;
-	width:149px;
+	width:148px;
 	padding: 0px 0px 0px 4px;
 	border: none;	
 	background-color: rgb(248, 232, 207);
@@ -170,18 +170,18 @@
 	font-family: 'Open Sans', sans-serif;
 	background-color: white;
 	border-radius: 5px;
-	margin: 2px 0px 2px 1px;	
-	width:150px;
-	padding: 1px 0px 0px 3px;
+	margin: 2px 0px 2px 2px;	
+	width:149px;
+	padding: 1px 0px 0px 4px;
 	border: none;	
 }
 
 .companyDetails .subInput{
 	margin: 2px 0px 1px 1px;
-	padding-left: 3px;
+	padding-left: 4px;
 }
 .userProfile .subInput{
-	width:150px;
+	width:148px;
 }
 .pageOne .mail{
 	overflow-y: auto;
@@ -213,6 +213,7 @@
 .wrapBtns, .wrapOneBtn{
 	margin-top: 10px;
 	text-align: center;
+	margin-left: 2px;
 }
 
 .wrapBtns button{
@@ -223,6 +224,7 @@
 	font-size: 12px;
 	font-weight: 600;
 	font-family: "Montserrat", sans-serif;
+	cursor: pointer;
 }
 .wrapBtns button:hover {
 	opacity: 0.7;
@@ -330,6 +332,9 @@
 	font-size: 12px;
 	font-family: 'Open Sans', sans-serif;
 	margin: 0px 2px -10px 2px;
+}
+.modalConfirm .wrapBtns {
+	margin-top: 16px;
 }
 .bookPageTwo{
 	z-index: 2;

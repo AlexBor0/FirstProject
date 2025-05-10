@@ -10,12 +10,12 @@
     width: 155px;
     
 }
-.prevMessage {
+.primaryMessage {
     height: 100%;
     width: 100%;
     text-align: center;
 }
-.pageTwo .prevMessage {
+.pageTwo .primaryMessage {
     display: flex;
     flex-direction:column;
     justify-content: space-between;
@@ -80,8 +80,8 @@
     border-radius: 5px;
 }
 #editCompany .wrapBtns {
-    margin-top: 10px;
-    margin-left: -1px;
+    margin-top: 12px;
+    margin-left: -3px;
 }
 #editCompany .wrapBtns button:last-child  {
     margin-left: 4px;
@@ -132,9 +132,7 @@
 	border: solid 1px rgb(248, 232, 207);
     border-radius: 5px;
 }
-.pageTwo p .subInput {
-    margin: 2px 0px 2px -1px;
-}
+
 .companyProfile .wrapLogoImage {
     justify-content: center;
     margin-left: auto;
@@ -154,5 +152,5 @@
 }
 .companyForm .inputEditProfile {
     margin: 0;
-    margin-left: -1px;
+    margin-left: 0px;
 }

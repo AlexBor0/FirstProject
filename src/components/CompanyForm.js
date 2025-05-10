@@ -1,46 +1,15 @@
-import React, {useState, useEffect}  from "react";
+import React, {useState}  from "react";
 import { IoCameraSharp, IoCloseCircleSharp } from "react-icons/io5";
 import TelephoneInput from "./TelephoneInput";
-import Spinner from "./Spinner";
-import './../css/CompanyForm.css';
 import CompanyLogo from "./CompanyLogo";
-import MessagePost from "./MessagePost";
-import formatPhoneNumber from "./FormatePhone";
-
-const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) => {
-
-    const [newCompany, setNewCompany] = useState({
-        companyName: '',
-        logo: '',
-        telephone: '',
-        companySite: '',
-        telegram: '',
-    });
-
-    const resetNewCompany = () => ({
-        companyName: '',
-        logo: '',
-        telephone: '',
-        companySite: '',
-        telegram: ''  
-      });
 
 
-    const explanation = 
-        <p className="explanation">
-            Додайте<br/> 
-            інформацію про вашу компанію:
-            назву, логотип та реквізити, за якими 
-            можуть звертатися потенційні претенденти.
-            Ця інформація буде додаватися до карток ваших вакансій
-        </p>
-    const [isPrev, setIsPrev] = useState(true),
-          [fileSize, setFileSize] = useState(''),
-          [openForm, setOpenForm] = useState(true),
+const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, newCompany, setNewCompany, resetNewCompany, setLoading, setPostSuccess, setPostFetch, setOpenForm, setIsPrev }) => {
+
+ 
+
+    const [fileSize, setFileSize] = useState(''),
           [failUpload, setFailUpload] = useState(null),
-          [loading, setLoading] = useState(false),
-          [postFetch, setPostFetch] = useState(false),
-          [postSuccess, setPostSuccess] = useState(null),
           [error, setError] = useState(null),
           [validText, setValidText] = useState(null);
 
@@ -69,6 +38,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
             setFileSize(null);
             setValidText("");
           };
+
           const goBack = (e) => {
             e.preventDefault();
             resetNewCompany();
@@ -76,6 +46,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
             setOpenForm(false);
             setIsPrev(true)
           };
+
 
           const apiRequest = async (apiCall) => {
             setLoading(true);
@@ -157,191 +128,119 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
         // }, [currentUser.userJWT, host, axios, failUpload]);
 
 
-    return (
-        <>
-            {currentUser?.company?.companyName && !loading && 
-                <div className="companyProfile">
-                    <p className="companyName">{currentUser?.company?.companyName || "Назва компанії"}</p>
-                    <div className="wrapLogoImage">
-                        <img 
-                            className="previewImg" 
-                            width="60px" 
-                            height="60px" 
-                            src={
-                                ((currentUser?.company?.logo?.url && host + currentUser.company.logo.formats.thumbnail.url) || imageSrc) || 
-                                <CompanyLogo 
-                                    wordOne="ЛОГО"
-                                /> 
-                            } 
-                            alt="Логотип компанії"
-                        />
-                    </div>
-                    <h4>Реквізити:</h4>
-                    <div className="companyDetails" >
-                        <span>Телефон: </span>  
-                        <p className="subInput">{(currentUser?.company?.telephone && formatPhoneNumber(currentUser?.company?.telephone)) || "тел. номер"}</p>
-                        <span>Сайт компанії: </span> 
-                        <p>{currentUser?.company?.companySite || "Сайт компанії"}</p>
-                        <span>Telegram: </span> 
-                        <p>{currentUser?.company?.telegram || "Телеграм-канал"}</p>
-                    </div>
-                    <div className="wrapOneBtn">
-                        <button 
-                            className="btnEditProfile" 
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                }} 
-                        >
-                            РЕДАГУВАТИ
-                        </button>
-                    </div>
-                </div>
-            }
-            { (openForm && !isPrev && !postFetch) &&
-                <div className="companyForm">
+    return (         
+           
+            <div className="companyForm">
 
-                    <form 
-                        id="editCompany"
-                        onSubmit={
-                            (e) => {
-                                e.preventDefault();
-                            }
+                <form 
+                    id="editCompany"
+                    onSubmit={
+                        (e) => {
+                            e.preventDefault();
                         }
-                    >
+                    }
+                >
 
-                        <input 
-                            required
-                            className="inputEditProfile text" 
-                            type="text" name="companyName" 
-                            placeholder={currentUser?.company?.companyName || "Назва компанії"}
-                            onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
-                            
-                        />
-                            
-                        <div className="wrapLogoImage">
-                            {(newCompany.logo) 
-                            ? <img className="previewImg" width="60px" height="60px" src={ newCompany.logo && imageSrc } alt="Логотип компанії"/>
-                            : <div className="subImgComp" width="60px" height="60px"> 
-                                <CompanyLogo 
-                                    wordOne="ЛОГО"
-                                />
-                            </div>
-                            }
-                                <div className="wrapBtnsImg">
+                    <input 
+                        required
+                        className="inputEditProfile text" 
+                        type="text" name="companyName" 
+                        placeholder={currentUser?.company?.companyName || "Назва компанії"}
+                        onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
+                        
+                    />
+                        
+                    <div className="wrapLogoImage">
+                        {(newCompany.logo) 
+                        ? <img className="previewImg" width="60px" height="60px" src={ newCompany.logo && imageSrc } alt="Логотип компанії"/>
+                        : <div className="subImgComp" width="60px" height="60px"> 
+                            {/* {(currentUser?.company?.logo?.url && host + currentUser.company.logo.formats.thumbnail.url) || */}
+                            <CompanyLogo 
+                                wordOne="ЛОГО"
+                            />
+                            {/* } */}
+                        </div>
+                        }
+                            <div className="wrapBtnsImg">
 
-                                    <div className="subImg" > 
-                                        {(fileSize && (fileSize < 120) && <span className="dark"> {fileSize} kb</span>) || validText} 
-                                    </div>
+                                <div className="subImg" > 
+                                    {(fileSize && (fileSize < 120) && <span className="dark"> {fileSize} kb</span>) || validText} 
+                                </div>
 
-                                    <div className="changeFoto"> 
-                                    
-                                        <label required htmlFor="imageL">
-                                            <input autoFocus={ true } type="file" id="imageL" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
-                                                onChange={ getLogoImage } 
-                                            />
-                                            <IoCameraSharp className="delete-icon"/>
-                                        </label>
+                                <div className="changeFoto"> 
+                                
+                                    <label required htmlFor="imageL">
+                                        <input autoFocus={ true } type="file" id="imageL" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
+                                            onChange={ getLogoImage } 
+                                        />
+                                        <IoCameraSharp className="delete-icon"/>
+                                    </label>
 
-                                        <button className="delPrevImg" 
-                                                autoFocus={true}
-                                                onClick={ deleteImage }>
-                                            <IoCloseCircleSharp className="delete-icon"/>
-                                        </button>
-
-                                    </div>
+                                    <button className="delPrevImg" 
+                                            autoFocus={true}
+                                            onClick={ deleteImage }>
+                                        <IoCloseCircleSharp className="delete-icon"/>
+                                    </button>
 
                                 </div>
+
+                            </div>
+                    </div>
+
+                        <h4>Реквізити:</h4>
+
+                        <div className="companyDetails" >
+
+                            <span>Телефон: </span> 
+                                <TelephoneInput
+                                    telClass={"inputEditProfile text"}
+                                    telephone={newCompany.telephone}
+                                    setNewItem={setNewCompany}
+                                />
+
+                            <span>Сайт компанії: </span> 
+
+                            <input 
+                                className="inputEditProfile text" 
+                                type="text" 
+                                name="companySite" 
+                                placeholder={currentUser?.company?.companySite || "https://"}
+                                onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
+                            />
+
+                            <span>Telegram: </span> 
+
+                            <input 
+                                className="inputEditProfile text" 
+                                type="text" 
+                                name="telegram" 
+                                placeholder={currentUser?.company?.telegram || "https://t.me/"}
+                                onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
+                            />
+                            
                         </div>
 
-                            <h4>Реквізити:</h4>
+                        <div className="wrapBtns">
 
-                            <div className="companyDetails" >
+                            <button onClick={ goBack }>
+                                НАЗАД
+                            </button>
 
-                                <span>Телефон: </span> 
-                                    <TelephoneInput
-                                        telClass={"inputEditProfile text"}
-                                        telephone={newCompany.telephone}
-                                        setNewItem={setNewCompany}
-                                    />
+                            <button 
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    fetchNewCompany()
+                                }} 
+                            >
+                                {currentUser?.company?.companyName ? "ЗМІНИТИ" : "ДОДАТИ"}  
+                            </button>
 
-                                <span>Сайт компанії: </span> 
+                        </div> 
 
-                                <input 
-                                    className="inputEditProfile text" 
-                                    type="text" 
-                                    name="companySite" 
-                                    placeholder={currentUser?.company?.companySite || "https://"}
-                                    onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
-                                />
-
-                                <span>Telegram: </span> 
-
-                                <input 
-                                    className="inputEditProfile text" 
-                                    type="text" 
-                                    name="telegram" 
-                                    placeholder={currentUser?.company?.telegram || "https://t.me/"}
-                                    onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
-                                />
-                                
-                            </div>
-
-                            <div className="wrapBtns">
-
-                                <button onClick={ goBack }>
-                                    НАЗАД
-                                </button>
-
-                                <button 
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        fetchNewCompany()
-                                    }} 
-                                >
-                                    {currentUser?.company?.companyName ? "ЗМІНИТИ" : "ДОДАТИ"}  
-                                </button>
-
-                            </div> 
-
-                    </form>
-                        
-                </div>
-            }
-
-            { isPrev && !postFetch && !currentUser?.company?.companyName &&
-                <div className="prevMessage" >
-                    {explanation}
-                    <button 
-                        className="btnAdd"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setIsPrev(false);
-                            setOpenForm(true);
-                        }}
-                    >
-                        ДОДАТИ
-                    </button>
-                </div>
-            }
-
-            {loading && 
-                <div className="loading">
-                    <Spinner className="profileImg"/>
-                </div>
-            }
-
-            {postSuccess && 
-                <MessagePost 
-                    isOpen={postSuccess} 
-                    onClose={setPostSuccess} 
-                    closeItem={setOpenForm}
-                    typeOfDoc={"Компанія"}
-                    newClass={"modalAdCont addCompany"}
-                />
-            }
+                </form>
+                    
+            </div>
      
-        </>
-
     )
 }
 
