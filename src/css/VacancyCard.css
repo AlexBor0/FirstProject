@@ -19,6 +19,9 @@
     font-family: 'Open Sans', sans-serif;
     overflow-y: hidden;
  }
+ .brieflyMain {
+  padding-left: 6px;
+ }
 .vacancy {
     position: relative;
  }
@@ -44,10 +47,13 @@ address {
 .vacancyProperties span, .propertieValues span {
   padding: 0px 3px;
 }
-.description {
-  font-size: 1rem;
-  text-indent: 10px;
+.description, .requirements {
+  font-size: 0.9rem;
+  
 } 
+.description{
+  text-indent: 12px;
+}
 .vacancyInfo {
   width: 250px;
   font-size: 0.8rem;
@@ -78,13 +84,15 @@ article header {
     background-color:wheat;
   }
 .vacancy h3{
-    margin: 4px 0px 8px 0px;
+    margin: 4px 10px;
     font-weight: 650;
   }
 .vacancy h3+p{
-    margin: 0px 0px 3px 110px;
+    margin: 0px 0px 3px 10px;
   }
-
+.companyLogo {
+  float: right;
+}
 .delete-icon:hover {
     opacity: 0.5;
   }

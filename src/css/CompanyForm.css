@@ -1,7 +1,6 @@
 .companyForm {
     display: flex;
     flex-direction: column;
-    /* gap: 1rem; */
     margin-left: 3px;
     margin-right: 1px;
     text-align: center;

@@ -290,6 +290,12 @@
 .pageTwo .pageBtn, .pageThree .pageBtn, .pageFour .pageBtn {
 	margin-top: 4px;
 }
+.pageTwo .currentEntries .loading {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom:auto;
+}
 .pageThree .pageBtn {
 	float: left;
 	margin-left: 6px;

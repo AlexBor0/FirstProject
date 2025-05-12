@@ -8,7 +8,7 @@ import VacancyInput from "./VacancyInput";
 
 
 
-const AddVacancyForm = ({ newVacancy, setNewVacancy, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, specialtiesBase, saveTextEditor, setSaveTextEditor, modalContRef, setIsPreviewVisible, setSavingEditorContent, savingEditorContent}) => {
+const AddVacancyForm = ({ newVacancy, setNewVacancy, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, specialtiesBase, saveTextEditor, setSaveTextEditor, modalContRef, setIsPreviewVisible, setSavingEditorContent, savingEditorContent, currentUser }) => {
 
 const pHolder = "Місто, де пропонується робота",
       vacHolder = "Наіменування вакансії*"; 
@@ -27,7 +27,7 @@ const textEditorRef = useRef(null);
 const check = newVacancy.employment;
 
 
-useEffect(() => {
+useEffect(() => { //Перемещение фокуса по модальному окну
   const handleTabNavigation = (e) => {
     if (e.key === 'Tab') {
       const modalCont = modalContRef.current;
@@ -85,7 +85,7 @@ useEffect(() => {
   }
 }, []);
 
-  useEffect(() => {
+  useEffect(() => { //Блокировка Ентер в форме
     const formElement = formRef.current;
     
     const handleFormKeyPress = (e) => {
@@ -103,12 +103,13 @@ useEffect(() => {
     }
   }, []);
 
-useEffect(() => {
+useEffect(() => { //Установка значений по умолчанию 
     setNewVacancy(prev => ({
       ...prev,
       employment: prev.employment || "повна",
       workSchedule: prev.workSchedule || "тижневий",
       workFormat: prev.workFormat || "очна робота",
+      company: prev.company || currentUser?.company?.companyName || "",
     }));
   }, []);
 
@@ -129,7 +130,7 @@ const validSubmit = (e) => {
       setSaveTextEditor(true);
     };
 
-    useEffect(() => {
+    useEffect(() => { //Проверка на наличие текста в редакторе
       if (isSubmitting && newVacancy.requirements && newVacancy.requirements.length > 0) {
         setIsSubmitting(false);
         setIsPreviewVisible(true);
@@ -150,19 +151,19 @@ const changeRadio = (e) => {
             <h3 className="modalTitle">Розміщення вакансії</h3>
             <p>Для розміщення вакансії заповніть форму</p>
             <VacancyDepInput
-                specialtiesBase={specialtiesBase}
-                arrowPress={arrowPress}
-                getDataItems={getDataItems}
-                resetInput={resetInput}
-                setNewVacancy={setNewVacancy}
-                selectedIndex={selectedIndex}
-                setSelectedIndex={setSelectedIndex}
-                setSelectVacancyValue={setSelectValue}
-                newVacancy={newVacancy}
+              specialtiesBase={specialtiesBase}
+              arrowPress={arrowPress}
+              getDataItems={getDataItems}
+              resetInput={resetInput}
+              setNewVacancy={setNewVacancy}
+              selectedIndex={selectedIndex}
+              setSelectedIndex={setSelectedIndex}
+              setSelectVacancyValue={setSelectValue}
+              newVacancy={newVacancy}
             />
             <input 
               required 
-              placeholder="Назва компанії" 
+              placeholder={currentUser?.company?.companyName ||"Назва компанії" }
               name="company" 
               minLength="3" 
               maxLength="30"
@@ -172,16 +173,16 @@ const changeRadio = (e) => {
               onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
             />
             <VacancyInput
-                vacBaseChunck={vacBaseChunck}
-                pHolder = {vacHolder}
-                arrowPress={arrowPress}
-                getDataItems={getDataItems}
-                resetInput={resetInput}
-                selectedIndex={selectedIndex}
-                setSelectedIndex={setSelectedIndex}
-                setNewItem={setNewVacancy}
-                selectValue={selectValue}
-                setSelectValue={setSelectValue}
+              vacBaseChunck={vacBaseChunck}
+              pHolder = {vacHolder}
+              arrowPress={arrowPress}
+              getDataItems={getDataItems}
+              resetInput={resetInput}
+              selectedIndex={selectedIndex}
+              setSelectedIndex={setSelectedIndex}
+              setNewItem={setNewVacancy}
+              selectValue={selectValue}
+              setSelectValue={setSelectValue}
             />
 
             <div className="optionsFild">
@@ -275,16 +276,16 @@ const changeRadio = (e) => {
             />
             
             <CityInput 
-                citiesBase={citiesBase} 
-                arrowPress={arrowPress}
-                getDataItems={getDataItems}
-                resetInput={resetInput}
-                setNewItem={setNewVacancy}
-                selectedIndex={selectedIndex}
-                setSelectedIndex={setSelectedIndex}
-                pHolder={pHolder}
-                newDoc={newVacancy}
-                />
+              citiesBase={citiesBase} 
+              arrowPress={arrowPress}
+              getDataItems={getDataItems}
+              resetInput={resetInput}
+              setNewItem={setNewVacancy}
+              selectedIndex={selectedIndex}
+              setSelectedIndex={setSelectedIndex}
+              pHolder={pHolder}
+              newDoc={newVacancy}
+            />
             <p>Опис вакансії має бути від 100 до 600 символів.</p>
             <p>Вимоги до кандидата не більше 600.</p>  
             <textarea 

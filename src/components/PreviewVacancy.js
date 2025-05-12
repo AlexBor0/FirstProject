@@ -1,7 +1,7 @@
 import React from "react";
 import VacancyCard from "./VacancyCard";
 
-const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, editable, setShowDoc, setShowConfirmModal, setShowDocList, setShowProfileBook}) => {
+const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, editable, setShowDoc, setShowConfirmModal, setShowDocList, setShowProfileBook, currentUser, host}) => {
 
     const onClose = () => {
         setShowDoc(false); 
@@ -40,6 +40,8 @@ const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, e
                             onClose={onClose}
                             editable={editable}
                             requirements={requirements}
+                            currentUser={currentUser}
+                            host={host}
                         />
 
                     </div>

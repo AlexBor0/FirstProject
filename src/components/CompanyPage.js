@@ -29,6 +29,26 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
         companySite: '',
         telegram: ''  
     });
+    const fetchGetInfo = async () => {
+        const jwt = currentUser.userJWT;
+        setLoading(true);
+        try {
+            const response = await axios.get(`${host}/api/users/me?populate[company][populate][logo]=true`
+                , {
+                    headers: {
+                      Authorization: `Bearer ${jwt}`
+                  }
+                });
+                setCurrentUser(prev => ({...prev, company: response.data.company}));
+
+        }
+        catch (error) {
+            console.error('Помилка отримання данних:', error);
+        } finally {
+            setLoading(false);
+        }
+       
+    };
 
 
     return (
@@ -45,6 +65,7 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
             { (openForm && !isPrev && !postFetch) &&
                 <CompanyForm
                     axios={axios}
+                    host={host}
                     getDataItems={getDataItems}
                     newCompany={newCompany}
                     setNewCompany={setNewCompany}
@@ -79,6 +100,8 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
                     closeItem={setOpenForm}
                     typeOfDoc={"Компанія"}
                     newClass={"modalAdCont addCompany"}
+                    fetchGetInfo={fetchGetInfo}
+                    setPostFetch={setPostFetch}
                 />
             }
      

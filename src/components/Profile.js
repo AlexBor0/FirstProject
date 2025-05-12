@@ -193,7 +193,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
               ? <CompanyPage
                   currentUser={currentUser}
                   getDataItems={getDataItems}
-                  setCurrentUse={setCurrentUser}
+                  setCurrentUser={setCurrentUser}
                   axios={axios}
                   host={host}
                 /> 

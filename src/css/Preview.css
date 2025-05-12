@@ -16,7 +16,7 @@
 
 } 
 .viewModal {
-  top:50px;
+  /* top:50px; */
   left: 50%;
   transform: translateX(-50%);
   border-radius: 30px;
@@ -24,7 +24,7 @@
   margin-right: auto;
 }
 .previewModal {
-  top: 40px;
+  top: 20px;
   left: 50%; 
   transform: translateX(-50%);
 }
@@ -74,9 +74,9 @@
 .btnEdit:hover, .btnPublish:hover{
     opacity: 0.8;
 }
-.previewModal .vacancy {
+/* .previewModal .vacancy {
     padding-left: 30px;
-  }
+  } */
 .previewModal .vacancy h2 {
     margin: 6px;
   }
@@ -86,14 +86,17 @@
   }
 .previewModal .vacancy p {
     margin: 7px 0px;
+
+  }
+.previewModal .vacancy h3+p{
+    margin: 0px 0px 3px 6px;
   }
 .previewModal .vacancy h2 span{
-    font-weight: normal;
-   
+    font-weight: normal; 
   }
 .previewModal .vacancy div {
-    font-size: 0.8rem;
-    text-indent: 10px;
+    /* font-size: 0.8rem; */
+    /* text-indent: 10px; */
     text-align: left;
   }
 

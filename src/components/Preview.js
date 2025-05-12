@@ -181,6 +181,7 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
                   requirements={requirements}
                   previewContentRef={previewContentRef}
                   currentUser={currentUser}
+                  host={host}
                 />
               ) : (
                 <PreviewResume

@@ -3,23 +3,33 @@ import { FcOk } from "react-icons/fc";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import './../css/MessagePost.css';
 
-const MessagePost = ({isOpen, onClose, closeItem, typeOfDoc, newClass}) => {
+const MessagePost = ({isOpen, onClose, closeItem, typeOfDoc, newClass, fetchGetInfo, setPostFetch }) => {
 
-    const document = typeOfDoc==="Компанія"? "Інформацію про компанію додано" : (typeOfDoc? "Вакансія успішно опублікована": "Резюме успішно опубліковано"); 
+    const document = typeOfDoc==="Компанія"? "Інформацію про компанію додано!" : (typeOfDoc? "Вакансія успішно опублікована": "Резюме успішно опубліковано"); 
 
-    // useEffect(() => {
-    //     if(isOpen) {
-    //         const timer = setTimeout(() => {
-    //             onClose(null);
-    //             closeItem(false);
+    const closeMessagePost = () => {
+        fetchGetInfo();
+        onClose(null);
+        closeItem(false);
+        setPostFetch(false);
+    }
+    
+    useEffect(() => {
+        if(isOpen) {
+            const timer = setTimeout(() => {
+                fetchGetInfo();
+                onClose(null);
+                closeItem(false);
+                setPostFetch(false);
 
-    //         }, 3000);
-    //         return () => clearTimeout(timer);
-    //     }
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
         
-    // }, [isOpen, onClose, closeItem]);
+    }, [isOpen, onClose, closeItem, fetchGetInfo, setPostFetch]);
 
-    // if (!isOpen) return null;
+    if (!isOpen) return null;
+
     
 
     return(
@@ -38,7 +48,10 @@ const MessagePost = ({isOpen, onClose, closeItem, typeOfDoc, newClass}) => {
                     
             </div>
                 <button className="pageBtn">
-                    <IoCloseCircleSharp className="delete-icon" onClick = {() => onClose(null)}/>
+                    <IoCloseCircleSharp 
+                        className="delete-icon" 
+                        onClick = {closeMessagePost}
+                        />
                 </button>
         </div>
     )

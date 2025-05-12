@@ -79,7 +79,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
         
         
             const data = {
-            companyName: newCompany.companyName,
+            companyName: newCompany?.companyName && newCompany.companyName,
             logo: newFotoId && newFotoId,
             telephone: newCompany?.telephone && newCompany.telephone.replace(/\D/g, ''),
             companySite: newCompany?.companySite,
@@ -134,11 +134,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
 
                 <form 
                     id="editCompany"
-                    onSubmit={
-                        (e) => {
-                            e.preventDefault();
-                        }
-                    }
+                   
                 >
 
                     <input 
@@ -152,14 +148,24 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
                         
                     <div className="wrapLogoImage">
                         {(newCompany.logo) 
-                        ? <img className="previewImg" width="60px" height="60px" src={ newCompany.logo && imageSrc } alt="Логотип компанії"/>
-                        : <div className="subImgComp" width="60px" height="60px"> 
-                            {/* {(currentUser?.company?.logo?.url && host + currentUser.company.logo.formats.thumbnail.url) || */}
-                            <CompanyLogo 
-                                wordOne="ЛОГО"
-                            />
-                            {/* } */}
-                        </div>
+                        ? <img className="previewImg" width="60px" height="60px" src={ newCompany.logo && imageSrc } alt="Новий логотип компанії"/>
+                        : (currentUser?.company?.logo?.url &&
+                            <img 
+                                className="previewImg" 
+                                width="60px" 
+                                height="60px" 
+                                src={ host + currentUser.company.logo.formats.thumbnail.url} 
+                                alt="Логотип компанії"/>
+                            ) 
+                            ||
+                            (    <div className="subImgComp" width="60px" height="60px"> 
+                                
+                                    <CompanyLogo 
+                                        wordOne="ЛОГО"
+                                    />
+                            
+                                </div>
+                            )
                         }
                             <div className="wrapBtnsImg">
 
