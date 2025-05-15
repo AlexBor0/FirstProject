@@ -293,11 +293,13 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
               indexDoc={indexDoc}
               setShowDoc={setShowDoc}
               editable={false}
+              preview={true}
               host={host}
               backward={backward}
               setShowConfirmModal={setShowConfirmModal}
               setShowDocList={setShowDocList}
               setShowProfileBook={setShowProfileBook}
+              currentUser={currentUser}
             />
           : <PreviewResume
               candidate={currentUser.userDocs[indexDoc]}

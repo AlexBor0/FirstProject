@@ -1,4 +1,4 @@
-import React, { useEffect, useState, forwardRef } from "react";
+import { useEffect, useState, forwardRef } from "react";
 import GestAva from "./../img/GestAva.png";
 
 const UserLogo = forwardRef(({host, setShowProfile, currentUser, setRegEntry}, ref) => {

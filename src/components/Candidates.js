@@ -15,7 +15,7 @@ const Candidates = ({host, axios}) => {
     
             const fetchCandidates = async () => {
     
-                try {const response = await axios.get(`${host}/api/Candidates?populate=*`);
+                try {const response = await axios.get(`${host}/api/Candidates?[populate][foto]=true`);
     
                 setCandidates(response.data.data);} 
                 catch (error) {setError(error);} 

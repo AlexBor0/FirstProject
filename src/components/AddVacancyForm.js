@@ -109,7 +109,7 @@ useEffect(() => { //Установка значений по умолчанию
       employment: prev.employment || "повна",
       workSchedule: prev.workSchedule || "тижневий",
       workFormat: prev.workFormat || "очна робота",
-      company: prev.company || currentUser?.company?.companyName || "",
+      company: prev.company || currentUser?.company?.companyName,
     }));
   }, []);
 
@@ -163,13 +163,13 @@ const changeRadio = (e) => {
             />
             <input 
               required 
-              placeholder={currentUser?.company?.companyName ||"Назва компанії" }
+              // placeholder={currentUser?.company?.companyName ||"Назва компанії" }
               name="company" 
               minLength="3" 
               maxLength="30"
               type="text" 
               className="modalInputAd short"
-              value={newVacancy.company} 
+              value={currentUser?.company?.companyName} 
               onChange={(e) => getDataItems(e, { setNewDoc: setNewVacancy })}
             />
             <VacancyInput

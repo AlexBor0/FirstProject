@@ -6,7 +6,7 @@ import './../css/Preview.css';
 import './../css/VacancyCard.css';
 
 
-const VacancyCard = ({vacancy, onClose, editable, parentComponent, currentUser, host}) => {
+const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, currentUser, host}) => {
 
     const city = editable ? vacancy.city : vacancy.location;
 
@@ -25,7 +25,7 @@ const VacancyCard = ({vacancy, onClose, editable, parentComponent, currentUser, 
              <h3>{editable ? vacancy.vacancy : vacancy.title }</h3>
             </header>
             <div className="brieflyMain">
-                {editable && currentUser?.company?.logo && 
+                {(editable || preview) && currentUser?.company?.logo && 
                         <img 
                             width="100px"
                             height="100px"
@@ -33,10 +33,19 @@ const VacancyCard = ({vacancy, onClose, editable, parentComponent, currentUser, 
                             src={host + currentUser.company.logo.formats.thumbnail.url} 
                             alt="Логотип компанії"
                         />
-                    }
+                }
+                {parentComponent === 'Vacancies'&& vacancy?.company?.logo && 
+                    <img 
+                        width="100px"
+                        height="100px"
+                        className="companyLogo" 
+                        src={host + vacancy.company.logo.formats.thumbnail.url} 
+                        alt="Логотип компанії"
+                    />   
+                }
                     <p className="salary" >{vacancy.salary} грн.{" "}</p>
                     
-                <p><b>Компанія: {vacancy.company ? vacancy.company : "Назва компанії"}</b></p>
+                <p><b>Компанія: {(parentComponent === 'Vacancies'? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії"}</b></p>
                 <address>
                     <p>{city} {vacancy.region&&(`(${vacancy.region} обл.)`)}</p>	
                 </address>	

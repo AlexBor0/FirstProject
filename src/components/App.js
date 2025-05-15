@@ -145,7 +145,7 @@ useEffect (() => {
   } 
 }, [currentUser.userStatus])
 
-useEffect(() => {
+useEffect(() => { // Получение данных пользователя
   const jwt = localStorage.getItem('jwt');
   const status = currentUser.userStatus;
   const recDoc = status === "employer"? "vacancies":"candidates";
@@ -195,7 +195,7 @@ useEffect(() => {
 
   const toggleButton = () => {if(!regEntry)setRegEntry(!regEntry)} // Вход в учетную запись (regEntry меняется на true )
 
-      useEffect(() => {
+      useEffect(() => { // Получение аватарки пользователя
 
         if ((currentUser.userName && currentUser.docId && currentUser.userImage.length < 1 
           
@@ -218,9 +218,11 @@ useEffect(() => {
   
       }, [currentUser.userName, currentUser.changeFoto, currentUser.docId, regEntry, currentUser.userImage.length]);
 
-      useEffect(() => {
+      useEffect(() => {// Получение списка вакансий или резюме для профиля
         const status = currentUser.userStatus;
-        let recDoc = status === "employer"? "=vacancies": "[candidates][populate][0]=foto";
+        let recDoc = status === "employer"
+          ? "=vacancies"
+          : "[candidates][populate][0]=foto";
         if((currentUser.userJWT && currentUser.userStatus) || currentUser.addDoc ) {
           const fetchGetDocs = async () => {
             
@@ -246,7 +248,7 @@ useEffect(() => {
        
       confirm&&toggleModal();
 
-      useEffect(() => {
+      useEffect(() => { // Получение списка  специальностей
         if(currentUser.docId&& !specialtiesBase) {
           const fetchSpecialties = async () => {
             
@@ -264,7 +266,7 @@ useEffect(() => {
         }
       }, [currentUser.docId, specialtiesBase]);
 
-      useEffect(() => {
+      useEffect(() => {// Получение списка городов
         if(currentUser.docId&& !citiesBase) {
           const fetchCities = async () => {
             

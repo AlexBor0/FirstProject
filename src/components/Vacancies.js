@@ -16,7 +16,7 @@ const Vacancies = ({host, setTitle, axios}) => {
 
 			const fetchVacancies = async () => {
 
-				try {const response = await axios.get(`${host}/api/Vacancies`);
+				try {const response = await axios.get(`${host}/api/Vacancies?populate[company][populate][logo]=true`);
 					setVacancies(response.data.data)
 					setTitle(response.data.data.map(vacancy => (vacancy.title)));
 				} 
@@ -43,6 +43,7 @@ const Vacancies = ({host, setTitle, axios}) => {
 					vacancy={el}
 					editable={editable}
 					parentComponent={'Vacancies'}
+					host={host}
 					/>
 				))}
 

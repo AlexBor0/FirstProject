@@ -84,10 +84,10 @@
     text-align: left;
     margin: 5px;
   }
-.previewModal .vacancy p {
+/* .previewModal .vacancy p {
     margin: 7px 0px;
 
-  }
+  } */
 .previewModal .vacancy h3+p{
     margin: 0px 0px 3px 6px;
   }

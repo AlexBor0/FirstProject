@@ -3,11 +3,12 @@ import './../css/Preview.css';
 import PreviewVacancy from "./PreviewVacancy";
 import PreviewResume from "./PreviewResume";
 
-const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, setCurrentUser, axios, setIsPreviewVisible, setAddDoc}) => {
+const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, setCurrentUser, axios, setIsPreviewVisible, setAddDoc, editable}) => {
 
     const previewContentRef = useRef(null);
     const [failUpload, setFailUpload] = useState(null);
-    const editable = true;
+    
+    
 
     useEffect(() => {
         if (previewContentRef.current) {
@@ -40,7 +41,7 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
     
         if (!candidateId) console.log('Кандидат не знайдений');
         const data = {
-          company: newVacancy.company,
+          company: { connect: [currentUser.company.id] },
           title: newVacancy.vacancy,
           candidates: { connect: [candidateId] } || newVacancy.candidate,
           user: {connect: [currentUser.id] },

@@ -52,6 +52,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
     [error, setError] = useState(null);
 
     const modalContRef = useRef(null);
+    const editable = true;
     
 
     const arrowPress = (e, options) => {
@@ -108,7 +109,8 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
     };
 
     useEsc(()=> setAddDoc(false));
-    useNoScroll( addDoc, saveTextEditor )
+    useNoScroll( addDoc, saveTextEditor );
+  
 
     return ((
         <div className={modalClass} 
@@ -181,6 +183,7 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                     axios={axios}
                     setIsPreviewVisible={setIsPreviewVisible}
                     setAddDoc={setAddDoc}
+                    editable={editable}
                 />
             )}
             {postSuccess && (
@@ -189,7 +192,13 @@ const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputEr
                             onClose={setPostSuccess} 
                             closeItem={setAddDoc}
                             typeOfDoc={type}
-                            newClass={"modalAddDoc modalAdCont"}
+                            newClass={"modalAddDoc modalAdComp"}
+                            editable={editable}
+                            currentUser={currentUser}
+                            setCurrentUser={setCurrentUser}
+                            setLoading={setLoading}
+                            axios={axios}
+                            host={host}
                         />
             )}
         </div>)
