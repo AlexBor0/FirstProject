@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import { useState, useEffect }  from "react";
 import ProfileForm from "./ProfileForm";
 import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoTrash, IoArrowUndo } from "react-icons/io5";
 import FormatDate from './FormatDate';
@@ -32,7 +32,29 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
     clipRule: "evenodd"
   }
 
-    const docs = typeOfSearch ? "Vacancies" : "Candidates"
+    const docs = typeOfSearch ? "Vacancies" : "Candidates";
+
+    useEffect(() => {
+    if (showProfileBook) {
+      const pageTwo = document.querySelector('.pageTwo');
+      const pageThree = document.querySelector('.pageThree');
+      const bookPageTwo = document.querySelector('.bookPageTwo');
+      const bookPageThree = document.querySelector('.bookPageThree');
+      if (pageTwo && pageThree && bookPageTwo && bookPageThree) {
+        if (isPageTwoVisible) {
+          pageTwo.style.display = 'block';
+          bookPageThree.style.display = 'block';
+          pageThree.style.display = 'none';
+          bookPageTwo.style.display = 'none';
+        } else {
+          pageTwo.style.display = 'none';
+          bookPageThree.style.display = 'none';
+          pageThree.style.display = 'block';
+          bookPageTwo.style.display = 'block';
+        }
+      }
+    }
+  }, [showProfileBook, isPageTwoVisible]);
     
     const fetchDeleteDoc = async () => {
 
