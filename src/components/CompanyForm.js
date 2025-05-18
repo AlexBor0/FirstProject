@@ -131,22 +131,22 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
 
            if (response && response.status >= 200 && response.status < 300) {
 
-        try {
-            const updatedCompany = await axios.get(`${host}/api/users/me?populate[company][populate][logo]=true&populate[vacancies]=true`, {
-                headers: {
-                    Authorization: `Bearer ${currentUser.userJWT}`
-                }
-            });
+        // try {
+        //     const updatedCompany = await axios.get(`${host}/api/users/me?populate[company][populate][logo]=true&populate[vacancies]=true`, {
+        //         headers: {
+        //             Authorization: `Bearer ${currentUser.userJWT}`
+        //         }
+        //     });
 
-            setCurrentUser(prev => ({
-                ...prev, 
-                company: updatedCompany.data.company,
-                userDocs: updatedCompany.data.vacancies
-            }));
+        //     setCurrentUser(prev => ({
+        //         ...prev, 
+        //         company: updatedCompany.data.company,
+        //         userDocs: updatedCompany.data.vacancies
+        //     }));
             
-        } catch (error) {
-            console.error('Ошибка при получении обновленных данных компании:', error);
-        }
+        // } catch (error) {
+        //     console.error('Ошибка при получении обновленных данных компании:', error);
+        // }
     }
     
     if (response && (response.status >= 400 || !response.data)) {

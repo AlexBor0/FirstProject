@@ -7,23 +7,36 @@ const MessagePost = ({isOpen, onClose, closeItem, typeOfDoc, newClass, setPostFe
 
     
 
-    const document = typeOfDoc==="Компанія"? "Інформацію про компанію додано!" : (typeOfDoc? "Вакансія успішно опублікована": "Резюме успішно опубліковано"); 
+    const document = typeOfDoc==="Компанія"? "Інформацію про компанію додано!" : (typeOfDoc? "Вакансія успішно опублікована": "Резюме успішно опубліковано");
+    const status = currentUser.userStatus;
+    let recDoc = status === "employer"
+          ? "[company][populate][logo]=true&populate[vacancies]=true"
+          : "[candidates][populate][0]=foto"; 
 
      const fetchGetInfo = async () => {
         const jwt = currentUser.userJWT;
         setLoading(true);
-        try {
-            const response = await axios.get(`${host}/api/users/me?populate[company][populate][logo]=true&populate[vacancies]=true`
-                , {
-                    headers: {
-                      Authorization: `Bearer ${jwt}`
-                  }
-                });
-                setCurrentUser(prev => ({...prev, company: response.data.company}));
-                setCurrentUser(prev => ({...prev, userDocs: response.data.vacancies}));
-                
+ 
+        try 
+            {
 
-        }
+                const response = await axios.get( `${host}/api/users/me?populate${recDoc}`
+                        , {
+                            headers: {
+                            Authorization: `Bearer ${jwt}`
+                        }
+                        });
+
+                        if (status === "employer") {
+                            setCurrentUser(prev => ({...prev, company: response.data.company}));
+                            setCurrentUser(prev => ({...prev, userDocs: response.data.vacancies}));
+                        }
+                        if (status === "candidate") {
+                            setCurrentUser(prev => ({...prev, userDocs: response.data.candidates}));
+                        }
+
+            }
+            
         catch (error) {
             console.error('Помилка отримання данних:', error);
         } finally {
