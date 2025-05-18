@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import VacancyCard from './VacancyCard';
 
 const Vacancies = ({host, setTitle, axios}) => {

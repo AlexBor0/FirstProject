@@ -18,7 +18,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
           [loading, setLoading] = useState(false),
           [error, setError] = useState(null),
           [openForm, setOpenForm] = useState(false),
-          [imageOpacity, setImageOpacity] = useState(1), // Новое состояние для прозрачности изображения
+          [imageOpacity, setImageOpacity] = useState(1), 
           [currentImageSrc, setCurrentImageSrc] = useState('');
 
     useEffect(() => {
@@ -125,12 +125,12 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
               img.src = newAvatarUrl;
             };
             setFileSize(null);
-            if (imageIdToDelete&&editeCandidate.foto) {
+            if (imageIdToDelete && editeCandidate.foto) {
               const deletePrevImage = await axios.delete(
                 `${host}/api/upload/files/${imageIdToDelete}`,
                 {
                   headers: {
-                    Authorization: `Bearer ${currentUser.userJWT}`,
+                    'Authorization': `Bearer ${currentUser.userJWT}`,
                   },
                 }
               );
@@ -164,7 +164,7 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
           userData,
           {
             headers: {
-              Authorization: `Bearer ${currentUser.userJWT}`,
+              'Authorization': `Bearer ${currentUser.userJWT}`,
             },
           }
         );

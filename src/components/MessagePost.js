@@ -38,9 +38,9 @@ const MessagePost = ({isOpen, onClose, closeItem, typeOfDoc, newClass, setPostFe
         } 
         onClose(null);
         closeItem(false);
-        if (!editable) {
-            setPostFetch(false);
-        }
+        // if (!editable) {
+        //     setPostFetch(false);
+        // }
     }
     
     useEffect(() => {
@@ -48,7 +48,7 @@ const MessagePost = ({isOpen, onClose, closeItem, typeOfDoc, newClass, setPostFe
             const timer = setTimeout(() => {
                 closeMessagePost()
 
-            }, 3000);
+            }, 2000);
             return () => clearTimeout(timer);
         }
         

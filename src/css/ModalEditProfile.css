@@ -290,7 +290,10 @@
 .pageTwo .pageBtn, .pageThree .pageBtn, .pageFour .pageBtn {
 	margin-top: 4px;
 }
-.pageTwo .currentEntries .loading {
+.loading {
+	display: block;
+	width: 40%;
+	height: 40%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: auto;

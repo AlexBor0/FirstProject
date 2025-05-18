@@ -22,7 +22,7 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
           [postFetch, setPostFetch] = useState(false),
           [postSuccess, setPostSuccess] = useState(null);
 
-           const resetNewCompany = () => ({
+    const resetNewCompany = () => ({
         companyName: '',
         logo: '',
         telephone: '',
@@ -80,12 +80,13 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
                     closeItem={setOpenForm}
                     typeOfDoc={"Компанія"}
                     newClass={"modalAdCont addCompany"}
-                    editable={false}
+                    editable={true}
                     currentUser={currentUser}
                     setCurrentUser={setCurrentUser}
                     setLoading={setLoading}
                     axios={axios}
                     host={host}
+                    setPostFetch={setPostFetch}
                 />
             }
      

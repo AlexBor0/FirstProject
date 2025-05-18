@@ -1,4 +1,3 @@
-import React from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import FormatDate from './FormatDate';

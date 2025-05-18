@@ -34,7 +34,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
 
     const docs = typeOfSearch ? "Vacancies" : "Candidates";
 
-    useEffect(() => {
+    useEffect(() => { // Установка начального состояния видимости страниц
     if (showProfileBook) {
       const pageTwo = document.querySelector('.pageTwo');
       const pageThree = document.querySelector('.pageThree');

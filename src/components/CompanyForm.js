@@ -1,4 +1,4 @@
-import React, {useState}  from "react";
+import {useState}  from "react";
 import { IoCameraSharp, IoCloseCircleSharp } from "react-icons/io5";
 import TelephoneInput from "./TelephoneInput";
 import CompanyLogo from "./CompanyLogo";
@@ -63,50 +63,99 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
             }
           };
 
+        let newFotoId = null;
+
         const fetchNewCompany = async () => {
-            const file = new FormData();
-            file.append("files", newCompany.logo);
+            if(newCompany.logo) {
+
+                    let logoIdToDelete = currentUser?.company?.logo?.id || null;
+                const file = new FormData();
+                file.append("files", newCompany.logo);
+            
+                const imageResponse = await apiRequest(() =>
+                    axios.post(`${host}/api/upload`, file, {
+                        headers: {
+                            'Authorization': `Bearer ${currentUser.userJWT}`, 
+                            'Content-Type': 'multipart/form-data', 
+                        },
+                    })
+                ); 
+                newFotoId = imageResponse?.data[0].id;
+            
+                if (logoIdToDelete && newFotoId) {
+
+                    const deletePrevImage = await axios.delete(
+                        `${host}/api/upload/files/${logoIdToDelete}`,
+                        {
+                        headers: {
+                            'Authorization': `Bearer ${currentUser.userJWT}`,
+                        },
+                        }
+                    );
         
-            const imageResponse = await apiRequest(() =>
-            axios.post(`${host}/api/upload`, file, {
-                headers: {
-                'Authorization': `Bearer ${currentUser.userJWT}`, 
-                'Content-Type': 'multipart/form-data', 
-                },
-            })
-            );
-            const newFotoId = imageResponse?.data[0].id;
-        
+                    if (deletePrevImage.status !== 200) {
+                        throw new Error("Помилка при видаленні старого файлу");
+                    } 
+
+                };
+
+            };
         
             const data = {
             companyName: newCompany?.companyName && newCompany.companyName,
             logo: newFotoId && newFotoId,
             telephone: newCompany?.telephone && newCompany.telephone.replace(/\D/g, ''),
-            companySite: newCompany?.companySite,
-            telegram: newCompany?.telegram,
+            companySite: newCompany?.companySite && newCompany?.companySite,
+            telegram: newCompany?.telegram && newCompany?.telegram,
             user: {connect: [currentUser.id] },
             };
-        
-            const response = await apiRequest(() =>
-            axios.post(`${host}/api/companies`, { data }, {
-                headers: { 
-                'Authorization': `Bearer ${currentUser.userJWT}`,
-                'Content-Type': 'application/json' },
-            })
-            );
-            if (response) {
-            setNewCompany((prev) => ({ ...prev, documentId: response.data.data.documentId }));
+            const name = currentUser?.company?.companyName;
+            const docId = currentUser?.company?.documentId;
 
-            }
-            if 
-            // (response.status === 400 && 404) 
-            (response.status!== 200) {
-                setFailUpload(true);
-            };
-            if(error) {
-            console.log(error.message)
-            }
-        };
+        
+            const response = await apiRequest(() => 
+                    name 
+                        ? axios.put(`${host}/api/companies${'/' + docId}`, { data }, {
+                            headers: { 
+                            'Authorization': `Bearer ${currentUser.userJWT}`,
+                            'Content-Type': 'application/json' 
+                            },
+                        })
+                        : axios.post(`${host}/api/companies`, { data }, {
+                            headers: { 
+                            'Authorization': `Bearer ${currentUser.userJWT}`,
+                            'Content-Type': 'application/json' 
+                            },
+                        })
+                );
+
+           if (response && response.status >= 200 && response.status < 300) {
+
+        try {
+            const updatedCompany = await axios.get(`${host}/api/users/me?populate[company][populate][logo]=true&populate[vacancies]=true`, {
+                headers: {
+                    Authorization: `Bearer ${currentUser.userJWT}`
+                }
+            });
+
+            setCurrentUser(prev => ({
+                ...prev, 
+                company: updatedCompany.data.company,
+                userDocs: updatedCompany.data.vacancies
+            }));
+            
+        } catch (error) {
+            console.error('Ошибка при получении обновленных данных компании:', error);
+        }
+    }
+    
+    if (response && (response.status >= 400 || !response.data)) {
+        setFailUpload(true);
+    }
+    if(error) {
+        console.log(error.message)
+    }
+};
         
         // useEffect ((newFotoId) => {
         //     if (failUpload) {

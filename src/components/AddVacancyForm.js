@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef} from "react";
 
 import TextEditor from "./TextEditor";
 import CityInput from "./CityInput";
