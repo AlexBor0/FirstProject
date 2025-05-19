@@ -131,3 +131,7 @@ article header {
 .companyLogo {
   margin-top: 7px;
 }
+ .previewContent .card  {
+  margin: 0px 20px;
+
+}

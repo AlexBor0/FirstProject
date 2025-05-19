@@ -1,9 +1,16 @@
 import React from "react";
 import VacancyCard from "./VacancyCard";
+import useNoScroll from "./useNoScroll";
 
-const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, editable, preview, onClose, currentUser, host}) => {
+const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, editable, preview, onClose, currentUser, host, parentComponent}) => {
 
     
+        useNoScroll(() => {
+            if (parentComponent === "fullCardInfo") {
+                return true;
+            }
+        });
+  
     
     return (
         <>
@@ -38,6 +45,7 @@ const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, e
                             currentUser={currentUser}
                             host={host}
                             preview={preview} 
+                            parentComponent={parentComponent}
                         />
 
                     </div>

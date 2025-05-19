@@ -12,6 +12,7 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
 
     const city = editable ? vacancy.city : vacancy.location;
     const pcv = parentComponent === 'Vacancies';
+    const fci = parentComponent === 'fullCardInfo';
 
 
     return (
@@ -45,7 +46,7 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                                 alt="Логотип компанії"
                             />
                     }
-                    {pcv && vacancy?.company?.logo && 
+                    {(pcv || fci) && vacancy?.company?.logo && 
                         <img 
                             width="100px"
                             height="100px"
@@ -56,7 +57,7 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                     }
                         <p className="salary" >{vacancy.salary} грн.{" "}</p>
                         
-                    <p><b>Работодавець: {(pcv? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії"}</b></p>
+                    <p><b>Работодавець: {((pcv || fci)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії"}</b></p>
                     <address>
                         <p>{city} {vacancy.region&&(`(${vacancy.region} обл.)`)}</p>	
                     </address>	
@@ -124,6 +125,7 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                             editable={editable}
                             currentUser={currentUser}
                             host={host}
+                            parentComponent={"fullCardInfo"}
                         /> 
                     </div>
                 </div>
