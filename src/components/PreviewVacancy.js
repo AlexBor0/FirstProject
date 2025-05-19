@@ -1,14 +1,9 @@
 import React from "react";
 import VacancyCard from "./VacancyCard";
 
-const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, editable, preview, setShowDoc, setShowConfirmModal, setShowDocList, setShowProfileBook, currentUser, host}) => {
+const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, editable, preview, onClose, currentUser, host}) => {
 
-    const onClose = () => {
-        setShowDoc(false); 
-        setShowConfirmModal(false);
-        setShowDocList(true);
-        setShowProfileBook(true);
-    };
+    
     
     return (
         <>

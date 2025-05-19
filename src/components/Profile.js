@@ -176,6 +176,13 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
     }
 };
 
+const onClose = () => {
+        setShowDoc(false); 
+        setShowConfirmModal(false);
+        setShowDocList(true);
+        setShowProfileBook(true);
+    };
+
     return(
       <>
         {showProfileBook && (
@@ -322,6 +329,7 @@ const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurr
               setShowDocList={setShowDocList}
               setShowProfileBook={setShowProfileBook}
               currentUser={currentUser}
+              onClose={onClose}
             />
           : <PreviewResume
               candidate={currentUser.userDocs[indexDoc]}

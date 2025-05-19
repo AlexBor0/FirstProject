@@ -1,4 +1,4 @@
-import {useState}  from "react";
+import {useState, useEffect}  from "react";
 import { IoCameraSharp, IoCloseCircleSharp } from "react-icons/io5";
 import TelephoneInput from "./TelephoneInput";
 import CompanyLogo from "./CompanyLogo";
@@ -131,22 +131,6 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
 
            if (response && response.status >= 200 && response.status < 300) {
 
-        // try {
-        //     const updatedCompany = await axios.get(`${host}/api/users/me?populate[company][populate][logo]=true&populate[vacancies]=true`, {
-        //         headers: {
-        //             Authorization: `Bearer ${currentUser.userJWT}`
-        //         }
-        //     });
-
-        //     setCurrentUser(prev => ({
-        //         ...prev, 
-        //         company: updatedCompany.data.company,
-        //         userDocs: updatedCompany.data.vacancies
-        //     }));
-            
-        // } catch (error) {
-        //     console.error('Ошибка при получении обновленных данных компании:', error);
-        // }
     }
     
     if (response && (response.status >= 400 || !response.data)) {
@@ -157,24 +141,24 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
     }
 };
         
-        // useEffect ((newFotoId) => {
-        //     if (failUpload) {
-        //     const fetchDeleteImage = async () => {
-        //         const deletePrevImage = await axios.delete(
-        //         `${host}/api/upload/files/${newFotoId}`,
-        //         {
-        //             headers: {
-        //             Authorization: `Bearer ${currentUser.userJWT}`,
-        //             },
-        //         }  
-        //         );
-        //         if (deletePrevImage.status !== 200) {
-        //         throw new Error("Помилка при видаленні відправленого файлу");
-        //         };
-        //     };
-        //     fetchDeleteImage();
-        //     }     
-        // }, [currentUser.userJWT, host, axios, failUpload]);
+        useEffect ((newFotoId) => {
+            if (failUpload) {
+            const fetchDeleteImage = async () => {
+                const deletePrevImage = await axios.delete(
+                `${host}/api/upload/files/${newFotoId}`,
+                {
+                    headers: {
+                    Authorization: `Bearer ${currentUser.userJWT}`,
+                    },
+                }  
+                );
+                if (deletePrevImage.status !== 200) {
+                throw new Error("Помилка при видаленні відправленого файлу");
+                };
+            };
+            fetchDeleteImage();
+            }     
+        }, [currentUser.userJWT, host, axios, failUpload]);
 
 
     return (         

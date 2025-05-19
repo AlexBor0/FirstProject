@@ -3,10 +3,8 @@ import Candidate from "./Candidate";
 import './../css/ItemCard.css';
 
 const Candidates = ({candidates, deleteUser, host}) => {
-
-         
-    if (candidates.length  > 0) 
       
+    if (candidates.length  > 0)   
           
       return (
 

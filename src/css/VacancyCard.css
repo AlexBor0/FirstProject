@@ -53,7 +53,18 @@ address {
 } 
 .description{
   text-indent: 12px;
+  
 }
+.description-short {
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 15px;
+}
+
 .vacancyInfo {
   width: 250px;
   font-size: 0.8rem;
@@ -83,7 +94,23 @@ article header {
     justify-content: center;
     background-color:wheat;
   }
+  article header button {
+    border:none;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: wheat;
+    font-weight: 700;
+    height: 100%;
+    width: 100%;
+    padding: 4px 10px;
+  }
+  article header button:hover, article header button:focus {
+    background-color: rgb(245, 213, 154);
+    color: rgb(4, 33, 197);
+    cursor: pointer;
+  }
 .vacancy h3{
+  font-size: 18px;
     margin: 4px 10px;
     font-weight: 650;
   }
