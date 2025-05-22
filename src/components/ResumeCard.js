@@ -40,7 +40,8 @@ const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, paren
                     body="Доброго дня!"
                     children={candidate.email}
                 />
-                {tel ? (<p>тел: <a href={`tel:+${formatedTel}`}>{editable ? tel : formatPhoneNumber(tel) }</a></p>) : (<p>тел: не надано</p>)}
+                <p>тел: {tel? (<a href={`tel:+${formatedTel}`}>{editable ? tel : formatPhoneNumber(tel) }</a>) : (<span>не надано</span>)} </p>
+
             </address>
             {!editable&& 
                 <div className="dates">

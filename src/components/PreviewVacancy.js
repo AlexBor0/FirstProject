@@ -6,7 +6,7 @@ const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, e
 
     
         useNoScroll(() => {
-            if (parentComponent === "fullCardInfo") {
+            if (parentComponent === "shortCard") {
                 return true;
             }
         });

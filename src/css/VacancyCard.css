@@ -20,8 +20,55 @@
     overflow-y: hidden;
  }
  .brieflyMain {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding-left: 6px;
+  
  }
+ .rightSide {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* min-width: 40%; */
+  flex: 1 0 260px;
+  box-sizing: border-box;
+}
+
+.leftSide{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  flex-wrap: wrap;
+  min-width: 50%;
+  flex: 1 0 260px;
+}
+.wrapProperties{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex: 1 0 100%;
+  box-sizing: border-box;
+}
+.wrapPropBlock{
+  width: 246px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+details {
+  font-size: 14px;
+}
+details address {
+  font-size: 12px;
+}
+summary {
+  font-size: 14px;
+  font-weight: 600;
+}
 .vacancy {
     position: relative;
  }
@@ -29,7 +76,7 @@
     margin: 2px 3px;  
   }
 address {
-  font-size: 0.9rem;
+  font-size: 14px;
 }
   .card p:has(strong) {
     margin-top: 7px;
@@ -41,7 +88,7 @@ address {
   justify-content: start;
 }
 
-.vacancyInfo .vacancyProperties span:nth-child(odd), .vacancyInfo .propertieValues span:nth-child(odd) {
+.vacancyInfo .wrapPropBlock span:nth-child(odd) {
   background-color:rgb(248, 232, 207);
 }
 .vacancyProperties span, .propertieValues span {
@@ -66,7 +113,7 @@ address {
 }
 
 .vacancyInfo {
-  width: 250px;
+  min-width: 250px;
   font-size: 0.8rem;
   /* border: solid 1px rgb(3, 87, 116); */
   display: flex;
@@ -77,14 +124,15 @@ address {
   margin-bottom: 8px;
 }
 .vacancy .dates{
-    width: 222px;
+    width: 160px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content:space-between;
     clear: both;
     font-size: 0.7rem;
-    margin: 0px 0px 3px 0px;
+    margin: 10px 0px 3px 0px;
+    background-color:rgb(255, 254, 231);
     color:rgb(10, 76, 199);
   }
 article header {
@@ -133,5 +181,4 @@ article header {
 }
  .previewContent .card  {
   margin: 0px 20px;
-
 }
