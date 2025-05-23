@@ -166,7 +166,7 @@ const changeRadio = (e) => {
               // placeholder={currentUser?.company?.companyName ||"Назва компанії" }
               name="company" 
               minLength="3" 
-              maxLength="30"
+              maxLength="25"
               type="text" 
               className="modalInputAd short"
               value={currentUser?.company?.companyName} 

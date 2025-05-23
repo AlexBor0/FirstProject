@@ -107,10 +107,24 @@ const App = () => {
     setRegUser(resetRegUser());
   }, [setRegUser] ); 
   
-  const validInput = (value, inputElement) => {
+  const validInput = (value, inputElement, exceptions = []) => {
     if(inputElement.type === "text") {
-        const forbiddenChars = /[<>{}[\]()&$%#?!*^+=|\\:;,"'`~]/;
-        const mat = value.match(forbiddenChars);
+      
+        const baseForbiddenChars = ['<', '>', '{', '}', '[', ']', '(', ')', '&', '$', '%', '#', '?', '!', '*', '^', '+', '=', '|', '\\', ':', ';', ',', '"', "'", '`', '~'];
+        const forbiddenChars = baseForbiddenChars.filter(char => !exceptions.includes(char));
+        
+        function createPreEscapedRegex(forbiddenChars) {
+            const charMap = {
+                '.': '\\.', '*': '\\*', '+': '\\+', '?': '\\?', '^': '\\^', '$': '\\$', '{': '\\{', '}': '\\}', '(': '\\(', ')': '\\)','|': '\\|', '[': '\\[', ']': '\\]', '\\': '\\\\'
+            };
+            
+            const escaped = forbiddenChars
+                .map(char => charMap[char] || char)
+                .join('');
+            return new RegExp(`[${escaped}]`);
+        }
+
+        const mat = value.match(createPreEscapedRegex(forbiddenChars));
         
         if (mat) {
             setInputErrors(prev => ({
@@ -131,11 +145,13 @@ const App = () => {
 
   const getDataItems = (e, options = {}) => {
     const { name, value } = e.target;
+    const exceptions = options.exceptions || [];
+
     if (options.setNewDoc) options.setNewDoc(prev => ({ ...prev, [name]: value }));
     if (options.setSelectValue) options.setSelectValue(value);
     if (options.setQuery) options.setQuery(value);
     if (options.setShowList) options.setShowList(value.length > 0);
-    if (options.validate) validInput(value, e.target);
+    if (options.validate) validInput(value, e.target, exceptions);
 };
 
 useEffect (() => {

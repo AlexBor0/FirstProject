@@ -119,6 +119,15 @@
 	margin: 0px 0px 2px -1px;
 	border: none;
 }
+
+.currentEntries .companyProfile .companyName, .currentEntries .companyProfile p {
+    
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
 .companyProfile .btnEditProfile{
     font-size: 12px;
     margin-left: auto;
@@ -133,7 +142,6 @@
 }
 
 .companyProfile .wrapLogoImage {
-    justify-content: center;
     margin-left: auto;
     margin-right:auto;
 }

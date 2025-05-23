@@ -4,7 +4,7 @@ import TelephoneInput from "./TelephoneInput";
 import CompanyLogo from "./CompanyLogo";
 
 
-const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, newCompany, setNewCompany, resetNewCompany, setLoading, setPostSuccess, setPostFetch, setOpenForm, setIsPrev }) => {
+const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNewCompany, resetNewCompany, setLoading, setPostSuccess, setPostFetch, setOpenForm, setIsPrev }) => {
 
  
 
@@ -41,7 +41,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
 
           const goBack = (e) => {
             e.preventDefault();
-            resetNewCompany();
+            setNewCompany(resetNewCompany());
             setFileSize('');
             setOpenForm(false);
             setIsPrev(true)
@@ -100,19 +100,28 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
                 };
 
             };
-        
-            const data = {
-            companyName: newCompany?.companyName && newCompany.companyName,
-            logo: newFotoId && newFotoId,
-            telephone: newCompany?.telephone && newCompany.telephone.replace(/\D/g, ''),
-            companySite: newCompany?.companySite && newCompany?.companySite,
-            telegram: newCompany?.telegram && newCompany?.telegram,
-            user: {connect: [currentUser.id] },
-            };
+
             const name = currentUser?.company?.companyName;
             const docId = currentUser?.company?.documentId;
 
+
         
+            const data = {
+                ...(newCompany?.companyName && { companyName: newCompany?.companyName}),
+                companyName: newCompany?.companyName,
+                ...(newFotoId && { logo: newFotoId }),
+                ...(newCompany?.telephone && newCompany.telephone.replace(/\D/g, '').length > 4 && { 
+                        telephone: newCompany.telephone.replace(/\D/g, '') 
+                    }),
+                ...(newCompany?.companySite && { companySite: newCompany.companySite }),
+                ...(newCompany?.telegram && { telegram: newCompany.telegram }),
+                user: {connect: [currentUser.id] },
+            };
+            
+
+        if (data) {
+
+        }
             const response = await apiRequest(() => 
                     name 
                         ? axios.put(`${host}/api/companies${'/' + docId}`, { data }, {
@@ -167,15 +176,28 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
 
                 <form 
                     id="editCompany"
-                   
+                    onSubmit={
+                        (e) => {
+                            e.preventDefault();
+                            fetchNewCompany()
+                        }
+                    }
+                 
                 >
 
                     <input 
-                        required
+                        required={currentUser?.company?.companyName ? false : true}
                         className="inputEditProfile text" 
-                        type="text" name="companyName" 
+                        type="text" 
+                        name="companyName"
+                        minLength="3" 
+                        maxLength="25" 
                         placeholder={currentUser?.company?.companyName || "Назва компанії"}
-                        onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
+                        onChange={(e) => getDataItems(e, {
+                             setNewDoc: setNewCompany, 
+                             validate: true,
+                             exceptions: ['"']
+                            })}
                         
                     />
                         
@@ -235,6 +257,7 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
                                     telClass={"inputEditProfile text"}
                                     telephone={newCompany.telephone}
                                     setNewItem={setNewCompany}
+                                    currentUser={currentUser}
                                 />
 
                             <span>Сайт компанії: </span> 
@@ -244,7 +267,11 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
                                 type="text" 
                                 name="companySite" 
                                 placeholder={currentUser?.company?.companySite || "https://"}
-                                onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
+                                onChange={(e) => getDataItems(e, {
+                                     setNewDoc: setNewCompany,
+                                      validate: true,
+                                     exceptions: [':', '/', '.']
+                                    })}
                             />
 
                             <span>Telegram: </span> 
@@ -254,7 +281,11 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
                                 type="text" 
                                 name="telegram" 
                                 placeholder={currentUser?.company?.telegram || "https://t.me/"}
-                                onChange={(e) => getDataItems(e, { setNewDoc: setNewCompany, validate: true })}
+                                onChange={(e) => getDataItems(e, {
+                                     setNewDoc: setNewCompany,
+                                     validate: true,
+                                     exceptions: [':', '/', '.']
+                                    })}
                             />
                             
                         </div>
@@ -266,10 +297,10 @@ const CompanyForm = ({currentUser, getDataItems, setCurrentUser, axios, host, ne
                             </button>
 
                             <button 
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    fetchNewCompany()
-                                }} 
+                                // onClick={(e) => {
+                                //     e.preventDefault();
+                                //     fetchNewCompany()
+                                // }} 
                             >
                                 {currentUser?.company?.companyName ? "ЗМІНИТИ" : "ДОДАТИ"}  
                             </button>

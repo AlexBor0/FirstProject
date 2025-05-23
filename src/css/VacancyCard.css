@@ -36,7 +36,9 @@
   flex: 1 0 260px;
   box-sizing: border-box;
 }
-
+.companyTitle {
+  width: 200px;
+}
 .leftSide{
   display: flex;
   flex-direction: column;

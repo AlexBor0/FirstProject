@@ -1,11 +1,12 @@
 import React,  {useState, useEffect} from "react";
 import formatPhoneNumber from "./FormatePhone";
 
-const TelephoneInput = ({telephone, telClass, setNewItem }) => {
+const TelephoneInput = ({telephone, telClass, setNewItem, currentUser }) => {
 
     const [telephoneDigits, setTelephoneDigits] = useState(() => {
                 return telephone ? telephone.replace(/\D/g, '') : '380';
                 });
+    const [isFocused, setIsFocused] = useState(false);
 
     const getTelNumber = (e) => {
     
@@ -25,8 +26,7 @@ const TelephoneInput = ({telephone, telClass, setNewItem }) => {
     };
     
     const manageDigits = (e) => {
-    
-            
+             
         if (e.target.value.length < 1) {
             setTelephoneDigits("380");
             setTimeout(() => {
@@ -80,19 +80,35 @@ const TelephoneInput = ({telephone, telClass, setNewItem }) => {
             }
         };
 
+    const handleFocus = () => {
+         setIsFocused(true);
+    };
+
+     const handleBlur = () => {
+        setIsFocused(false);
+    };
+
+        const placeholderValue = currentUser?.company?.telephone
+        ? formatPhoneNumber(currentUser.company.telephone.replace(/\D/g, ''))
+        : "+380 (XX) XXX XX XX";
+
 return (
     <input 
-        placeholder="+380 (XX) XXX XX XX" 
+        placeholder={placeholderValue} 
         name="telephone"
         minLength="6" 
         maxLength="19" 
         type="tel" 
         className={telClass}
-        value={telephone}  
+        value={isFocused || telephoneDigits !== '380' ? formatPhoneNumber(telephoneDigits) : ''} 
         onInput={getTelNumber}
         onKeyDown={manageEvents}
         onClick={manageDigits}
-        onFocus={manageDigits}
+        onFocus={(e) => {
+            manageDigits(e);
+            handleFocus();
+        }}
+        onBlur={handleBlur}
     />
 )
 }

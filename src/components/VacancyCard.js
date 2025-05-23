@@ -96,8 +96,9 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                     </div>
                      
                     <div className="rightSide">
-                        <div>
-                            <p><b>{((pcv || pcsc)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії"}</b></p>
+                        <p className="companyTitle"><b>{((pcv || pcsc)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії"}</b></p>
+                        <div >
+                            
                             {(pcsc || editable || preview) &&
                                 <details>
                                     <summary>Реквізити</summary>
@@ -110,9 +111,7 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                                     </address>
                                 </details>
                             }
-                             
-
-
+                         
                         </div>
                        
                         {(editable || preview) && currentUser?.company?.logo && 
