@@ -10,6 +10,8 @@ import OddBookPage from "./OddBookPage ";
 import ConfirmModal from "./ConfirmModal";
 import CompanyPage from "./CompanyPage";
 import BillBoard from "./BillBoard";
+import DetailsPage from "./DetailsPage";
+import ResponsesPage from "./ResponsesPage";
 
 
 
@@ -243,10 +245,18 @@ const onClose = () => {
            {/* Содержимое Страницаы 3 */}
            <div className="pageThree">
               <div className="profileHead" >
-              { typeOfSearch? "АНАЛІТИКА": "МОЇ ВІДГУКИ" }
+              { typeOfSearch? "РЕКВІЗИТИ": "МОЇ ВІДГУКИ" }
               </div>
               <div className="currentEntries">
-
+                { typeOfSearch
+                  ? <DetailsPage
+                      currentUser={currentUser}
+                      getDataItems={getDataItems}
+                      setCurrentUser={setCurrentUser}
+                      axios={axios}
+                      host={host}
+                    /> 
+                  : <ResponsesPage/> }
               </div>
               <button className="pageBtn" onClick={flipPage}>
                 <IoArrowUndo  className="redo-icon"/> 

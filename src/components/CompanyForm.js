@@ -201,7 +201,7 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
                         
                     />
                         
-                    <div className="wrapLogoImage">
+                    <div className="wrapLogoImageForm">
                         {(newCompany.logo) 
                         ? <img className="previewImg" width="60px" height="60px" src={ newCompany.logo && imageSrc } alt="Новий логотип компанії"/>
                         : (currentUser?.company?.logo?.url &&
@@ -269,7 +269,7 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
                                 placeholder={currentUser?.company?.companySite || "https://"}
                                 onChange={(e) => getDataItems(e, {
                                      setNewDoc: setNewCompany,
-                                      validate: true,
+                                     validate: true,
                                      exceptions: [':', '/', '.']
                                     })}
                             />
@@ -296,12 +296,7 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
                                 НАЗАД
                             </button>
 
-                            <button 
-                                // onClick={(e) => {
-                                //     e.preventDefault();
-                                //     fetchNewCompany()
-                                // }} 
-                            >
+                            <button>
                                 {currentUser?.company?.companyName ? "ЗМІНИТИ" : "ДОДАТИ"}  
                             </button>
 

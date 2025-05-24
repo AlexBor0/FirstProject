@@ -171,6 +171,8 @@ const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, se
         // setPostSuccess(true);
       };
 
+      
+
         return (
             <>
               {type ? (

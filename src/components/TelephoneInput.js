@@ -80,11 +80,11 @@ const TelephoneInput = ({telephone, telClass, setNewItem, currentUser }) => {
             }
         };
 
-    const handleFocus = () => {
+    const placeFocus = () => {
          setIsFocused(true);
     };
 
-     const handleBlur = () => {
+     const placeBlur = () => {
         setIsFocused(false);
     };
 
@@ -106,9 +106,9 @@ return (
         onClick={manageDigits}
         onFocus={(e) => {
             manageDigits(e);
-            handleFocus();
+            placeFocus();
         }}
-        onBlur={handleBlur}
+        onBlur={placeBlur}
     />
 )
 }

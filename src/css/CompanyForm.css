@@ -54,21 +54,33 @@
 
 .companyDetails {
     text-align: left;
-    margin-top: -6px;
-}
 
-.wrapLogoImage{
-    margin: 2px auto 0px auto;
+}
+.middleWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 84%;
+}
+.wrapLogoImage {
+    width: 130px;
+	height: 100px;
+    margin: 15px auto 0px auto;
+}
+.wrapLogoImage, .wrapLogoImageForm {
+    
 	display: flex;
 	flex-direction:row;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: end;
-	width: 130px;
-	height: 70px;
 }
 .wrapLogoImage img {
     border-radius: 5px;
     margin: 4px;
+}
+.previewImg {
+    margin-right: 10px;
 }
 #editCompany .subImgComp {
     width: 70px;
@@ -113,25 +125,29 @@
     font-size: 0.8em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     width:154px;
+    height: 100%;
 }
 .currentEntries .companyProfile .companyName{
     font-weight: 600;
-	margin: 0px 0px 2px -1px;
+	margin: 0px 1px 2px -1px;
 	border: none;
 }
 
-.currentEntries .companyProfile .companyName, .currentEntries .companyProfile p {
+/* .currentEntries .companyProfile .companyName, .currentEntries .companyProfile p {
     
     display: -webkit-box;
     -webkit-box-orient: vertical;
     line-clamp: 1;
     -webkit-line-clamp: 1;
     overflow: hidden;
-}
+} */
 .companyProfile .btnEditProfile{
     font-size: 12px;
     margin-left: auto;
     margin-right:auto;
+}
+.currentEntries .companyProfile .companyName {
+    background-color: rgb(255, 254, 231);
 }
 .currentEntries .companyProfile p{
 	padding: 0px 4px;
@@ -140,6 +156,7 @@
 	border: solid 1px rgb(248, 232, 207);
     border-radius: 5px;
 }
+
 
 .companyProfile .wrapLogoImage {
     margin-left: auto;
