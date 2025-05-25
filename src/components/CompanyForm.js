@@ -1,20 +1,24 @@
 import {useState, useEffect}  from "react";
-import { IoCameraSharp, IoCloseCircleSharp } from "react-icons/io5";
+import { IoCameraSharp, IoCloseCircleSharp, IoAddCircleOutline } from "react-icons/io5";
 import TelephoneInput from "./TelephoneInput";
 import CompanyLogo from "./CompanyLogo";
 
 
-const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNewCompany, resetNewCompany, setLoading, setPostSuccess, setPostFetch, setOpenForm, setIsPrev }) => {
+
+const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNewCompany, resetNewCompany, setLoading, setPostSuccess, setPostFetch, setOpenForm, setIsPrev, addTelephone, setAddTelephone}) => {
 
  
 
     const [fileSize, setFileSize] = useState(''),
           [failUpload, setFailUpload] = useState(null),
           [error, setError] = useState(null),
+          [showPrompt, setShowPrompt] = useState(false),
           [validText, setValidText] = useState(null);
 
           const imageSrc = newCompany.logo instanceof File 
           && URL.createObjectURL(newCompany.logo);
+
+          
 
           const getLogoImage = (e) => {
             deleteImage(e);
@@ -113,6 +117,7 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
                 ...(newCompany?.telephone && newCompany.telephone.replace(/\D/g, '').length > 4 && { 
                         telephone: newCompany.telephone.replace(/\D/g, '') 
                     }),
+                ...(newCompany?.companyEmail && { companySite: newCompany.companyEmail }),
                 ...(newCompany?.companySite && { companySite: newCompany.companySite }),
                 ...(newCompany?.telegram && { telegram: newCompany.telegram }),
                 user: {connect: [currentUser.id] },
@@ -169,6 +174,13 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
             }     
         }, [currentUser.userJWT, host, axios, failUpload]);
 
+        useEffect(() => {
+            if (newCompany.telephone.length >= 19) {
+                setAddTelephone(1);
+            }   else  {
+                        setAddTelephone(false);
+                }
+        }, [newCompany.telephone, setAddTelephone]);
 
     return (         
            
@@ -196,7 +208,7 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
                         onChange={(e) => getDataItems(e, {
                              setNewDoc: setNewCompany, 
                              validate: true,
-                             exceptions: ['"']
+                             exceptions: ['"', '.']
                             })}
                         
                     />
@@ -253,12 +265,40 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
                         <div className="companyDetails" >
 
                             <span>Телефон: </span> 
+                            {addTelephone && addTelephone < 3 &&
+
+                                <button 
+                                    className="addTelBtn"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                    }}
+                                    onMouseOver={() => setShowPrompt(true)}
+                                    onMouseLeave={() => setShowPrompt(false)}
+                                >
+                                    <IoAddCircleOutline />
+                                    {showPrompt && <span className="addTelPrompt">Додати ще телефон</span>}
+                                </button>
+                            }
                                 <TelephoneInput
                                     telClass={"inputEditProfile text"}
                                     telephone={newCompany.telephone}
                                     setNewItem={setNewCompany}
                                     currentUser={currentUser}
                                 />
+
+                            <span>E-mail: </span> 
+
+                            <input 
+                                className="inputEditProfile text" 
+                                type="text" 
+                                name="companyEmail" 
+                                placeholder={currentUser?.company?.companyEmail || "example@mail.com"}
+                                onChange={(e) => getDataItems(e, {
+                                     setNewDoc: setNewCompany,
+                                     validate: true,
+                                     exceptions: ['.']
+                                    })}
+                            />
 
                             <span>Сайт компанії: </span> 
 

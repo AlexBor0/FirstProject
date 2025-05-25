@@ -110,7 +110,7 @@ const App = () => {
   const validInput = (value, inputElement, exceptions = []) => {
     if(inputElement.type === "text") {
       
-        const baseForbiddenChars = ['<', '>', '{', '}', '[', ']', '(', ')', '&', '$', '%', '#', '?', '!', '*', '^', '+', '=', '|', '\\', ':', ';', ',', '"', "'", '`', '~'];
+        const baseForbiddenChars = ['.', '<', '>', '{', '}', '[', ']', '(', ')', '&', '$', '%', '#', '?', '!', '*', '^', '+', '=', '|', '\\', ':', ';', ',', '"', "'", '`', '~'];
         const forbiddenChars = baseForbiddenChars.filter(char => !exceptions.includes(char));
         
         function createPreEscapedRegex(forbiddenChars) {

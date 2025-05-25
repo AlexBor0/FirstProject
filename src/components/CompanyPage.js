@@ -12,6 +12,9 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
         companyName: '',
         logo: '',
         telephone: '',
+        telephone1: '',
+        telephone2: '',
+        companyEmail: '',
         companySite: '',
         telegram: '',
     });
@@ -20,12 +23,17 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
           [openForm, setOpenForm] = useState(false),
           [loading, setLoading] = useState(false),
           [postFetch, setPostFetch] = useState(false),
+          [addTelephone, setAddTelephone] = useState(false),
           [postSuccess, setPostSuccess] = useState(null);
+          
 
     const resetNewCompany = () => ({
         companyName: '',
         logo: '',
         telephone: '',
+        telephone1: '',
+        telephone2: '',
+        companyEmail: '',
         companySite: '',
         telegram: ''  
     });
@@ -57,6 +65,8 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
                     resetNewCompany={resetNewCompany}
                     currentUser={currentUser}
                     setCurrentUser={setCurrentUser}
+                    addTelephone={addTelephone}
+                    setAddTelephone={setAddTelephone}
                 />
             }
 
