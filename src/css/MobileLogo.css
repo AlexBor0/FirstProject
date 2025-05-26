@@ -1,0 +1,15 @@
+.mobileDetailsPage, .mobileResumeCard, .mobileVacancyCard {
+    width: 14px;  
+    height: 14px;
+    vertical-align: middle;
+}
+.mobileDetailsPage {
+    margin-left: 20px;
+}
+.mobileResumeCard {
+    margin-left: 10px;
+}
+.mobileVacancyCard {
+    margin-left: 4px;
+    margin-right: -5px;
+}

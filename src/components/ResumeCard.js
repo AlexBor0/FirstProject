@@ -1,15 +1,15 @@
-import React from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import FormatDate from './FormatDate';
 import Mailto from "./Mailto";
 import './../css/Preview.css';
 import './../css/ResumeCard.css';
 import formatPhoneNumber from "./FormatePhone";
+import MobileLogo from "./MobileLogo";
 
 
 const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, parentComponent }) => {
 
-    const tel = candidate.telephone;
+    const tel = candidate?.telephone;
     const formatedTel = tel ? tel.replace(/\D/g, '') : tel;
 
 
@@ -40,7 +40,21 @@ const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, paren
                     body="Доброго дня!"
                     children={candidate.email}
                 />
-                <p>тел: {tel? (<a href={`tel:+${formatedTel}`}>{editable ? tel : formatPhoneNumber(tel) }</a>) : (<span>не надано</span>)} </p>
+                <p> 
+                    тел: 
+                    {tel
+                        ? 
+                            <a href={`tel:+${formatedTel}`}>
+                                {editable ? tel : formatPhoneNumber(tel) }
+                            </a>
+                            
+                        :   <span>не надано</span>
+                    } 
+                    <MobileLogo
+                        firstDigits={(tel && tel.slice(3, 5)) || null} 
+                        mobileClass={"mobileResumeCard"}
+                    />
+                </p>
 
             </address>
             {!editable&& 

@@ -4,6 +4,7 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import formatPhoneNumber from "./FormatePhone";
 import FormatDate from './FormatDate';
 import PreviewVacancy from './PreviewVacancy';
+import MobileLogo from './MobileLogo';
 import './../css/Preview.css';
 import './../css/VacancyCard.css';
 
@@ -104,7 +105,17 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                                     <summary>Реквізити</summary>
                                     <address>
 
-                                        <p>тел: {tel? (<a href={`tel:+${formatedTel}`}>{ formatPhoneNumber(tel) }</a>) : (<span>не надано</span>)} </p>
+                                        <p>тел: {tel
+                                                ? <a href={`tel:+${formatedTel}`}>
+                                                    { formatPhoneNumber(tel) }
+                                                    </a> 
+                                                : <span>не надано</span>
+                                            } 
+                                            <MobileLogo
+                                                firstDigits={(tel && tel.slice(3, 5)) || null} 
+                                                mobileClass={"mobileVacancyCard"}
+                                            /> 
+                                        </p>
                                         <p>сайт: {site ? (<a href={site}>посилання на сайт</a>) : (<span>відсутній</span>)} </p> 
                                         <p>телеграм: {telegram ? (<a href={telegram}>телеграм</a>) : (<span>відсутній</span>)} </p>
 

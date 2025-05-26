@@ -1,8 +1,7 @@
-import React from 'react';
 import formatPhoneNumber from "./FormatePhone";
+import MobileLogo from "./MobileLogo";
 
-
-const DetailsPage = ({currentUser, setIsPrev, setOpenForm}) => {
+const DetailsPage = ({ currentUser, svgHttp, svgXlink, svgStyle  }) => {
 
     return(
         <div className="companyProfile">
@@ -12,7 +11,12 @@ const DetailsPage = ({currentUser, setIsPrev, setOpenForm}) => {
                     {currentUser?.company?.telephone &&
                         <>
                             <span>Телефон: </span>  
-                            <p className="subInput">{( formatPhoneNumber(currentUser.company.telephone)) || "тел. номер"}</p>
+                            <p className="subInput">{( formatPhoneNumber(currentUser.company.telephone)) || "тел. номер"}
+                                <MobileLogo
+                                    firstDigits={currentUser.company.telephone?.slice(3, 5)} 
+                                    mobileClass={"mobileDetailsPage"}
+                                />
+                            </p>
                         </>
                     }
                     {currentUser?.company?.companySite  &&
@@ -38,18 +42,7 @@ const DetailsPage = ({currentUser, setIsPrev, setOpenForm}) => {
 
                 
             </div>
-            {/* <div className="wrapOneBtn">
-                <button 
-                    className="btnEditProfile" 
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setIsPrev(false);
-                            setOpenForm(true);
-                        }} 
-                >
-                    РЕДАГУВАТИ
-                </button>
-            </div> */}
+
         </div>
     )
 }
