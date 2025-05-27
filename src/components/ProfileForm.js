@@ -4,7 +4,13 @@ import GestAva from "./../img/GestAva.png";
 import Spinner from "./Spinner";
 
 
-const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) => {
+const ProfileForm = ({
+  currentUser,
+  host,
+  getDataItems,
+  axios,
+  setCurrentUser
+}) => {
 
     const [editeCandidate, setEditCandidate] = useState({
       firstName: "",
@@ -214,8 +220,14 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
                   
                   <div className="changeFoto"> 
                     <label required htmlFor="imageF">
-                      <input autoFocus={ true } type="file" id="imageF" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
-                          onChange={ getImage } 
+                      <input 
+                        autoFocus={ true } 
+                        type="file" 
+                        id="imageF" 
+                        className="inputFile" 
+                        name="foto" 
+                        accept=".png, .jpg, .jpeg, .webp" 
+                        onChange={ getImage } 
                       />
                         <IoCameraSharp className="delete-icon"/>
                     </label>
@@ -231,8 +243,14 @@ const ProfileForm = ({currentUser, host, getDataItems, axios, setCurrentUser }) 
               <div className="companyDetails" >
                 <span>Ім'я: </span> 
                 {openForm
-                  ?(<input className="inputEditProfile text" type="text" name="firstName" placeholder={currentUser.userName || "Ваше ім'я"}
-                    onChange={(e) => getDataItems(e, { setNewDoc: setEditCandidate, validate: true })}
+                  ?(<input 
+                      className="inputEditProfile text" 
+                      type="text" 
+                      name="firstName" 
+                      placeholder={currentUser.userName || "Ваше ім'я"}
+                      onChange={(e) => getDataItems(e, {
+                         setNewDoc: setEditCandidate,
+                         validate: true })}
                     />)
                   :(<p className="subInput">{currentUser.userName || "Ваше ім'я"}</p>)
                 }

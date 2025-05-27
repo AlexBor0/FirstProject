@@ -6,14 +6,20 @@ import CompanyForm from "./CompanyForm";
 import PrimaryMessage from "./PrimaryMessage";
 import CompanyProfMain from "./CompanyProfMain";
 
-const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) => {
+const CompanyPage = ({
+    currentUser,
+    getDataItems,
+    setCurrentUser,
+    axios,
+    host
+}) => {
 
     const [newCompany, setNewCompany] = useState({
         companyName: '',
         logo: '',
         telephone: '',
-        telephone1: '',
         telephone2: '',
+        telephone3: '',
         companyEmail: '',
         companySite: '',
         telegram: '',
@@ -31,8 +37,8 @@ const CompanyPage = ({currentUser, getDataItems, setCurrentUser, axios, host}) =
         companyName: '',
         logo: '',
         telephone: '',
-        telephone1: '',
         telephone2: '',
+        telephone3: '',
         companyEmail: '',
         companySite: '',
         telegram: ''  

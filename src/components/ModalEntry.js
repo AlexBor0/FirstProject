@@ -7,7 +7,25 @@ import useNoScroll from "./useNoScroll";
 import './../css/ModalEntry.css';
 
 
-const ModalEntry = memo(({regEntry, modalClass, toggleModal, confirm, setConfirm, currentUser, setCurrentUser, regUser, resetRegForm, host, validInput, inputErrors, setRegUser, getDataItems, showProfile, addDoc, axios}) => {
+const ModalEntry = memo(({
+    regEntry,
+    modalClass,
+    toggleModal,
+    confirm,
+    setConfirm,
+    currentUser,
+    setCurrentUser,
+    regUser,
+    resetRegForm,
+    host,
+    validInput,
+    inputErrors,
+    setRegUser,
+    getDataItems,
+    showProfile,
+    addDoc,
+    axios
+}) => {
 
     const [regOn, setRegOn] = useState(false);
 

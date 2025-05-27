@@ -1,6 +1,17 @@
 import React, {useEffect} from "react";
 
-const RegForm = ({pF, lo, er, fReg, setRO, rO, inputErrors, getDataItems, resetRegForm, setRegUser}) => {
+const RegForm = ({
+    pF,
+    lo,
+    er,
+    fReg,
+    setRO,
+    rO,
+    inputErrors,
+    getDataItems,
+    resetRegForm,
+    setRegUser
+}) => {
 
     const setSubmit = (e) => {
         e.preventDefault();

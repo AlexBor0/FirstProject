@@ -1,8 +1,20 @@
-import React from "react";
+
 import VacancyCard from "./VacancyCard";
 import useNoScroll from "./useNoScroll";
 
-const PreviewVacancy = ({post, edit, previewContentRef, vacancy, requirements, editable, preview, onClose, currentUser, host, parentComponent}) => {
+const PreviewVacancy = ({
+    post,
+    edit,
+    previewContentRef,
+    vacancy,
+    requirements,
+    editable,
+    preview,
+    onClose,
+    currentUser,
+    host,
+    parentComponent
+}) => {
 
     
         useNoScroll(() => {

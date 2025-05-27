@@ -1,7 +1,7 @@
 import formatPhoneNumber from "./FormatePhone";
 import MobileLogo from "./MobileLogo";
 
-const DetailsPage = ({ currentUser, svgHttp, svgXlink, svgStyle  }) => {
+const DetailsPage = ({ currentUser }) => {
 
     return(
         <div className="companyProfile">
@@ -13,7 +13,29 @@ const DetailsPage = ({ currentUser, svgHttp, svgXlink, svgStyle  }) => {
                             <span>Телефон: </span>  
                             <p className="subInput">{( formatPhoneNumber(currentUser.company.telephone)) || "тел. номер"}
                                 <MobileLogo
-                                    firstDigits={currentUser.company.telephone?.slice(3, 5)} 
+                                    firstDigits={currentUser.company.telephone.slice(3, 5)} 
+                                    mobileClass={"mobileDetailsPage"}
+                                />
+                            </p>
+                        </>
+                    }
+                    {currentUser?.company?.telephone2 &&
+                        <>
+                            <span>Телефон 2: </span>  
+                            <p className="subInput">{( formatPhoneNumber(currentUser.company.telephone2)) || "тел. номер"}
+                                <MobileLogo
+                                    firstDigits={currentUser.company.telephone2.slice(3, 5)} 
+                                    mobileClass={"mobileDetailsPage"}
+                                />
+                            </p>
+                        </>
+                    }
+                    {currentUser?.company?.telephone3 &&
+                        <>
+                            <span>Телефон 3: </span>  
+                            <p className="subInput">{( formatPhoneNumber(currentUser.company.telephone3)) || "тел. номер"}
+                                <MobileLogo
+                                    firstDigits={currentUser.company.telephone3.slice(3, 5)} 
                                     mobileClass={"mobileDetailsPage"}
                                 />
                             </p>
@@ -25,10 +47,10 @@ const DetailsPage = ({ currentUser, svgHttp, svgXlink, svgStyle  }) => {
                             <p>{currentUser.company.companySite}</p>
                         </>
                     }
-                    {currentUser?.company?.email &&
+                    {currentUser?.company?.companyEmail &&
                         <>
                             <span>E-mail: </span> 
-                            <p>{currentUser.company.email}</p>
+                            <p>{currentUser.company.companyEmail}</p>
                         </>
                     }
                     {currentUser?.company?.telegram &&

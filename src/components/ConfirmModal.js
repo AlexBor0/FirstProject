@@ -1,5 +1,14 @@
 
-const ConfirmModal = ({currentUser, indexDoc, deleteDocument, setShowDoc, typeBtn, backward, setShowProfileBook, document} ) => {
+const ConfirmModal = ({
+  currentUser,
+  indexDoc,
+  deleteDocument,
+  setShowDoc,
+  typeBtn,
+  backward,
+  setShowProfileBook,
+  document
+}) => {
 
     const action = (typeBtn === "del"? "видалити" : (typeBtn === "edit" ? "редагувати" : "переглянути"));
 

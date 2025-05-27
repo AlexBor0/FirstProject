@@ -1,7 +1,14 @@
 import React,  {useState, useEffect} from "react";
 import formatPhoneNumber from "./FormatePhone";
 
-const TelephoneInput = ({telephone, telClass, setNewItem, currentUser }) => {
+const TelephoneInput = ({
+    telephone,
+    telClass,
+    setNewItem,
+    currentUser,
+    fieldName = 'telephone',
+    telephoneKey = 'telephone'
+}) => {
 
     const [telephoneDigits, setTelephoneDigits] = useState(() => {
                 return telephone ? telephone.replace(/\D/g, '') : '380';
@@ -37,9 +44,11 @@ const TelephoneInput = ({telephone, telClass, setNewItem, currentUser }) => {
     };
      
         useEffect (() => {
-            setNewItem(prev => ({ ...prev, telephone: formatPhoneNumber(telephoneDigits)}));
+            setNewItem(prev => ({ 
+                ...prev,
+                [fieldName]: formatPhoneNumber(telephoneDigits)}));
     
-        }, [telephoneDigits, setNewItem]);
+        }, [telephoneDigits, setNewItem, fieldName]);
     
         const manageEvents = (e) => {
             const cursorPosition = e.target.selectionStart;
@@ -88,14 +97,17 @@ const TelephoneInput = ({telephone, telClass, setNewItem, currentUser }) => {
         setIsFocused(false);
     };
 
-        const placeholderValue = currentUser?.company?.telephone
-        ? formatPhoneNumber(currentUser.company.telephone.replace(/\D/g, ''))
-        : "+380 (XX) XXX XX XX";
+        const getPlaceholderValue = () => {
+        const currentTelephone = currentUser?.company?.[telephoneKey];
+        return currentTelephone
+            ? formatPhoneNumber(currentTelephone.replace(/\D/g, ''))
+            : "+380 (XX) XXX XX XX";
+    };
 
 return (
     <input 
-        placeholder={placeholderValue} 
-        name="telephone"
+        placeholder={getPlaceholderValue()} 
+        name={telephone}
         minLength="6" 
         maxLength="19" 
         type="tel" 

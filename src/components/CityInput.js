@@ -4,7 +4,17 @@ import CitySelect from "./CitySelect";
 import transChars from "./Translit";
 
 
-const CityInput = ({citiesBase, arrowPress, getDataItems, resetInput, setNewItem, selectedIndex, setSelectedIndex, pHolder, newDoc}) => {
+const CityInput = ({
+    citiesBase,
+    arrowPress,
+    getDataItems,
+    resetInput,
+    setNewItem,
+    selectedIndex,
+    setSelectedIndex,
+    pHolder,
+    newDoc
+}) => {
 
     const [cityQuery, setCityQuery] = useState(''),
           [showCityList, setShowCityList] = useState(false),

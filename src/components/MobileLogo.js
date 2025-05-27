@@ -3,7 +3,7 @@ const MobileLogo = ({ firstDigits, mobileClass }) => {
 
     const operatorsUA = {
         "67": "KVS", "68": "KVS", "96": "KVS", "97": "KVS", "98": "KVS",
-        "050": "VDF", "66": "VDF", "95": "VDF", "99": "VDF",
+        "50": "VDF", "66": "VDF", "95": "VDF", "99": "VDF",
         "63": "LFC", "73": "LFC", "93": "LFC", "94": "LFC"
     };
 
@@ -14,7 +14,6 @@ const MobileLogo = ({ firstDigits, mobileClass }) => {
             <svg 
                 
                 xmlns= "http://www.w3.org/2000/svg"
-                xmlnsXhtml="http://www.w3.org/1999/xhtml"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 200 200"
                 className={mobileClass}

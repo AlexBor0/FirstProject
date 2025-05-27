@@ -1,4 +1,4 @@
-import React from "react";
+
 import spinner from "./../img/054 spinner1.svg";
 
 const Spinner= () => (

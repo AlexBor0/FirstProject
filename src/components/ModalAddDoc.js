@@ -8,7 +8,21 @@ import useEsc from "./useEsc";
 import useNoScroll from "./useNoScroll";
 import './../css/ModalAddDoc.css';
 
-const ModalAddDoc = ({addDoc, setAddDoc, modalClass, host, type, vacArr, inputErrors, citiesBase, specialtiesBase, getDataItems, currentUser, setCurrentUser, axios}) => {
+const ModalAddDoc = ({
+    addDoc,
+    setAddDoc,
+    modalClass,
+    host,
+    type,
+    vacArr,
+    inputErrors,
+    citiesBase,
+    specialtiesBase,
+    getDataItems,
+    currentUser,
+    setCurrentUser,
+    axios
+}) => {
 
     const [newCandidate, setNewCandidate] = useState({
         firstName: "",

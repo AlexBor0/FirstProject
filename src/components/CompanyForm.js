@@ -1,13 +1,27 @@
 import {useState, useEffect}  from "react";
-import { IoCameraSharp, IoCloseCircleSharp, IoAddCircleOutline } from "react-icons/io5";
+import { IoCameraSharp, IoCloseCircleSharp} from "react-icons/io5";
+import { IoIosRemoveCircleOutline, IoIosAddCircleOutline } from "react-icons/io";
 import TelephoneInput from "./TelephoneInput";
 import CompanyLogo from "./CompanyLogo";
 
 
 
-const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNewCompany, resetNewCompany, setLoading, setPostSuccess, setPostFetch, setOpenForm, setIsPrev, addTelephone, setAddTelephone}) => {
-
- 
+const CompanyForm = ({
+    currentUser,
+    getDataItems,
+    axios,
+    host,
+    newCompany,
+    setNewCompany,
+    resetNewCompany,
+    setLoading,
+    setPostSuccess,
+    setPostFetch,
+    setOpenForm,
+    setIsPrev,
+    addTelephone,
+    setAddTelephone
+}) => {
 
     const [fileSize, setFileSize] = useState(''),
           [failUpload, setFailUpload] = useState(null),
@@ -112,12 +126,17 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
         
             const data = {
                 ...(newCompany?.companyName && { companyName: newCompany?.companyName}),
-                companyName: newCompany?.companyName,
                 ...(newFotoId && { logo: newFotoId }),
                 ...(newCompany?.telephone && newCompany.telephone.replace(/\D/g, '').length > 4 && { 
                         telephone: newCompany.telephone.replace(/\D/g, '') 
                     }),
-                ...(newCompany?.companyEmail && { companySite: newCompany.companyEmail }),
+                ...(newCompany?.telephone2 && newCompany.telephone2.replace(/\D/g, '').length > 4 && { 
+                        telephone2: newCompany.telephone2.replace(/\D/g, '') 
+                    }),
+                ...(newCompany?.telephone3 && newCompany.telephone3.replace(/\D/g, '').length > 4 && { 
+                        telephone3: newCompany.telephone3.replace(/\D/g, '') 
+                    }),
+                ...(newCompany?.companyEmail && { companyEmail: newCompany.companyEmail }),
                 ...(newCompany?.companySite && { companySite: newCompany.companySite }),
                 ...(newCompany?.telegram && { telegram: newCompany.telegram }),
                 user: {connect: [currentUser.id] },
@@ -174,13 +193,41 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
             }     
         }, [currentUser.userJWT, host, axios, failUpload]);
 
-        useEffect(() => {
-            if (newCompany.telephone.length >= 19) {
+       useEffect(() => {
+        
+        if (newCompany.telephone && newCompany.telephone.replace(/\D/g, '').length >= 10) {
+            if (!addTelephone) {
                 setAddTelephone(1);
-            }   else  {
-                        setAddTelephone(false);
-                }
-        }, [newCompany.telephone, setAddTelephone]);
+            }
+        } else if (!newCompany.telephone || newCompany.telephone.replace(/\D/g, '').length < 4) {
+            
+            if (addTelephone > 1) {
+                setAddTelephone(false);
+                setNewCompany(prev => ({
+                    ...prev,
+                    telephone2: '',
+                    telephone3: ''
+                }));
+            }
+        }
+    }, [newCompany.telephone, addTelephone, setAddTelephone, setNewCompany]);
+
+    const resetTelephone = (e) => {
+        e.preventDefault();
+        const newCount = addTelephone - 1;
+        setAddTelephone(newCount);
+        
+        
+        if (newCount === 1) {
+            setNewCompany(prev => ({...prev, telephone3: ''}));
+        } else if (newCount === false) {
+            setNewCompany(prev => ({
+                ...prev, 
+                telephone2: '',
+                telephone3: ''
+            }));
+        }
+    };
 
     return (         
            
@@ -224,7 +271,7 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
                                 src={ host + currentUser.company.logo.formats.thumbnail.url} 
                                 alt="Логотип компанії"/>
                             ) 
-                            ||
+                        ||
                             (    <div className="subImgComp" width="60px" height="60px"> 
                                 
                                     <CompanyLogo 
@@ -269,14 +316,29 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
 
                                 <button 
                                     className="addTelBtn"
+                                    data-prompt="add"
                                     onClick={(e) => {
                                         e.preventDefault();
+                                        setAddTelephone(prev => prev + 1);
                                     }}
-                                    onMouseOver={() => setShowPrompt(true)}
-                                    onMouseLeave={() => setShowPrompt(false)}
+                                    onMouseOver={(e) => setShowPrompt(e.currentTarget.dataset.prompt)}
+                                    onMouseLeave={() => setShowPrompt(null)}
+                                    
                                 >
-                                    <IoAddCircleOutline />
-                                    {showPrompt && <span className="addTelPrompt">Додати ще телефон</span>}
+                                    <IoIosAddCircleOutline />
+                                    {showPrompt === "add" && <span className="addTelPrompt">Додати ще телефон</span>}
+                                </button>
+                            }{addTelephone && addTelephone >= 2  &&
+
+                                <button 
+                                    className="addTelBtn"
+                                    data-prompt="remove"
+                                    onClick={resetTelephone}
+                                    onMouseOver={(e) => setShowPrompt(e.currentTarget.dataset.prompt)}
+                                    onMouseLeave={() => setShowPrompt(null)}
+                                >
+                                    <IoIosRemoveCircleOutline />
+                                    {showPrompt === "remove" && <span className="addTelPrompt">Видалити телефон</span>}
                                 </button>
                             }
                                 <TelephoneInput
@@ -284,7 +346,36 @@ const CompanyForm = ({currentUser, getDataItems, axios, host, newCompany, setNew
                                     telephone={newCompany.telephone}
                                     setNewItem={setNewCompany}
                                     currentUser={currentUser}
+                                    fieldName="telephone"
+                                    telephoneKey="telephone"
                                 />
+
+                            { addTelephone && addTelephone >= 2 &&
+                              <>
+                                    <span>Телефон 2: </span>  
+                                        <TelephoneInput
+                                            telClass={"inputEditProfile text"}
+                                            telephone={newCompany.telephone2}
+                                            setNewItem={setNewCompany}
+                                            currentUser={currentUser}
+                                            fieldName="telephone2"
+                                            telephoneKey="telephone2"
+                                        />
+                                </>
+                            }
+                            {  addTelephone && addTelephone === 3 && 
+                                <>
+                                    <span>Телефон 3: </span>  
+                                        <TelephoneInput
+                                            telClass={"inputEditProfile text"}
+                                            telephone={newCompany.telephone3}
+                                            setNewItem={setNewCompany}
+                                            currentUser={currentUser}
+                                            fieldName="telephone3"
+                                            telephoneKey="telephone3"
+                                        />
+                                </>
+                            }
 
                             <span>E-mail: </span> 
 

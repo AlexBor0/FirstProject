@@ -3,7 +3,20 @@ import { FcOk } from "react-icons/fc";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import './../css/MessagePost.css';
 
-const MessagePost = ({isOpen, onClose, closeItem, typeOfDoc, newClass, setPostFetch, editable, currentUser, setCurrentUser, setLoading, axios, host }) => {
+const MessagePost = ({
+    isOpen,
+    onClose,
+    closeItem,
+    typeOfDoc,
+    newClass,
+    setPostFetch,
+    editable,
+    currentUser,
+    setCurrentUser,
+    setLoading,
+    axios,
+    host
+ }) => {
 
     
 

@@ -3,7 +3,25 @@ import './../css/Preview.css';
 import PreviewVacancy from "./PreviewVacancy";
 import PreviewResume from "./PreviewResume";
 
-const Preview = ({newVacancy, setNewVacancy, setSaveTextEditor, setPostFetch, setPostSuccess, setLoading, setError, host, type, newCandidate, setNewCandidate, currentUser, setCurrentUser, axios, setIsPreviewVisible, setAddDoc, editable}) => {
+const Preview = ({
+  newVacancy,
+  setNewVacancy,
+  setSaveTextEditor,
+  setPostFetch,
+  setPostSuccess,
+  setLoading,
+  setError,
+  host,
+  type,
+  newCandidate,
+  setNewCandidate,
+  currentUser,
+  setCurrentUser,
+  axios,
+  setIsPreviewVisible,
+  setAddDoc,
+  editable
+}) => {
 
     const previewContentRef = useRef(null);
     const [failUpload, setFailUpload] = useState(null);

@@ -6,9 +6,24 @@ import CityInput from "./CityInput";
 import VacancyDepInput from "./VacancyDepInput";
 import VacancyInput from "./VacancyInput";
 
-
-
-const AddVacancyForm = ({ newVacancy, setNewVacancy, citiesBase, arrowPress, selectedIndex, setSelectedIndex, resetInput, getDataItems, specialtiesBase, saveTextEditor, setSaveTextEditor, modalContRef, setIsPreviewVisible, setSavingEditorContent, savingEditorContent, currentUser }) => {
+const AddVacancyForm = ({ 
+  newVacancy,
+  setNewVacancy,
+  citiesBase,
+  arrowPress,
+  selectedIndex,
+  setSelectedIndex,
+  resetInput,
+  getDataItems,
+  specialtiesBase,
+  saveTextEditor,
+  setSaveTextEditor,
+  modalContRef,
+  setIsPreviewVisible,
+  setSavingEditorContent,
+  savingEditorContent,
+  currentUser 
+}) => {
 
 const pHolder = "Місто, де пропонується робота",
       vacHolder = "Наіменування вакансії*"; 

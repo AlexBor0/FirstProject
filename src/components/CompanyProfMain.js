@@ -1,10 +1,15 @@
 import './../css/CompanyForm.css';
 import CompanyLogo from "./CompanyLogo";
-import formatPhoneNumber from "./FormatePhone";
 
 
-const CompanyProfMain = ({currentUser, newCompany, host, setOpenForm, setIsPrev}) => {
 
+const CompanyProfMain = ({
+    currentUser,
+    newCompany,
+    host,
+    setOpenForm,
+    setIsPrev
+}) => {
 
     const imageSrc = newCompany.logo instanceof File 
     && URL.createObjectURL(newCompany.logo);
@@ -31,15 +36,6 @@ const CompanyProfMain = ({currentUser, newCompany, host, setOpenForm, setIsPrev}
                 </div>
             </div>
             
-            {/* <h4>Реквізити:</h4>
-            <div className="companyDetails" >
-                <span>Телефон: </span>  
-                <p className="subInput">{(currentUser?.company?.telephone && formatPhoneNumber(currentUser?.company?.telephone)) || "тел. номер"}</p>
-                <span>Сайт компанії: </span> 
-                <p>{currentUser?.company?.companySite || "Сайт компанії"}</p>
-                <span>Telegram: </span> 
-                <p>{currentUser?.company?.telegram || "Телеграм-канал"}</p>
-            </div> */}
             <div className="wrapOneBtn">
                 <button 
                     className="btnEditProfile" 

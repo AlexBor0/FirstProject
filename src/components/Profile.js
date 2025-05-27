@@ -13,9 +13,16 @@ import BillBoard from "./BillBoard";
 import DetailsPage from "./DetailsPage";
 import ResponsesPage from "./ResponsesPage";
 
-
-
-const Profile = ({ svgHttp, svgXlink, setShowProfile, host, currentUser, setCurrentUser, getDataItems, axios, typeOfSearch }) => {
+const Profile = ({ 
+  svgHttp,
+  svgXlink,
+  setShowProfile,
+  host,
+  currentUser,
+  setCurrentUser,
+  getDataItems,
+  axios,
+  typeOfSearch }) => {
 
   const currentDoc = currentUser?.userDocs || [];
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -251,6 +258,7 @@ const onClose = () => {
                 { typeOfSearch
                   ? <DetailsPage
                       currentUser={currentUser}
+                      
                       getDataItems={getDataItems}
                       setCurrentUser={setCurrentUser}
                       axios={axios}

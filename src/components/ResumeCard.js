@@ -7,7 +7,14 @@ import formatPhoneNumber from "./FormatePhone";
 import MobileLogo from "./MobileLogo";
 
 
-const ResumeCard = ({candidate, onClose, vacancyTitle, imageSrc, editable, parentComponent }) => {
+const ResumeCard = ({
+    candidate,
+    onClose,
+    vacancyTitle,
+    imageSrc,
+    editable,
+    parentComponent
+}) => {
 
     const tel = candidate?.telephone;
     const formatedTel = tel ? tel.replace(/\D/g, '') : tel;

@@ -129,7 +129,7 @@
 }
 .addTelBtn {
     position: relative;
-    margin: 0px;
+    margin: 0px 6px 0px 0px;
     padding: 0px;
     border: none;
     background:none;
@@ -142,7 +142,7 @@
     vertical-align: middle;
 }
 .addTelBtn path {
-    stroke-width: 60;
+    stroke-width: 30;
 }
 .addTelPrompt {
     position: absolute;
@@ -157,6 +157,11 @@
     font-family: 'Open Sans', sans-serif;
     color: black;
     border: solid 2px rgb(222, 161, 56);  
+    /* white-space: nowrap;
+    z-index: 10 */
+}
+button[data-prompt="remove"] .addTelPrompt{
+    right: -54px;
 }
 
 .currentEntries .companyProfile .companyName{

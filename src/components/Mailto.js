@@ -1,4 +1,3 @@
-import React from "react";
 
 const Mailto = ({ email, subject="", body="", children }) => {
     const params =
