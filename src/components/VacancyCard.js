@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
-import formatPhoneNumber from "./FormatePhone";
 import FormatDate from './FormatDate';
 import PreviewVacancy from './PreviewVacancy';
-import MobileLogo from './MobileLogo';
+import DetailsTelephone from './DetailsTelephone';
+import Mailto from "./Mailto";
 import './../css/Preview.css';
 import './../css/VacancyCard.css';
 
@@ -15,10 +15,10 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
     const city = editable ? vacancy.city : vacancy.location,
           pcv = parentComponent === 'Vacancies',
           pcsc = parentComponent === 'shortCard',
-          tel = (editable || preview)? currentUser?.company?.telephone : vacancy?.company?.telephone,
-          formatedTel = tel ? tel.replace(/\D/g, '') : tel,
-          site = (editable || preview) ? currentUser?.company?.companySite : vacancy?.company?.companySite, 
-          telegram = (editable || preview) ? currentUser?.company?.telegram : vacancy?.company?.telegram;
+          conditions = editable || preview,
+          companyData = conditions ? currentUser?.company : vacancy?.company;
+    const { telephone: tel, telephone2: tel2, telephone3: tel3, companySite: site, companyEmail: email, telegram } = companyData || {};
+    const details = tel || tel2 || tel3 || email || site || telegram;
 
 
 
@@ -97,27 +97,37 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                     </div>
                      
                     <div className="rightSide">
-                        <p className="companyTitle"><b>{((pcv || pcsc)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії"}</b></p>
+                        <p className="companyTitle"><b>{((pcv || pcsc)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії:"}</b></p>
                         <div >
                             
-                            {(pcsc || editable || preview) &&
+                            {(pcsc || editable || preview) && details &&
                                 <details>
-                                    <summary>Реквізити</summary>
+                                    <summary>Реквізити:</summary>
                                     <address>
 
-                                        <p>тел: {tel
-                                                ? <a href={`tel:+${formatedTel}`}>
-                                                    { formatPhoneNumber(tel) }
-                                                    </a> 
-                                                : <span>не надано</span>
-                                            } 
-                                            <MobileLogo
-                                                firstDigits={(tel && tel.slice(3, 5)) || null} 
-                                                mobileClass={"mobileVacancyCard"}
-                                            /> 
-                                        </p>
-                                        <p>сайт: {site ? (<a href={site}>посилання на сайт</a>) : (<span>відсутній</span>)} </p> 
-                                        <p>телеграм: {telegram ? (<a href={telegram}>телеграм</a>) : (<span>відсутній</span>)} </p>
+                                        {tel && <DetailsTelephone
+                                            tel= { tel }
+                                            word = {'тел:'}
+                                        />}
+                                        {tel2 && <DetailsTelephone
+                                            tel= { tel2 }
+                                            classTel = {'classTel'}
+                                        />}
+                                        {tel3 &&
+                                        <DetailsTelephone
+                                            tel= { tel3 }
+                                            classTel = {'classTel'}
+                                        />}
+                                       {email && <p>e-mail: {}  
+                                                    <Mailto
+                                                        email={email}
+                                                        subject="Відгук на вакансію" 
+                                                        body="Доброго дня!"
+                                                        children={email}
+                                                    /> 
+                                                </p>} 
+                                       {site && <p>сайт:  <a href={site}>посилання на сайт</a> </p>} 
+                                       {telegram && <p>телеграм:  <a href={telegram}>телеграм</a></p>}
 
                                     </address>
                                 </details>
