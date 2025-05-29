@@ -4,13 +4,13 @@ import GestAva from "./../img/GestAva.png";
 import Spinner from "./Spinner";
 
 
-const ProfileForm = ({
+const ProfileForm = ( {
   currentUser,
   host,
   getDataItems,
   axios,
   setCurrentUser
-}) => {
+} ) => {
 
     const [editeCandidate, setEditCandidate] = useState({
       firstName: "",

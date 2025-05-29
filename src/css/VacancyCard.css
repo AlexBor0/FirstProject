@@ -33,19 +33,20 @@
   justify-content: space-between;
   flex-wrap: wrap;
   /* min-width: 40%; */
-  flex: 1 0 260px;
+  flex: 1 0 270px;
   box-sizing: border-box;
 }
 .companyTitle {
-  width: 200px;
+  max-width: 180px;
+
 }
 .leftSide{
   display: flex;
   flex-direction: column;
   justify-content: start;
   flex-wrap: wrap;
-  min-width: 50%;
-  flex: 1 0 260px;
+  /* min-width: 40%; */
+  flex: 1 0 250px;
 }
 .wrapProperties{
   display: flex;
@@ -56,21 +57,18 @@
   box-sizing: border-box;
 }
 .wrapPropBlock{
-  width: 246px;
+  width: 240px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-details {
+.details {
   font-size: 14px;
 }
-details address {
+.details address {
   font-size: 12px;
 }
-summary {
-  font-size: 14px;
-  font-weight: 600;
-}
+
 .vacancy {
     position: relative;
  }
@@ -115,7 +113,7 @@ address {
 }
 
 .vacancyInfo {
-  min-width: 250px;
+  min-width: 240px;
   font-size: 0.8rem;
   /* border: solid 1px rgb(3, 87, 116); */
   display: flex;
@@ -168,8 +166,9 @@ article header {
     margin: 0px 0px 3px 10px;
   }
 .companyLogo {
-  float: right;
+  float: left;
 }
+.companyLogo
 .delete-icon:hover {
     opacity: 0.5;
   }

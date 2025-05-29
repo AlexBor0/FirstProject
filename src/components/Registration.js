@@ -2,7 +2,7 @@ import {useState} from "react";
 import RegForm from "./RegForm";
 import ModalThenks from "./ModaThenks";
 
-const RegistrationForm = ({
+const RegistrationForm = ( {
   setRegOn,
   regOn,
   regUser,
@@ -12,7 +12,7 @@ const RegistrationForm = ({
   resetRegForm,
   getDataItems,
   axios
-}) => {
+} ) => {
 
     const [yourLogin, setYourLogin] = useState(undefined);
     const [postFetch, setPostFetch] = useState(false),

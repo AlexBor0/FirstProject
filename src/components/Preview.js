@@ -3,7 +3,7 @@ import './../css/Preview.css';
 import PreviewVacancy from "./PreviewVacancy";
 import PreviewResume from "./PreviewResume";
 
-const Preview = ({
+const Preview = ( {
   newVacancy,
   setNewVacancy,
   setSaveTextEditor,
@@ -21,7 +21,7 @@ const Preview = ({
   setIsPreviewVisible,
   setAddDoc,
   editable
-}) => {
+} ) => {
 
     const previewContentRef = useRef(null);
     const [failUpload, setFailUpload] = useState(null);

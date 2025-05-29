@@ -4,7 +4,7 @@ import useEsc from "./useEsc";
 import useNoScroll from "./useNoScroll";
 import './../css/ModalEditProfile.css';
 
-const ModalEditProfile = ({ 
+const ModalEditProfile = ( { 
     currentUser,
     modalClass,
     showProfile,
@@ -16,7 +16,7 @@ const ModalEditProfile = ({
     axios,
     setCurrentUser,
     typeOfSearch
-}) => {
+} ) => {
 
 
     useEsc(() => setShowProfile(false));

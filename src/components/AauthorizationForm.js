@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const AauthorizationForm = ({
+const AauthorizationForm = ( {
   regOn,
   setRegOn,
   host,
@@ -9,7 +9,7 @@ const AauthorizationForm = ({
   validInput,
   inputErrors,
   axios
-}) => {
+} ) => {
     const [userLogin, setUserLogin] = useState({
               userName: '',
               userPassword: '',
@@ -59,8 +59,25 @@ const AauthorizationForm = ({
     <form id="authForm" onSubmit={fetchForm} >
       <h2 className="modalTitle">Вхід</h2>
       <p>Для входу пройдіть авторизацію, або зареєструйтеся</p>
-      <input autoFocus={true} required placeholder="Login" name="userName" type="text" minLength="3" className="modalInput" onChange={getDataItems}/>
-      <input required placeholder="Password" name="userPassword" type="password" minLength="6" className="modalInput" onChange={getDataItems}/>
+      <input 
+        autoFocus={true} 
+        required 
+        placeholder="Login"
+        name="userName" 
+        type="text" 
+        minLength="3" 
+        className="modalInput" 
+        onChange={getDataItems}
+      />
+      <input 
+        required
+        placeholder="Password"
+        name="userPassword" 
+        type="password" 
+        minLength="6" 
+        className="modalInput" 
+        onChange={getDataItems}
+      />
       {(inputErrors.userName)&& <p style={{ color: 'red' }}>{inputErrors.userName}</p>}
       <button>Увійти</button>
       <p>{error&&"Вибачте, невірний логін або пароль"}</p>

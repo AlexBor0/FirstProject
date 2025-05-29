@@ -3,7 +3,7 @@ import { IoClose } from "react-icons/io5";
 import VacancySelect from "./VacancySelect";
 
 
-const VacancyInput = ({ 
+const VacancyInput = ( { 
     arrowPress,
     getDataItems,
     resetInput,
@@ -14,7 +14,7 @@ const VacancyInput = ({
     setNewItem,
     selectValue,
     setSelectValue
-}) => {
+} ) => {
 
     const [vacancyQuery, setVacancyQuery] = useState(''),
           [showVacancyList, setShowVacancyList] = useState(false);

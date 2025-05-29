@@ -3,13 +3,13 @@ import CompanyLogo from "./CompanyLogo";
 
 
 
-const CompanyProfMain = ({
+const CompanyProfMain = ( {
     currentUser,
     newCompany,
     host,
     setOpenForm,
     setIsPrev
-}) => {
+} ) => {
 
     const imageSrc = newCompany.logo instanceof File 
     && URL.createObjectURL(newCompany.logo);

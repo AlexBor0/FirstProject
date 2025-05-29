@@ -157,11 +157,13 @@
     font-family: 'Open Sans', sans-serif;
     color: black;
     border: solid 2px rgb(222, 161, 56);  
-    /* white-space: nowrap;
-    z-index: 10 */
+
 }
 button[data-prompt="remove"] .addTelPrompt{
     right: -54px;
+}
+button.onlyRemove .addTelPrompt {
+    right: -74px;
 }
 
 .currentEntries .companyProfile .companyName{

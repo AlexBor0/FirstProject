@@ -6,7 +6,7 @@ import VacancyInput from "./VacancyInput";
 import TelephoneInput from "./TelephoneInput";
 
 
-const AddResumeForm = ({ 
+const AddResumeForm = ( { 
     newCandidate,
     setNewCandidate,
     inputErrors,
@@ -20,7 +20,7 @@ const AddResumeForm = ({
     specialtiesBase,
     setClassModal,
     setIsPreviewVisible
-}) => {
+} ) => {
 
     const [selectValue, setSelectValue] = useState(newCandidate.vacancy || ''),
           [fileSize, setFileSize] = useState(''),

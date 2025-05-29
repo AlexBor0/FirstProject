@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import FormatDate from './FormatDate';
@@ -7,18 +7,44 @@ import DetailsTelephone from './DetailsTelephone';
 import Mailto from "./Mailto";
 import './../css/Preview.css';
 import './../css/VacancyCard.css';
+import LogoImgVC from './LogoImgVC';
 
 
-const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, currentUser, host}) => {
-    const [showFullVacancy, setShowFullVacancy] =useState(false);
+const VacancyCard = ( {
+    vacancy,
+    onClose,
+    editable,
+    preview,
+    parentComponent,
+    currentUser,
+    host
+} ) => {
+    const [showFullVacancy, setShowFullVacancy] =useState(false),
+          [typeLogo, setTypeLogo] = useState(true);
+
+    const companyTitleRef = useRef(null);
+    const companyLogoRef = useRef(null);
+
 
     const city = editable ? vacancy.city : vacancy.location,
           pcv = parentComponent === 'Vacancies',
           pcsc = parentComponent === 'shortCard',
           conditions = editable || preview,
-          companyData = conditions ? currentUser?.company : vacancy?.company;
-    const { telephone: tel, telephone2: tel2, telephone3: tel3, companySite: site, companyEmail: email, telegram } = companyData || {};
+          companyData = conditions ? currentUser?.company : vacancy?.company,
+          isLogo = currentUser?.company?.logo || vacancy?.company?.logo;
+    const { telephone: tel, telephone2: tel2, telephone3: tel3, companySite: site, companyEmail: email, telegram} = companyData || {};
     const details = tel || tel2 || tel3 || email || site || telegram;
+
+    useEffect (() => {
+
+        if (companyTitleRef.current && companyLogoRef.current) {
+        const titleHeight = companyTitleRef.current.offsetHeight;
+        const logoHeight = companyLogoRef.current.offsetHeight;
+        const isHeight = titleHeight < logoHeight / 2
+        setTypeLogo(isHeight);
+      }
+
+    },[ companyTitleRef, companyLogoRef ]);
 
 
 
@@ -97,12 +123,22 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                     </div>
                      
                     <div className="rightSide">
-                        <p className="companyTitle"><b>{((pcv || pcsc)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії:"}</b></p>
+                        <div className="companyTitle" ref={companyTitleRef}>
+                            <p ><b>{((pcv || pcsc)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії:"}</b></p>
+                            {!typeLogo && pcsc && <LogoImgVC
+                                conditions={conditions}
+                                isLogo={isLogo}
+                                host={host}
+                                pcv={pcv}
+                                pcsc={pcsc}
+                                ref={companyLogoRef}
+                            />}
+                        </div>
                         <div >
                             
-                            {(pcsc || editable || preview) && details &&
-                                <details>
-                                    <summary>Реквізити:</summary>
+                            {(pcsc || conditions) && details &&
+                                <div className='details'>
+                                    <h4>Реквізити:</h4>
                                     <address>
 
                                         {tel && <DetailsTelephone
@@ -130,29 +166,19 @@ const VacancyCard = ({vacancy, onClose, editable, preview, parentComponent, curr
                                        {telegram && <p>телеграм:  <a href={telegram}>телеграм</a></p>}
 
                                     </address>
-                                </details>
+                                </div>
                             }
                          
                         </div>
+                        {(typeLogo || !pcsc) && <LogoImgVC
+                            conditions={conditions}
+                            isLogo={isLogo}
+                            host={host}
+                            pcv={pcv}
+                            pcsc={pcsc}
+                            ref={companyLogoRef}
+                        />}
                        
-                        {(editable || preview) && currentUser?.company?.logo && 
-                                <img 
-                                    width="100px"
-                                    height="100px"
-                                    className="companyLogo" 
-                                    src={host + (currentUser.company.logo?.formats?.thumbnail?.url || currentUser.company.logo.url)} 
-                                    alt="Логотип компанії"
-                                />
-                        }
-                        {(pcv || pcsc) && vacancy?.company?.logo && 
-                            <img 
-                                width="100px"
-                                height="100px"
-                                className="companyLogo" 
-                                src={host + (vacancy.company.logo?.formats?.thumbnail?.url || vacancy.company.logo.url)} 
-                                alt="Логотип компанії"
-                            />   
-                        }
                     </div>
                         <div ><h3>Опис вакансії:</h3> 
                             <div className={pcv?"description-short":"description"} >{vacancy.description}</div>

@@ -5,7 +5,7 @@ import BtnTogSearch from "./BtnTogSearch";
 import IconEntry from "./IconEntry";
 import UserLogo from "./UserLogo";
 
-const Header = ({ 
+const Header = ( { 
   typeOfSearch,
   setTypeOfsearch,
   host,
@@ -17,7 +17,7 @@ const Header = ({
   svgXlink,
   turnExit,
   userLogoRef
-}) => {
+} ) => {
 
    let thing, title;
     typeOfSearch ? thing = "персоналу" : thing="роботи";

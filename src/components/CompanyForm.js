@@ -6,7 +6,7 @@ import CompanyLogo from "./CompanyLogo";
 
 
 
-const CompanyForm = ({
+const CompanyForm = ( {
     currentUser,
     getDataItems,
     axios,
@@ -21,7 +21,7 @@ const CompanyForm = ({
     setIsPrev,
     addTelephone,
     setAddTelephone
-}) => {
+} ) => {
 
     const [fileSize, setFileSize] = useState(''),
           [failUpload, setFailUpload] = useState(null),
@@ -297,7 +297,7 @@ const CompanyForm = ({
                                     </label>
 
                                     <button className="delPrevImg" 
-                                            autoFocus={true}
+                                            autoFocus={ true }
                                             onClick={ deleteImage }>
                                         <IoCloseCircleSharp className="delete-icon"/>
                                     </button>
@@ -328,10 +328,11 @@ const CompanyForm = ({
                                     <IoIosAddCircleOutline />
                                     {showPrompt === "add" && <span className="addTelPrompt">Додати ще телефон</span>}
                                 </button>
-                            }{addTelephone && addTelephone >= 2  &&
+                            }
+                            {addTelephone && addTelephone >= 2  &&
 
                                 <button 
-                                    className="addTelBtn"
+                                    className={"addTelBtn" + (addTelephone === 3 ? " onlyRemove" : "")}
                                     data-prompt="remove"
                                     onClick={resetTelephone}
                                     onMouseOver={(e) => setShowPrompt(e.currentTarget.dataset.prompt)}

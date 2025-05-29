@@ -2,7 +2,7 @@
 import VacancyCard from "./VacancyCard";
 import useNoScroll from "./useNoScroll";
 
-const PreviewVacancy = ({
+const PreviewVacancy = ( {
     post,
     edit,
     previewContentRef,
@@ -14,7 +14,7 @@ const PreviewVacancy = ({
     currentUser,
     host,
     parentComponent
-}) => {
+} ) => {
 
     
         useNoScroll(() => {

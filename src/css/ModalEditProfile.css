@@ -3,10 +3,13 @@
 	margin:40px auto;
 }
 .profileBook {
-	z-index: 0;
-	position: relative;
 	width: 470px;
 	height: 372px;
+	display: flex;
+	flex: 0 2 470px;
+	z-index: 0;
+	position: relative;
+	
 	margin-left: auto;
 	margin-right: auto;
 }

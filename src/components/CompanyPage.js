@@ -6,13 +6,13 @@ import CompanyForm from "./CompanyForm";
 import PrimaryMessage from "./PrimaryMessage";
 import CompanyProfMain from "./CompanyProfMain";
 
-const CompanyPage = ({
+const CompanyPage = ( {
     currentUser,
     getDataItems,
     setCurrentUser,
     axios,
     host
-}) => {
+} ) => {
 
     const [newCompany, setNewCompany] = useState({
         companyName: '',
@@ -103,6 +103,7 @@ const CompanyPage = ({
                     axios={axios}
                     host={host}
                     setPostFetch={setPostFetch}
+                    parentComponent="CompanyPage"
                 />
             }
      

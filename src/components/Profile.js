@@ -13,7 +13,7 @@ import BillBoard from "./BillBoard";
 import DetailsPage from "./DetailsPage";
 import ResponsesPage from "./ResponsesPage";
 
-const Profile = ({ 
+const Profile = ( { 
   svgHttp,
   svgXlink,
   setShowProfile,
@@ -22,7 +22,8 @@ const Profile = ({
   setCurrentUser,
   getDataItems,
   axios,
-  typeOfSearch }) => {
+  typeOfSearch 
+} ) => {
 
   const currentDoc = currentUser?.userDocs || [];
   const [showConfirmModal, setShowConfirmModal] = useState(false);

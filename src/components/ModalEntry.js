@@ -7,7 +7,7 @@ import useNoScroll from "./useNoScroll";
 import './../css/ModalEntry.css';
 
 
-const ModalEntry = memo(({
+const ModalEntry = memo(( {
     regEntry,
     modalClass,
     toggleModal,
@@ -25,7 +25,7 @@ const ModalEntry = memo(({
     showProfile,
     addDoc,
     axios
-}) => {
+} ) => {
 
     const [regOn, setRegOn] = useState(false);
 

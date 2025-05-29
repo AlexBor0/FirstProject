@@ -6,7 +6,7 @@ import CityInput from "./CityInput";
 import VacancyDepInput from "./VacancyDepInput";
 import VacancyInput from "./VacancyInput";
 
-const AddVacancyForm = ({ 
+const AddVacancyForm = ( { 
   newVacancy,
   setNewVacancy,
   citiesBase,
@@ -23,7 +23,7 @@ const AddVacancyForm = ({
   setSavingEditorContent,
   savingEditorContent,
   currentUser 
-}) => {
+} ) => {
 
 const pHolder = "Місто, де пропонується робота",
       vacHolder = "Наіменування вакансії*"; 

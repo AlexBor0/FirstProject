@@ -1,8 +1,8 @@
 .previewModal, .viewModal {
     position: absolute;
     display: block;
-    max-width: 720px;
-    width: calc(350px + 30vmax);
+    max-width: 1024px;
+    width: calc(330px + 30vmax);
     height:auto;
     text-align: left;
     background-color:rgb(196, 224, 214);

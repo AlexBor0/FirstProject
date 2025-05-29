@@ -3,7 +3,7 @@ import { FcOk } from "react-icons/fc";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import './../css/MessagePost.css';
 
-const MessagePost = ({
+const MessagePost = ( {
     isOpen,
     onClose,
     closeItem,
@@ -15,8 +15,9 @@ const MessagePost = ({
     setCurrentUser,
     setLoading,
     axios,
-    host
- }) => {
+    host, 
+    parentComponent =""
+} ) => {
 
     
 
@@ -64,9 +65,9 @@ const MessagePost = ({
         } 
         onClose(null);
         closeItem(false);
-        // if (!editable) {
-        //     setPostFetch(false);
-        // }
+        if (parentComponent === "CompanyPage") {
+            setPostFetch(false);
+        }
     }
     
     useEffect(() => {
