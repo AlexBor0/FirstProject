@@ -1,12 +1,12 @@
-import { forwardRef } from 'react';
 
-const LogoImgVC = forwardRef(( {
+
+const LogoImgVC = ( {
         conditions,
         host,
         pcv,
         pcsc,
         isLogo,
-    }, ref ) => {
+    } ) => {
  
 
     return (
@@ -18,12 +18,11 @@ const LogoImgVC = forwardRef(( {
                         className="companyLogo" 
                         src={host + (isLogo.formats?.thumbnail?.url || isLogo.url)} 
                         alt="Логотип компанії"
-                        ref={ref}
                     />
             }
   
         </>
     )
-});
+};
 
 export default LogoImgVC;

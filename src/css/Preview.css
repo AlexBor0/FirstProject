@@ -1,9 +1,11 @@
+
 .previewModal, .viewModal {
     position: absolute;
     display: block;
-    max-width: 1024px;
-    width: calc(330px + 30vmax);
+    max-width: 1280px;
+    width: 100%;
     height:auto;
+    max-height: 100vh;
     text-align: left;
     background-color:rgb(196, 224, 214);
     z-index: 10;
@@ -13,8 +15,34 @@
     flex-direction: column;
     justify-content: flex-start;
     border-radius: 30px;
-
 } 
+@media (min-width: 10px) {
+  .previewModal, .viewModal  {
+     width: 100%;
+     height: auto;
+  }
+
+}
+
+@media (min-width: 650px) {
+  .previewModal, .viewModal  {
+  width: calc(300px + 40vmax);
+  height: auto; 
+  
+  }
+  .rightSide {
+    flex-wrap:wrap;
+  }
+
+}
+    
+@media (min-width: 1620px) {
+  .previewModal, .viewModal  {
+   width: 59%;
+    height: auto;
+  }
+}
+
 .viewModal {
   /* top:50px; */
   left: 50%;
@@ -24,7 +52,7 @@
   margin-right: auto;
 }
 .previewModal {
-  top: 20px;
+  /* top: 20px; */
   left: 50%; 
   transform: translateX(-50%);
 }
@@ -36,6 +64,7 @@
     width: 100%;
     height: 100%;
     position: relative;
+    overflow-y: auto;
 }
 .previewHeader {
     flex-shrink: 0;
@@ -102,9 +131,19 @@
 
 .previewContent {
     flex-grow: 1; 
-    /* overflow-y: auto; */
+    overflow-y: auto;
     overflow-x: hidden;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     padding: 10px 10px 32px 10px;
 }
 
+* main .card {
+  min-width: 260px;
+  margin-bottom: 50px;
+  font-family: 'Open Sans', sans-serif;
+  margin-right: auto;
+  margin-left: auto;
+} 
+.delete-icon:hover {
+  opacity: 0.5;
+} 

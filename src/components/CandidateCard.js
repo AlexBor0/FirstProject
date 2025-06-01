@@ -1,6 +1,6 @@
 import React from "react";
 import Candidate from "./Candidate";
-import './../css/ItemCard.css';
+
 
 const Candidates = ({candidates, deleteUser, host}) => {
       

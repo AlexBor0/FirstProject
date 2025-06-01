@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import FormatDate from './FormatDate';
@@ -19,13 +19,8 @@ const VacancyCard = ( {
     currentUser,
     host
 } ) => {
-    const [showFullVacancy, setShowFullVacancy] =useState(false),
-          [typeLogo, setTypeLogo] = useState(true);
-
-    const companyTitleRef = useRef(null);
-    const companyLogoRef = useRef(null);
-
-
+    const [showFullVacancy, setShowFullVacancy] =useState(false);
+  
     const city = editable ? vacancy.city : vacancy.location,
           pcv = parentComponent === 'Vacancies',
           pcsc = parentComponent === 'shortCard',
@@ -34,19 +29,6 @@ const VacancyCard = ( {
           isLogo = currentUser?.company?.logo || vacancy?.company?.logo;
     const { telephone: tel, telephone2: tel2, telephone3: tel3, companySite: site, companyEmail: email, telegram} = companyData || {};
     const details = tel || tel2 || tel3 || email || site || telegram;
-
-    useEffect (() => {
-
-        if (companyTitleRef.current && companyLogoRef.current) {
-        const titleHeight = companyTitleRef.current.offsetHeight;
-        const logoHeight = companyLogoRef.current.offsetHeight;
-        const isHeight = titleHeight < logoHeight / 2
-        setTypeLogo(isHeight);
-      }
-
-    },[ companyTitleRef, companyLogoRef ]);
-
-
 
     return (
         <>
@@ -123,15 +105,14 @@ const VacancyCard = ( {
                     </div>
                      
                     <div className="rightSide">
-                        <div className="companyTitle" ref={companyTitleRef}>
+                        <div className="companyTitle" >
                             <p ><b>{((pcv || pcsc)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії:"}</b></p>
-                            {!typeLogo && pcsc && <LogoImgVC
+                            {(pcsc || preview ) && <LogoImgVC
                                 conditions={conditions}
                                 isLogo={isLogo}
                                 host={host}
                                 pcv={pcv}
                                 pcsc={pcsc}
-                                ref={companyLogoRef}
                             />}
                         </div>
                         <div >
@@ -170,13 +151,12 @@ const VacancyCard = ( {
                             }
                          
                         </div>
-                        {(typeLogo || !pcsc) && <LogoImgVC
+                        {!pcsc && !preview && <LogoImgVC
                             conditions={conditions}
                             isLogo={isLogo}
                             host={host}
                             pcv={pcv}
                             pcsc={pcsc}
-                            ref={companyLogoRef}
                         />}
                        
                     </div>

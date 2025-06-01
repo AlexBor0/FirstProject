@@ -14,7 +14,6 @@
     max-width: 100%;
     margin: 0px 20px 0px 20px;
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3 );
-    /* font-size: 1rem; */
     border-radius:20px;
     font-family: 'Open Sans', sans-serif;
     overflow-y: hidden;
@@ -31,13 +30,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  flex-wrap: wrap;
-  /* min-width: 40%; */
-  flex: 1 0 270px;
+  flex-wrap: nowrap;
+  flex: 8 0 200px;
   box-sizing: border-box;
 }
 .companyTitle {
-  max-width: 180px;
+  min-width: 140px;
 
 }
 .leftSide{
@@ -45,7 +43,6 @@
   flex-direction: column;
   justify-content: start;
   flex-wrap: wrap;
-  /* min-width: 40%; */
   flex: 1 0 250px;
 }
 .wrapProperties{
@@ -62,8 +59,22 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.vacancy h2 {
+  margin: 6px;
+}
+.vacancy h2 span{
+  font-weight: normal;
+ 
+}
+
+.vacancy .salary {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
 .details {
   font-size: 14px;
+  min-width: 165px;;
+
 }
 .details address {
   font-size: 12px;
@@ -115,7 +126,6 @@ address {
 .vacancyInfo {
   min-width: 240px;
   font-size: 0.8rem;
-  /* border: solid 1px rgb(3, 87, 116); */
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -131,7 +141,7 @@ address {
     justify-content:space-between;
     clear: both;
     font-size: 0.7rem;
-    margin: 10px 0px 3px 0px;
+    margin: 10px 6px 3px 0px;
     background-color:rgb(255, 254, 231);
     color:rgb(10, 76, 199);
   }
@@ -185,4 +195,17 @@ article header {
 }
 p.classTel {
   margin-left: 32px;
+}
+@media (min-width: 10px) {
+
+  .rightSide {
+    flex-wrap:wrap;
+  }
+}
+
+@media (min-width: 650px) {
+
+  .rightSide {
+    flex-wrap:nowrap;
+  }
 }

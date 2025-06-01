@@ -10,7 +10,7 @@
 }
 .container {
   max-width: calc(70% + 160px);
-  min-width: 590px;
+  /* min-width: 590px; */
   margin-right: auto;
   margin-left: auto;
   position: relative;
