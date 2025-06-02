@@ -302,7 +302,7 @@ useEffect(() => { // Получение данных пользователя
 
   
   window.addEventListener('scroll', () => {
-    document.documentElement.scrollTop >= 140 ? setFix('Fix') : setFix('');
+    document.documentElement.scrollTop >= 130 ? setFix('Fix') : setFix('');
     document.documentElement.scrollTop > document.documentElement.clientHeight ? setBtnScrollUp(true) : setBtnScrollUp(false);
   });
 
@@ -391,6 +391,7 @@ useEffect(() => { // Получение данных пользователя
                     svgXlink={ svgXlink } 
                     turnExit={ turnExit } 
                   />}
+                  {fix&&<button className="burgerMenu"> </button>}
             </div> 
           </div>      
           <ResponseList typeOfSearch = {typeOfSearch} />
@@ -438,7 +439,7 @@ useEffect(() => { // Получение данных пользователя
                 });
                 setTimeout(() => {
                   userLogoRef.current?.focus();
-                }, 300);
+                }, 100);
               }}>
               <IoArrowUp className="arrowUp" />
             </button>}

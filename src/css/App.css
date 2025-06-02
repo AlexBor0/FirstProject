@@ -5,12 +5,8 @@
 .App h1, .App h2 {  
   color: rgb(4, 43, 65); 
 }  
-.App h1 {
-  padding: 2px 10px 6px 10px;
-}
 .container {
   max-width: calc(70% + 160px);
-  /* min-width: 590px; */
   margin-right: auto;
   margin-left: auto;
   position: relative;
@@ -39,11 +35,11 @@
   flex-direction: row;
   justify-content: center;
   align-items:center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   z-index: 2;
 }
 .Fix {
-  min-width: 590px;
+  min-width: 60px;
   width: calc(70% + 160px);
   position: fixed;
   top: 0px;
@@ -54,9 +50,9 @@
   flex-shrink: 2;
   display: inline-block;
   position: relative;
-  margin: 0px 30px;
+  margin: 0px 30px 0px 10px;
   width: 50%;
-  min-width: 300px;
+  min-width: 250px;
 }
 .search input {
   width: 100%;
@@ -89,7 +85,7 @@
   margin: 10px -10px;
 }
 .search button.btnSearch:hover, .search button.btnSearch:focus {
-  background-color: rgb(23, 127, 138);
+  background: rgb(10, 102, 127);
   }
 .search button.btnSearch{
   padding-top: 6px;
@@ -145,6 +141,133 @@ button.addResume:hover, button.addResume:focus {
   width: 100px;
   display: inline-block;
 }
+
+ button.burgerMenu:hover {
+    background: rgb(10, 102, 127);
+  }
+
+@media (min-width: 10px) {
+  .largeBtnTitle, .btnWrap, button.addResume, button.Userlogo, button.exit, .appLogo{
+    display: none;
+  }
+  #logotype {
+    margin-left: 20px;
+  }
+  #searchForm, .searchBlock{
+      display: none;
+    }
+  .search.Fix {
+    width: 100%;
+    justify-content: end;
+    max-width: 100%;
+    box-sizing: border-box; 
+  }
+  .card {
+    padding: 10px;
+  }
+    article header {
+      border-radius: 10px;
+    }
+ 
+  article header button{
+    border-radius: 10px;
+    border:none;
+  }
+  .App h1 {
+   font-size: x-large;
+   margin: 10px 0px;
+  }
+  .App h2 {
+   font-size:larger;
+  }
+  button.burgerMenu {
+    position: fixed;
+    right: 0px;
+    top: 12px;
+    z-index: 100;
+  }
+}
+@media (min-width: 350px) {
+   .searchBlock{
+      display: block; 
+    }
+    #searchForm{
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .search.Fix {
+      justify-content: center;
+    }
+    .card {
+    padding: 20px;
+  }
+  article header {
+      border-radius: 0px;
+    }
+ 
+  article header button{
+    border-radius: 0px;
+  }
+  button.burgerMenu {
+    position:static;
+  }
+}
+
+@media (min-width: 420px) {
+.btnWrap, .appLogo, button.addResume, button.Userlogo, button.exit {
+    display: inline-block;
+  }
+  button.burgerMenu {
+    display: none;
+  }
+  .btnWrap {
+    width: 36px;
+  }
+  #searchForm{
+      margin-right: 30px;
+    }
+  #logotype {
+      margin-left: 2%; 
+    }
+  button.addResume{
+    width: 36px;
+    font-size: 18px;
+  }
+  .search.Fix {
+    width: 100%;
+   
+    box-sizing: border-box; 
+  }
+}
+
+@media (min-width: 500px) {
+  .largeBtnTitle {
+    display: inline-block;
+  }
+  .shortBtnTitle {
+    display: none;
+  }
+
+  .btnWrap {
+  width: 100px;
+  }
+  button.addResume{
+    width: 100px;
+    font-size: 11px;
+  }
+  .search.Fix {
+    width: calc(70% + 160px);
+  }
+}
+@media (min-width: 650px) {
+  .App h1 {
+   font-size:xx-large;
+  }
+  .App h2 {
+   font-size:x-large;
+  }
+}
+
 .btnUp {
   position: fixed;
   bottom:50px;

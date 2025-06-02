@@ -138,4 +138,12 @@ button.chooseDirection:hover, button.chooseDirection:focus {
   border-radius: 8px;
   margin: 0px 5px;
 }
-
+button.burgerMenu {
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: rgb(3, 87, 116);
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 10px;
+}

@@ -104,7 +104,7 @@ const VacancyCard = ( {
                         
                     </div>
                      
-                    <div className="rightSide">
+                    <div className={`rightSide ${pcv ? 'short' : ''}`}>
                         <div className="companyTitle" >
                             <p ><b>{((pcv || pcsc)? vacancy?.company?.companyName : currentUser?.company?.companyName) || "Назва компанії:"}</b></p>
                             {(pcsc || preview ) && <LogoImgVC

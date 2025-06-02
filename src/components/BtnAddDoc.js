@@ -5,7 +5,8 @@ const BtnAddDoc = ({type, setAddDoc}) => {
     return(
        <>
          <button className="addResume" onClick = {() => setAddDoc(true)}>
-            {type?"РОЗМІСТИТИ ВАКАНСІЮ":"РОЗМІСТИТИ РЕЗЮМЕ"}
+            <span className="largeBtnTitle">{type?"РОЗМІСТИТИ ВАКАНСІЮ":"РОЗМІСТИТИ РЕЗЮМЕ"}</span>
+            <span className="shortBtnTitle" >+</span>
          </button>
        </>)
   

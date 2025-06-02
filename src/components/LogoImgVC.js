@@ -1,5 +1,4 @@
 
-
 const LogoImgVC = ( {
         conditions,
         host,
@@ -8,7 +7,6 @@ const LogoImgVC = ( {
         isLogo,
     } ) => {
  
-
     return (
         <>
             {((conditions && isLogo) || ((pcv || pcsc) && isLogo)) && 

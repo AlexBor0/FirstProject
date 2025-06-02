@@ -42,7 +42,7 @@ const ConfirmModal = ( {
               НІ
           </button>
           <button autoFocus={true} onClick={
-            // () => chooseAction(typeBtn)
+
             confirmAction
             }
           >

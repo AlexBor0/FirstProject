@@ -259,7 +259,6 @@ const onClose = () => {
                 { typeOfSearch
                   ? <DetailsPage
                       currentUser={currentUser}
-                      
                       getDataItems={getDataItems}
                       setCurrentUser={setCurrentUser}
                       axios={axios}
