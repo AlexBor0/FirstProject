@@ -4,6 +4,7 @@ import './../css/Header.css';
 import BtnTogSearch from "./BtnTogSearch";
 import IconEntry from "./IconEntry";
 import UserLogo from "./UserLogo";
+import BtnBurgerMenu from "./BtnBurgerMenu";
 
 const Header = ( { 
   typeOfSearch,
@@ -16,7 +17,10 @@ const Header = ( {
   svgHttp,
   svgXlink,
   turnExit,
-  userLogoRef
+  userLogoRef,
+  fix,
+  isClicked,
+  setIsClicked
 } ) => {
 
    let thing, title;
@@ -25,7 +29,21 @@ const Header = ( {
     
     useEffect (() => {
       document.title = `Для ${title}`;
-    })
+    });
+
+    const showBurgerMenu = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth < 350) {
+        return true;
+      }
+      else if (screenWidth >= 350 && screenWidth < 420) {
+        return !fix;
+      }
+      else {
+        return false;
+      }
+    };
+    
   return (
     <div className="App">
       <header className="AppHeader">
@@ -59,7 +77,10 @@ const Header = ( {
             svgXlink={ svgXlink } 
             turnExit={ turnExit } 
           />
-          <button className="burgerMenu"> </button>
+          {showBurgerMenu() && <BtnBurgerMenu
+            setIsClicked={setIsClicked}
+            isClicked={isClicked}
+          />}
         </div>
       </header>
       <div className='conteinerH1'>

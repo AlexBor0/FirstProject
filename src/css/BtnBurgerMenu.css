@@ -1,0 +1,76 @@
+ button.burgerMenu:hover {
+    background: rgb(10, 102, 127);
+  }
+
+.string {
+margin: 4px auto;
+width: 28px;
+height: 27px;
+position: relative;
+transform: rotate(0deg);
+transition: .5s ease-in-out;
+cursor: pointer;
+}
+.string span {
+	display: block;
+	position: absolute;
+	height: 2px;
+	width: 100%;
+	background: white;
+	border-radius: 2px;
+	opacity: 1;
+	left: 0;
+	transform: rotate(0deg);
+	transition: .25s ease-in-out;
+}
+.string .line1 {
+	top: 3px;
+}
+.string .line2,
+.string .line3 {
+	top: 12px;
+
+}
+.string .line4 {
+	top: 21px;
+}
+
+.string .line1active {
+	top: 10px;
+	width: 0%;
+	left: 50%;
+}
+.string .line2active {
+    top: 12px;
+	transform: rotate(45deg);
+}
+.string .line3active {
+    top: 12px;
+	transform: rotate(-45deg);
+}
+.string .line4active {
+	top: 10px;
+	width: 0%;
+	left: 50%;
+}
+
+@media (min-width: 10px) {
+
+button.burgerMenu {
+    position: fixed;
+    right: 0px;
+    top: 12px;
+    z-index: 100;
+  }
+
+}
+@media (min-width: 350px) {
+button.burgerMenu {
+    position:static;
+  }
+}
+@media (min-width: 420px) {
+ button.burgerMenu {
+    display: none;
+  }
+}

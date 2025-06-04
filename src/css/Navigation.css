@@ -1,0 +1,13 @@
+.navigation {
+    position: fixed;
+    box-sizing: border-box; 
+    top: 0px;
+    right: 0px;
+    display:flex;
+    height: 80%;
+    width: 100%;
+    background: #C4E0D6;
+    border: #104B5D 3px solid;
+    border-radius: 10px;
+    z-index: 50;
+}

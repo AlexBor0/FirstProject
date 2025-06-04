@@ -142,10 +142,6 @@ button.addResume:hover, button.addResume:focus {
   display: inline-block;
 }
 
- button.burgerMenu:hover {
-    background: rgb(10, 102, 127);
-  }
-
 @media (min-width: 10px) {
   .largeBtnTitle, .btnWrap, button.addResume, button.Userlogo, button.exit, .appLogo{
     display: none;
@@ -180,12 +176,7 @@ button.addResume:hover, button.addResume:focus {
   .App h2 {
    font-size:larger;
   }
-  button.burgerMenu {
-    position: fixed;
-    right: 0px;
-    top: 12px;
-    z-index: 100;
-  }
+  
 }
 @media (min-width: 350px) {
    .searchBlock{
@@ -208,18 +199,14 @@ button.addResume:hover, button.addResume:focus {
   article header button{
     border-radius: 0px;
   }
-  button.burgerMenu {
-    position:static;
-  }
+  
 }
 
 @media (min-width: 420px) {
 .btnWrap, .appLogo, button.addResume, button.Userlogo, button.exit {
     display: inline-block;
   }
-  button.burgerMenu {
-    display: none;
-  }
+ 
   .btnWrap {
     width: 36px;
   }

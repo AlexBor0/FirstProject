@@ -16,6 +16,8 @@ import BtnAddDoc from "./BtnAddDoc";
 import ModalAddDoc from "./ModalAddDoc";
 import IconEntry from "./IconEntry";
 import classNames from 'classnames';
+import BtnBurgerMenu from "./BtnBurgerMenu";
+import Navigation from "./Navigation";
 import './../css/App.css';
 
 const svgHttp = "http://www.w3.org/2000/svg",
@@ -56,6 +58,7 @@ const App = () => {
         [vacancyName, setVacancyName] = useState([]),
         [citiesBase, setCitiesBase] = useState(null),
         [specialtiesBase, setSpecialtiesBase] = useState(null),
+        [isClicked, setIsClicked] = useState(false),
         [loading, setLoading] = useState(true),
         [error, setError] = useState(null),
         [fix, setFix] = useState(''),
@@ -351,6 +354,9 @@ useEffect(() => { // Получение данных пользователя
             setShowProfile={setShowProfile}
             currentUser={currentUser}
             userLogoRef={userLogoRef}
+            fix={fix}
+            isClicked={isClicked}
+            setIsClicked={setIsClicked}
           /> 
           {showProfile&&
             <ModalEditProfile 
@@ -391,9 +397,18 @@ useEffect(() => { // Получение данных пользователя
                     svgXlink={ svgXlink } 
                     turnExit={ turnExit } 
                   />}
-                  {fix&&<button className="burgerMenu"> </button>}
+                  {fix && <BtnBurgerMenu
+                    isClicked={isClicked}
+                    setIsClicked={setIsClicked}
+                  />}
+                  
             </div> 
-          </div>      
+          </div>   
+          {isClicked && <Navigation
+          fix={fix}
+          mainSearchRef={mainSearchRef}
+          typeOfSearch={typeOfSearch}
+          />}   
           <ResponseList typeOfSearch = {typeOfSearch} />
             {addDoc&&<ModalAddDoc 
               vacArr={vacancyName} 
