@@ -1,30 +1,37 @@
-import {  IoSearch } from "react-icons/io5";
+import SearchForm from "./SearchForm";
+import BtnAddDoc from "./BtnAddDoc";
 import './../css/Navigation.css';
 
-const Navigation = ({fix, mainSearchRef, typeOfSearch}) => {
+
+const Navigation = ( { 
+    mainSearchRef,
+    typeOfSearch,
+    setAddDoc
+} ) => {
 
 
     return (
-       <nav className="navigation">
-        <div >
-            <div className="searchBlock">
-                        <div className={`search ${fix}`}>
-                            <form id="searchForm">
-                            <input ref={mainSearchRef} type="search"  placeholder={typeOfSearch?"Пошук кандидата" : "Пошук вакансії"} name="search"/>
-                            <button type="submit" className="btnSearch" onClick={(e) =>{
-                                    e.preventDefault();
-                                    }}> 
-                                    <IoSearch />
-                            </button>
-                            </form>                
-                           
-                              
-                        </div> 
-                      </div>
+        <nav className="navigation">
+           
+            <div className="searchContainer" >
+    
+               <SearchForm
+                ref={mainSearchRef}
+                typeOfSearch={typeOfSearch}
+              />               
 
-        </div>
-          
-       </nav>
+            </div>
+
+                <div className="btnWrap">
+                  <BtnAddDoc 
+                    type={typeOfSearch} 
+                    setAddDoc={setAddDoc}
+                  />
+                </div> 
+
+
+            
+        </nav>
 
     )
 }

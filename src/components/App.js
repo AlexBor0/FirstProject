@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef, useCallback} from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import axios from 'axios';
-import { IoArrowUp, IoSearch } from "react-icons/io5";
+import { IoArrowUp } from "react-icons/io5";
 import './../css/index.css';
 import Header from "./Header";
 import Image from "./image";
@@ -18,6 +18,7 @@ import IconEntry from "./IconEntry";
 import classNames from 'classnames';
 import BtnBurgerMenu from "./BtnBurgerMenu";
 import Navigation from "./Navigation";
+import SearchForm from "./SearchForm";
 import './../css/App.css';
 
 const svgHttp = "http://www.w3.org/2000/svg",
@@ -376,38 +377,34 @@ useEffect(() => { // Получение данных пользователя
 
           <div className="searchBlock">
             <div className={`search ${fix}`}>
-                <form id="searchForm">
-                <input ref={mainSearchRef} type="search"  placeholder={typeOfSearch?"Пошук кандидата" : "Пошук вакансії"} name="search"/>
-                <button type="submit" className="btnSearch" onClick={(e) =>{
-                        e.preventDefault();
-                        }}> 
-                        <IoSearch />
-                </button>
-                </form>                
-                {confirm&&<div className="btnWrap">
-                    <BtnAddDoc 
-                      type={typeOfSearch} 
-                      setAddDoc={setAddDoc}
-                    />
-                  </div> 
-                }
-                 {fix&&<IconEntry 
-                    confirm={ confirm } 
-                    svgHttp={ svgHttp } 
-                    svgXlink={ svgXlink } 
-                    turnExit={ turnExit } 
-                  />}
-                  {fix && <BtnBurgerMenu
-                    isClicked={isClicked}
-                    setIsClicked={setIsClicked}
-                  />}
+              <SearchForm
+                ref={mainSearchRef}
+                typeOfSearch={typeOfSearch}
+              />
+              {confirm&&<div className="btnWrap">
+                  <BtnAddDoc 
+                    type={typeOfSearch} 
+                    setAddDoc={setAddDoc}
+                  />
+                </div> 
+              }
+              {fix&&<IconEntry 
+                confirm={ confirm } 
+                svgHttp={ svgHttp } 
+                svgXlink={ svgXlink } 
+                turnExit={ turnExit } 
+              />}
+              {fix && <BtnBurgerMenu
+                isClicked={isClicked}
+                setIsClicked={setIsClicked}
+              />}
                   
             </div> 
           </div>   
           {isClicked && <Navigation
-          fix={fix}
-          mainSearchRef={mainSearchRef}
-          typeOfSearch={typeOfSearch}
+            setAddDoc={setAddDoc}
+            mainSearchRef={mainSearchRef}
+            typeOfSearch={typeOfSearch}
           />}   
           <ResponseList typeOfSearch = {typeOfSearch} />
             {addDoc&&<ModalAddDoc 

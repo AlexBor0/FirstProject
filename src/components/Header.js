@@ -77,7 +77,7 @@ const Header = ( {
             svgXlink={ svgXlink } 
             turnExit={ turnExit } 
           />
-          {showBurgerMenu() && <BtnBurgerMenu
+          {showBurgerMenu() &&<BtnBurgerMenu
             setIsClicked={setIsClicked}
             isClicked={isClicked}
           />}
