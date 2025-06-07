@@ -9,8 +9,6 @@ const ModalEditProfile = ( {
     modalClass,
     showProfile,
     setShowProfile,
-    svgHttp,
-    svgXlink,
     host,
     getDataItems,
     axios,
@@ -26,8 +24,6 @@ const ModalEditProfile = ( {
 <div className={modalClass}>
     <div className="modalAddDoc">   
            <Profile
-                svgHttp={svgHttp}
-                svgXlink={svgXlink}
                 setShowProfile={setShowProfile}
                 currentUser={currentUser}
                 host={host}

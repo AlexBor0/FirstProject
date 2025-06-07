@@ -14,8 +14,6 @@ import DetailsPage from "./DetailsPage";
 import ResponsesPage from "./ResponsesPage";
 
 const Profile = ( { 
-  svgHttp,
-  svgXlink,
   setShowProfile,
   host,
   currentUser,
@@ -198,8 +196,6 @@ const onClose = () => {
         {showProfileBook && (
         <div className="profileBook">
           <SvgBook 
-            svgHttp={svgHttp}
-            svgXlink={svgXlink}
             svgStyle={svgStyle}
           />
 
@@ -221,7 +217,11 @@ const onClose = () => {
             {/* Содержимое Страницы 2 */}
 
             <div className="pageTwo">
-              <button className="pageBtn" autoFocus={true} onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}>
+              <button 
+                className="pageBtn" 
+                autoFocus={true} 
+                onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}
+              >
                 <IoCloseCircleSharp className="delete-icon" />
               </button>
               <div className="profileHead" >
@@ -245,8 +245,6 @@ const onClose = () => {
 
             {/* Страница 2 */}
             <EvenBookPage
-              svgHttp={svgHttp}
-              svgXlink={svgXlink}
               svgStyle={svgStyle}
             />
 
@@ -273,8 +271,6 @@ const onClose = () => {
 
             {/* Страница 3 */}
           <OddBookPage
-            svgHttp={svgHttp}
-            svgXlink={svgXlink}
             svgStyle={svgStyle}
           />
 

@@ -90,18 +90,18 @@ button.addResume {
 button.addResume:hover, button.addResume:focus {
   background:rgb(251, 143, 93);
 }
-.btnWrap {
+.searchBlock.btnWrap {
   margin-left: 0px 1%;
   width: 100px;
-  display: inline-block;
+  display: block;
 }
 
 @media (min-width: 10px) {
-  .largeBtnTitle, .btnWrap, button.addResume, button.Userlogo, button.exit, .appLogo{
+  .largeBtnTitle, .btnWrap, button.addResume, .AppHeaderRight button.Userlogo, .AppHeaderRight button.exit, .appLogo{
     display: none;
   }
-  .navigation .btnWrap {
-    display: inline-block;
+  .navigation .btnWrap, .navigation .btnWrap button.addResume {
+    display: block;
   }
   #logotype {
     margin-left: 20px;
@@ -109,7 +109,9 @@ button.addResume:hover, button.addResume:focus {
   .searchBlock{
       display: none;
     }
-
+  .AppHeader {
+    min-height: 62px;
+  }
   .search.Fix {
     width: 100%;
     justify-content: end;
@@ -141,9 +143,13 @@ button.addResume:hover, button.addResume:focus {
     }
     .search.Fix {
       justify-content: space-between;
+     
     }
     .card {
     padding: 20px;
+  }
+  .search.Fix button.exit {
+    display: none;
   }
   article header {
       border-radius: 0px;
@@ -155,10 +161,12 @@ button.addResume:hover, button.addResume:focus {
 }
 
 @media (min-width: 420px) {
-.btnWrap, .appLogo, button.addResume, button.Userlogo, button.exit {
+.btnWrap, .appLogo, button.addResume, .AppHeaderRight button.Userlogo, .AppHeaderRight button.exit, .search.Fix button.exit {
     display: inline-block;
   }
- 
+ .AppHeader {
+    min-height: 10vh;
+  }
   .btnWrap {
     width: 36px;
   }

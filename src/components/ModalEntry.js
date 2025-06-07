@@ -18,7 +18,7 @@ const ModalEntry = memo(( {
     regUser,
     resetRegForm,
     host,
-    validInput,
+    setInputErrors,
     inputErrors,
     setRegUser,
     getDataItems,
@@ -57,8 +57,8 @@ const ModalEntry = memo(( {
                     setCurrentUser={setCurrentUser}
                     setRegOn={setRegOn} 
                     regOn={regOn}
-                    validInput={validInput}
                     inputErrors={inputErrors}
+                    setInputErrors={setInputErrors}
                     axios={axios}
                 />}
                 {regOn&&<Registration 

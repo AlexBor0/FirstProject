@@ -5,13 +5,14 @@
     right: 0px;
     display:flex;
     flex-direction: column;
-    height: 80%;
+    height: auto;
     width: 100%;
     background: #C4E0D6;
     border: #104B5D 3px solid;
     border-radius: 10px;
     z-index: 50;
-    /* padding-right: 20px; */
+    padding: 0 10px 0 10px;
+   
 }
 @media (min-width: 420px) {
    .navigation {
@@ -19,9 +20,38 @@
    } 
 }
 .searchContainer {
-    width: calc(100% - 20px) ;
+    width: calc(100% - 10px) ;
     height: auto;
+    
+}
+.navigation .searchContainer input {
+    margin-left: 0px;
 }
 nav .navigation .btnWrap {
-    display: block;
+    display: inline-block;
+    width: 100%;
+    margin: 10px auto;
+    /* align-items:center; */
+    padding: 0 10px 0 10px;
+}
+.navigation .addResume {
+    width: 100%;  
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.navMenuUseBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+.navMenuUseBlock .Userlogo p {
+    color: #104B5D;
+    font-size: 14px;
+    font-weight: 600;
 }

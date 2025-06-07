@@ -1,14 +1,18 @@
 import React from "react";
 
 
-const IconEntry = ({ confirm, svgHttp, svgXlink, turnExit }) => {
+const IconEntry = ({ confirm, turnExit }) => {
 
 
   return(
     <button className="exit" onClick={turnExit}>
-      <svg  xmlns= {svgHttp} xmlSpace="preserve"  version="1.1" 
-       viewBox="0 0 472 472" className="entry"
-        xmlnsXlink={svgXlink}
+      <svg   
+        viewBox="0 0 472 472" 
+        className="entry"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        xmlns= "http://www.w3.org/2000/svg"
+        xmlSpace="preserve"  
+        version="1.1"
       >       
         <g id="iconEntry">
           <path className={!confirm?"fil0": "fil0Cl"} fill=" #50ACBB" d="M136.37 413.03c28.8,-1.31 133.74,-2.02 162.82,-1.9 32.11,0.13 26.17,-7.87 26.18,-52.66 0.02,-185.85 -1.21,-91.12 0.08,-227.13 1.01,-79.82 5.79,-63.73 -51.56,-66.2 -16.76,0.4 -121.61,1.78 -136.01,1.48 1.17,45.87 -1.51,312.13 -1.51,346.41z"/>

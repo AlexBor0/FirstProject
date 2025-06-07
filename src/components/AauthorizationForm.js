@@ -1,4 +1,6 @@
-import React, {useState} from "react";
+import {useState} from "react";
+import validInput from "./validInput";
+
 
 const AauthorizationForm = ( {
   regOn,
@@ -6,7 +8,7 @@ const AauthorizationForm = ( {
   host,
   setConfirm,
   setCurrentUser,
-  validInput,
+  setInputErrors,
   inputErrors,
   axios
 } ) => {
@@ -21,7 +23,7 @@ const AauthorizationForm = ( {
           const getDataItems = (e) => {
             const { name, value } = e.target;
             setUserLogin({ ...userLogin, [name]: value });
-            validInput(value, e.target);
+            validInput(value, e.target, [], setInputErrors);
         };
     
 		const fetchAauthorization = async () => {

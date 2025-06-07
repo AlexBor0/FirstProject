@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import axios from 'axios';
 import { IoArrowUp } from "react-icons/io5";
-import './../css/index.css';
+import axios from 'axios';
 import Header from "./Header";
 import Image from "./image";
 import wallpaper from "./../img/wallpaper.jpg";
@@ -19,11 +18,12 @@ import classNames from 'classnames';
 import BtnBurgerMenu from "./BtnBurgerMenu";
 import Navigation from "./Navigation";
 import SearchForm from "./SearchForm";
+import validInput from "./validInput";
+import './../css/index.css';
 import './../css/App.css';
 
-const svgHttp = "http://www.w3.org/2000/svg",
-      svgXlink = "http://www.w3.org/1999/xlink",
-      host = "http://localhost:1337";
+
+const host = "http://localhost:1337";
 
  
 const App = () => {
@@ -110,42 +110,6 @@ const App = () => {
   const resetRegForm = useCallback(() => {
     setRegUser(resetRegUser());
   }, [setRegUser] ); 
-  
-  const validInput = (value, inputElement, exceptions = []) => {
-    if(inputElement.type === "text") {
-      
-        const baseForbiddenChars = ['<', '>', '{', '}', '[', ']', '(', ')', '&', '$', '%', '#', '?', '!', '*', '^', '+', '=', '|', '\\', ':', ';', ',', '"', "'", '`', '~'];
-        const forbiddenChars = baseForbiddenChars.filter(char => !exceptions.includes(char));
-        
-        function createPreEscapedRegex(forbiddenChars) {
-            const charMap = {
-                 '*': '\\*', '+': '\\+', '?': '\\?', '^': '\\^', '$': '\\$', '{': '\\{', '}': '\\}', '(': '\\(', ')': '\\)','|': '\\|', '[': '\\[', ']': '\\]', '\\': '\\\\'
-            };
-            
-            const escaped = forbiddenChars
-                .map(char => charMap[char] || char)
-                .join('');
-            return new RegExp(`[${escaped}]`);
-        }
-
-        const mat = value.match(createPreEscapedRegex(forbiddenChars));
-        
-        if (mat) {
-            setInputErrors(prev => ({
-                ...prev,
-                [inputElement.name]: 'Використання таких символів не допускається'
-            }));
-            inputElement.setCustomValidity('Внесений некоректний символ/ли');
-        } else {
-            setInputErrors(prev => ({
-                ...prev,
-                [inputElement.name]: ''
-            }));
-
-            inputElement.setCustomValidity('');
-        }
-    }
-  };
 
   const getDataItems = (e, options = {}) => {
     const { name, value } = e.target;
@@ -155,7 +119,7 @@ const App = () => {
     if (options.setSelectValue) options.setSelectValue(value);
     if (options.setQuery) options.setQuery(value);
     if (options.setShowList) options.setShowList(value.length > 0);
-    if (options.validate) validInput(value, e.target, exceptions);
+    if (options.validate) validInput(value, e.target, exceptions, setInputErrors);
 };
 
 useEffect (() => {
@@ -328,8 +292,8 @@ useEffect(() => { // Получение данных пользователя
             setRegUser={setRegUser}
             getDataItems={getDataItems}
             resetRegForm={resetRegForm}
-            validInput={validInput}
             inputErrors={inputErrors}
+            setInputErrors={setInputErrors}
             resetRegUser={resetRegUser}
             showProfile={showProfile}
             addDoc={addDoc}
@@ -347,8 +311,6 @@ useEffect(() => { // Получение данных пользователя
             typeOfSearch = {typeOfSearch} 
             setTypeOfsearch = {setTypeOfsearch}  
             confirm={confirm} 
-            svgHttp={svgHttp} 
-            svgXlink={svgXlink} 
             setRegEntry={setRegEntry}
             mainSearchRef={mainSearchRef}
             turnExit={turnExit}
@@ -364,8 +326,6 @@ useEffect(() => { // Получение данных пользователя
               modalClass={modalClass}
               showProfile={showProfile}
               setShowProfile={setShowProfile}
-              svgHttp={svgHttp}
-              svgXlink={svgXlink}
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
               host={host}
@@ -381,17 +341,16 @@ useEffect(() => { // Получение данных пользователя
                 ref={mainSearchRef}
                 typeOfSearch={typeOfSearch}
               />
-              {confirm&&<div className="btnWrap">
+              {confirm &&
+                <div className="btnWrap">
                   <BtnAddDoc 
                     type={typeOfSearch} 
                     setAddDoc={setAddDoc}
                   />
                 </div> 
               }
-              {fix&&<IconEntry 
+              {fix && <IconEntry 
                 confirm={ confirm } 
-                svgHttp={ svgHttp } 
-                svgXlink={ svgXlink } 
                 turnExit={ turnExit } 
               />}
               {fix && <BtnBurgerMenu
@@ -405,9 +364,19 @@ useEffect(() => { // Получение данных пользователя
             setAddDoc={setAddDoc}
             mainSearchRef={mainSearchRef}
             typeOfSearch={typeOfSearch}
+            isClicked={isClicked}
+            setShowProfile={setShowProfile}
+            currentUser={currentUser}
+            setRegEntry={setRegEntry}
+            host={host}
+            userLogoRef={userLogoRef}
+            confirm={confirm}
+            turnExit={turnExit}
+            fix={fix}
+            setIsClicked={setIsClicked}
           />}   
           <ResponseList typeOfSearch = {typeOfSearch} />
-            {addDoc&&<ModalAddDoc 
+            {addDoc && <ModalAddDoc 
               vacArr={vacancyName} 
               type={typeOfSearch} 
               addDoc={addDoc} 

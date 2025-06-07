@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import gear from './../img/gear.svg';
 import './../css/Header.css';
 import BtnTogSearch from "./BtnTogSearch";
 import IconEntry from "./IconEntry";
 import UserLogo from "./UserLogo";
 import BtnBurgerMenu from "./BtnBurgerMenu";
+import ShowBrgMenu from "./ShowBrgMenu";
 
 const Header = ( { 
   typeOfSearch,
@@ -14,8 +15,6 @@ const Header = ( {
   currentUser,
   setRegEntry,
   confirm,
-  svgHttp,
-  svgXlink,
   turnExit,
   userLogoRef,
   fix,
@@ -30,19 +29,6 @@ const Header = ( {
     useEffect (() => {
       document.title = `Для ${title}`;
     });
-
-    const showBurgerMenu = () => {
-      const screenWidth = window.innerWidth;
-      if (screenWidth < 350) {
-        return true;
-      }
-      else if (screenWidth >= 350 && screenWidth < 420) {
-        return !fix;
-      }
-      else {
-        return false;
-      }
-    };
     
   return (
     <div className="App">
@@ -73,11 +59,9 @@ const Header = ( {
           />
           <IconEntry 
             confirm={ confirm } 
-            svgHttp={ svgHttp } 
-            svgXlink={ svgXlink } 
             turnExit={ turnExit } 
           />
-          {showBurgerMenu() &&<BtnBurgerMenu
+          {(ShowBrgMenu(fix) || isClicked )&&<BtnBurgerMenu
             setIsClicked={setIsClicked}
             isClicked={isClicked}
           />}

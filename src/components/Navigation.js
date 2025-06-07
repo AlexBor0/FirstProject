@@ -1,12 +1,23 @@
 import SearchForm from "./SearchForm";
 import BtnAddDoc from "./BtnAddDoc";
+import UserLogo from "./UserLogo";
+import IconEntry from "./IconEntry";
 import './../css/Navigation.css';
 
 
 const Navigation = ( { 
     mainSearchRef,
     typeOfSearch,
-    setAddDoc
+    setAddDoc,
+    isClicked,
+    setShowProfile,
+    currentUser,
+    setRegEntry,
+    host,
+    userLogoRef,
+    confirm,
+    turnExit,
+ 
 } ) => {
 
 
@@ -16,18 +27,32 @@ const Navigation = ( {
             <div className="searchContainer" >
     
                <SearchForm
-                ref={mainSearchRef}
-                typeOfSearch={typeOfSearch}
+                    ref={mainSearchRef}
+                    typeOfSearch={typeOfSearch}
               />               
 
             </div>
 
-                <div className="btnWrap">
-                  <BtnAddDoc 
+            <div className="btnWrap">
+                <BtnAddDoc 
                     type={typeOfSearch} 
                     setAddDoc={setAddDoc}
-                  />
-                </div> 
+                    isClicked={isClicked}
+                />
+            </div> 
+            <div className="navMenuUseBlock" >
+                <UserLogo  
+                    setShowProfile={setShowProfile}
+                    currentUser={currentUser}
+                    setRegEntry={ setRegEntry } 
+                    host={ host }
+                    ref={userLogoRef}
+                />
+                <IconEntry 
+                    confirm={ confirm }  
+                    turnExit={ turnExit } 
+                />
+            </div>
 
 
             

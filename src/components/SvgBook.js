@@ -1,16 +1,16 @@
 
-const SvgBook = ({ svgHttp, svgXlink, svgStyle }) => {
+const SvgBook = ({ svgStyle }) => {
     return (
         <>
             <svg
-            xmlns= {svgHttp}
-            xmlSpace="preserve"
+            viewBox="55 245 500 230"
             width="470px"
             height="372px"
+            xmlSpace="preserve"
             version="1.1"
             style={{svgStyle}}
-            viewBox="55 245 500 230"
-            xmlnsXlink={svgXlink}
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            xmlns= "http://www.w3.org/2000/svg"
             >
                 <defs>
                   <style type="text/css">

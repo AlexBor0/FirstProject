@@ -1,7 +1,8 @@
+import { forwardRef } from 'react';
 import { IoSearch } from "react-icons/io5";
 import './../css/SearchForm.css';
 
-const SearchForm = ({ref, typeOfSearch}) => {
+const SearchForm = forwardRef(({ typeOfSearch }, ref) => {
 
     return (
             <form id="searchForm">
@@ -17,6 +18,7 @@ const SearchForm = ({ref, typeOfSearch}) => {
                 </button>
             </form>
     )
-}
+});
+
 
 export default SearchForm;

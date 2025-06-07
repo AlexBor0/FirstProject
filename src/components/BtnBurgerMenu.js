@@ -13,7 +13,7 @@ const click = () => {
 
     return (
        <button 
-            className="burgerMenu"
+            className={`burgerMenu ${isClicked ? 'fixed' : ''}`}
             onClick={click}
         >
             <div className="string">
