@@ -1,7 +1,7 @@
-import React from "react";
-import GestAva from "./../img/GestAva.png";
+
 import './../css/Preview.css';
 import ResumeCard from "./ResumeCard";
+import useNoScroll from "./useNoScroll";
 
 const PreviewResume = ( {
     post,
@@ -9,30 +9,18 @@ const PreviewResume = ( {
     previewContentRef,
     candidate,
     editable,
+    preview,
+    onClose,
+    currentUser,
     host,
-    setShowDoc,
-    setShowConfirmModal,
-    setShowDocList,
-    setShowProfileBook
+    parentComponent
 } ) => {
-    
-    const imageSrc = editable
-        ? 
-            (candidate.foto instanceof File 
-                ? URL.createObjectURL(candidate.foto) 
-                : GestAva) 
-        :   (candidate?.foto?.url 
-                ? `${host}${candidate.foto.url}` 
-                : GestAva);
 
-    const onClose = () => {
-        setShowDoc(false); 
-        setShowConfirmModal(false);
-        setShowDocList(true);
-        setShowProfileBook(true);
-    };
-
-    const vacancyTitle = editable ? candidate.vacancy : candidate.title;
+    useNoScroll(() => {
+            if (parentComponent === "shortCard") {
+                return true;
+            }
+        });    
    
     return (
         <>
@@ -64,9 +52,11 @@ const PreviewResume = ( {
                         <ResumeCard
                             candidate={candidate}
                             onClose={onClose}
-                            vacancyTitle={vacancyTitle}
-                            imageSrc={imageSrc}
                             editable={editable}
+                            preview={preview}
+                            parentComponent={parentComponent}
+                            currentUser={currentUser}
+                            host={host}
                         />
                         
                     </div>

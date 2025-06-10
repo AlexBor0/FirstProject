@@ -350,11 +350,14 @@ const onClose = () => {
               indexDoc={indexDoc}
               setShowDoc={setShowDoc}
               editable={false}
+              preview={true}
               host={host}
               backward={backward}
               setShowConfirmModal={setShowConfirmModal}
               setShowDocList={setShowDocList}
               setShowProfileBook={setShowProfileBook}
+              currentUser={currentUser}
+              onClose={onClose}
             /> )
         }
 

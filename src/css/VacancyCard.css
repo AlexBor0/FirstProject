@@ -116,7 +116,7 @@ address {
   text-indent: 12px;
   
 }
-.description-short {
+.description-short, .textResume-short {
   display: -webkit-box;
   line-clamp: 2;
   -webkit-line-clamp: 2;

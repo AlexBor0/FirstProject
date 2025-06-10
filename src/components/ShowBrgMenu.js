@@ -13,4 +13,4 @@ const ShowBrgMenu = (fix) => {
       }
     };
 
-    export default ShowBrgMenu;
+export default ShowBrgMenu;

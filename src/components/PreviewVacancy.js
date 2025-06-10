@@ -22,8 +22,7 @@ const PreviewVacancy = ( {
                 return true;
             }
         });
-  
-    
+     
     return (
         <>
             <div className={editable?"previewModal":"viewModal"} >

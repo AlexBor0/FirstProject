@@ -34,6 +34,7 @@ const Candidate = ({candidate, onDelete, host}) => {
                 imageSrc={imageSrc}
                 editable={editable}
                 parentComponent={'Candidate'}
+                host={host}
             />
         </>
        
