@@ -331,7 +331,7 @@ useEffect(() => { // Получение данных пользователя
               host={host}
               getDataItems={getDataItems}
               axios={axios}
-              typeOfSearch={typeOfSearch}
+              type={typeOfSearch}
             />
           }
 
@@ -390,7 +390,7 @@ useEffect(() => { // Получение данных пользователя
               getDataItems={getDataItems}
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
-              />
+               />
             }
           <div className="mainContainer">
             <main>
@@ -398,11 +398,14 @@ useEffect(() => { // Получение данных пользователя
               {typeOfSearch&&currentUser?.userStatus === "employer"&&<Candidates 
                 host={host}
                 axios={axios}
+                type={typeOfSearch}
+                currentUser={currentUser}
                 />}
               {!typeOfSearch&&currentUser?.userStatus === "candidate"&&<Vacancies 
                 host={host} 
                 setTitle={setVacancyName} 
                 axios={axios}
+                type={typeOfSearch}
                 />} 
                    
             </main>

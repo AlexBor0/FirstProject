@@ -13,7 +13,7 @@ const ModalEditProfile = ( {
     getDataItems,
     axios,
     setCurrentUser,
-    typeOfSearch
+    type
 } ) => {
 
 
@@ -30,7 +30,7 @@ const ModalEditProfile = ( {
                 getDataItems={getDataItems}
                 axios={axios}
                 setCurrentUser={setCurrentUser}
-                typeOfSearch={typeOfSearch}
+                type={type}
             />
              
     </div>

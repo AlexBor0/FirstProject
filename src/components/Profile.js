@@ -2,8 +2,7 @@ import { useState, useEffect }  from "react";
 import ProfileForm from "./ProfileForm";
 import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoTrash, IoArrowUndo } from "react-icons/io5";
 import FormatDate from './FormatDate';
-import PreviewResume from './PreviewResume';
-import PreviewVacancy from './PreviewVacancy';
+import PreviewDoc from './PreviewDoc';
 import SvgBook from "./SvgBook";
 import EvenBookPage from "./EvenBookPage";
 import OddBookPage from "./OddBookPage ";
@@ -20,7 +19,7 @@ const Profile = ( {
   setCurrentUser,
   getDataItems,
   axios,
-  typeOfSearch 
+  type 
 } ) => {
 
   const currentDoc = currentUser?.userDocs || [];
@@ -40,7 +39,7 @@ const Profile = ( {
     clipRule: "evenodd"
   }
 
-    const docs = typeOfSearch ? "Vacancies" : "Candidates";
+    const docs = type ? "Vacancies" : "Candidates";
 
     useEffect(() => { // Установка начального состояния видимости страниц
     if (showProfileBook) {
@@ -124,7 +123,7 @@ const Profile = ( {
   };
 
   const deleteDocument = () => {
-    typeOfSearch ? fetchDeleteDoc() : fetchDeleteImgAndDoc();
+    type ? fetchDeleteDoc() : fetchDeleteImgAndDoc();
     setShowConfirmModal(false);
     setShowDocList(true);
   };
@@ -225,10 +224,10 @@ const onClose = () => {
                 <IoCloseCircleSharp className="delete-icon" />
               </button>
               <div className="profileHead" >
-                { typeOfSearch? "КОМПАНІЯ": "РОБОТА"}
+                { type? "КОМПАНІЯ": "РОБОТА"}
               </div>
               <div  className="currentEntries">
-              { typeOfSearch
+              { type
               ? <CompanyPage
                   currentUser={currentUser}
                   getDataItems={getDataItems}
@@ -251,10 +250,10 @@ const onClose = () => {
            {/* Содержимое Страницаы 3 */}
            <div className="pageThree">
               <div className="profileHead" >
-              { typeOfSearch? "РЕКВІЗИТИ": "МОЇ ВІДГУКИ" }
+              { type? "РЕКВІЗИТИ": "МОЇ ВІДГУКИ" }
               </div>
               <div className="currentEntries">
-                { typeOfSearch
+                { type
                   ? <DetailsPage
                       currentUser={currentUser}
                       getDataItems={getDataItems}
@@ -280,7 +279,7 @@ const onClose = () => {
                 <IoCloseCircleSharp className="delete-icon" />
               </button>
               <div className="profileHead" >
-                { typeOfSearch? "МОЇ ВАКАНСІЇ": "МОЇ РЕЗЮМЕ"}
+                { type? "МОЇ ВАКАНСІЇ": "МОЇ РЕЗЮМЕ"}
               </div>
               <div  className="currentEntries">
 
@@ -294,7 +293,7 @@ const onClose = () => {
                     typeBtn={typeBtn}
                     backward={backward}
                     setShowProfileBook={setShowProfileBook}
-                    document={typeOfSearch ? "вакансію" : "резюме"}
+                    document={type ? "вакансію" : "резюме"}
                   />
                 }
 
@@ -330,9 +329,9 @@ const onClose = () => {
         </div>
         
         )}
-        {showDoc&& (typeOfSearch 
-          ? <PreviewVacancy
-              vacancy={currentUser.userDocs[indexDoc]}
+        {showDoc&& 
+           <PreviewDoc
+              documentData={currentUser.userDocs[indexDoc]}
               indexDoc={indexDoc}
               setShowDoc={setShowDoc}
               editable={false}
@@ -344,21 +343,8 @@ const onClose = () => {
               setShowProfileBook={setShowProfileBook}
               currentUser={currentUser}
               onClose={onClose}
+              type={type ? "vacancy" : "resume"}
             />
-          : <PreviewResume
-              candidate={currentUser.userDocs[indexDoc]}
-              indexDoc={indexDoc}
-              setShowDoc={setShowDoc}
-              editable={false}
-              preview={true}
-              host={host}
-              backward={backward}
-              setShowConfirmModal={setShowConfirmModal}
-              setShowDocList={setShowDocList}
-              setShowProfileBook={setShowProfileBook}
-              currentUser={currentUser}
-              onClose={onClose}
-            /> )
         }
 
 

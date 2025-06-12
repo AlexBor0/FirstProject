@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import VacancyCard from './VacancyCard';
 
-const Vacancies = ({host, setTitle, axios}) => {
+const Vacancies = ( {
+	host,
+	setTitle,
+	axios,
+	type
+} ) => {
 
 	const [vacancies, setVacancies] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -43,6 +48,7 @@ const Vacancies = ({host, setTitle, axios}) => {
 					vacancy={el}
 					editable={editable}
 					parentComponent={'Vacancies'}
+					type={type}
 					host={host}
 					/>
 				))}

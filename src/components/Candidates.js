@@ -1,7 +1,7 @@
 import React,  { useEffect, useState } from "react";
 import CandidateCard from "./CandidateCard";
 
-const Candidates = ({host, axios}) => {
+const Candidates = ({host, axios, type, currentUser}) => {
 
     const [candidates, setCandidates] = useState([]),
           [loading, setLoading] = useState(true),
@@ -30,7 +30,13 @@ const Candidates = ({host, axios}) => {
 
         return (
             <>
-                <CandidateCard candidates= {candidates} deleteUser={deleteUser} host={host}/>
+                <CandidateCard 
+                    candidates={candidates}
+                    deleteUser={deleteUser}
+                    host={host}
+                    type={type}
+                    currentUser={currentUser}
+                />
             </>
         )
 }

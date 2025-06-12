@@ -1,7 +1,6 @@
-import React, {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import './../css/Preview.css';
-import PreviewVacancy from "./PreviewVacancy";
-import PreviewResume from "./PreviewResume";
+import PreviewDoc from "./PreviewDoc";
 
 const Preview = ( {
   newVacancy,
@@ -12,15 +11,14 @@ const Preview = ( {
   setLoading,
   setError,
   host,
-  type,
   newCandidate,
   setNewCandidate,
   currentUser,
   setCurrentUser,
   axios,
   setIsPreviewVisible,
-  setAddDoc,
-  editable
+  editable,
+  type
 } ) => {
 
     const previewContentRef = useRef(null);
@@ -185,17 +183,17 @@ const Preview = ( {
 
       const post = () => {
         type ? fetchNewVacancy() : fetchNewCandidate();
-        // setAddDoc(false);
-        // setPostSuccess(true);
+
       };
 
-      
+      const onClose = () => {
+        setIsPreviewVisible(false);
+    };
 
         return (
-            <>
-              {type ? (
-                <PreviewVacancy
-                  vacancy={newVacancy}
+
+              <PreviewDoc
+                  documentData={type ? newVacancy : newCandidate}
                   post={post}
                   edit={edit}
                   editable={editable}
@@ -203,20 +201,11 @@ const Preview = ( {
                   previewContentRef={previewContentRef}
                   currentUser={currentUser}
                   host={host}
-                />
-              ) : (
-                <PreviewResume
-                  candidate={newCandidate}
-                  post={post}
-                  edit={edit}
-                  editable={editable}
-                  newVacancy={newVacancy} 
-                  previewContentRef={previewContentRef}
-                  currentUser={currentUser}
-                  host={host} 
-                />
-              )}
-            </>
+                  onClose={onClose}
+                  type={type ? "vacancy" : "resume"}
+              
+              />
+
           );
 };
 

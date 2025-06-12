@@ -1,4 +1,4 @@
-import React, { useState, useRef} from "react";
+import { useState, useRef } from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import AddResumeForm from "./AddResumeForm";
 import AddVacancyForm from "./AddVacancyForm";
@@ -21,7 +21,7 @@ const ModalAddDoc = ( {
     getDataItems,
     currentUser,
     setCurrentUser,
-    axios
+    axios,
 } ) => {
 
     const [newCandidate, setNewCandidate] = useState({

@@ -67,21 +67,22 @@
 .previewHeader {
     flex-shrink: 0;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content:space-between;
     height: 40px;
     margin-bottom: 20px;
 }
-.previewH3 {
+.previewContainer .previewH3 {
     text-align: center;
     margin: 10px 0px 0px;
 }
 .btnEdit, .btnPublish {
     display:inline-block;
     text-transform: uppercase;
-    margin: 1px 35px 0px;
+    margin-top: 5px;
     min-width: 150px;
-    padding: 4px 8px;
+    padding: 5px 5px;
     cursor: pointer;
     letter-spacing: 0.05rem;
     color: white;
@@ -94,10 +95,47 @@
 }
 .btnEdit {
     background-color:brown;
+    margin-right: 1%;
 }
 .btnPublish {
     background-color:rgb(10, 76, 199);
+    margin-left: 1%;
 }
+@media (min-width: 10px) {
+  .btnEdit {
+    margin-left: 4%;
+    margin-right: 4%;
+    flex-grow: 1;
+  }
+  .btnPublish {
+      margin-right: 4%;
+      margin-left: 4%;
+      flex-grow: 1;
+  }
+}
+@media (min-width: 550px) {
+  .btnEdit {
+    margin-left: 11%;
+    margin-right: 11%;
+    flex-grow: 0;
+  }
+  .btnPublish {
+      margin-right: 11%;
+      margin-left: 11%;
+      flex-grow: 0;
+  }
+}
+@media (min-width: 850px) {
+  .btnEdit {
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+  .btnPublish {
+      margin-right: 12%;
+      margin-left: 12%;
+  }
+}
+
 .btnEdit:hover, .btnPublish:hover{
     opacity: 0.8;
 }

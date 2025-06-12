@@ -4,7 +4,7 @@ import FormatDate from './FormatDate';
 import Mailto from "./Mailto";
 import formatPhoneNumber from "./FormatePhone";
 import MobileLogo from "./MobileLogo";
-import PreviewResume from './PreviewResume';
+import PreviewDoc from './PreviewDoc';
 import GestAva from "./../img/GestAva.png";
 import './../css/Preview.css';
 import './../css/ResumeCard.css';
@@ -14,9 +14,9 @@ const ResumeCard = ( {
     candidate,
     onClose,
     editable,
-    preview,
     parentComponent,
     currentUser,
+    type,
     host
 } ) => {
     const [showFullResume, setShowFullResume] =useState(false);
@@ -33,7 +33,6 @@ const ResumeCard = ( {
 
     const   tel = candidate?.telephone,
             pcc = parentComponent === 'Candidate',
-            pcsc = parentComponent === 'shortCard',
             formatedTel = tel ? tel.replace(/\D/g, '') : tel;
     
 
@@ -56,19 +55,19 @@ const ResumeCard = ( {
                     >
                             {vacancyTitle }
                         </button>
-                    :   <h3>{editable ? candidate.title : vacancyTitle }</h3>
+                    :   <h3>{editable ? candidate.vacancy : vacancyTitle }</h3>
                     }
 
 
                 </header>
-                {(pcsc || preview) && <img src={imageSrc} alt={candidate.foto?"Фото кандидата" : "Фото за замовчуванням"}  width="100px" height="100px" />}
+                {(!pcc) && <img src={imageSrc} alt={candidate.foto?"Фото кандидата" : "Фото за замовчуванням"}  width="100px" height="100px" />}
                 
                 <p><strong>{candidate.firstName} {candidate.lastName}</strong> 
                 </p> 
                 <address>
                     <p>{"місто: "}{candidate.city}{" ("}{candidate.region}{" обл.)"}</p>
                     
-                {(pcsc || preview) &&  <>
+                {(!pcc) &&  <>
                         <span>e-mail: </span>
                         <Mailto
                             email={candidate.email}
@@ -77,7 +76,7 @@ const ResumeCard = ( {
                             children={candidate.email}
                         />
                         <p> 
-                            тел: 
+                            тел: {" "}
                             {tel
                                 ? 
                                     <a href={`tel:+${formatedTel}`}>
@@ -119,14 +118,14 @@ const ResumeCard = ( {
             {showFullResume && 
                 <div className="blurRect">
                     <div className="modalAddDoc">
-                        <PreviewResume
+                        <PreviewDoc
                             onClose={() => setShowFullResume(false)}
-                            candidate={candidate}
+                            documentData={candidate}
                             editable={editable}
                             currentUser={currentUser}
                             host={host}
                             parentComponent={"shortCard"}
-                            vacancyTitle={vacancyTitle}
+                            type="resume"
                         /> 
                     </div>
                 </div>

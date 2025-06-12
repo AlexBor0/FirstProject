@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import FormatDate from './FormatDate';
-import PreviewVacancy from './PreviewVacancy';
+import PreviewDoc from './PreviewDoc';
 import DetailsTelephone from './DetailsTelephone';
 import Mailto from "./Mailto";
 import './../css/Preview.css';
@@ -17,6 +17,7 @@ const VacancyCard = ( {
     preview,
     parentComponent,
     currentUser,
+    type,
     host
 } ) => {
     const [showFullVacancy, setShowFullVacancy] =useState(false);
@@ -48,7 +49,8 @@ const VacancyCard = ( {
                     >
                             {vacancy.title }
                         </button>
-                    :   <h3>{editable ? vacancy.vacancy : vacancy.title }</h3>}
+                    :   <h3>{editable ? vacancy.vacancy : vacancy.title }</h3>
+                    }
                     
                 </header>
                 <div className="brieflyMain">
@@ -161,7 +163,7 @@ const VacancyCard = ( {
                        
                     </div>
                         <div ><h3>Опис вакансії:</h3> 
-                            <div className={pcv?"description-short":"description"} >{vacancy.description}</div>
+                            <div className={pcv ? "description-short" : "description"} > {vacancy.description}</div>
                         </div>
 
                 </div>
@@ -186,13 +188,15 @@ const VacancyCard = ( {
             {showFullVacancy && 
                 <div className="blurRect">
                     <div className="modalAddDoc">
-                        <PreviewVacancy
+                        <PreviewDoc
                             onClose={() => setShowFullVacancy(false)}
-                            vacancy={vacancy}
+                            documentData={vacancy}
                             editable={editable}
                             currentUser={currentUser}
                             host={host}
                             parentComponent={"shortCard"}
+                            type="vacancy"
+                            requirements={vacancy.requirements}
                         /> 
                     </div>
                 </div>
