@@ -16,17 +16,9 @@ const PreviewDoc = ( {
     host,
     parentComponent,
     type,
-    // vacancy,
-    // candidate,
-    // indexDoc,
-    // setShowDoc,
-    // backward,
-    // setShowConfirmModal,
-    // setShowDocList,
-    // setShowProfileBook
+
 } ) => {
     const isVacancy = type === "vacancy";
-    // const documentData = targetDoc || vacancy || candidate;
     const docType = isVacancy ? "вакансії" : "резюме";
 
     useNoScroll(() => parentComponent === "shortCard");
@@ -72,7 +64,6 @@ const PreviewDoc = ( {
                                 parentComponent={parentComponent}
                                 host={host}
                                 requirements={requirements}
-                                // type={type}
                             />
                             :   
                             <ResumeCard
@@ -83,7 +74,6 @@ const PreviewDoc = ( {
                                 parentComponent={parentComponent}
                                 currentUser={currentUser}
                                 host={host}
-                                // type={type}
                             />
                         }
                         

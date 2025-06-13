@@ -17,7 +17,6 @@ const VacancyCard = ( {
     preview,
     parentComponent,
     currentUser,
-    type,
     host
 } ) => {
     const [showFullVacancy, setShowFullVacancy] =useState(false);

@@ -43,13 +43,13 @@ const Vacancies = ( {
 				{vacancies.map(el => (
 					
 					<VacancyCard
-					key={el.id}
-					onClose={onClose}
-					vacancy={el}
-					editable={editable}
-					parentComponent={'Vacancies'}
-					type={type}
-					host={host}
+						key={el.id}
+						onClose={onClose}
+						vacancy={el}
+						editable={editable}
+						parentComponent={'Vacancies'}
+						type={type}
+						host={host}
 					/>
 				))}
 

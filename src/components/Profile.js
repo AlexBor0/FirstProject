@@ -346,8 +346,6 @@ const onClose = () => {
               type={type ? "vacancy" : "resume"}
             />
         }
-
-
       </>
     )
 }

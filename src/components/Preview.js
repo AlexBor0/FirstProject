@@ -138,8 +138,7 @@ const Preview = ( {
           {
           setFailUpload(true);
         };
-      };
-      
+      };      
       useEffect ((newFotoId) => {
         if (failUpload) {
           const fetchDeleteImage = async () => {
@@ -158,8 +157,6 @@ const Preview = ( {
           fetchDeleteImage();
         }     
       }, [currentUser.userJWT, host, axios, failUpload]);
-
-
 
       const requirements = type && Array.isArray(newVacancy.requirements)
       ? newVacancy.requirements
@@ -191,7 +188,6 @@ const Preview = ( {
     };
 
         return (
-
               <PreviewDoc
                   documentData={type ? newVacancy : newCandidate}
                   post={post}
@@ -203,9 +199,7 @@ const Preview = ( {
                   host={host}
                   onClose={onClose}
                   type={type ? "vacancy" : "resume"}
-              
               />
-
           );
 };
 

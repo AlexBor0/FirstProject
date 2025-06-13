@@ -16,7 +16,6 @@ const ResumeCard = ( {
     editable,
     parentComponent,
     currentUser,
-    type,
     host
 } ) => {
     const [showFullResume, setShowFullResume] =useState(false);

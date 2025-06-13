@@ -25,7 +25,6 @@ const Candidate = ( {
                 currentUser={currentUser}
                 type={type}
                 host={host}
-
             />
         </>
        

@@ -1,16 +1,17 @@
 .modalAddDoc{
-	max-width:600px;
-	margin:0px auto;
+	/* max-width:600px; */
+	margin: calc(2vw - 10px) auto;
 }
 
 .modalAdCont, .modalAdComp{
 	position:relative;
-	padding:20px;
+	box-sizing: border-box;
+	padding: 4% 2%;
 	background-color:#fff;
 	border:1px solid rgba(0,0,0,.2);
 	border-radius:4px;
-	max-height:80vh;
-    border-radius: 20px;
+	max-height:100vh;
+    border-radius: 10px;
 	text-align: center;
 	overflow-y:auto
 }
@@ -20,6 +21,9 @@
 
 .modalInputAd{
 	display:inline;
+	/* display:inline-flex; */
+	box-sizing: border-box;
+	/* flex-grow: 1; */
 	margin:5px 5px;
 	width:90%;
 	height:50px;
@@ -40,14 +44,14 @@
 }
 
 .short {
-	width:40.2%;
+	width: 90%;
 }
+
 .shortBtn {
-	width:47.5%;
+	width:90%;
 	cursor: pointer;
 	color: rgb(129, 129, 129);
 }
-
 
 .modalAdCont p{
 	text-align:center;
@@ -70,7 +74,7 @@
     letter-spacing: 0.05rem;
     color: white;
 	font-family: "Montserrat", sans-serif;
-    font-size: 1rem;
+    font-size: 12px;
 	font-weight: 500;
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3 );
     border: none;
@@ -110,6 +114,7 @@
 .inputFileBtnText {
 	line-height: 1;
  	margin-top: 1px;
+	margin-right: 15px;
   }
    
 .inputFile {
@@ -119,12 +124,11 @@
   }
  
 .btnInputFile {
-	width: 100%;
-	max-width: 270px;
+	max-width: 250px;
 	height: 50px;
 	background:rgb(3, 87, 116);
 	color: #fff;
-	font-size: 1rem;
+	font-size: 12px;
 	font-weight: 500;
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -154,10 +158,9 @@
 	width: 30px;
   }
 
-
 .modalAdCont textarea {
 	min-height: 80px;
-	max-width: 500px;
+	/* max-width: 500px; */
 	font-family: 'Open Sans', sans-serif;
 	font-size: small;
 	margin: 5px 0px;
@@ -169,7 +172,6 @@
 	margin: 0.3em;
 	text-align: center;
 }
-
 .vacancyAdd, .itemAdd {
 	position:relative;
 	display:inline;
@@ -204,14 +206,12 @@
 	width: 90%;
 	box-shadow: 1px 5px 15px 2px rgba(0, 0, 0, 0.2 );
 }
-
 .vacList {
 	padding: 0px;
 	margin: 5px 5px;
 	list-style-type:none;
 		
 }
-
 .vacList button {
 	width: 100%;
 	background:white;
@@ -220,13 +220,11 @@
     text-align: left;
 
 }
-
 .btnText {
 	text-align:left;
 	padding: 10px; 
 	max-width: 220px;
 }
-
 .hovered {
     background-color:rgb(232, 240, 254) !important; 
 }
@@ -240,19 +238,31 @@
 	transform: scale(1.5);
   }
 .optionsFild {
-	display: inline-block;
+	display: inline-flex;
+	flex-direction:row;
+	flex-wrap: wrap;
+	justify-content: center;
+	box-sizing: border-box;
+	font-size: 15px;
 	margin: 5px 0px;
-	width: 97%;
+	width: 90%;
+	padding: 3px;
 	box-shadow:0 3px 10px rgba(0,0,0,.2);
 }
 .workOptions {
 	text-align: left;
 	display: inline-block;
-	margin: 5px;
-	width: 42.5%;
+	padding-left: 8px;
+	padding-right: 5px;
+	flex: 1 0 190px;
+}
+.workOptions legend {
+	font-size: 15px;
+	font-weight: 600;
+	margin-left: 20px;
 }
 .workOptions div {
-	margin: 5px;
+	margin: 5px 5px;
 }
 .format{
 	display: inline-block;
@@ -270,7 +280,7 @@
 }
  
 .editor {
-	width: 97%;
+	width: 90%;
 	position: relative;
 	margin-top: 6px;
 	padding-top: 5px;
@@ -278,10 +288,12 @@
 	text-align: center;
 	box-shadow:0 3px 10px rgba(0,0,0,.2);
 }
-
+.toolbar {
+	padding: 0 2px;
+}
 .toolbar button, .toolbar select {
 	padding: 5px 10px;
-	margin: 0px 2px;
+	margin: 2px 3px;
 	background: #f0f0f0;
 	border: 1px solid #edecec;
 	border-radius: 3px;
@@ -295,7 +307,7 @@
   
 .ProseMirror {
 	display: inline-block;
-	width: 95%;
+	width: 90%;
 	background-color: rgb(255, 254, 231);
 	padding: 10px;
 	border: 1px solid #ccc;
@@ -340,4 +352,35 @@
 }
 .upShow {
 	z-index: 2;
+}
+@media (min-width: 320px) {
+	.btnInputFile {
+		font-size: 14px;
+		max-width: 270px;
+	}
+	.btnAddRes {
+		font-size: 14px;
+		width: 90%;
+	}	
+}
+@media (min-width: 400px) {
+	.btnInputFile {
+		font-size: 16px;
+		max-width: 270px;
+	}
+	.btnAddRes {
+		font-size: 16px;
+		width: 90%;
+	}
+	.ProseMirror{
+		width: 92%;
+	}	
+}
+@media (min-width: 570px) {
+	.short, .shortBtn {
+		width:44%;
+	}
+	.modalAdCont {
+		padding: 20px;
+	}
 }

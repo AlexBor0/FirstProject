@@ -25,7 +25,7 @@
 	position: absolute;
 	z-index: 6;	
 	cursor: pointer;
-	right: 22px;
+	right: calc(14px + 2%);
 	width: 10px;
 	height: 25px;
 	border: none;
@@ -64,10 +64,11 @@
 	perspective: 500px;
 	position: relative;
 	position: absolute;
+	left: -10px;
 	top: -92px;
-	width: 285px;
+	width: 105%;
 	height: 190px;
-	padding-top: -50px;
+	/* padding-top: -50px; */
 }
 .closeSelect {
 	z-index: 6;
@@ -119,21 +120,25 @@
 }
 
 .one {
-	width: 57%;
+	width: 60%;
 	transform: perspective(400px) rotateX(65deg) translateY(54px);
 	z-index: 1;
+	font-size:15px;
 }
+
 .two {
-	transform: perspective(400px) rotateX(30deg) translateY(1px);
+	width: 93%;
+	transform: perspective(500px) rotateX(30deg) translateY(1px);
 	z-index: 2;
 	border: solid 1px rgb(180, 180, 180);
+	font-size:15px;
 }
 .three {
-	width:97%;
+	width:98.5%;
 	transform:translateX(-2px);
 	border: solid 2px rgb(97, 97, 97);
 	background-color:rgb(232, 240, 254);
-	font-size:18px;
+	font-size:16px;
 	height:52px;
 	z-index: 6;
 }
@@ -142,13 +147,84 @@
 	background-color:rgb(232, 240, 254);
 }
 .four {
+	width: 92%;
 	transform: perspective(400px) rotateX(-30deg) translateY(-2px);
 	border: solid 1px rgb(180, 180, 180);
+	font-size:15px;
 } 
 .five {
-	width: 56%;
+	width: 57%;
 	transform: perspective(400px) rotateX(-65deg) translateY(-59px);
+	font-size:15px;
 }
+@media (min-width: 320px) {
+	.one{
+		font-size:15px;
+	}
+	.two{
+		font-size:16px;
+	}
+	.three {
+	font-size:18px;
+	}	
+	.four {
+		font-size:16px;
+	}
+	.five {
+		font-size:15px;
+	}
+
+}
+
+@media (min-width: 570px) {
+	
+	.vacSelect {
+		left: 43px;
+		width: calc(90% - 26px);
+	}
+	.selectWill {
+		left: -24px;
+		width: 285px;
+	}
+	.one {
+		font-size:15px;
+		width: 59%;
+		transform: perspective(400px) rotateX(65deg) translateY(56px);
+		z-index: 1;
+	}
+	.two {
+		width: 92%;
+		transform: perspective(500px) rotateX(34deg) translateY(3px);
+		z-index: 2;
+		border: solid 1px rgb(180, 180, 180);
+		font-size:16px;
+	}
+	.three {
+		width:97.7%;
+		transform:translateX(-2px);
+		border: solid 2px rgb(97, 97, 97);
+		background-color:rgb(232, 240, 254);
+		font-size:18px;
+		height:52px;
+		z-index: 6;
+	}
+	.three:active {
+		background-color:rgb(232, 240, 254);
+	}
+	.four {
+		transform: perspective(400px) rotateX(-34deg) translateY(-3px);
+		border: solid 1px rgb(180, 180, 180);
+		font-size:16px;
+	} 
+	.five {
+		width: 55%;
+		transform: perspective(400px) rotateX(-65deg) translateY(-64px);
+		font-size:15px;
+	}
+}
+
+
+
 .darkShadaw {
 	position: absolute;
 	display: inline-block;
@@ -175,9 +251,10 @@
 	z-index: 3;
 	background:white;
 	padding: 0px 0px;
-	left: 5%;
-	width: 90%;
+	left: calc(5% + 3px);
+	width: calc(90% - 6px);
 	box-shadow: 1px 5px 15px 2px rgba(0, 0, 0, 0.2 );
 }
+
 
 
