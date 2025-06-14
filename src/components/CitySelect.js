@@ -1,5 +1,6 @@
-import React, {useState} from "react";
-import './../css/VacancySelect.css';
+import {useState} from "react";
+import './../css/CitySelect.css';
+
 
 const CitySelect = ({ setSelectValue, dinList, selectedIndex, setNewItem}) => {
     
@@ -35,7 +36,7 @@ const CitySelect = ({ setSelectValue, dinList, selectedIndex, setNewItem}) => {
 
     return dinList.length > 0 && (
         <div className="vacCitySelect">
-            <ul className="vacList" >
+            <ul className="cityList" >
                 {dinList.map((el, index)=> (
                     <li key={`${el.cN}-${el.re}-${index}`}>
                         <button style={{backgroundColor:selectedIndex === index ?' rgb(232, 240, 254)': 'transparent' }}

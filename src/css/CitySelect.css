@@ -1,0 +1,56 @@
+.resetSearch {
+	position: absolute;
+	top: -4px;
+ 	right: 15px;
+	height: 30px;
+	width: 30px;
+	border:none;
+	background:white;
+	cursor: pointer;
+	color:gray;
+}
+.resetSearch:hover{
+	color:black;
+}
+.hovered {
+    background-color:rgb(232, 240, 254) !important; 
+}
+.otherNonHovered {
+    background-color: white !important; 
+}
+.resetSearchIcon {
+	transform: scale(2);
+}
+.vacCitySelect {
+    position: absolute;
+	z-index: 1;
+	background:white;
+	padding: 0px 0px;
+	left: 6%;
+	width: 88%;
+	box-shadow: 1px 5px 15px 2px rgba(0, 0, 0, 0.2 );
+}
+.cityList {
+	padding: 0px;
+	margin: 5px 5px;
+	list-style-type:none;		
+}
+.cityList button {
+	width: 100%;
+	background:white;
+	border: none;
+	padding: 0px;
+    text-align: left;
+}
+.btnText {
+	text-align:left;
+	padding: 10px; 
+	max-width: 220px;
+}
+@media (min-width: 570px) {
+	
+	.vacCitySelect {
+		left: 43px;
+		width: 85.4%;
+	}
+}

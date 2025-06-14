@@ -1,4 +1,3 @@
-import React from "react";
 import Profile from "./Profile";
 import useEsc from "./useEsc";
 import useNoScroll from "./useNoScroll";
@@ -22,7 +21,7 @@ const ModalEditProfile = ( {
 
     return (
 <div className={modalClass}>
-    <div className="modalAddDoc">   
+    <div className="modalProfile">   
            <Profile
                 setShowProfile={setShowProfile}
                 currentUser={currentUser}

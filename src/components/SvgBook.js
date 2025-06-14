@@ -49,6 +49,7 @@ const SvgBook = ({ svgStyle }) => {
                   {/* <path className="fil3 str2" d="M338 222c7,-4 10,-7 15,-10 4,3 9,6 15,10 4,3 6,0 5,-2l0 -45 -40 0 0 45c0,2 2,5 5,2l0 0z"/> */}
                   
                 </g>
+                
             </svg>        
         </>
     )

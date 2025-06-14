@@ -1,9 +1,10 @@
 import { useState, useEffect }  from "react";
-import ProfileForm from "./ProfileForm";
+import PageOne from "./PageOne";
 import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoTrash, IoArrowUndo } from "react-icons/io5";
 import FormatDate from './FormatDate';
 import PreviewDoc from './PreviewDoc';
 import SvgBook from "./SvgBook";
+import SinglePageBook from "./SinglePageBook";
 import EvenBookPage from "./EvenBookPage";
 import OddBookPage from "./OddBookPage ";
 import ConfirmModal from "./ConfirmModal";
@@ -193,28 +194,32 @@ const onClose = () => {
     return(
       <>
         {showProfileBook && (
+          <SinglePageBook
+            svgStyle={svgStyle}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            host={host} 
+            getDataItems={getDataItems}
+            axios={axios}
+          />
+        )
+          
+        }
+        {showProfileBook && (
         <div className="profileBook">
           <SvgBook 
             svgStyle={svgStyle}
           />
-
             {/*  Содержимое Страницы 1 */}
-
-            <div className="pageOne">
-              <div className="profileHead" >
-                ПРОФІЛЬ
-              </div>
-              <ProfileForm
+            <PageOne
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser}
                 host={host} 
                 getDataItems={getDataItems}
                 axios={axios}
-              />      
-            </div>
-
+                setShowProfile={setShowProfile}
+            />
             {/* Содержимое Страницы 2 */}
-
             <div className="pageTwo">
               <button 
                 className="pageBtn" 
@@ -322,6 +327,7 @@ const onClose = () => {
               {/* <button className="pageBtn" onClick={flipPage}>
                 <IoArrowRedo className="redo-icon"/> 
               </button> */}
+              
                 
             </div>
           

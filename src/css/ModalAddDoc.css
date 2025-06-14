@@ -21,10 +21,8 @@
 
 .modalInputAd{
 	display:inline;
-	/* display:inline-flex; */
 	box-sizing: border-box;
-	/* flex-grow: 1; */
-	margin:5px 5px;
+	margin:5px;
 	width:90%;
 	height:50px;
 	background:#fff;
@@ -197,20 +195,11 @@
 .txtVac {
 	background-color: white;
 }
-.vacCitySelect {
-    position: absolute;
-	z-index: 1;
-	background:white;
-	padding: 0px 0px;
-	left: 30px;
-	width: 90%;
-	box-shadow: 1px 5px 15px 2px rgba(0, 0, 0, 0.2 );
-}
+
 .vacList {
 	padding: 0px;
 	margin: 5px 5px;
-	list-style-type:none;
-		
+	list-style-type:none;		
 }
 .vacList button {
 	width: 100%;
@@ -218,7 +207,6 @@
 	border: none;
 	padding: 0px;
     text-align: left;
-
 }
 .btnText {
 	text-align:left;
@@ -262,7 +250,7 @@
 	margin-left: 20px;
 }
 .workOptions div {
-	margin: 5px 5px;
+	margin: 5px;
 }
 .format{
 	display: inline-block;
