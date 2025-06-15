@@ -297,6 +297,9 @@
 	border:none;
 	padding: 0px;
 }
+.profileBook .pageOne .pageBtn, .profileBook .pageThree .pageBtn:has(.delete-icon) {
+	display: none;
+}
 .pageTwo .pageBtn, .pageFour .pageBtn{
     /* margin: 4px 4px; */
 	margin-right: 6px;

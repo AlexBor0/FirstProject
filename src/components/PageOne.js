@@ -1,5 +1,5 @@
 import ProfileForm from "./ProfileForm";
-
+import { IoCloseCircleSharp } from "react-icons/io5";
 
 const PageOne = ( { 
     currentUser,
@@ -7,13 +7,19 @@ const PageOne = ( {
     getDataItems,
     axios,
     setCurrentUser,
-
+    setShowProfile
 } ) => {
-
 
 
     return (
         <div className="pageOne">
+            <button 
+                className="pageBtn" 
+                autoFocus={true} 
+                onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}
+            >
+                <IoCloseCircleSharp className="delete-icon" />
+            </button>
 
             <div className="profileHead" >
                 ПРОФІЛЬ

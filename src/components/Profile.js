@@ -1,17 +1,13 @@
 import { useState, useEffect }  from "react";
 import PageOne from "./PageOne";
-import { IoCloseCircleSharp, IoArrowRedo, IoCreate,  IoEyeSharp, IoTrash, IoArrowUndo } from "react-icons/io5";
-import FormatDate from './FormatDate';
+import PageTwo from "./PageTwo";
+import PageThree from "./PageThree";
+import PageFour from "./PageFour";
 import PreviewDoc from './PreviewDoc';
 import SvgBook from "./SvgBook";
 import SinglePageBook from "./SinglePageBook";
 import EvenBookPage from "./EvenBookPage";
 import OddBookPage from "./OddBookPage ";
-import ConfirmModal from "./ConfirmModal";
-import CompanyPage from "./CompanyPage";
-import BillBoard from "./BillBoard";
-import DetailsPage from "./DetailsPage";
-import ResponsesPage from "./ResponsesPage";
 
 const Profile = ( { 
   setShowProfile,
@@ -201,15 +197,27 @@ const onClose = () => {
             host={host} 
             getDataItems={getDataItems}
             axios={axios}
+            setShowProfile={setShowProfile}
+            type={type}
+            flipPage={flipPage}
+            currentDoc={currentDoc}
+            showDocList={showDocList}
+            setShowProfileBook={setShowProfileBook}
+            backward={backward}
+            showConfirmModal={showConfirmModal}
+            indexDoc={indexDoc}
+            deleteDocument={deleteDocument}
+            setShowDoc={setShowDoc}
+            typeBtn={typeBtn}
+            openModal={openModal}
           />
-        )
-          
+        )      
         }
         {showProfileBook && (
         <div className="profileBook">
-          <SvgBook 
-            svgStyle={svgStyle}
-          />
+            <SvgBook 
+              svgStyle={svgStyle}
+            />
             {/*  Содержимое Страницы 1 */}
             <PageOne
                 currentUser={currentUser}
@@ -220,120 +228,53 @@ const onClose = () => {
                 setShowProfile={setShowProfile}
             />
             {/* Содержимое Страницы 2 */}
-            <div className="pageTwo">
-              <button 
-                className="pageBtn" 
-                autoFocus={true} 
-                onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}
-              >
-                <IoCloseCircleSharp className="delete-icon" />
-              </button>
-              <div className="profileHead" >
-                { type? "КОМПАНІЯ": "РОБОТА"}
-              </div>
-              <div  className="currentEntries">
-              { type
-              ? <CompanyPage
-                  currentUser={currentUser}
-                  getDataItems={getDataItems}
-                  setCurrentUser={setCurrentUser}
-                  axios={axios}
-                  host={host}
-                /> 
-              : <BillBoard/> }
-              </div>
-              <button className="pageBtn" onClick={flipPage}>
-                <IoArrowRedo className="redo-icon"/> 
-              </button>                
-            </div>
-
-            {/* Страница 2 */}
+             <PageTwo
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                host={host} 
+                getDataItems={getDataItems}
+                axios={axios}
+                setShowProfile={setShowProfile}
+                type={type}                
+                flipPage={flipPage}
+            />
+            {/* Лист 2 Лицо */}
             <EvenBookPage
               svgStyle={svgStyle}
             />
-
-           {/* Содержимое Страницаы 3 */}
-           <div className="pageThree">
-              <div className="profileHead" >
-              { type? "РЕКВІЗИТИ": "МОЇ ВІДГУКИ" }
-              </div>
-              <div className="currentEntries">
-                { type
-                  ? <DetailsPage
-                      currentUser={currentUser}
-                      getDataItems={getDataItems}
-                      setCurrentUser={setCurrentUser}
-                      axios={axios}
-                      host={host}
-                    /> 
-                  : <ResponsesPage/> }
-              </div>
-              <button className="pageBtn" onClick={flipPage}>
-                <IoArrowUndo  className="redo-icon"/> 
-              </button>     
-            </div>
-
-            {/* Страница 3 */}
-          <OddBookPage
-            svgStyle={svgStyle}
-          />
+            {/* Содержимое Страницаы 3 */}
+            <PageThree
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                host={host} 
+                getDataItems={getDataItems}
+                axios={axios}
+                setShowProfile={setShowProfile}
+                type={type}                
+                flipPage={flipPage}
+            />
+            {/* Лист 2 Оборот */}
+            <OddBookPage
+              svgStyle={svgStyle}
+            />
 
           {/* Содержимое Страницы 4 */}
-          <div className="pageFour">
-              <button className="pageBtn" autoFocus={true} onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}>
-                <IoCloseCircleSharp className="delete-icon" />
-              </button>
-              <div className="profileHead" >
-                { type? "МОЇ ВАКАНСІЇ": "МОЇ РЕЗЮМЕ"}
-              </div>
-              <div  className="currentEntries">
-
-                {/* Модальное окно подтверждение */}
-                {showConfirmModal&& 
-                  <ConfirmModal
-                    currentUser={currentUser}
-                    indexDoc={indexDoc}
-                    deleteDocument={deleteDocument}
-                    setShowDoc={setShowDoc}
-                    typeBtn={typeBtn}
-                    backward={backward}
-                    setShowProfileBook={setShowProfileBook}
-                    document={type ? "вакансію" : "резюме"}
-                  />
-                }
-
-                {showDocList&& (<ol >
-                  {currentDoc.map((el,index) => (
-                    <li key={index}>
-                      <h4>{el.title}</h4>
-                      <p><data>Створено: <FormatDate isoDate={el.createdAt} /></data></p>
-                      <p><span>Оглянуто: (0)</span></p>
-                      <p><span>Відгуки: (0)</span>
-                      <button className="pageBtn item" data-type="del" onClick = {(e) => openModal(e,index)}>
-                        <IoTrash  className="del-icon" />
-                      </button>
-                      <button className="pageBtn item" data-type="edit" onClick = {(e) => openModal(e,index)}>
-                        <IoCreate className="edit-icon"/>
-                      </button>
-                      <button className="pageBtn item" data-type="view" onClick = {(e) => openModal(e,index)}>
-                        <IoEyeSharp className="view-icon" />
-                      </button>
-                      </p>
-                    </li>
-                    ))  
-                  } 
-                </ol>)}
-              </div>
-              {/* <button className="pageBtn" onClick={flipPage}>
-                <IoArrowRedo className="redo-icon"/> 
-              </button> */}
-              
-                
-            </div>
-          
-
-        </div>
-        
+            <PageFour
+                currentDoc={currentDoc}
+                currentUser={currentUser}
+                showDocList={showDocList}
+                setShowProfileBook={setShowProfileBook}
+                backward={backward}
+                type={type}
+                setShowProfile={setShowProfile}
+                showConfirmModal={showConfirmModal}
+                indexDoc={indexDoc}
+                deleteDocument={deleteDocument}
+                setShowDoc={setShowDoc}
+                typeBtn={typeBtn}
+                openModal={openModal}
+            />
+        </div>        
         )}
         {showDoc&& 
            <PreviewDoc
