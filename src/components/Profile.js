@@ -27,6 +27,9 @@ const Profile = ( {
   const [showDoc, setShowDoc] = useState(false);
   const [showProfileBook, setShowProfileBook] = useState(true);
   const [isPageTwoVisible, setIsPageTwoVisible] = useState(true);
+  const [currentPageIndex, setCurrentPageIndex] = useState(0);
+  const [nextPageIndex, setNextPageIndex] = useState(1);
+  const [isFlipping, setIsFlipping] = useState(false);
   const delSuccessStatuses = [200, 202, 204];
   const svgStyle = {
     shapeRendering: "geometricPrecision",
@@ -38,13 +41,23 @@ const Profile = ( {
 
     const docs = type ? "Vacancies" : "Candidates";
 
+    const pB = '.profileBook',
+          sPb = '.singlePage',    
+          p2 = '.pageTwo',
+          p3 = '.pageThree',
+          bP2 = '.bookPageTwo',
+          bP3 = '.bookPageThree';
+
     useEffect(() => { // Установка начального состояния видимости страниц
     if (showProfileBook) {
-      const pageTwo = document.querySelector('.pageTwo');
-      const pageThree = document.querySelector('.pageThree');
-      const bookPageTwo = document.querySelector('.bookPageTwo');
-      const bookPageThree = document.querySelector('.bookPageThree');
-      if (pageTwo && pageThree && bookPageTwo && bookPageThree) {
+      const pageTwo = document.querySelector(`${pB || sPb} ${p2}`);
+      const pageThree = document.querySelector(`${pB || sPb} ${p3}`);
+      const bookPageTwo = document.querySelector(`${pB} ${bP2}`);
+      const bookPageThree = document.querySelector(`${pB} ${bP3}`);
+
+      const bookIsReady = pageTwo && pageThree && bookPageTwo && bookPageThree
+
+      if (bookIsReady) {
         if (isPageTwoVisible) {
           pageTwo.style.display = 'block';
           bookPageThree.style.display = 'block';
@@ -113,8 +126,7 @@ const Profile = ( {
 
     };
 
-  const backward = (e) => {
-      e.preventDefault(); 
+  const backward = () => {
       setShowConfirmModal(false);
       setShowDocList(true);
   };
@@ -126,7 +138,6 @@ const Profile = ( {
   };
 
   const openModal = (e, index) => {
-    e.preventDefault();
     setIndexDoc(index);
     setTypeBtn(e.currentTarget.dataset.type);
     setShowConfirmModal(true);
@@ -138,13 +149,12 @@ const Profile = ( {
       element.classList.remove('flip-out', 'flip-in', 'flip-out-reverse', 'flip-in-reverse');
     });
   };
-  const flipPage = (e) => {
-    e.preventDefault();
+  const flipPageBook = () => {
 
-    const pageTwo = document.querySelector('.pageTwo');
-    const pageThree = document.querySelector('.pageThree');
-    const bookPageThree = document.querySelector('.bookPageThree');
-    const bookPageTwo = document.querySelector('.bookPageTwo');
+    const pageTwo = document.querySelector(`${pB} ${p2}`);
+    const pageThree = document.querySelector(`${pB} ${p3}`);
+    const bookPageThree = document.querySelector(`${pB} ${bP3}`);
+    const bookPageTwo = document.querySelector(`${pB} ${bP2}`);
     const allElements = [pageTwo, pageThree, bookPageTwo, bookPageThree];
     clearAnimationClasses(allElements);
 
@@ -179,6 +189,74 @@ const Profile = ( {
       }, 210);
     }
 };
+ const pages = [
+        <PageOne
+            key="page1"
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            host={host}
+            getDataItems={getDataItems}
+            axios={axios}
+            setShowProfile={setShowProfile}
+            flipPage={() => flipPageSPB()}
+            sPB={true}
+        />,
+        <PageTwo
+            key="page2"
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            host={host}
+            getDataItems={getDataItems}
+            axios={axios}
+            setShowProfile={setShowProfile}
+            type={type}
+            flipPage={() => flipPageSPB()}
+            sPB={true}
+        />,
+        <PageThree
+            key="page3"
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            host={host}
+            getDataItems={getDataItems}
+            axios={axios}
+            setShowProfile={setShowProfile}
+            type={type}
+            flipPage={() => flipPageSPB()}
+            sPB={true}
+        />,
+        <PageFour
+            key="page4"
+            currentDoc={currentDoc}
+            currentUser={currentUser}
+            showDocList={showDocList}
+            setShowProfileBook={setShowProfileBook}
+            backward={backward}
+            type={type}
+            setShowProfile={setShowProfile}
+            showConfirmModal={showConfirmModal}
+            indexDoc={indexDoc}
+            deleteDocument={deleteDocument}
+            setShowDoc={setShowDoc}
+            typeBtn={typeBtn}
+            openModal={openModal}
+            flipPage={() => flipPageSPB()}
+            sPB={true}
+        />
+    ];
+const flipPageSPB = () => {
+
+    if (isFlipping) return;
+    setIsFlipping(true);
+    setTimeout(() => {
+        setCurrentPageIndex((prev) =>
+          (prev + 1) % pages.length
+        ); 
+        setNextPageIndex((prev) => 
+        (prev + 1) % pages.length);
+        setIsFlipping(false);  
+    }, 400);     
+};
 
 const onClose = () => {
         setShowDoc(false); 
@@ -192,24 +270,9 @@ const onClose = () => {
         {showProfileBook && (
           <SinglePageBook
             svgStyle={svgStyle}
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
-            host={host} 
-            getDataItems={getDataItems}
-            axios={axios}
-            setShowProfile={setShowProfile}
-            type={type}
-            flipPage={flipPage}
-            currentDoc={currentDoc}
-            showDocList={showDocList}
-            setShowProfileBook={setShowProfileBook}
-            backward={backward}
-            showConfirmModal={showConfirmModal}
-            indexDoc={indexDoc}
-            deleteDocument={deleteDocument}
-            setShowDoc={setShowDoc}
-            typeBtn={typeBtn}
-            openModal={openModal}
+            currentPage={pages[currentPageIndex]}
+            nextPage={pages[nextPageIndex]}
+            isFlipping={isFlipping}
           />
         )      
         }
@@ -236,7 +299,7 @@ const onClose = () => {
                 axios={axios}
                 setShowProfile={setShowProfile}
                 type={type}                
-                flipPage={flipPage}
+                flipPage={flipPageBook}
             />
             {/* Лист 2 Лицо */}
             <EvenBookPage
@@ -251,7 +314,7 @@ const onClose = () => {
                 axios={axios}
                 setShowProfile={setShowProfile}
                 type={type}                
-                flipPage={flipPage}
+                flipPage={flipPageBook}
             />
             {/* Лист 2 Оборот */}
             <OddBookPage

@@ -1,13 +1,15 @@
 import ProfileForm from "./ProfileForm";
-import { IoCloseCircleSharp } from "react-icons/io5";
+import { IoCloseCircleSharp, IoArrowUndo } from "react-icons/io5";
 
 const PageOne = ( { 
     currentUser,
+    setCurrentUser,
     host,
     getDataItems,
     axios,
-    setCurrentUser,
-    setShowProfile
+    setShowProfile,
+    flipPage,
+    sPB = false
 } ) => {
 
 
@@ -16,7 +18,7 @@ const PageOne = ( {
             <button 
                 className="pageBtn" 
                 autoFocus={true} 
-                onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}
+                onClick = {() => { setShowProfile(false) }}
             >
                 <IoCloseCircleSharp className="delete-icon" />
             </button>
@@ -30,7 +32,13 @@ const PageOne = ( {
                 host={host} 
                 getDataItems={getDataItems}
                 axios={axios}
-            />      
+            /> 
+            <button 
+                className="pageBtn" 
+                onClick={flipPage}
+            >
+                <IoArrowUndo className="redo-icon"/> 
+            </button>     
         </div>
     )
 }

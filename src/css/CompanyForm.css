@@ -8,6 +8,23 @@
     padding-left: 10px;
     width: 155px;  
 }
+.singlePage .companyForm{
+	margin-left: 0px;
+    padding-left: 0px;    
+}
+.topPageContent .currentEntries:has(.companyForm) {
+	width: 166px;
+}
+.topPageContent .pageTwo:has(.companyForm) .pageBtn:has(.delete-icon) {
+    margin: -3px 3px; 
+}
+.topPageContent .pageTwo:has(.companyForm) .pageBtn:has(.redo-icon) {
+    margin: -3px 2px; 
+}
+.topPageContent .pageTwo:has(.companyForm) .profileHead {
+margin-right: 23px;
+margin-left: auto;
+}
 .primaryMessage {
     height: 100%;
     width: 100%;
@@ -124,7 +141,7 @@
     text-align: center;
     font-size: 0.8em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    width:154px;
+    width:151px;
     height: 100%;
 }
 .addTelBtn {

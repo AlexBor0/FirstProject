@@ -1,8 +1,7 @@
-import React from "react";
 import IconUpload from "./IconUpload";
 
 
-const UploadFile = ({svgH, svgX, getImage, inputFileRef}) => {
+const UploadFile = ({getImage, inputFileRef}) => {
 
 
     return(
@@ -11,10 +10,8 @@ const UploadFile = ({svgH, svgX, getImage, inputFileRef}) => {
             <div className="inputWrapper" >
             
                 <label required htmlFor="image" className="btnInputFile">
-                    <span className="inputFileIconWrapper"><IconUpload 
-                        svgH={svgH} 
-                        svgX={svgX} 
-                    />
+                    <span className="inputFileIconWrapper">
+                        <IconUpload/>
                     </span>
                     <input type="file" id="image" className="inputFile" name="foto" accept=".png, .jpg, .jpeg, .webp" 
                         onChange={getImage} 

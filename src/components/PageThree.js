@@ -11,7 +11,7 @@ const PageThree = ( {
     setShowProfile,
     type,
     flipPage,
-
+    sPB = false
 } ) => {
 
     return (
@@ -19,7 +19,7 @@ const PageThree = ( {
                 <button 
                     className="pageBtn" 
                     autoFocus={true} 
-                    onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}
+                    onClick = {() => { setShowProfile(false) }}
                 >
                     <IoCloseCircleSharp className="delete-icon" />
                 </button>

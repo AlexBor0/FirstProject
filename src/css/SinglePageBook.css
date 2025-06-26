@@ -3,19 +3,96 @@
     z-index: 20;
     display: block;
 }
-.singlePage .pageOne {
-    left: 38px
+.singleFlippingPage, .topPageContent  {
+    position: absolute;
+    z-index: 3;
+    top:0px;
+    left:0px;
 }
-.singlePage .pageBtn {
-    margin: 3px 5px;
+.singlePage .topPageContent, .singlePage .bottomPageContent {
+    top: 20px;
+    left: 52px;   
 }
-.singlePage .pageTwo, .singlePage .pageThree, .singlePage .pageFour {
-    display: none;
+.singlePage .profileHead{
+	width: 121px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.singlePage .pageThree .pageBtn {
+	float: right;
+	margin-left: 3px;
+}
+.topPageContent .pageFour .currentEntries {
+	width: 176px;
+}
+.topPageContent .currentEntries {
+	width: 154px;
+}
+.topPageContent .currentEntries ol li {
+	padding: 2px 0px 6px 0px;
+	width: 140px;	
+}
+.singlePage .topPageContent .pageFour, .singlePage .bottomPageContent  .pageFour{
+    margin-left: -10px;
+}
+.singlePage .topPageContent .pageFour ol li{
+    padding-left: 10px;
+    margin-left: -2px;
+}
+.singlePage .topPageContent {
     z-index: 10;
 }
+.singlePage .bottomPageContent{
+   z-index: 2; 
+   display: none;
+}
+.singlePage .pageBtn:has(.delete-icon), .bottomPageContent .pageBtn:has(.delete-icon){
+    margin: -3px -9px;
+}
+.singlePage .pageFour .pageBtn:has(.delete-icon), .bottomPageContent .pageFour .pageBtn:has(.delete-icon){
+    margin: -3px 3px;
+}
+.singlePage .pageBtn:has(.redo-icon){
+    margin: -3px -10px;
+    transform: rotate(95deg);
+}
+.singlePage .pageFour .pageBtn:has(.redo-icon){
+    margin: -3px 3px;
+    transform: rotate(95deg);
+}
 @media (min-width: 480px) {
-
  .singlePage {
 	display: none;
  }
 }
+ .topPageContent {
+    transform-origin: top;
+    transition: transform 0.4s;
+}
+.singleFlippingPage{
+    transform-origin: 50% 0px 10px;
+    transition: transform 0.4s;
+}
+@keyframes flipPageUp {
+    0% {
+        transform: perspective(2000px) rotateX(0deg);
+        opacity: 1;
+        z-index: 10;
+    }
+  
+    100% {
+        transform: perspective(2000px) rotateX(90deg);
+        opacity: 0;
+        z-index: 0;
+    }
+}
+.flip {
+    animation: flipPageUp 0.4s forwards;
+}
+.topPageContent.flip {
+    z-index: 10;
+}
+.singlePage .bottomPageContent.active {
+    display: block; 
+}
+

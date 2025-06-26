@@ -1,6 +1,6 @@
 import ConfirmModal from "./ConfirmModal";
 import FormatDate from './FormatDate';
-import { IoCloseCircleSharp, IoCreate, IoEyeSharp, IoTrash} from "react-icons/io5";
+import { IoCloseCircleSharp, IoCreate, IoEyeSharp, IoTrash, IoArrowUndo} from "react-icons/io5";
 
 const PageFour = ( {
     currentDoc, 
@@ -15,7 +15,9 @@ const PageFour = ( {
     deleteDocument,
     setShowDoc,
     typeBtn,
-    openModal
+    openModal,
+    flipPage = null,
+    sPB = false
 } ) => {
 
 
@@ -24,7 +26,7 @@ const PageFour = ( {
               <button 
                 className="pageBtn" 
                 autoFocus={true} 
-                onClick = {(e) => { e.preventDefault(); setShowProfile(false) }}>
+                onClick = {() => { setShowProfile(false) }}>
                 <IoCloseCircleSharp className="delete-icon" />
               </button>
               <div className="profileHead" >
@@ -68,9 +70,9 @@ const PageFour = ( {
                   } 
                 </ol>)}
               </div>
-              {/* <button className="pageBtn" onClick={flipPage}>
-                <IoArrowRedo className="redo-icon"/> 
-              </button> */}
+              {flipPage && <button className="pageBtn" onClick={flipPage}>
+                <IoArrowUndo className="redo-icon"/> 
+              </button>}
                               
             </div>
     )

@@ -1,12 +1,15 @@
-import React from "react";
 
- const IconUpload = ({ svgH, svgX}) => {
+ const IconUpload = () => {
 
   return(
 
-    <svg xmlns= {svgH} xmlSpace="preserve"  version="1.1" 
-        viewBox="3 15 38 38" className="uploadSvg"
-        xmlnsXlink={svgX}>    
+    <svg
+        viewBox="3 15 38 38"
+        className="uploadSvg"
+        xmlns= "http://www.w3.org/2000/svg" 
+        xmlSpace="preserve"  
+        version="1.1" 
+        xmlnsXlink="http://www.w3.org/1999/xlink">    
       <g>
         <path className="fil0" fill="white" d="M13.02 33.35l0 3.87c0,1.08 0.87,1.94 1.94,1.94l15.48 0c1.07,0 1.94,-0.86 1.94,-1.94l0 -3.87c0,-1.07 0.86,-1.93 1.93,-1.93 1.07,0 1.94,0.86 1.94,1.93l0 3.87c0,3.21 -2.6,5.81 -5.81,5.81l-15.48 0c-3.21,0 -5.81,-2.6 -5.81,-5.81l0 -3.87c0,-1.07 0.87,-1.93 1.94,-1.93 1.07,0 1.93,0.86 1.93,1.93l0 0zm16.94 -3.83l-5.94 5.94c-0.35,0.35 -0.83,0.55 -1.32,0.55 -0.49,0 -0.97,-0.2 -1.32,-0.55l-5.94 -5.94c-0.31,-0.31 -0.48,-0.72 -0.48,-1.16 0,-0.9 0.74,-1.64 1.64,-1.64l3 0 0 -6.19c0,-0.85 0.7,-1.54 1.55,-1.54l3.1 0c0.85,0 1.54,0.69 1.54,1.54l0 6.19 3.01 0c0.9,0 1.64,0.74 1.64,1.64 0,0.44 -0.18,0.85 -0.48,1.16z"/>
       </g>
