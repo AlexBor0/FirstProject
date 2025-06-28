@@ -55,3 +55,7 @@ nav .navigation .btnWrap {
     font-size: 14px;
     font-weight: 600;
 }
+
+.navigation .Userlogo p {
+margin-top: 5px;
+}

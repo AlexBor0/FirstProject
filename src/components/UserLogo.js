@@ -28,7 +28,7 @@ const UserLogo = forwardRef(({host, setShowProfile, currentUser, setRegEntry}, r
         >
          <img src={ currentImageSrc } alt={ altImg }/>
          <p style={{
-            margin: "-5px 0px 0px 0px ",
+            margin: "0px",
             fontSize: "12px",
             textAlign: "center"
          }}>{ !currentUser.userName ? "Гість" : currentUser.userName }</p>   

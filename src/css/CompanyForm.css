@@ -8,22 +8,25 @@
     padding-left: 10px;
     width: 155px;  
 }
+.bottomPageContent .primaryMessage{
+    width: 155px;
+}
 .singlePage .companyForm{
 	margin-left: 0px;
     padding-left: 0px;    
 }
-.topPageContent .currentEntries:has(.companyForm) {
+.topPageContent .currentEntries:has(.companyForm), .topPageContent .primaryMessage {
 	width: 166px;
 }
-.topPageContent .pageTwo:has(.companyForm) .pageBtn:has(.delete-icon) {
+.topPageContent .pageTwo:has(.companyForm) .pageBtn:has(.delete-icon){
     margin: -3px 3px; 
 }
 .topPageContent .pageTwo:has(.companyForm) .pageBtn:has(.redo-icon) {
     margin: -3px 2px; 
 }
 .topPageContent .pageTwo:has(.companyForm) .profileHead {
-margin-right: 23px;
-margin-left: auto;
+    margin-right: 23px;
+    margin-left: auto;
 }
 .primaryMessage {
     height: 100%;
@@ -41,6 +44,9 @@ margin-left: auto;
     padding-left: 16px;
     padding-right: 16px;
     padding-top:10px;
+}
+.singlePage .explanation {
+    padding-left: 6px;
 }
 .btnAdd {
     margin-bottom: 9px;
