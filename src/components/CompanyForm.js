@@ -3,7 +3,7 @@ import { IoCameraSharp, IoCloseCircleSharp} from "react-icons/io5";
 import { IoIosRemoveCircleOutline, IoIosAddCircleOutline } from "react-icons/io";
 import TelephoneInput from "./TelephoneInput";
 import CompanyLogo from "./CompanyLogo";
-
+import './../css/CompanyForm.css';
 
 
 const CompanyForm = ( {

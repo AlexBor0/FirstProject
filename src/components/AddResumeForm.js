@@ -17,7 +17,7 @@ const AddResumeForm = ( {
     resetInput,
     getDataItems,
     setPreview,
-    specialtiesBase,
+    vacBaseChunck,
     setClassModal,
     setIsPreviewVisible
 } ) => {
@@ -27,18 +27,6 @@ const AddResumeForm = ( {
           vacHolder = "Наіменування вакансії*",
           pHolder = "Місто, де шукаєте роботу";
 
-
-const vacBaseChunck = specialtiesBase.map((el) => el.position).flat();
-
-// const getPositions = (arr) => {
-//     const vbc = [];
-//     for(const el of arr) 
-//         for(const i of el)
-//         vbc.push(i);
-//     }
-//     return vbc;
-// };
-// const vacBaseChunck = getPositions(arrBaseChunck);
 const telClass = "modalInputAd short";
 
 const inputFileRef = useRef(null);
@@ -145,6 +133,7 @@ const lookAtPreviw = (e) => {
                     setSelectedIndex={setSelectedIndex}
                     setNewCandidate={setNewCandidate}
                     newDoc={newCandidate}
+                    btnColor={"rgb(232, 240, 254)"}
                 />
 
                 {(inputErrors.firstName || inputErrors.lastName) && (

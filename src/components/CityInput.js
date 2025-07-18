@@ -13,7 +13,8 @@ const CityInput = ( {
     selectedIndex,
     setSelectedIndex,
     pHolder,
-    newDoc
+    newDoc,
+    btnColor
 } ) => {
 
     const [cityQuery, setCityQuery] = useState(''),
@@ -93,6 +94,7 @@ const debouncedCityQuery = useDebounce(cityQuery, 400);
         selectedIndex={selectedIndex}
         setSelectValue={setSelectCityValue}
         setNewItem={setNewItem}
+        btnColor={btnColor}
         />} 
     </div>
     </>

@@ -1,11 +1,12 @@
-
+import './../css/BillBoard.css';
 
 const BillBoard = () => {
     return (
-        <div className="currentEntries">
-            Дошка роботи
+        <div className="billBoard">
+            <div className="middleWrap">
+                Дошка роботи
+            </div>
         </div>
-
     )
 }
 

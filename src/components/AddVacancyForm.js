@@ -300,6 +300,7 @@ const changeRadio = (e) => {
               setSelectedIndex={setSelectedIndex}
               pHolder={pHolder}
               newDoc={newVacancy}
+              btnColor={"rgb(232, 240, 254)"}
             />
             <p>Опис вакансії має бути від 100 до 600 символів.</p>
             <p>Вимоги до кандидата не більше 600.</p>  

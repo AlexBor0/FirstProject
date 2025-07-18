@@ -1,0 +1,9 @@
+.billBoard {
+    margin-left: auto;
+	margin-right: auto;
+    text-align: center;
+    font-size: 0.8em;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width:151px;
+    height: 100%;
+}

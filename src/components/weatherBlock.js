@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import Info from "./info";
 import Weather from "./weather";
 import WeatherForm from "./WeatherForm";
@@ -9,7 +9,7 @@ const buttonsTitle = "ОТРИМАТИ";
 
 
 
-const WeatherBlock = ({axios}) => {
+const WeatherBlock = ({axios, getDataItems, citiesBase}) => {
 
    const formRef = useRef(null);
 
@@ -121,18 +121,18 @@ const WeatherBlock = ({axios}) => {
                 <div className="row">
                     <div className="info"><Info/></div>
                     <div>
-                    <WeatherForm gettingWeather={gettingWeather} 
-                                buttonsTitle={buttonsTitle} 
-                                formRef={formRef}/>
+                    <WeatherForm 
+                        citiesBase={citiesBase}
+                        gettingWeather={gettingWeather} 
+                        buttonsTitle={buttonsTitle} 
+                        formRef={formRef}
+                        infoWeather={infoWeather}
+                        setInfo={setInfo}
+                        getDataItems={getDataItems}
+                    />
                     <Weather 
-                            city={infoWeather.city}
-                            country={infoWeather.country}
-                            weather={infoWeather.weather}
-                            sunrise={infoWeather.sunrise}
-                            humidity={infoWeather.humidity}
-                            wind={infoWeather.wind}
-                            pressure={infoWeather.pressure}
-                            error={error}
+                        infoWeather={infoWeather}
+                        error={error}
                     />
                     </div>
 

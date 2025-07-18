@@ -2,7 +2,7 @@ import {useState} from "react";
 import './../css/CitySelect.css';
 
 
-const CitySelect = ({ setSelectValue, dinList, selectedIndex, setNewItem}) => {
+const CitySelect = ({ setSelectValue, dinList, selectedIndex, setNewItem, btnColor}) => {
     
     const regLatToKyrArr = {"VIN": "Вінницька", "VOL": "Волинська", "DNP": "Дніпропетровська", "DON": "Донецька", "ZHYT": "Житомирська", "ZAK": "Закарпатська"
         , "ZAP": "Запорізька", "I-F": "Івано-Франківська", "KYI": "Київська", "KIR": "Кіровоградська", "LUG": "Луганська", "LVI": "Львівська", "MYK": "Миколаївська"
@@ -39,7 +39,7 @@ const CitySelect = ({ setSelectValue, dinList, selectedIndex, setNewItem}) => {
             <ul className="cityList" >
                 {dinList.map((el, index)=> (
                     <li key={`${el.cN}-${el.re}-${index}`}>
-                        <button style={{backgroundColor:selectedIndex === index ?' rgb(232, 240, 254)': 'transparent' }}
+                        <button style={{backgroundColor:selectedIndex === index ? btnColor: 'transparent' }}
                             className={`${hoveredIndex === index ? 'hovered' : ''} ${hoveredIndex !== null && hoveredIndex !== index ? 'otherNonHovered' : ''}`}
                             onClick={(e) =>{
                                 e.preventDefault();

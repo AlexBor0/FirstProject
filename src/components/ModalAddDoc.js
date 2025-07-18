@@ -6,6 +6,7 @@ import MessagePost from "./MessagePost";
 import Preview from "./Preview";
 import useEsc from "./useEsc";
 import useNoScroll from "./useNoScroll";
+import { useInputArrowPress } from "./useInputArrowPress";
 import './../css/ModalAddDoc.css';
 
 const ModalAddDoc = ( {
@@ -18,6 +19,7 @@ const ModalAddDoc = ( {
     inputErrors,
     citiesBase,
     specialtiesBase,
+    vacBaseChunck,
     getDataItems,
     currentUser,
     setCurrentUser,
@@ -58,7 +60,7 @@ const ModalAddDoc = ( {
     [savingEditorContent, setSavingEditorContent] = useState(null),
     [postFetch, setPostFetch] = useState(false),
     [postSuccess, setPostSuccess] = useState(null),
-    [selectedIndex, setSelectedIndex] = useState(0),
+    // [selectedIndex, setSelectedIndex] = useState(0),
     [saveTextEditor, setSaveTextEditor] = useState(false),
     [loading, setLoading] = useState(false),
     [classModal, setClassModal] = useState("modalAddDoc"),
@@ -68,41 +70,41 @@ const ModalAddDoc = ( {
     const modalContRef = useRef(null);
     const editable = true;
     
-
-    const arrowPress = (e, options) => {
-        const { 
-            list, 
-            setValue, 
-            updateItem 
-          } = options;
+    const { selectedIndex, setSelectedIndex, arrowPress, resetSelection } = useInputArrowPress();
+    // const arrowPress = (e, options) => {
+    //     const { 
+    //         list, 
+    //         setValue, 
+    //         updateItem 
+    //       } = options;
     
-            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-                e.preventDefault();
-                const direction = e.key === 'ArrowDown' ? 1 : -1;
+    //         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    //             e.preventDefault();
+    //             const direction = e.key === 'ArrowDown' ? 1 : -1;
             
-               setSelectedIndex((prev) => (prev + direction + list.length) % list.length);
-            }
-            else if (e.key === 'Enter'&&list.length > 0 ) {
-                e.preventDefault();
-                const selectedItem = list[selectedIndex];
-                if (selectedItem) {
-                    if (typeof selectedItem === 'string') {
-                      setValue(selectedItem);
-                      updateItem('vacancy', selectedItem);
-                    } 
-                    else {
-                        setValue(selectedItem.cN);
-                        updateItem('city', selectedItem.cN);
-                        updateItem('region', selectedItem.re);
-                      }
-                      setSelectedIndex(0);
-                      options.hideList();
-                    }
-            }
-            else if (e.key === 'Enter'&&list.length > 0){
-                setSelectedIndex(0);
-        }        
-    };
+    //            setSelectedIndex((prev) => (prev + direction + list.length) % list.length);
+    //         }
+    //         else if (e.key === 'Enter'&&list.length > 0 ) {
+    //             e.preventDefault();
+    //             const selectedItem = list[selectedIndex];
+    //             if (selectedItem) {
+    //                 if (typeof selectedItem === 'string') {
+    //                   setValue(selectedItem);
+    //                   updateItem('vacancy', selectedItem);
+    //                 } 
+    //                 else {
+    //                     setValue(selectedItem.cN);
+    //                     updateItem('city', selectedItem.cN);
+    //                     updateItem('region', selectedItem.re);
+    //                   }
+    //                   setSelectedIndex(0);
+    //                   options.hideList();
+    //                 }
+    //         }
+    //         else if (e.key === 'Enter'&&list.length > 0){
+    //             setSelectedIndex(0);
+    //     }        
+    // };
 
     const resetInput = (e, options) => {
         e.preventDefault();
@@ -118,7 +120,7 @@ const ModalAddDoc = ( {
             resetFields.forEach(field => (updated[field] = ""));
             return updated;
         });
-        setSelectedIndex(0);
+        resetSelection();
         hideList(false);
     };
 
@@ -148,7 +150,7 @@ const ModalAddDoc = ( {
                             getDataItems={getDataItems}
                             resetInput={resetInput}
                             setPreview={setSaveTextEditor}
-                            specialtiesBase={specialtiesBase}
+                            vacBaseChunck={vacBaseChunck}
                             setClassModal={setClassModal}
                             setIsPreviewVisible={setIsPreviewVisible}
                         />

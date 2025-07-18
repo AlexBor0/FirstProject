@@ -59,6 +59,7 @@ const App = () => {
         [vacancyName, setVacancyName] = useState([]),
         [citiesBase, setCitiesBase] = useState(null),
         [specialtiesBase, setSpecialtiesBase] = useState(null),
+        [vacBaseChunck, setVacBaseChunck] = useState(null),
         [isClicked, setIsClicked] = useState(false),
         [loading, setLoading] = useState(true),
         [error, setError] = useState(null),
@@ -74,7 +75,7 @@ const App = () => {
        userLogoRef = useRef(null);   
 
   const [btnScrollUp, setBtnScrollUp] = useState(false);
-
+  
   const resetCurrentUser = () => ({
     userLogin: null,
     userEmail: null,
@@ -239,6 +240,7 @@ useEffect(() => { // Получение данных пользователя
             try {const response = await axios.get(`${host}/api/bases?filters[dbTitle][$eq]=dbSpecialties`);
             
               setSpecialtiesBase(response.data.data[0]?.dataBase.specialties || []);
+
             }          
             catch (error) {setError(error);} 
             finally {setLoading(false);             
@@ -273,6 +275,12 @@ useEffect(() => { // Получение данных пользователя
     document.documentElement.scrollTop >= 130 ? setFix('Fix') : setFix('');
     document.documentElement.scrollTop > document.documentElement.clientHeight ? setBtnScrollUp(true) : setBtnScrollUp(false);
   });
+
+  useEffect(() => {
+    if(specialtiesBase) {
+      setVacBaseChunck (specialtiesBase.map((el) => el.position).flat());
+    }
+  }, [specialtiesBase])
 
   return(
       <div className="container">   
@@ -340,6 +348,8 @@ useEffect(() => { // Получение данных пользователя
               <SearchForm
                 ref={mainSearchRef}
                 typeOfSearch={typeOfSearch}
+                vacBaseChunck={vacBaseChunck}
+                getDataItems={getDataItems}
               />
               {confirm &&
                 <div className="btnWrap">
@@ -386,6 +396,7 @@ useEffect(() => { // Получение данных пользователя
               axios={axios}
               inputErrors={inputErrors}
               citiesBase={citiesBase}
+              vacBaseChunck={vacBaseChunck}
               specialtiesBase={specialtiesBase}
               getDataItems={getDataItems}
               currentUser={currentUser}
@@ -413,6 +424,8 @@ useEffect(() => { // Получение данных пользователя
             <aside>
               <WeatherBlock
               axios={axios}
+              getDataItems={getDataItems}
+              citiesBase={citiesBase}
               />
             </aside>
             {btnScrollUp&&<button className="btnUp" 
