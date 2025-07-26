@@ -1,8 +1,4 @@
-import React from "react";
-
 const ModalThenks = ({yourLogin}) => {
-
-
         return(
             <div className="modalThenks" >
                 <h2>Дякуємо за реєстрацію!</h2>

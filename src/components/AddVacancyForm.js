@@ -198,6 +198,7 @@ const changeRadio = (e) => {
               setNewItem={setNewVacancy}
               selectValue={selectValue}
               setSelectValue={setSelectValue}
+              btnColor={"rgb(232, 240, 254)"}
             />
 
             <div className="optionsFild">

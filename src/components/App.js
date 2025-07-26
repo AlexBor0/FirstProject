@@ -57,6 +57,7 @@ const App = () => {
         [goodbye, setGoodbye] = useState(null),
         [addDoc, setAddDoc] = useState(false),
         [vacancyName, setVacancyName] = useState([]),
+        [candidates, setCandidates] = useState([]),
         [citiesBase, setCitiesBase] = useState(null),
         [specialtiesBase, setSpecialtiesBase] = useState(null),
         [vacBaseChunck, setVacBaseChunck] = useState(null),
@@ -350,6 +351,10 @@ useEffect(() => { // Получение данных пользователя
                 typeOfSearch={typeOfSearch}
                 vacBaseChunck={vacBaseChunck}
                 getDataItems={getDataItems}
+                host={host}
+                axios={axios}
+                candidates={candidates} 
+                setCandidates={setCandidates}
               />
               {confirm &&
                 <div className="btnWrap">
@@ -411,6 +416,8 @@ useEffect(() => { // Получение данных пользователя
                 axios={axios}
                 type={typeOfSearch}
                 currentUser={currentUser}
+                candidates={candidates} 
+                setCandidates={setCandidates}
                 />}
               {!typeOfSearch&&currentUser?.userStatus === "candidate"&&<Vacancies 
                 host={host} 

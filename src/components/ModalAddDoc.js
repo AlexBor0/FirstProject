@@ -60,7 +60,6 @@ const ModalAddDoc = ( {
     [savingEditorContent, setSavingEditorContent] = useState(null),
     [postFetch, setPostFetch] = useState(false),
     [postSuccess, setPostSuccess] = useState(null),
-    // [selectedIndex, setSelectedIndex] = useState(0),
     [saveTextEditor, setSaveTextEditor] = useState(false),
     [loading, setLoading] = useState(false),
     [classModal, setClassModal] = useState("modalAddDoc"),
@@ -71,41 +70,7 @@ const ModalAddDoc = ( {
     const editable = true;
     
     const { selectedIndex, setSelectedIndex, arrowPress, resetSelection } = useInputArrowPress();
-    // const arrowPress = (e, options) => {
-    //     const { 
-    //         list, 
-    //         setValue, 
-    //         updateItem 
-    //       } = options;
-    
-    //         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-    //             e.preventDefault();
-    //             const direction = e.key === 'ArrowDown' ? 1 : -1;
-            
-    //            setSelectedIndex((prev) => (prev + direction + list.length) % list.length);
-    //         }
-    //         else if (e.key === 'Enter'&&list.length > 0 ) {
-    //             e.preventDefault();
-    //             const selectedItem = list[selectedIndex];
-    //             if (selectedItem) {
-    //                 if (typeof selectedItem === 'string') {
-    //                   setValue(selectedItem);
-    //                   updateItem('vacancy', selectedItem);
-    //                 } 
-    //                 else {
-    //                     setValue(selectedItem.cN);
-    //                     updateItem('city', selectedItem.cN);
-    //                     updateItem('region', selectedItem.re);
-    //                   }
-    //                   setSelectedIndex(0);
-    //                   options.hideList();
-    //                 }
-    //         }
-    //         else if (e.key === 'Enter'&&list.length > 0){
-    //             setSelectedIndex(0);
-    //     }        
-    // };
-
+ 
     const resetInput = (e, options) => {
         e.preventDefault();
         const {
@@ -203,19 +168,19 @@ const ModalAddDoc = ( {
                 />
             )}
             {postSuccess && (
-                        <MessagePost 
-                            isOpen={postSuccess} 
-                            onClose={setPostSuccess} 
-                            closeItem={setAddDoc}
-                            typeOfDoc={type}
-                            newClass={"modalAddDoc modalAdComp"}
-                            editable={editable}
-                            currentUser={currentUser}
-                            setCurrentUser={setCurrentUser}
-                            setLoading={setLoading}
-                            axios={axios}
-                            host={host}
-                        />
+                <MessagePost 
+                    isOpen={postSuccess} 
+                    onClose={setPostSuccess} 
+                    closeItem={setAddDoc}
+                    typeOfDoc={type}
+                    newClass={"modalAddDoc modalAdComp"}
+                    editable={editable}
+                    currentUser={currentUser}
+                    setCurrentUser={setCurrentUser}
+                    setLoading={setLoading}
+                    axios={axios}
+                    host={host}
+                />
             )}
         </div>)
     );

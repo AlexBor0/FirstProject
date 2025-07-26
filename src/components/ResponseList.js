@@ -1,5 +1,3 @@
-import React from "react";
-
 function ResponseList(props) {
 
   let title;

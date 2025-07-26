@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import UploadFile from "./UploadFile";
 import UploadFileInfo from "./UploadFileInfo";
 import CityInput from "./CityInput";
@@ -121,6 +121,7 @@ const lookAtPreviw = (e) => {
                     setNewItem={setNewCandidate}
                     selectValue={selectValue}
                     setSelectValue={setSelectValue}
+                    btnColor={"rgb(232, 240, 254)"}
                 />
                 <CityInput 
                     pHolder={pHolder}

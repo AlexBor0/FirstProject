@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import {useState, useRef} from "react";
 import { IoClose } from "react-icons/io5";
 import VacancySelect from "./VacancySelect";
 
@@ -13,7 +13,8 @@ const VacancyInput = ( {
     pHolder,
     setNewItem,
     selectValue,
-    setSelectValue
+    setSelectValue,
+    btnColor
 } ) => {
 
     const [vacancyQuery, setVacancyQuery] = useState(''),
@@ -130,6 +131,7 @@ const VacancyInput = ( {
         selectedIndex={selectedIndex}
         setSelectValue={setSelectValue}
         setNewItem={setNewItem}
+        btnColor={btnColor}
         />} 
     </div>
     </>

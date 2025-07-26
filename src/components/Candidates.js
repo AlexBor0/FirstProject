@@ -1,10 +1,10 @@
-import React,  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CandidateCard from "./CandidateCard";
 
-const Candidates = ({host, axios, type, currentUser}) => {
+const Candidates = ({host, axios, type, currentUser, candidates, setCandidates}) => {
 
-    const [candidates, setCandidates] = useState([]),
-          [loading, setLoading] = useState(true),
+
+    const [loading, setLoading] = useState(true),
           [error, setError] = useState(null);
 
     const deleteUser = (id) => {
@@ -23,7 +23,7 @@ const Candidates = ({host, axios, type, currentUser}) => {
             };
     
             fetchCandidates();
-        }, [host, axios]);
+        }, [host, axios, setCandidates]);
     
     if (loading) return <p>Загрузка...</p>;
     if (error) return <p>Ошибка: {error.message}</p>

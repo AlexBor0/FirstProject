@@ -187,6 +187,14 @@
 	width: 88%;
 	box-shadow: 1px 5px 15px 2px rgba(0, 0, 0, 0.2 );
 }
+#searchForm .vacSelect {
+	left: 10px;
+	top: 52px;
+	width: 100%;
+}
+#searchForm .hovered {
+    background-color:rgb(210, 247, 247) !important; 
+}
 @media (min-width: 320px) {
 	.one{
 		font-size:15px;

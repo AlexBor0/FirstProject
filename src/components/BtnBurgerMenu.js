@@ -1,9 +1,6 @@
-
 import './../css/BtnBurgerMenu.css';
 
 const BtnBurgerMenu = ({isClicked, setIsClicked}) => {
-
-
 
 const click = () => {
         setIsClicked(prev => !prev);

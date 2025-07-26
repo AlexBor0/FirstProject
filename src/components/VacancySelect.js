@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import './../css/VacancySelect.css';
 
-const VacancySelect = ({ setSelectValue, dinList, selectedIndex, setNewItem}) => {
+const VacancySelect = ({ setSelectValue, dinList, selectedIndex, setNewItem, btnColor}) => {
 
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -29,7 +29,7 @@ const VacancySelect = ({ setSelectValue, dinList, selectedIndex, setNewItem}) =>
             <ul className="vacList" >
                 {dinList.map((el, index)=> (
                     <li key={`${el}-${index}`}>
-                        <button style={{backgroundColor:selectedIndex === index ?' rgb(232, 240, 254)': 'transparent' }}
+                        <button style={{backgroundColor:selectedIndex === index ? btnColor : 'transparent' }}
                             className={`${hoveredIndex === index ? 'hovered' : ''} ${hoveredIndex !== null && hoveredIndex !== index ? 'otherNonHovered' : ''}`}
                             onClick={(e) =>{
                                 e.preventDefault();

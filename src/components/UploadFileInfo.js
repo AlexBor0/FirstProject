@@ -1,4 +1,3 @@
-import React from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
 
 const UploadFileInfo = ({newCandidate, fileSize, hasFile, deleteImage}) => {

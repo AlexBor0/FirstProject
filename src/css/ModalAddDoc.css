@@ -216,6 +216,7 @@
 .hovered {
     background-color:rgb(232, 240, 254) !important; 
 }
+
 .otherNonHovered {
     background-color: white !important; 
 }

@@ -1,5 +1,3 @@
-import React from "react";
-
 const Info = () => (
         <div>
             <h2 style={{color:"rgb(3, 87, 116)"}}>Погода</h2>

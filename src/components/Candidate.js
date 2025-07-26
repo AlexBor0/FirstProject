@@ -1,6 +1,5 @@
 import ResumeCard from "./ResumeCard";
 
-
 const Candidate = ( {
     currentUser,
     candidate, 

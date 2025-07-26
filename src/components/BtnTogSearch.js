@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import { useState} from "react";
 
 const BtnTogSearch = ({typeOfSearch, setTypeOfsearch}) => {
         const [clicked, toggleClick] = useState(false);

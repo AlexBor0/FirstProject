@@ -1,4 +1,4 @@
-import React, {useState, memo} from "react";
+import {useState, memo} from "react";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import AauthorizationForm from "./AauthorizationForm";
 import Registration from "./Registration";

@@ -8,12 +8,16 @@ const SearchForm = forwardRef(( {
     typeOfSearch,
     vacBaseChunck,
     getDataItems,
+    host,
+    axios,
+    candidates,
+    setCandidates
 
 }, ref) => {
 
     const { selectedIndex, setSelectedIndex, arrowPress, resetSelection } = useInputArrowPress();
     const [newRequest, setNewRequest] = useState({
-        company: "",
+        // company: "",
         vacancy: ""
     })
     const [selectValue, setSelectValue] = useState('');
@@ -35,17 +39,20 @@ const SearchForm = forwardRef(( {
         resetSelection();
         hideList(false);
     };
+          const fetchNewRequest = async () => {
+            let title = selectValue.toLowerCase();
+            let titleUpper = title.charAt(0).toUpperCase() + title.slice(1);
 
+        const response = await axios.get(`${host}/api/Candidates?filters[title][$containsi]=${title}&filters[title][$containsi]=${titleUpper}&populate[foto]=true`);
+            if (response) {
+                setCandidates(response.data.data);
+            }
 
+      };
 
     return (
             <form id="searchForm">
-                {/* <input 
-                    ref={ref} 
-                    type="search"  
-                    placeholder={typeOfSearch?"Пошук кандидата" : "Пошук вакансії"} 
-                    name="search"
-                /> */}
+
                 <VacancyInput
                     vacBaseChunck={vacBaseChunck}
                     pHolder = {typeOfSearch?"Пошук кандидата" : "Пошук вакансії"} 
@@ -58,12 +65,16 @@ const SearchForm = forwardRef(( {
                     selectValue={selectValue}
                     setSelectValue={setSelectValue}
                     ref={ref}
+                    btnColor="rgb(210, 247, 247)"
                 />
                 <button type="submit" className="btnSearch" onClick={(e) =>{
                     e.preventDefault();
+                    setCandidates([]);
+                    fetchNewRequest()
                     }}> 
                     <IoSearch />
                 </button>
+
             </form>
     )
 });

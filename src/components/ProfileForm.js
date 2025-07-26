@@ -1,4 +1,4 @@
-import React, {useState, useEffect}  from "react";
+import {useState, useEffect}  from "react";
 import { IoCameraSharp, IoCloseCircleSharp } from "react-icons/io5";
 import GestAva from "./../img/GestAva.png";
 import Spinner from "./Spinner";

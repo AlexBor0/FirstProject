@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import './../css/VacancySelect.css';
 
 const ItemSelect = ({ setSelectValue, dinList, selectedIndex, setNewCandidate, newCandidate}) => {
