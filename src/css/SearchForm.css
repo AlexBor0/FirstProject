@@ -27,8 +27,8 @@
   border-radius: 5px;
   outline: none;
   background:rgb(223, 248, 252);
-  font-size: 20px;
-  color: #7d7d7d;
+  font-size: 16px;
+  color: #474747;
   margin: 10px 10px 10px 10px;
 }
 .searchContainer input {
@@ -53,6 +53,10 @@
 }
 .searchContainer button.btnSearch{
   right: 0px;
+}
+#searchForm .resetSearch{
+  right: 52px;
+  background-color: rgb(210, 250, 250);
 }
 
 

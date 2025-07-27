@@ -30,6 +30,7 @@ const AddResumeForm = ( {
 const telClass = "modalInputAd short";
 
 const inputFileRef = useRef(null);
+const gray = "rgb(232, 240, 254)";
 
 const getImage = (e) => {
     const file = e.target.files[0];
@@ -57,6 +58,7 @@ const deleteImage = (e) => {
    
 const lookAtPreviw = (e) => {
     e.preventDefault();
+    if (newCandidate.vacancy === '') {setNewCandidate(prev => ({...prev, vacancy: selectValue}));}
     setClassModal("modalAddDoc");
     setPreview(true);
     setIsPreviewVisible(true);
@@ -121,7 +123,7 @@ const lookAtPreviw = (e) => {
                     setNewItem={setNewCandidate}
                     selectValue={selectValue}
                     setSelectValue={setSelectValue}
-                    btnColor={"rgb(232, 240, 254)"}
+                    btnColor={gray}
                 />
                 <CityInput 
                     pHolder={pHolder}
@@ -134,7 +136,7 @@ const lookAtPreviw = (e) => {
                     setSelectedIndex={setSelectedIndex}
                     setNewCandidate={setNewCandidate}
                     newDoc={newCandidate}
-                    btnColor={"rgb(232, 240, 254)"}
+                    btnColor={gray}
                 />
 
                 {(inputErrors.firstName || inputErrors.lastName) && (

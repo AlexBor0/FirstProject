@@ -39,11 +39,19 @@ const SearchForm = forwardRef(( {
         resetSelection();
         hideList(false);
     };
-          const fetchNewRequest = async () => {
-            let title = selectValue.toLowerCase();
-            let titleUpper = title.charAt(0).toUpperCase() + title.slice(1);
+        const fetchNewRequest = async () => {
+        const title = selectValue.toLowerCase();
+        const titleUpper = title.charAt(0).toUpperCase() + title.slice(1);
+        const firstWord = title.split(' ')[0];
+        const firstWordUpper = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
 
-        const response = await axios.get(`${host}/api/Candidates?filters[title][$containsi]=${title}&filters[title][$containsi]=${titleUpper}&populate[foto]=true`);
+        const response = await axios.get(`
+                ${host}/api/Candidates?filters[title]
+                [$containsi]=${title}&filters[title]
+                [$containsi]=${titleUpper}&filters[title]
+                [$containsi]=${firstWord}&filters[title]
+                [$containsi]=${firstWordUpper}&populate[foto]=true
+            `);
             if (response) {
                 setCandidates(response.data.data);
             }
