@@ -5,10 +5,12 @@ const Vacancies = ( {
 	host,
 	setTitle,
 	axios,
-	type
+	type,
+	vacancies,
+	setVacancies
 } ) => {
 
-	const [vacancies, setVacancies] = useState([]);
+	
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const editable = false;
@@ -30,7 +32,7 @@ const Vacancies = ( {
 			};
 
 			fetchVacancies();
-		}, [host, setTitle, axios]);
+		}, [host, setTitle, axios, setVacancies]);
 
 		
 

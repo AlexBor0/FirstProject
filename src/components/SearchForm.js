@@ -10,8 +10,8 @@ const SearchForm = forwardRef(( {
     getDataItems,
     host,
     axios,
-    candidates,
-    setCandidates
+    setCandidates,
+	setVacancies
 
 }, ref) => {
 
@@ -40,22 +40,35 @@ const SearchForm = forwardRef(( {
         hideList(false);
     };
         const fetchNewRequest = async () => {
-        const title = selectValue.toLowerCase();
-        const titleUpper = title.charAt(0).toUpperCase() + title.slice(1);
-        const firstWord = title.split(' ')[0];
-        const firstWordUpper = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
-
-        const response = await axios.get(`
-                ${host}/api/Candidates?filters[title]
-                [$containsi]=${title}&filters[title]
-                [$containsi]=${titleUpper}&filters[title]
-                [$containsi]=${firstWord}&filters[title]
-                [$containsi]=${firstWordUpper}&populate[foto]=true
-            `);
-            if (response) {
-                setCandidates(response.data.data);
+            
+                const title = selectValue.toLowerCase();
+                const titleUpper = title.charAt(0).toUpperCase() + title.slice(1);
+                const firstWord = title.split(' ')[0];
+                const firstWordUpper = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
+            if(typeOfSearch) {
+                const response = await axios.get(`
+                        ${host}/api/Candidates?filters[title]
+                        [$containsi]=${title}&filters[title]
+                        [$containsi]=${titleUpper}&filters[title]
+                        [$containsi]=${firstWord}&filters[title]
+                        [$containsi]=${firstWordUpper}&populate[foto]=true
+                    `);
+                    if (response) {
+                        setCandidates(response.data.data);
+                    }
+            } else {
+                const response = await axios.get(`
+                        ${host}/api/Vacancies?filters[title]
+                        [$containsi]=${title}&filters[title]
+                        [$containsi]=${titleUpper}&filters[title]
+                        [$containsi]=${firstWord}&filters[title]
+                        [$containsi]=${firstWordUpper}&populate[company][populate][logo]=true
+                    `);
+                    if (response) {
+                        setVacancies(response.data.data);
+                    }
             }
-
+            
       };
 
     return (

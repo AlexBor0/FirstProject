@@ -58,6 +58,7 @@ const App = () => {
         [addDoc, setAddDoc] = useState(false),
         [vacancyName, setVacancyName] = useState([]),
         [candidates, setCandidates] = useState([]),
+        [vacancies, setVacancies] = useState([]),
         [citiesBase, setCitiesBase] = useState(null),
         [specialtiesBase, setSpecialtiesBase] = useState(null),
         [vacBaseChunck, setVacBaseChunck] = useState(null),
@@ -355,6 +356,8 @@ useEffect(() => { // Получение данных пользователя
                 axios={axios}
                 candidates={candidates} 
                 setCandidates={setCandidates}
+                vacancies={vacancies} 
+                setVacancies={setVacancies}
               />
               {confirm &&
                 <div className="btnWrap">
@@ -424,6 +427,8 @@ useEffect(() => { // Получение данных пользователя
                 setTitle={setVacancyName} 
                 axios={axios}
                 type={typeOfSearch}
+                vacancies={vacancies}
+                setVacancies={setVacancies}
                 />} 
                    
             </main>
