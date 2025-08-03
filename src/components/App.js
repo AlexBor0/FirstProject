@@ -354,9 +354,7 @@ useEffect(() => { // Получение данных пользователя
                 getDataItems={getDataItems}
                 host={host}
                 axios={axios}
-                candidates={candidates} 
                 setCandidates={setCandidates}
-                vacancies={vacancies} 
                 setVacancies={setVacancies}
               />
               {confirm &&
@@ -392,6 +390,12 @@ useEffect(() => { // Получение данных пользователя
             turnExit={turnExit}
             fix={fix}
             setIsClicked={setIsClicked}
+            vacBaseChunck={vacBaseChunck}
+            getDataItems={getDataItems}
+            axios={axios}
+            setCandidates={setCandidates}
+            setVacancies={setVacancies}
+
           />}   
           <ResponseList typeOfSearch = {typeOfSearch} />
             {addDoc && <ModalAddDoc 

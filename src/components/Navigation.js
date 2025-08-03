@@ -17,7 +17,11 @@ const Navigation = ( {
     userLogoRef,
     confirm,
     turnExit,
- 
+    vacBaseChunck,
+    getDataItems,
+    axios,
+    setCandidates,
+    setVacancies
 } ) => {
 
 
@@ -29,6 +33,12 @@ const Navigation = ( {
                <SearchForm
                     ref={mainSearchRef}
                     typeOfSearch={typeOfSearch}
+                    vacBaseChunck={vacBaseChunck}
+                    getDataItems={getDataItems}
+                    host={host}
+                    axios={axios}
+                    setCandidates={setCandidates}
+                    setVacancies={setVacancies}
               />               
 
             </div>

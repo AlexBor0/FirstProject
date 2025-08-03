@@ -108,3 +108,13 @@
     max-width: 750px;
  }
 }
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.btnSearch:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

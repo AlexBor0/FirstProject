@@ -1,5 +1,5 @@
 import { useState, forwardRef } from 'react';
-import { IoSearch } from "react-icons/io5";
+import { IoSearch, IoRocket  } from "react-icons/io5";
 import VacancyInput from "./VacancyInput";
 import { useInputArrowPress } from "./useInputArrowPress";
 import './../css/SearchForm.css';
@@ -16,11 +16,9 @@ const SearchForm = forwardRef(( {
 }, ref) => {
 
     const { selectedIndex, setSelectedIndex, arrowPress, resetSelection } = useInputArrowPress();
-    const [newRequest, setNewRequest] = useState({
-        // company: "",
-        vacancy: ""
-    })
-    const [selectValue, setSelectValue] = useState('');
+    const [selectValue, setSelectValue] = useState(''),
+          [isLoading, setIsLoading] = useState(false),
+          [error, setError] = useState(null);
     
     const resetInput = (e, options) => {
         e.preventDefault();
@@ -40,39 +38,53 @@ const SearchForm = forwardRef(( {
         hideList(false);
     };
         const fetchNewRequest = async () => {
+            if (!selectValue.trim()) {
+                setError('Введіть запит');
+            return;
+        }
+
+    setIsLoading(true);
+    setError(null);
+    try {
+        const title = selectValue.toLowerCase();
+        const titleUpper = title.charAt(0).toUpperCase() + title.slice(1);
+        const firstWord = title.split(' ')[0];
+        const firstWordUpper = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
+        const endpoint = typeOfSearch ? 'Candidates' : 'Vacancies';
+        const populate = typeOfSearch ? 'foto' : 'company.logo';
             
-                const title = selectValue.toLowerCase();
-                const titleUpper = title.charAt(0).toUpperCase() + title.slice(1);
-                const firstWord = title.split(' ')[0];
-                const firstWordUpper = firstWord.charAt(0).toUpperCase() + firstWord.slice(1);
-            if(typeOfSearch) {
                 const response = await axios.get(`
-                        ${host}/api/Candidates?filters[title]
+                        ${host}/api/${endpoint}?filters[title]
                         [$containsi]=${title}&filters[title]
                         [$containsi]=${titleUpper}&filters[title]
                         [$containsi]=${firstWord}&filters[title]
-                        [$containsi]=${firstWordUpper}&populate[foto]=true
+                        [$containsi]=${firstWordUpper}&populate[${populate}]=true
                     `);
-                    if (response) {
-                        setCandidates(response.data.data);
-                    }
-            } else {
-                const response = await axios.get(`
-                        ${host}/api/Vacancies?filters[title]
-                        [$containsi]=${title}&filters[title]
-                        [$containsi]=${titleUpper}&filters[title]
-                        [$containsi]=${firstWord}&filters[title]
-                        [$containsi]=${firstWordUpper}&populate[company][populate][logo]=true
-                    `);
-                    if (response) {
-                        setVacancies(response.data.data);
-                    }
+                    if (response.data.data) {
+                       typeOfSearch ? setCandidates(response.data.data) : setVacancies(response.data.data);
+                    } else {
+                        setError('Інформацію не знайдено');
+                     }
+        } catch (err) {
+            setError('Помилка при отриманні даних');
+            console.error('Помилка запита:', err);
+         } finally {
+            setIsLoading(false);
             }
+       
             
       };
 
     return (
-            <form id="searchForm">
+            <form 
+                id="searchForm" 
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    setCandidates([]);
+                    setVacancies([]);
+                    fetchNewRequest()
+                }}
+            >
 
                 <VacancyInput
                     vacBaseChunck={vacBaseChunck}
@@ -82,20 +94,16 @@ const SearchForm = forwardRef(( {
                     resetInput={resetInput}
                     selectedIndex={selectedIndex}
                     setSelectedIndex={setSelectedIndex}
-                    setNewItem={setNewRequest}
+                    setNewItem={() => {}}
                     selectValue={selectValue}
                     setSelectValue={setSelectValue}
                     ref={ref}
                     btnColor="rgb(210, 247, 247)"
                 />
-                <button type="submit" className="btnSearch" onClick={(e) =>{
-                    e.preventDefault();
-                    setCandidates([]);
-                    fetchNewRequest()
-                    }}> 
-                    <IoSearch />
+                <button type="submit" className="btnSearch" disabled={isLoading}> 
+                    {isLoading ? <IoRocket /> : <IoSearch />}
                 </button>
-
+                {error && <div className="error">{error}</div>}
             </form>
     )
 });
